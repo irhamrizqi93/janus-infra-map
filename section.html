@@ -1,0 +1,67 @@
+<!DOCTYPE html><html lang="id"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Infra Map — Lensa Section (Janus)</title><style>
+:root{--navy:#10384F;--blue:#50B9F5;--green:#9AD04B;--bg:#F8F9FA;--surface:#fff;--text:#1F2421;--muted:#6B726A;--border:#E2E5E0}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:15px;line-height:1.55}
+.wrap{max-width:1080px;margin:0 auto;padding:24px 16px 48px}
+.super{text-align:center;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px dashed var(--border);border-radius:8px;padding:6px;margin-bottom:16px}
+h1{font-weight:600;font-size:28px;color:var(--navy);margin:0 0 2px}.sub{color:var(--muted);font-size:13px;margin-bottom:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.sec{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:8px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.sec-A{border-left-color:#0078C8}.sec-B{border-left-color:#9AD04B}.sec-C{border-left-color:#50B9F5}.sec-D{border-left-color:#7B4A9C}.sec-backbone{border-left-color:#6B726A}.sec-meta{border-left-color:#D3A931}
+.sec header{display:flex;gap:8px;align-items:baseline;margin-bottom:10px}
+.tag{font-weight:700;color:var(--navy);font-size:18px}.sec h2{font-size:15px;margin:0;font-weight:500;color:var(--text)}
+.row{display:flex;gap:8px;margin:6px 0;font-size:13px}.lbl{flex:0 0 52px;font-size:11px;font-weight:600;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.chip{display:inline-block;background:#eef1f4;border:1px solid var(--border);border-radius:99px;padding:1px 8px;margin:2px 3px 0 0;font-size:12px}
+.chip.sk{background:#eaf6ff;border-color:#bfe3ff}.chip.tl{background:#f0f7e9}.chip.dim{color:var(--muted)}
+.sot{margin:2px 0 0;padding-left:16px;font-size:12px}.sot code{font-size:11px;background:#f4f5f6;padding:0 4px;border-radius:4px}
+.role{margin-top:24px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px}
+.role h3{margin:0 0 8px;color:var(--navy);font-size:16px}.role table{width:100%;border-collapse:collapse}
+.role th{text-align:left;color:var(--navy);width:80px;vertical-align:top;padding:4px 0}.role td{padding:4px 0}
+footer{margin-top:24px;font-size:12px;color:var(--muted);border-top:1px solid var(--border);padding-top:10px}
+</style></head><body><div class="wrap">
+<div class="super">super admin level — Bang Irham (akses semua section)</div>
+<h1>Infra Map — Lensa Section</h1>
+<div class="sub">Governance Janus per section (diagram blueprint). Dirender dari manifest + registry + SOT-registry + access.json — nol hardcode.</div>
+<main class="grid"><article class="sec sec-A">
+      <header><span class="tag">A</span><h2>A</h2></header>
+      <div class="row"><span class="lbl">skills</span><div><span class="chip sk">prioritas-visit</span></div></div>
+      <div class="row"><span class="lbl">tools</span><div><span class="chip dim">—</span></div></div>
+      <div class="row"><span class="lbl">materi</span><div><span class="chip dim">—</span></div></div>
+      <div class="row"><span class="lbl">SOT</span><ul class="sot"><li><b>budget</b> → <code>commex.json)</code></li></ul></div>
+    </article><article class="sec sec-B">
+      <header><span class="tag">B</span><h2>B</h2></header>
+      <div class="row"><span class="lbl">skills</span><div><span class="chip sk">program</span></div></div>
+      <div class="row"><span class="lbl">tools</span><div><span class="chip dim">—</span></div></div>
+      <div class="row"><span class="lbl">materi</span><div><span class="chip dim">—</span></div></div>
+      <div class="row"><span class="lbl">SOT</span><ul class="sot"><li><b>protokol</b> → <code>protokol_spray.json</code></li></ul></div>
+    </article><article class="sec sec-C">
+      <header><span class="tag">C</span><h2>C</h2></header>
+      <div class="row"><span class="lbl">skills</span><div><span class="chip sk">brp</span><span class="chip sk">demoplot</span><span class="chip sk">kegiatan</span></div></div>
+      <div class="row"><span class="lbl">tools</span><div><span class="chip dim">—</span></div></div>
+      <div class="row"><span class="lbl">materi</span><div><span class="chip dim">—</span></div></div>
+      <div class="row"><span class="lbl">SOT</span><ul class="sot"><li><b>plan_laporan</b> → <code>liquidation.json</code></li><li><b>demoplot</b> → <code>demoplot_units.json</code></li></ul></div>
+    </article><article class="sec sec-D">
+      <header><span class="tag">D</span><h2>D</h2></header>
+      <div class="row"><span class="lbl">skills</span><div><span class="chip sk">product-pitch</span></div></div>
+      <div class="row"><span class="lbl">tools</span><div><span class="chip dim">—</span></div></div>
+      <div class="row"><span class="lbl">materi</span><div><span class="chip dim">—</span></div></div>
+      <div class="row"><span class="lbl">SOT</span><ul class="sot"><li class="dim">—</li></ul></div>
+    </article><article class="sec sec-backbone">
+      <header><span class="tag">backbone</span><h2>backbone</h2></header>
+      <div class="row"><span class="lbl">skills</span><div><span class="chip sk">kios</span><span class="chip sk">nego-kios</span></div></div>
+      <div class="row"><span class="lbl">tools</span><div><span class="chip dim">—</span></div></div>
+      <div class="row"><span class="lbl">materi</span><div><span class="chip dim">—</span></div></div>
+      <div class="row"><span class="lbl">SOT</span><ul class="sot"><li><b>kios_master</b> → <code>Database_Retailer.xlsx</code></li></ul></div>
+    </article><article class="sec sec-meta">
+      <header><span class="tag">meta</span><h2>meta</h2></header>
+      <div class="row"><span class="lbl">skills</span><div><span class="chip sk">output</span></div></div>
+      <div class="row"><span class="lbl">tools</span><div><span class="chip dim">—</span></div></div>
+      <div class="row"><span class="lbl">materi</span><div><span class="chip dim">—</span></div></div>
+      <div class="row"><span class="lbl">SOT</span><ul class="sot"><li><b>jurnal</b> → <code></code></li></ul></div>
+    </article></main>
+<section class="role"><h3>Role → Section (USER-N)</h3>
+<table><tbody><tr><th>TM</th><td><span class=chip>A</span><span class=chip>B</span><span class=chip>C</span><span class=chip>D</span><span class=chip>E</span><span class=chip>backbone</span></td></tr><tr><th>MD</th><td><span class=chip>D</span><span class=chip>demoplot</span><span class=chip>backbone</span></td></tr><tr><th>CAC</th><td><span class=chip>D-campaign</span><span class=chip>D</span><span class=chip>backbone</span></td></tr></tbody></table>
+<div class="sub" style="margin-top:8px">Setiap user masuk lewat gerbang role. <code>area_scope: own</code> = silo area sendiri (A/C).</div></section>
+<footer>Digenerate <code>infra_section.py</code> dari sections/*.manifest.json · skills/registry.json · sot_registry.json · config/access.json. Manifest berubah → regenerate.</footer>
+</div></body></html>
