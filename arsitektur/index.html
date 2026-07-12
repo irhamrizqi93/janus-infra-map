@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arsitektur Janus — Peta untuk Semua</title>
+<style>
+:root{--navy:#10384F;--capri:#00BCFF;--green:#89D329;--ablue:#0071BC;--bg:#F8F9FA;--surface:#fff;--text:#1F2421;--muted:#6E8494;--border:#E2E5E0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.6;font-size:16px}
+.wrap{max-width:880px;margin:0 auto;padding:32px 16px 64px}
+header{display:flex;align-items:center;gap:12px;margin-bottom:4px}
+.cross{width:34px;height:34px;flex:none}
+h1{font-size:26px;font-weight:600;color:var(--navy);margin:0;letter-spacing:-.3px}
+.sub{color:var(--muted);font-size:14px;margin:2px 0 28px}
+h2{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:30px 0 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+a.card{display:block;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;text-decoration:none;color:var(--text);box-shadow:0 1px 3px rgba(16,56,79,.08);transition:border-color .15s}
+a.card:hover{border-color:var(--ablue)}
+a.card b{display:block;color:var(--ablue);font-size:15px;margin-bottom:4px}
+a.card span{font-size:13px;color:var(--muted)}
+.intro{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;font-size:14px;margin-bottom:8px}
+.intro b{color:var(--navy)}
+footer{color:var(--muted);font-size:12px;text-align:center;margin-top:44px}
+footer a{color:var(--ablue)}
+.pill{display:inline-block;background:var(--navy);color:#fff;font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;border-radius:999px;padding:2px 10px;margin-left:8px;vertical-align:middle}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <svg class="cross" viewBox="0 0 24 24"><rect x="10" y="2" width="4" height="20" rx="1.4" fill="#00BCFF"/><rect x="2" y="10" width="20" height="4" rx="1.4" fill="#89D329"/></svg>
+  <h1>Arsitektur Janus</h1>
+</header>
+<p class="sub">Peta sistem untuk <b>orang awam</b> (paham cara kerjanya) dan <b>kontributor teknis</b> (tahu harus menyentuh apa). Tiap diagram interaktif — tekan <b>T</b> ganti tema, <b>E</b> untuk ekspor gambar.</p>
+
+<div class="intro">
+<b>Baca 30 detik:</b> Janus = asisten AI Territory Manager Bayer yang jalan 24/7 di ROG Ally, dilayani lewat Telegram. Data disimpan sekali di <b>SoT</b> (satu topik = satu sumber kebenaran), diolah <b>satu engine</b> per topik, lalu dipanggil kembali oleh semua konsumen dari engine yang sama — alur <b>STORING → PROCESSING → RECALLING</b> di tiap section.
+</div>
+
+<h2>Gambaran besar</h2>
+<div class="grid">
+  <a class="card" href="arsitektur-3-aktor.html"><b>Arsitektur 3 Aktor</b><span>Abang · Janus (DeepSeek) · Claude ROG/GitHub — alur deploy GitHub-first + keamanan gate</span></a>
+</div>
+
+<h2>Per section — alur storing → processing → recalling</h2>
+<div class="grid">
+  <a class="card" href="section-A.html"><b>Section A — User/TM</b><span>Budget, target, KPI</span></a>
+  <a class="card" href="section-B.html"><b>Section B — Bisnis</b><span>Program, protokol, kontrak</span></a>
+  <a class="card" href="section-C.html"><b>Section C — Kegiatan</b><span>Laporan, plan, settle SIM↔eksekusi</span></a>
+  <a class="card" href="section-D.html"><b>Section D — Knowledge</b><span>Produk, teknikal, RAG (owner: MD)</span></a>
+  <a class="card" href="section-E.html"><b>Section E — Design</b><span>Design gate: token, template, aset resmi</span></a>
+</div>
+
+<h2>Mau kontribusi?</h2>
+<div class="intro">
+Mulai dari diagram section yang kamu incar — kartu <b>"Mau kontribusi?"</b> di tiap diagram menyebut file spec, lokasi kode, dan test yang wajib hijau. Aturan main: <b>1 topik = 1 SoT</b> (jangan bikin store tandingan) · <b>ubah engine, bukan bikin hitungan baru</b> · <b>test guard lulus sebelum push</b>. Repo utama: <code>janus-project</code> (kode) · <code>janus-business</code> (data) · <code>janus-design</code> (brand). Sumber diagram = JSON di <code>janus-project/docs/arsitektur/</code> — ubah arsitektur = update JSON-nya (dirender ulang via skill archify).
+</div>
+
+<div class="grid">
+  <a class="card" href="../section.html"><b>Peta Governance Section</b><span>Lensa manifest: skills, tools, scope per section A–E</span></a>
+  <a class="card" href="../index.html"><b>Peta Infrastruktur</b><span>Diagram infra lengkap (halaman lama)</span></a>
+</div>
+
+<footer>Janus · diagram dirender <a href="https://github.com/tt-a1i/archify">Archify</a> (MIT) dari JSON ter-commit — update terakhir 2026-07-12</footer>
+</div>
+</body>
+</html>
