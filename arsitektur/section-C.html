@@ -527,12 +527,12 @@
         <div class="pulse-dot"></div>
         <h1>Section C — Kegiatan &amp; Settle (untuk kontributor)</h1>
       </div>
-      <p class="subtitle">Konsep alur: STORING → PROCESSING → RECALLING · 1 topik = 1 SoT · 1 engine · semua konsumen baca engine yang sama</p>
+      <p class="subtitle">STORING → PROCESSING → RECALLING · 1 topik = 1 SoT · 1 engine · kegiatan P&amp;I/demoplot + Marketing/Comex/BLF (budget_tambahan) semua tampil di papan</p>
     </div>
 
     <!-- Main Diagram -->
     <div class="diagram-container">
-      <svg viewBox="0 0 1120 820" role="img" aria-label="Section C — Kegiatan &amp; Settle (untuk kontributor) — Konsep alur: STORING → PROCESSING → RECALLING · 1 topik = 1 SoT · 1 engine · semua konsumen baca engine yang sama (data-flow diagram)">
+      <svg viewBox="0 0 1120 820" role="img" aria-label="Section C — Kegiatan &amp; Settle (untuk kontributor) — STORING → PROCESSING → RECALLING · 1 topik = 1 SoT · 1 engine · kegiatan P&amp;I/demoplot + Marketing/Comex/BLF (budget_tambahan) semua tampil di papan (data-flow diagram)">
         <!-- Definitions -->
         <defs>
           <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
@@ -581,6 +581,7 @@
         <path d="M 586 385 L 637.5 385 L 637.5 157 L 689 157" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
         <path d="M 586 385 L 689 385" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
         <path d="M 586 385 L 637.5 385 L 637.5 613 L 689 613" class="a-dashed" stroke-width="1.4" marker-end="url(#arrowhead-dashed)"/>
+        <path d="M 156 385 L 259 385" class="a-security" stroke-width="1.4" marker-end="url(#arrowhead-security)"/>
 
         <!-- Nodes -->
         <rect x="44" y="128" width="112" height="58" rx="6" class="c-mask"/>
@@ -649,6 +650,12 @@
         <text x="745" y="621" class="t-muted" font-size="7" text-anchor="middle">jaga drift &amp; orphan</text>
         <text x="745" y="631" class="t-security" font-size="7" text-anchor="middle">health</text>
 
+        <rect x="259" y="356" width="112" height="58" rx="6" class="c-mask"/>
+        <rect x="259" y="356" width="112" height="58" rx="6" class="c-database" stroke-width="1.5"/>
+        <text x="315" y="377" class="t-primary" font-size="10" font-weight="600" text-anchor="middle">budget_tambahan</text>
+        <text x="315" y="393" class="t-muted" font-size="7" text-anchor="middle">kegiatan Mktg/Comex/BLF (.json)</text>
+        <text x="315" y="403" class="t-database" font-size="7" text-anchor="middle">budget_tambahan.py</text>
+
         <!-- Flow labels -->
         <rect x="135.85" y="67" width="144.3" height="27" rx="4" class="c-mask"/>
         <text x="208" y="78" class="t-backend" font-size="8" text-anchor="middle">laporan kegiatan</text>
@@ -686,6 +693,9 @@
         <rect x="602.1" y="478" width="70.80000000000001" height="27" rx="4" class="c-mask"/>
         <text x="637.5" y="489" class="t-messagebus" font-size="8" text-anchor="middle">cek 0 orphan</text>
         <text x="637.5" y="500" class="t-dim" font-size="7" text-anchor="middle">reconcile()</text>
+        <rect x="50.5" y="509" width="159" height="27" rx="4" class="c-mask"/>
+        <text x="130" y="520" class="t-security" font-size="8" text-anchor="middle">usul mkt</text>
+        <text x="130" y="531" class="t-dim" font-size="7" text-anchor="middle">kegiatan_mkt → ACC Abang → add</text>
 
         <!-- Legend -->
         <text x="214" y="764" class="t-primary" font-size="10" font-weight="600">Legend</text>
@@ -711,6 +721,7 @@
           <li>&bull; 1 topik = 1 file sumber kebenaran (sot_registry.json)</li>
           <li>&bull; Tiap file punya PENULIS-SAH (tool), jangan tulis via chat/shadow</li>
           <li>&bull; Klarifikasi DR pun file (settle_overrides), bukan ingatan</li>
+          <li>&bull; Kegiatan Marketing/Comex/BLF = budget_tambahan (program tanpa tgl = seksi Program; ada tgl_eksekusi = kegiatan kalender) → engine baca via registry activity_sources</li>
         </ul>
       </div>
 
@@ -745,7 +756,7 @@
         </div>
         <ul>
           <li>&bull; Baca spec dulu: docs/SETTLE_SYSTEM.md (referensi tunggal)</li>
-          <li>&bull; Kode: scripts/ (tools) + infra/dr-dashboard/ (engine+papan)</li>
+          <li>&bull; Kode: scripts/ (tools, budget_tambahan.py) + infra/dr-dashboard/ (engine registry activity_sources + papan)</li>
           <li>&bull; Wajib: test guard lulus (53 test settle) + update spec kalau ubah perilaku</li>
         </ul>
       </div>
