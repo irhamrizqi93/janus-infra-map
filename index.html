@@ -3,25 +3,53 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="refresh" content="0; url=arsitektur/">
-<link rel="canonical" href="arsitektur/">
-<title>Janus — Arsitektur</title>
+<meta name="robots" content="noindex,nofollow">
+<title>Janus Infrastruktur — Masuk</title>
 <style>
   html,body{height:100%}
-  body{margin:0;display:grid;place-items:center;background:#10384F;color:#fff;
-    font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
-  .box{text-align:center;padding:24px}
-  .cross{width:44px;height:44px;margin-bottom:14px}
-  a{color:#00BCFF;text-decoration:none;font-weight:600}
-  .muted{color:#9fb6c4;font-size:14px;margin-top:8px}
+  body{margin:0;display:grid;place-items:center;background:#10384F;
+    font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:#fff}
+  .card{width:min(90vw,340px);background:#0d2c3f;border:1px solid #1d4a63;
+    border-radius:14px;padding:28px 24px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+  .cross{width:40px;height:40px;margin-bottom:10px}
+  h1{font-size:19px;margin:0 0 2px;font-weight:600}
+  .sub{color:#9fb6c4;font-size:13px;margin:0 0 20px}
+  input{width:100%;box-sizing:border-box;padding:12px 14px;border-radius:9px;
+    border:1px solid #2a5a76;background:#0a2231;color:#fff;
+    font-size:15px;outline:none}
+  input:focus{border-color:#00BCFF}
+  button{width:100%;margin-top:12px;padding:12px;border:0;border-radius:9px;
+    background:#00BCFF;color:#062430;font-weight:700;font-size:15px;cursor:pointer}
+  button:hover{background:#33ccff}
+  .err{color:#ff8a8a;font-size:13px;margin-top:12px;min-height:16px}
+  .note{color:#5f7688;font-size:11px;margin-top:18px}
 </style>
 </head>
 <body>
-  <div class="box">
+  <form class="card" onsubmit="return cek(event)">
     <svg class="cross" viewBox="0 0 24 24"><rect x="10" y="2" width="4" height="20" rx="1.4" fill="#00BCFF"/><rect x="2" y="10" width="20" height="4" rx="1.4" fill="#89D329"/></svg>
-    <div>Membuka <a href="arsitektur/">Arsitektur Janus</a>…</div>
-    <div class="muted">Kalau tak beralih otomatis, klik tautan di atas.</div>
-  </div>
-  <script>location.replace('arsitektur/');</script>
+    <h1>Janus Infrastruktur</h1>
+    <p class="sub">Internal — masuk untuk melanjutkan</p>
+    <input id="pw" type="password" placeholder="Password" autocomplete="off" autofocus>
+    <button type="submit">Masuk</button>
+    <div class="err" id="err"></div>
+    <div class="note">Akses internal tim Janus.</div>
+  </form>
+<script>
+  // ── GANTI PASSWORD DI SINI (satu baris) ──
+  const PASS = "janus2026";
+  function cek(e){
+    e.preventDefault();
+    if(document.getElementById('pw').value === PASS){
+      sessionStorage.setItem('jinfra','ok');
+      location.replace('arsitektur/');
+    } else {
+      document.getElementById('err').textContent = "Password salah.";
+      document.getElementById('pw').value = "";
+      document.getElementById('pw').focus();
+    }
+    return false;
+  }
+</script>
 </body>
 </html>
