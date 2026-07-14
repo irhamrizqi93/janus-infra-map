@@ -1,14 +1,14 @@
 <!DOCTYPE html><html lang="id"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Infra Map — Lensa Section (Janus)</title><style>
-:root{--navy:#10384F;--blue:#50B9F5;--green:#9AD04B;--bg:#F8F9FA;--surface:#fff;--text:#1F2421;--muted:#6B726A;--border:#E2E5E0}
+:root{--navy:#10384F;--blue:#00BCFF;--green:#89D329;--ablue:#0071BC;--bg:#F8F9FA;--surface:#fff;--text:#1F2421;--muted:#6B726A;--border:#E2E5E0}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:15px;line-height:1.55}
 .wrap{max-width:1080px;margin:0 auto;padding:24px 16px 48px}
 .super{text-align:center;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px dashed var(--border);border-radius:8px;padding:6px;margin-bottom:16px}
 h1{font-weight:600;font-size:28px;color:var(--navy);margin:0 0 2px}.sub{color:var(--muted);font-size:13px;margin-bottom:20px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
 .sec{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:8px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
-.sec-A{border-left-color:#0078C8}.sec-B{border-left-color:#9AD04B}.sec-C{border-left-color:#50B9F5}.sec-D{border-left-color:#7B4A9C}.sec-backbone{border-left-color:#6B726A}.sec-meta{border-left-color:#D3A931}
+.sec-A{border-left-color:#0071BC}.sec-B{border-left-color:#89D329}.sec-C{border-left-color:#00BCFF}.sec-D{border-left-color:#7B4A9C}.sec-E{border-left-color:#E5007D}.sec-backbone{border-left-color:#6B726A}.sec-meta{border-left-color:#D3A931}
 .sec header{display:flex;gap:8px;align-items:baseline;margin-bottom:10px}
 .tag{font-weight:700;color:var(--navy);font-size:18px}.sec h2{font-size:15px;margin:0;font-weight:500;color:var(--text)}
 .row{display:flex;gap:8px;margin:6px 0;font-size:13px}.lbl{flex:0 0 52px;font-size:11px;font-weight:600;text-transform:uppercase;color:var(--muted);padding-top:3px}
@@ -24,44 +24,50 @@ footer{margin-top:24px;font-size:12px;color:var(--muted);border-top:1px solid va
 <h1>Infra Map — Lensa Section</h1>
 <div class="sub">Governance Janus per section (diagram blueprint). Dirender dari manifest + registry + SOT-registry + access.json — nol hardcode.</div>
 <main class="grid"><article class="sec sec-A">
-      <header><span class="tag">A</span><h2>A</h2></header>
-      <div class="row"><span class="lbl">skills</span><div><span class="chip sk">prioritas-visit</span></div></div>
-      <div class="row"><span class="lbl">tools</span><div><span class="chip dim">—</span></div></div>
-      <div class="row"><span class="lbl">materi</span><div><span class="chip dim">—</span></div></div>
+      <header><span class="tag">A</span><h2>A — Specific user: KPI · Budget (P&amp;I/BLF/Marketing/Commex) · Area mapping (silo TM)</h2></header>
+      <div class="row"><span class="lbl">skills</span><div><span class="chip sk">budget</span><span class="chip sk">kegiatan</span><span class="chip sk">pending-followup</span><span class="chip sk">prioritas-visit</span></div></div>
+      <div class="row"><span class="lbl">tools</span><div><span class="chip tl">budget_activity</span><span class="chip tl">budget_tambahan</span><span class="chip tl">cross_analyst</span><span class="chip tl">demand_project</span><span class="chip tl">infra_map</span><span class="chip tl">kpi_summary</span><span class="chip tl">shadow_play</span><span class="chip tl">target_analyst</span></div></div>
+      <div class="row"><span class="lbl">materi</span><div><span class="chip mt">data/A-user/kpi/</span><span class="chip mt">data/A-user/budget/</span><span class="chip mt">data/A-user/area-mapping/</span><span class="chip mt">data/_backbone/mapping_kios_2026.csv</span><span class="chip mt">data/_backbone/shadow_map.csv</span></div></div>
       <div class="row"><span class="lbl">SOT</span><ul class="sot"><li><b>budget</b> → <code>commex.json)</code></li></ul></div>
     </article><article class="sec sec-B">
-      <header><span class="tag">B</span><h2>B</h2></header>
-      <div class="row"><span class="lbl">skills</span><div><span class="chip sk">program</span></div></div>
-      <div class="row"><span class="lbl">tools</span><div><span class="chip dim">—</span></div></div>
-      <div class="row"><span class="lbl">materi</span><div><span class="chip dim">—</span></div></div>
+      <header><span class="tag">B</span><h2>B — Business Area: Program (retailer/farmer) · Protocol/rule (Demo, GFA)</h2></header>
+      <div class="row"><span class="lbl">skills</span><div><span class="chip sk">demoplot</span><span class="chip sk">program</span></div></div>
+      <div class="row"><span class="lbl">tools</span><div><span class="chip tl">demoplot_spray</span><span class="chip tl">program_engine</span><span class="chip tl">program_query</span><span class="chip tl">protokol_update</span></div></div>
+      <div class="row"><span class="lbl">materi</span><div><span class="chip mt">data/B-bisnis/program/</span><span class="chip mt">data/B-bisnis/protokol/protokol_spray.json</span></div></div>
       <div class="row"><span class="lbl">SOT</span><ul class="sot"><li><b>protokol</b> → <code>protokol_spray.json</code></li></ul></div>
     </article><article class="sec sec-C">
-      <header><span class="tag">C</span><h2>C</h2></header>
-      <div class="row"><span class="lbl">skills</span><div><span class="chip sk">brp</span><span class="chip sk">demoplot</span><span class="chip sk">kegiatan</span></div></div>
-      <div class="row"><span class="lbl">tools</span><div><span class="chip dim">—</span></div></div>
-      <div class="row"><span class="lbl">materi</span><div><span class="chip dim">—</span></div></div>
+      <header><span class="tag">C</span><h2>C — Running data: BRP · Activity · demoplot-units eksekusi (silo per-area)</h2></header>
+      <div class="row"><span class="lbl">skills</span><div><span class="chip sk">brp</span><span class="chip sk">dampak-kegiatan</span><span class="chip sk">demoplot</span><span class="chip sk">kegiatan</span><span class="chip sk">lapor-kegiatan</span><span class="chip sk">musim-tani</span><span class="chip sk">nego-kios</span><span class="chip sk">peta</span><span class="chip sk">shadow</span><span class="chip sk">terima-planning-kegiatan</span></div></div>
+      <div class="row"><span class="lbl">tools</span><div><span class="chip tl">brp_query</span><span class="chip tl">brp_analyst</span><span class="chip tl">brp_merge</span><span class="chip tl">kpi_summary</span><span class="chip tl">target_analyst</span><span class="chip tl">demand_project</span><span class="chip tl">liquidation</span><span class="chip tl">budget_activity</span><span class="chip tl">budget_tambahan</span><span class="chip tl">kegiatan_recall</span><span class="chip tl">pending_digest</span><span class="chip tl">demoplot_spray</span><span class="chip tl">demoplot_flow</span><span class="chip tl">sample_monitor</span><span class="chip tl">dr_snapshot</span></div></div>
+      <div class="row"><span class="lbl">materi</span><div><span class="chip mt">data/C-running/brp/</span><span class="chip mt">data/C-running/activity/liquidation.json</span><span class="chip mt">data/C-running/projects/demand_projects.json</span><span class="chip mt">data/C-running/demoplot/</span><span class="chip mt">data/A-user/kpi/Target_R1_R2_2026.xlsx</span></div></div>
       <div class="row"><span class="lbl">SOT</span><ul class="sot"><li><b>plan_laporan</b> → <code>liquidation.json</code></li><li><b>demoplot</b> → <code>demoplot_units.json</code></li></ul></div>
     </article><article class="sec sec-D">
-      <header><span class="tag">D</span><h2>D</h2></header>
-      <div class="row"><span class="lbl">skills</span><div><span class="chip sk">product-pitch</span></div></div>
-      <div class="row"><span class="lbl">tools</span><div><span class="chip dim">—</span></div></div>
-      <div class="row"><span class="lbl">materi</span><div><span class="chip dim">—</span></div></div>
+      <header><span class="tag">D</span><h2>Knowledge — produk teknikal/branding/campaign (shared; owner-edit: MD Widya)</h2></header>
+      <div class="row"><span class="lbl">skills</span><div><span class="chip sk">kontribusi</span><span class="chip sk">product-pitch</span><span class="chip sk">recall-dossier</span></div></div>
+      <div class="row"><span class="lbl">tools</span><div><span class="chip tl">knowledge_contrib</span><span class="chip tl">rag_lookup</span><span class="chip tl">protokol_update</span><span class="chip tl">chunk_knowledge</span></div></div>
+      <div class="row"><span class="lbl">materi</span><div><span class="chip mt">data/D-knowledge/</span><span class="chip mt">vault/Fakta/</span><span class="chip mt">design/DESIGN_REFERENCE.md</span><span class="chip mt">design/assets/</span><span class="chip mt">PROTOKOL_DEMOPLOT.md</span><span class="chip mt">folder branding company (index: data/D-knowledge/branding/materi_komunikasi/branding_index.md)</span></div></div>
+      <div class="row"><span class="lbl">SOT</span><ul class="sot"><li class="dim">—</li></ul></div>
+    </article><article class="sec sec-E">
+      <header><span class="tag">E</span><h2>E — Design: pintu depan visual/brand. Storing/identify/generate/create aset &amp; materi (undangan, poster, banner, sertifikat, deck, kartu, laporan) — on-brand Bayer, aset ASLI, via design gate.</h2></header>
+      <div class="row"><span class="lbl">skills</span><div><span class="chip sk">desain</span></div></div>
+      <div class="row"><span class="lbl">tools</span><div><span class="chip tl">design_preflight</span><span class="chip tl">table_render</span><span class="chip tl">pk_web</span><span class="chip tl">peta</span><span class="chip tl">infra_section</span><span class="chip tl">kirim_vektor</span><span class="chip tl">send_to_telegram</span></div></div>
+      <div class="row"><span class="lbl">materi</span><div><span class="chip mt">design/tokens.json</span><span class="chip mt">design/DESIGN_REFERENCE.md</span><span class="chip mt">design/assets/manifest.json</span><span class="chip mt">design/templates/</span><span class="chip mt">design/CATALOG.md</span><span class="chip mt">design/catalog.json</span><span class="chip mt">data/E-design/GOALS.md</span><span class="chip mt">data/E-design/MATERI.md</span><span class="chip mt">data/D-knowledge/branding/DESIGN_KIT.md</span><span class="chip mt">aset penuh di repo privat janus-design (tokens/, BAYER_DESIGN_SYSTEM.md, 00_guideline_resmi, 01_logos_transparan 117 PNG, 02_packshots 39 PNG) — TAK reachable runtime; mirror runtime = design/ (tokens.json + assets/manifest.json logo+packshot + templates/ 6 template + DESIGN_REFERENCE.md)</span><span class="chip mt">folder &#x27;Logo Bayer&#x27; + &#x27;Botol Bayer&#x27; (asset_id di DESIGN_KIT.md, legacy) — via MCP Claude</span></div></div>
       <div class="row"><span class="lbl">SOT</span><ul class="sot"><li class="dim">—</li></ul></div>
     </article><article class="sec sec-backbone">
-      <header><span class="tag">backbone</span><h2>backbone</h2></header>
+      <header><span class="tag">backbone</span><h2>Backbone — master kios/geo/rantai (shared read)</h2></header>
       <div class="row"><span class="lbl">skills</span><div><span class="chip sk">kios</span><span class="chip sk">nego-kios</span></div></div>
-      <div class="row"><span class="lbl">tools</span><div><span class="chip dim">—</span></div></div>
-      <div class="row"><span class="lbl">materi</span><div><span class="chip dim">—</span></div></div>
+      <div class="row"><span class="lbl">tools</span><div><span class="chip tl">retailer_lookup</span><span class="chip tl">chain_query</span><span class="chip tl">kios_intel</span><span class="chip tl">vault_search</span></div></div>
+      <div class="row"><span class="lbl">materi</span><div><span class="chip mt">data/_backbone/mapping_kios_2026.csv</span><span class="chip mt">data/_backbone/Database_Retailer.xlsx</span><span class="chip mt">data/A-user/area-mapping/Mapping_DR.xlsx</span><span class="chip mt">data/_backbone/geo/</span><span class="chip mt">data/_backbone/people/</span></div></div>
       <div class="row"><span class="lbl">SOT</span><ul class="sot"><li><b>kios_master</b> → <code>Database_Retailer.xlsx</code></li></ul></div>
     </article><article class="sec sec-meta">
-      <header><span class="tag">meta</span><h2>meta</h2></header>
-      <div class="row"><span class="lbl">skills</span><div><span class="chip sk">output</span></div></div>
-      <div class="row"><span class="lbl">tools</span><div><span class="chip dim">—</span></div></div>
-      <div class="row"><span class="lbl">materi</span><div><span class="chip dim">—</span></div></div>
+      <header><span class="tag">meta</span><h2>Meta — jurnal keputusan/lessons/output-delivery (shared)</h2></header>
+      <div class="row"><span class="lbl">skills</span><div><span class="chip sk">berita</span><span class="chip sk">desain</span><span class="chip sk">eskalasi-dev</span><span class="chip sk">output</span></div></div>
+      <div class="row"><span class="lbl">tools</span><div><span class="chip tl">decision_journal</span><span class="chip tl">lessons</span><span class="chip tl">send_to_telegram</span><span class="chip tl">table_render</span><span class="chip tl">publish_output</span><span class="chip tl">pustaka</span><span class="chip tl">janus_doctor</span><span class="chip tl">janus_health</span></div></div>
+      <div class="row"><span class="lbl">materi</span><div><span class="chip mt">data/_meta/journal/</span><span class="chip mt">workspace/ops/</span></div></div>
       <div class="row"><span class="lbl">SOT</span><ul class="sot"><li><b>jurnal</b> → <code></code></li></ul></div>
     </article></main>
 <section class="role"><h3>Role → Section (USER-N)</h3>
-<table><tbody><tr><th>TM</th><td><span class=chip>A</span><span class=chip>B</span><span class=chip>C</span><span class=chip>D</span><span class=chip>E</span><span class=chip>backbone</span></td></tr><tr><th>MD</th><td><span class=chip>D</span><span class=chip>demoplot</span><span class=chip>backbone</span></td></tr><tr><th>CAC</th><td><span class=chip>D-campaign</span><span class=chip>D</span><span class=chip>backbone</span></td></tr></tbody></table>
+<table><tbody><tr><th>TM</th><td><span class=chip>A</span><span class=chip>B</span><span class=chip>C</span><span class=chip>D</span><span class=chip>E</span><span class=chip>backbone</span></td></tr><tr><th>MD</th><td><span class=chip>D</span><span class=chip>demoplot</span><span class=chip>backbone</span></td></tr><tr><th>CAC</th><td><span class=chip>D-campaign</span><span class=chip>D</span><span class=chip>backbone</span></td></tr><tr><th>KONTRIBUTOR</th><td><span class=chip>D</span><span class=chip>demoplot</span><span class=chip>backbone</span></td></tr></tbody></table>
 <div class="sub" style="margin-top:8px">Setiap user masuk lewat gerbang role. <code>area_scope: own</code> = silo area sendiri (A/C).</div></section>
 <footer>Digenerate <code>infra_section.py</code> dari sections/*.manifest.json · skills/registry.json · sot_registry.json · config/access.json. Manifest berubah → regenerate.</footer>
 </div></body></html>
