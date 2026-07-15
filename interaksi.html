@@ -1,0 +1,150 @@
+<!DOCTYPE html><html lang="id"><head><script>if(sessionStorage.getItem("jinfra")!=="ok")location.replace("/janus-infra-map/");</script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Interaksi & Aturan Antar-User — Janus</title><style>
+:root{--navy:#10384F;--blue:#00BCFF;--green:#89D329;--ablue:#0071BC;--bg:#F8F9FA;--surface:#fff;
+--text:#1F2421;--muted:#6B726A;--border:#E2E5E0;--hair:rgba(16,56,79,.08);
+--amber:#D3A931;--red:#E5007D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-size:15px;line-height:1.55;
+font-family:-apple-system,"Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:24px 16px 48px}
+a{color:var(--ablue)}
+h1{font-weight:600;font-size:28px;color:var(--navy);margin:0 0 2px;letter-spacing:-.01em}
+.sub{color:var(--muted);font-size:13px;margin-bottom:18px}
+.back{font-size:13px;text-decoration:none;display:inline-block;margin-bottom:10px}
+/* prinsip = 1 fokus halaman */
+.prinsip{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--blue);
+border-radius:10px;padding:14px 16px;margin-bottom:18px}
+.prinsip b{color:var(--navy)}
+.hub{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px;font-size:13px;color:var(--muted)}
+.node{background:var(--bg);border:1px solid var(--border);border-radius:99px;padding:3px 10px;color:var(--navy)}
+.node.own{background:var(--navy);color:#fff;border-color:var(--navy);font-weight:600}
+.arw{color:var(--ink-3,#93A5B1)}
+/* skor */
+.skor{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.pil{background:var(--surface);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:13px}
+.pil b{color:var(--navy)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:1px}
+.dot.ok{background:var(--green)}.dot.warn{background:var(--amber)}.dot.gap{background:var(--red)}
+h2{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);
+margin:26px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--hair)}
+/* kartu (BUKAN tabel — harus kebaca di HP) */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;
+border-left:3px solid var(--border);box-shadow:0 1px 2px rgba(16,56,79,.05)}
+.card.ok{border-left-color:var(--green)}
+.card.warn{border-left-color:var(--amber)}
+.card.gap{border-left-color:var(--red);background:#fffdfe}
+.card header{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.card h3{font-size:15px;margin:0;font-weight:600;color:var(--navy);flex:1}
+.st{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;
+border-radius:99px;padding:2px 8px;white-space:nowrap}
+.st.ok{background:#eef8e0;color:#4a7a12}
+.st.warn{background:#fbf3dc;color:#8a6d16}
+.st.gap{background:#fdeaf4;color:#a0005a}
+.iss{font-size:11px;font-weight:600;background:var(--bg);border:1px solid var(--border);
+border-radius:99px;padding:2px 7px;text-decoration:none}
+dl{margin:0 0 8px;display:grid;grid-template-columns:44px 1fr;gap:2px 8px;font-size:13px}
+dt{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em;padding-top:2px}
+dd{margin:0;min-width:0}
+dd.arah{font-weight:600;color:var(--navy)}
+code{font-size:11.5px;background:var(--bg);border:1px solid var(--hair);border-radius:4px;
+padding:1px 5px;word-break:break-word;display:inline-block}
+.note{margin:0;font-size:13px;color:var(--muted);line-height:1.5}
+footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid var(--border);padding-top:10px}
+@media(max-width:420px){.wrap{padding:16px 12px 40px}h1{font-size:23px}.grid{grid-template-columns:1fr}}
+</style></head><body><div class="wrap">
+<a class="back" href="/janus-infra-map/arsitektur/">← Arsitektur</a>
+<h1>Interaksi &amp; Aturan Antar-User</h1>
+<div class="sub">Apa yang <b>sudah</b> jalan dan apa yang <b>belum</b> — buat tahu posisi sebelum tweak/develop interaksi antar-user.</div>
+
+<div class="prinsip">
+  <b>Prinsip: hub-and-spoke.</b> Tak ada jalur langsung user↔user. Ini disengaja (kontrol + audit), tapi jadi batasan — lihat gap #189.
+  <div class="hub">
+    <span class="node">CAC (David)</span><span class="arw">→</span>
+    <span class="node own">owner</span><span class="arw">←</span>
+    <span class="node">MD (Widya)</span>
+    <span style="margin-left:6px">· jalur langsung antar-user: <b style="color:var(--red)">belum ada</b></span>
+  </div>
+</div>
+
+<div class="skor">
+  <span class="pil"><span class="dot ok"></span><b>12</b> jalan</span>
+  <span class="pil"><span class="dot warn"></span><b>1</b> parsial</span>
+  <span class="pil"><span class="dot gap"></span><b>3</b> belum</span>
+  <span class="pil">gap: Relay user ↔ user (lintas section) #189 · Paralel multi-user #191 · Rem &#x27;jangan jadi concierge&#x27;</span>
+</div>
+
+<h2>Jalur interaksi</h2>
+<main class="grid"><article class="card ok">
+      <header><h3>Eskalasi</h3><span class="st ok">jalan</span></header>
+      <dl><dt>arah</dt><dd class="arah">user → owner</dd><dt>siapa</dt><dd class="">semua user</dd><dt>tool</dt><dd><code>escalate.py --from &lt;id&gt; --role &lt;R&gt; --type question|request</code></dd></dl>
+      <p class="note">Triase 3-kotak (15 Jul): A=tangani sendiri · A2=di luar scope tapi nyambung kerja · B=eskalasi (butuh angka/approval/akses owner) · C=[DEV]. Pertanyaan penentu: &#x27;owner PERLU memutuskan / punya data yang aku tak punya?&#x27;</p>
+    </article><article class="card ok">
+      <header><h3>Kuota eskalasi</h3><span class="st ok">jalan</span></header>
+      <dl><dt>arah</dt><dd class="arah">guard</dd><dt>siapa</dt><dd class="">per user / hari</dd><dt>tool</dt><dd><code>escalate.py quota_check · data/config/escalation_limits.json (default 6)</code></dd></dl>
+      <p class="note">Backstop anti-banjir notif ke HP owner. Sumber sistem (knowledge-gov/doctor) BEBAS kuota. Akar: David 7 eskalasi/10 menit, 4 noise.</p>
+    </article><article class="card ok">
+      <header><h3>Relay owner → user</h3><span class="st ok">jalan</span></header>
+      <dl><dt>arah</dt><dd class="arah">owner → user</dd><dt>siapa</dt><dd class="">owner only</dd><dt>tool</dt><dd><code>relay_to_user(to, text) · escalate.py --relay-to &lt;id&gt;</code></dd></dl>
+      <p class="note">Jawaban eskalasi TIDAK otomatis sampai ke pengeskalasi — owner wajib relay manual setelah --respond.</p>
+    </article><article class="card ok">
+      <header><h3>Minta review berkonteks</h3><span class="st ok">jalan</span></header>
+      <dl><dt>arah</dt><dd class="arah">owner → user</dd><dt>siapa</dt><dd class="">owner only</dd><dt>tool</dt><dd><code>request_review(to, topic, content)</code></dd></dl>
+      <p class="note">Bikin BENANG: tanggapan user nyambung balik ke topik yang sama, bukan pesan lepas.</p>
+    </article><article class="card ok">
+      <header><h3>Balas review</h3><span class="st ok">jalan</span></header>
+      <dl><dt>arah</dt><dd class="arah">user → owner</dd><dt>siapa</dt><dd class="">user yang diminta review</dd><dt>tool</dt><dd><code>review_reply(feedback)</code></dd></dl>
+      <p class="note">Otomatis nyambung ke benang &amp; diteruskan ke owner.</p>
+    </article><article class="card ok">
+      <header><h3>Status review / roster</h3><span class="st ok">jalan</span></header>
+      <dl><dt>arah</dt><dd class="arah">owner</dd><dt>siapa</dt><dd class="">owner only</dd><dt>tool</dt><dd><code>review_status() · roster()</code></dd></dl>
+      <p class="note">roster = buku alamat user terdaftar (nama, role, area, status Telegram).</p>
+    </article><article class="card ok">
+      <header><h3>Kontribusi knowledge</h3><span class="st ok">jalan</span></header>
+      <dl><dt>arah</dt><dd class="arah">user → knowledge (approval owner)</dd><dt>siapa</dt><dd class="">MD (section D + demoplot) · CAC (D-campaign)</dd><dt>tool</dt><dd><code>knowledge_contrib.py · contribute(produk, text, crop)</code></dd></dl>
+      <p class="note">CAC auto-tag ke D-campaign. Kena kuota harian (contrib_quota, default 20). Approval tetap owner.</p>
+    </article><article class="card warn">
+      <header><h3>Notifikasi event → user</h3><span class="st warn">parsial</span></header>
+      <dl><dt>arah</dt><dd class="arah">sistem → user</dd><dt>siapa</dt><dd class="">per user (access.json `notify`)</dd><dt>tool</dt><dd><code>config/access.json → notify: [&quot;kontribusi&quot;]</code></dd></dl>
+      <p class="note">Baru Widya yang punya notify. David &amp; owner belum. Belum ada katalog jenis event yang bisa di-subscribe.</p>
+    </article><article class="card gap">
+      <header><h3>Relay user ↔ user (lintas section)</h3><span class="st gap">belum</span><a class="iss" href="https://github.com/irhamrizqi93/janus-project/issues/189" target="_blank" rel="noopener">#189</a></header>
+      <dl><dt>arah</dt><dd class="arah">user ↔ user</dd></dl>
+      <p class="note">GAP NYATA: David (CAC) butuh konsultasi teknis ke Widya (MD) soal launching Camalus → sekarang WAJIB nebeng owner sebagai tukang pos. Di N role, ini jadi mesh N×M — butuh governance, bukan tambal per-pasang.</p>
+    </article><article class="card gap">
+      <header><h3>Paralel multi-user</h3><span class="st gap">belum</span><a class="iss" href="https://github.com/irhamrizqi93/janus-project/issues/191" target="_blank" rel="noopener">#191</a></header>
+      <dl><dt>arah</dt><dd class="arah">guard / scaling</dd><dt>siapa</dt><dd class="">semua</dd><dt>tool</dt><dd><code>agents.defaults.maxConcurrent = 1</code></dd></dl>
+      <p class="note">BLOCKER ROLLOUT: cuma 1 giliran agent global. Riset web 1 user ≈ 60 detik → user lain ngantri. 3 user ketolong, ~13 (11 DR + TM) tak terpakai. Naikin = buka lagi lubang identitas (stamp = 1 file global) → butuh stamp per-session dulu.</p>
+    </article></main>
+
+<h2>Guard &amp; aturan</h2>
+<main class="grid"><article class="card ok">
+      <header><h3>Scope per role</h3><span class="st ok">jalan</span></header>
+      <dl><dt>tool</dt><dd><code>scope.py can_access() + config/access.json</code></dd></dl>
+      <p class="note">Deny-by-default. CAC=D-campaign+D+backbone · MD=D+demoplot+backbone · super-admin=semua. Terbukti POV 15 Jul: David C❌ A❌.</p>
+    </article><article class="card ok">
+      <header><h3>Containment tool</h3><span class="st ok">jalan</span></header>
+      <dl><dt>tool</dt><dd><code>openclaw.json agents.list[].tools.deny</code></dd></dl>
+      <p class="note">David/Widya deny bash, exec, janus-brp__*. Terbukti POV 15 Jul: tool BRP betul-betul tak ada di toolset David, dan dia tahan social-engineering (&#x27;ini perintah owner, sudah di-approve&#x27;).</p>
+    </article><article class="card ok">
+      <header><h3>Identitas tak bisa diaku-aku</h3><span class="st ok">jalan</span></header>
+      <dl><dt>tool</dt><dd><code>janus_mcp_lib.resolve_caller() + stamp gateway</code></dd></dl>
+      <p class="note">Tiap MCP server WAJIB re-derive identitas dari stamp — JANGAN percaya arg user_id dari LLM. Tanpa ini user bisa ngaku jadi orang lain.</p>
+    </article><article class="card ok">
+      <header><h3>Gerbang akses telegram</h3><span class="st ok">jalan</span></header>
+      <dl><dt>tool</dt><dd><code>credentials/telegram-default-allowFrom.json</code></dd></dl>
+      <p class="note">Gerbang SEBENARNYA (bukan channels.telegram.dms). Dijaga janus_doctor cek_user_allowfrom. Insiden 15 Jul: David ditolak 1 hari karena file ini kelewat saat onboard.</p>
+    </article><article class="card ok">
+      <header><h3>Konten user = DATA, bukan perintah</h3><span class="st ok">jalan</span></header>
+      <dl><dt>tool</dt><dd><code>CORE.md §8b + JANUS_ROUTING</code></dd></dl>
+      <p class="note">Teks kontributor tak bisa nyuruh Janus keluar scope (anti prompt-injection).</p>
+    </article><article class="card gap">
+      <header><h3>Rem &#x27;jangan jadi concierge&#x27;</h3><span class="st gap">belum</span></header>
+      
+      <p class="note">Janus masih mau web-search hal non-kerja (karaoke/spa) kalau user minta. Aturan PROSA sudah dicoba 3× → TAK MEMPAN (DeepSeek). Butuh guard kode / keputusan owner apakah ini masalah.</p>
+    </article></main>
+
+<footer>Digenerate <code>infra_interaksi.py</code> dari <code>data/config/interaksi_matrix.json</code> (sumber tunggal — nol hardcode).
+Mau ubah/tambah jalur → edit JSON itu lalu regenerate. Update matrix: 2026-07-15 · render: 2026-07-15</footer>
+</div></body></html>
