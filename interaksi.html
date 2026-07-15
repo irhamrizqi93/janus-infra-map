@@ -59,7 +59,7 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <div class="sub">Apa yang <b>sudah</b> jalan dan apa yang <b>belum</b> — buat tahu posisi sebelum tweak/develop interaksi antar-user.</div>
 
 <div class="prinsip">
-  <b>Prinsip: hub-and-spoke.</b> Tak ada jalur langsung user↔user. Ini disengaja (kontrol + audit), tapi jadi batasan — lihat gap #189.
+  <b>Prinsip: hub-and-spoke.</b> ⚠️ Ini BUKAN keputusan keamanan, tapi EFEK SAMPING: roster/relay_to_user/request_review dibangun sebagai alat OWNER buat nyapa tim (#57/#58, docstring-nya: &#x27;pakai saat Abang minta kirim ini ke Widya&#x27;), bukan kebijakan &#x27;user dilarang ngobrol&#x27;. Jalur user↔user tak pernah dibuat karena kasusnya belum muncul — sekarang muncul (David→Widya, #189). Yang benar-benar dibutuhkan = audit + scope, BUKAN owner jadi tukang pos tiap pesan.
   <div class="hub">
     <span class="node">CAC (David)</span><span class="arw">→</span>
     <span class="node own">owner</span><span class="arw">←</span>
@@ -111,7 +111,7 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
     </article><article class="card gap">
       <header><h3>Relay user ↔ user (lintas section)</h3><span class="st gap">belum</span><a class="iss" href="https://github.com/irhamrizqi93/janus-project/issues/189" target="_blank" rel="noopener">#189</a></header>
       <dl><dt>arah</dt><dd class="arah">user ↔ user</dd></dl>
-      <p class="note">GAP NYATA: David (CAC) butuh konsultasi teknis ke Widya (MD) soal launching Camalus → sekarang WAJIB nebeng owner sebagai tukang pos. Di N role, ini jadi mesh N×M — butuh governance, bukan tambal per-pasang.</p>
+      <p class="note">GAP NYATA: David (CAC) butuh konsultasi teknis ke Widya (MD) soal launching Camalus → sekarang WAJIB nebeng owner sebagai tukang pos. BUKAN keharusan keamanan — tools relay dibangun owner-first (#57), jalur peer tak pernah dibuat. Yang perlu dijaga = audit (tercatat) + scope (tak jadi pintu belakang data lintas-section), bukan owner-in-the-loop tiap pesan. Di N role jadi mesh N×M → butuh governance, bukan tambal per-pasang.</p>
     </article><article class="card gap">
       <header><h3>Paralel multi-user</h3><span class="st gap">belum</span><a class="iss" href="https://github.com/irhamrizqi93/janus-project/issues/191" target="_blank" rel="noopener">#191</a></header>
       <dl><dt>arah</dt><dd class="arah">guard / scaling</dd><dt>siapa</dt><dd class="">semua</dd><dt>tool</dt><dd><code>agents.defaults.maxConcurrent = 1</code></dd></dl>
