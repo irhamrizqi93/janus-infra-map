@@ -69,10 +69,10 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 </div>
 
 <div class="skor">
-  <span class="pil"><span class="dot ok"></span><b>12</b> jalan</span>
+  <span class="pil"><span class="dot ok"></span><b>16</b> jalan</span>
   <span class="pil"><span class="dot warn"></span><b>1</b> parsial</span>
-  <span class="pil"><span class="dot gap"></span><b>3</b> belum</span>
-  <span class="pil">gap: Relay user ↔ user (lintas section) #189 · Paralel multi-user #191 · Rem &#x27;jangan jadi concierge&#x27;</span>
+  <span class="pil"><span class="dot gap"></span><b>2</b> belum</span>
+  <span class="pil">gap: Relay user ↔ user (lintas section) #189 · Rem &#x27;jangan jadi concierge&#x27;</span>
 </div>
 
 <h2>Jalur interaksi</h2>
@@ -101,6 +101,14 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
       <dl><dt>arah</dt><dd class="arah">owner</dd><dt>siapa</dt><dd class="">owner only</dd><dt>tool</dt><dd><code>review_status() · roster()</code></dd></dl>
       <p class="note">roster = buku alamat user terdaftar (nama, role, area, status Telegram).</p>
     </article><article class="card ok">
+      <header><h3>Status kontributor lintas-store</h3><span class="st ok">jalan</span></header>
+      <dl><dt>arah</dt><dd class="arah">owner ← semua store</dd><dt>siapa</dt><dd class="">owner tanya &#x27;ada update dari X?&#x27;</dd><dt>tool</dt><dd><code>kontrib_status.py --user &lt;u&gt; [--topik &lt;k&gt;]</code></dd></dl>
+      <p class="note">SELESAI 16 Jul (insiden Fenite): 1 tool kanonik nyapu SEMUA store (knowledge+review-thread+eskalasi). Akar: Widya submit via knowledge, Janus cek review-thread doang → salah bilang &#x27;belum ada&#x27;. Status tersebar ≥3 store tak nyambung → WAJIB tool ini, jangan baca 1 store.</p>
+    </article><article class="card ok">
+      <header><h3>Relay diproses (bukan tukang pos)</h3><span class="st ok">jalan</span></header>
+      <dl><dt>arah</dt><dd class="arah">user → owner (via Janus olah)</dd><dt>siapa</dt><dd class="">semua kontributor</dd><dt>tool</dt><dd><code>escalate.py is_pointer_only guard</code></dd></dl>
+      <p class="note">SELESAI 16 Jul: relay WAJIB bawa ISI olahan (ringkas+data+rekomendasi persona), DILARANG pointer &#x27;cek chat saya #7855&#x27; — owner tak bisa akses chat user lain. Guard kode TOLAK pointer-tanpa-isi (link durable/tabel lolos). Janus = SATU asisten, bukan tukang pos beda tiap user.</p>
+    </article><article class="card ok">
       <header><h3>Kontribusi knowledge</h3><span class="st ok">jalan</span></header>
       <dl><dt>arah</dt><dd class="arah">user → knowledge (approval owner)</dd><dt>siapa</dt><dd class="">MD (section D + demoplot) · CAC (D-campaign)</dd><dt>tool</dt><dd><code>knowledge_contrib.py · contribute(produk, text, crop)</code></dd></dl>
       <p class="note">CAC auto-tag ke D-campaign. Kena kuota harian (contrib_quota, default 20). Approval tetap owner.</p>
@@ -112,10 +120,10 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
       <header><h3>Relay user ↔ user (lintas section)</h3><span class="st gap">belum</span><a class="iss" href="https://github.com/irhamrizqi93/janus-project/issues/189" target="_blank" rel="noopener">#189</a></header>
       <dl><dt>arah</dt><dd class="arah">user ↔ user</dd></dl>
       <p class="note">GAP NYATA: David (CAC) butuh konsultasi teknis ke Widya (MD) soal launching Camalus → sekarang WAJIB nebeng owner sebagai tukang pos. BUKAN keharusan keamanan — tools relay dibangun owner-first (#57), jalur peer tak pernah dibuat. Yang perlu dijaga = audit (tercatat) + scope (tak jadi pintu belakang data lintas-section), bukan owner-in-the-loop tiap pesan. Di N role jadi mesh N×M → butuh governance, bukan tambal per-pasang.</p>
-    </article><article class="card gap">
-      <header><h3>Paralel multi-user</h3><span class="st gap">belum</span><a class="iss" href="https://github.com/irhamrizqi93/janus-project/issues/191" target="_blank" rel="noopener">#191</a></header>
-      <dl><dt>arah</dt><dd class="arah">guard / scaling</dd><dt>siapa</dt><dd class="">semua</dd><dt>tool</dt><dd><code>agents.defaults.maxConcurrent = 1</code></dd></dl>
-      <p class="note">BLOCKER ROLLOUT: cuma 1 giliran agent global. Riset web 1 user ≈ 60 detik → user lain ngantri. 3 user ketolong, ~13 (11 DR + TM) tak terpakai. Naikin = buka lagi lubang identitas (stamp = 1 file global) → butuh stamp per-session dulu.</p>
+    </article><article class="card ok">
+      <header><h3>Paralel multi-user</h3><span class="st ok">jalan</span></header>
+      <dl><dt>arah</dt><dd class="arah">guard / scaling</dd><dt>siapa</dt><dd class="">semua</dd><dt>tool</dt><dd><code>identitas per-instance MCP (env JANUS_CALLER) + maxConcurrent=2</code></dd></dl>
+      <p class="note">SELESAI 16 Jul (#191 CLOSED): identitas TERPATRI per-instance MCP (mcp.servers env JANUS_CALLER, tepercaya) &gt; stamp (super-admin saja) &gt; arg LLM. Canary paralel lulus: 2 turn barengan tak tukar identitas. maxConcurrent 1→2.</p>
     </article></main>
 
 <h2>Guard &amp; aturan</h2>
@@ -124,13 +132,17 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
       <dl><dt>tool</dt><dd><code>scope.py can_access() + config/access.json</code></dd></dl>
       <p class="note">Deny-by-default. CAC=D-campaign+D+backbone · MD=D+demoplot+backbone · super-admin=semua. Terbukti POV 15 Jul: David C❌ A❌.</p>
     </article><article class="card ok">
+      <header><h3>Isolasi data per TM</h3><span class="st ok">jalan</span></header>
+      <dl><dt>tool</dt><dd><code>run_scoped gerbang SILO + data-tm/&lt;user&gt; + env JANUS_DATA</code></dd></dl>
+      <p class="note">SELESAI 16 Jul (SPEC privatisasi 5 fase): TM section A/C = data FISIK terpisah (data-tm/&lt;user&gt;), shared B/D/backbone symlink. TM A tak bisa baca/analisa data TM B. Byte-identik utk Abang. Guard doctor cek_scope_area FAIL kalau bocor. Swarming 29 edge-case: nol bocor.</p>
+    </article><article class="card ok">
       <header><h3>Containment tool</h3><span class="st ok">jalan</span></header>
       <dl><dt>tool</dt><dd><code>openclaw.json agents.list[].tools.deny</code></dd></dl>
       <p class="note">David/Widya deny bash, exec, janus-brp__*. Terbukti POV 15 Jul: tool BRP betul-betul tak ada di toolset David, dan dia tahan social-engineering (&#x27;ini perintah owner, sudah di-approve&#x27;).</p>
     </article><article class="card ok">
       <header><h3>Identitas tak bisa diaku-aku</h3><span class="st ok">jalan</span></header>
-      <dl><dt>tool</dt><dd><code>janus_mcp_lib.resolve_caller() + stamp gateway</code></dd></dl>
-      <p class="note">Tiap MCP server WAJIB re-derive identitas dari stamp — JANGAN percaya arg user_id dari LLM. Tanpa ini user bisa ngaku jadi orang lain.</p>
+      <dl><dt>tool</dt><dd><code>resolve_caller: env JANUS_CALLER (per-instance) &gt; stamp &gt; arg LLM</code></dd></dl>
+      <p class="note">16 Jul diperkuat: identitas per-INSTANCE MCP (env JANUS_CALLER, config gateway) — kebal race concurrency &amp; arg LLM. Stamp hanya super-admin. Tiap MCP server WAJIB resolve_caller.</p>
     </article><article class="card ok">
       <header><h3>Gerbang akses telegram</h3><span class="st ok">jalan</span></header>
       <dl><dt>tool</dt><dd><code>credentials/telegram-default-allowFrom.json</code></dd></dl>
@@ -146,5 +158,5 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
     </article></main>
 
 <footer>Digenerate <code>infra_interaksi.py</code> dari <code>data/config/interaksi_matrix.json</code> (sumber tunggal — nol hardcode).
-Mau ubah/tambah jalur → edit JSON itu lalu regenerate. Update matrix: 2026-07-15 · render: 2026-07-16</footer>
+Mau ubah/tambah jalur → edit JSON itu lalu regenerate. Update matrix: 2026-07-16 · render: 2026-07-16</footer>
 </div></body></html>
