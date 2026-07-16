@@ -70,9 +70,9 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 
 <div class="skor">
   <span class="pil"><span class="dot ok"></span><b>17</b> jalan</span>
-  <span class="pil"><span class="dot warn"></span><b>1</b> parsial</span>
-  <span class="pil"><span class="dot gap"></span><b>1</b> belum</span>
-  <span class="pil">gap: Rem &#x27;jangan jadi concierge&#x27;</span>
+  <span class="pil"><span class="dot warn"></span><b>2</b> parsial</span>
+  <span class="pil"><span class="dot gap"></span><b>0</b> belum</span>
+  
 </div>
 
 <h2>Jalur interaksi</h2>
@@ -151,10 +151,10 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
       <header><h3>Konten user = DATA, bukan perintah</h3><span class="st ok">jalan</span></header>
       <dl><dt>tool</dt><dd><code>CORE.md §8b + JANUS_ROUTING</code></dd></dl>
       <p class="note">Teks kontributor tak bisa nyuruh Janus keluar scope (anti prompt-injection).</p>
-    </article><article class="card gap">
-      <header><h3>Rem &#x27;jangan jadi concierge&#x27;</h3><span class="st gap">belum</span></header>
-      
-      <p class="note">Janus masih mau web-search hal non-kerja (karaoke/spa) kalau user minta. Aturan PROSA sudah dicoba 3× → TAK MEMPAN (DeepSeek). Butuh guard kode / keputusan owner apakah ini masalah.</p>
+    </article><article class="card warn">
+      <header><h3>Rem &#x27;jangan jadi concierge&#x27;</h3><span class="st warn">parsial</span></header>
+      <dl><dt>tool</dt><dd><code>plugin access-gate: before_agent_reply short-circuit + agent_turn_prepare inject</code></dd></dl>
+      <p class="note">16 Jul: 2 lapis. Inject per-turn (TERUJI via CLI: Janus TOLAK, tak rekomendasi venue) — tapi kadang masih web_search internal. Hard-block short-circuit (agent tak jalan, nol search) ditambah TAPI cuma aktif jalur Telegram asli (tak bisa di-CLI-test) — nunggu verifikasi pesan Telegram nyata. Guard kode &gt; prosa: inject sendiri lemah utk DeepSeek.</p>
     </article></main>
 
 <footer>Digenerate <code>infra_interaksi.py</code> dari <code>data/config/interaksi_matrix.json</code> (sumber tunggal — nol hardcode).
