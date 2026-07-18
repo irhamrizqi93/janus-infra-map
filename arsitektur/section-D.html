@@ -527,12 +527,12 @@
         <div class="pulse-dot"></div>
         <h1>Section D — Knowledge Produk &amp; Branding (untuk kontributor)</h1>
       </div>
-      <p class="subtitle">STORING → PROCESSING → RECALLING · kontribusi lewat gerbang governance (mirip→hold+notify owner) · owner-edit: MD Widya</p>
+      <p class="subtitle">STORING → PROCESSING → RECALLING · kontribusi lewat gerbang governance (mirip→hold+notify owner) · owner-edit: MD Widya (agronomi) + CAC David (campaign/USP)</p>
     </div>
 
     <!-- Main Diagram -->
     <div class="diagram-container">
-      <svg viewBox="0 0 1120 820" role="img" aria-label="Section D — Knowledge Produk &amp; Branding (untuk kontributor) — STORING → PROCESSING → RECALLING · kontribusi lewat gerbang governance (mirip→hold+notify owner) · owner-edit: MD Widya (data-flow diagram)">
+      <svg viewBox="0 0 1120 820" role="img" aria-label="Section D — Knowledge Produk &amp; Branding (untuk kontributor) — STORING → PROCESSING → RECALLING · kontribusi lewat gerbang governance (mirip→hold+notify owner) · owner-edit: MD Widya (agronomi) + CAC David (campaign/USP) (data-flow diagram)">
         <!-- Definitions -->
         <defs>
           <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
@@ -570,6 +570,7 @@
 
         <!-- Flow paths -->
         <path d="M 156 157 L 259 157" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path d="M 156 271 L 207.5 271 L 207.5 157 L 259 157" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
         <path d="M 156 385 L 207.5 385 L 207.5 157 L 259 157" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
         <path d="M 156 613 L 259 613" class="a-dashed" stroke-width="1.4" marker-end="url(#arrowhead-dashed)"/>
         <path d="M 100 414 L 287 414 L 287 499 L 474 499" class="a-default" stroke-width="1.4" marker-end="url(#arrowhead)"/>
@@ -587,6 +588,12 @@
         <text x="100" y="149" class="t-primary" font-size="10" font-weight="600" text-anchor="middle">MD Widya</text>
         <text x="100" y="165" class="t-muted" font-size="7" text-anchor="middle">owner knowledge produk</text>
         <text x="100" y="175" class="t-frontend" font-size="7" text-anchor="middle">kontributor</text>
+
+        <rect x="44" y="242" width="112" height="58" rx="6" class="c-mask"/>
+        <rect x="44" y="242" width="112" height="58" rx="6" class="c-frontend" stroke-width="1.5"/>
+        <text x="100" y="263" class="t-primary" font-size="10" font-weight="600" text-anchor="middle">CAC David</text>
+        <text x="100" y="279" class="t-muted" font-size="7" text-anchor="middle">owner campaign/branding</text>
+        <text x="100" y="289" class="t-frontend" font-size="7" text-anchor="middle">kontributor</text>
 
         <rect x="44" y="356" width="112" height="58" rx="6" class="c-mask"/>
         <rect x="44" y="356" width="112" height="58" rx="6" class="c-frontend" stroke-width="1.5"/>
@@ -658,6 +665,9 @@
         <rect x="138.3" y="189" width="139.4" height="27" rx="4" class="c-mask"/>
         <text x="208" y="200" class="t-backend" font-size="8" text-anchor="middle">submit produk</text>
         <text x="208" y="211" class="t-dim" font-size="7" text-anchor="middle">knowledge_contrib --submit</text>
+        <rect x="135.85" y="303" width="144.3" height="27" rx="4" class="c-mask"/>
+        <text x="208" y="314" class="t-muted" font-size="8" text-anchor="middle">submit campaign/USP</text>
+        <text x="208" y="325" class="t-dim" font-size="7" text-anchor="middle">auto-tag section D-campaign</text>
         <rect x="167.2" y="250" width="80.60000000000001" height="27" rx="4" class="c-mask"/>
         <text x="207.5" y="261" class="t-muted" font-size="8" text-anchor="middle">submit fakta</text>
         <text x="207.5" y="272" class="t-dim" font-size="7" text-anchor="middle">via chat Janus</text>
@@ -725,6 +735,7 @@
           <li>&bull; knowledge_contrib.py: BARU→auto · mirip existing→DITAHAN + notify owner (MD)</li>
           <li>&bull; chunk_knowledge.py: vault .md + PROTOKOL_DEMOPLOT.md (auto-pull Drive) → ChromaDB</li>
           <li>&bull; protokol_update.py: 1 input → protokol_spray.json + note RAG — anti-divergen</li>
+          <li>&bull; CAC (David) → section D-campaign otomatis; USP wajib bersandar fakta agronomi approved (anti over-claim)</li>
         </ul>
       </div>
 
@@ -746,8 +757,8 @@
           <h3>Mau kontribusi di section D?</h3>
         </div>
         <ul>
-          <li>&bull; Baca scope dulu: data/sections/D.manifest.json (tools + owner-edit MD)</li>
-          <li>&bull; Kode: scripts/knowledge_contrib.py · chunk_knowledge.py · pk_web.py · rag_lookup.py</li>
+          <li>&bull; Scope: D.manifest.json — owner-edit MD (agronomi) &amp; CAC (campaign/USP/branding)</li>
+          <li>&bull; Kode: knowledge_contrib.py (auto-tag CAC→D-campaign) · pk_reconcile.py (blok USP terpisah) · pk_web.py · rag_lookup.py</li>
           <li>&bull; Test: scripts/test_recall_dossier.py + test_pk_reconcile.py wajib hijau sebelum push</li>
         </ul>
       </div>
