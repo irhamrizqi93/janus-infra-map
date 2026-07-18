@@ -233,7 +233,7 @@ function copyJSON(){const t=JSON.stringify(payload());
 // Kirim LANGSUNG ke backend (anonim, peserta tak forward apa-apa). URL dari backend.json
 // (di-update watchdog tunnel). Gagal (tunnel mati) → fallback Simpan/Salin (nol data hilang).
 function submitOnline(){const btn=$("#send");if(btn){btn.disabled=true;btn.textContent="Mengirim…";}
- fetch("backend.json",{cache:"no-store"}).then(r=>r.json()).then(cfg=>{
+ fetch("../backend.json",{cache:"no-store"}).then(r=>r.json()).then(cfg=>{
    if(!cfg||!cfg.url)throw 0;
    return fetch(cfg.url.replace(/\/+$/,"")+"/submit",{method:"POST",
      headers:{"Content-Type":"application/json"},body:JSON.stringify(payload())});
