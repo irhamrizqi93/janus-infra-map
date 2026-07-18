@@ -1,0 +1,89 @@
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Governance Janus — Siapa Boleh Akses Apa</title>
+<style>
+:root{--navy:#10384F;--capri:#00BCFF;--green:#89D329;--ablue:#0071BC;--ink:#1a1a1a;--rust:#b4451f;--mut:#6b7280;--line:#e2e6ea;--silo:#eaf1f6;--shared:#eef7e9;--priv:#f6efe9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#fff;color:var(--ink);font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;padding:30px 34px;max-width:1180px;margin:0 auto;-webkit-font-smoothing:antialiased}
+.top{display:flex;align-items:center;gap:14px;border-bottom:2.5px solid var(--ink);padding-bottom:14px;margin-bottom:8px}
+.brand{width:38px;height:38px;flex:0 0 auto}
+h1{font-size:30px;font-weight:800;letter-spacing:-.4px}
+.sub{color:var(--mut);font-size:13.5px;margin:4px 0 20px;font-weight:500}
+.wrap{overflow-x:auto;border:1.5px solid var(--line);border-radius:14px}
+table{border-collapse:collapse;width:100%;min-width:820px;font-size:13px}
+th,td{padding:11px 8px;text-align:center;border-bottom:1px solid var(--line)}
+thead th{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;color:var(--navy);border-bottom:2px solid var(--navy);position:sticky;top:0;background:#fff}
+th.role,td.role{text-align:left;font-weight:800;white-space:nowrap;padding-left:16px}
+td.role small{display:block;font-weight:500;color:var(--mut);font-size:10.5px}
+.silo{background:var(--silo)}.shared{background:var(--shared)}.priv{background:var(--priv)}
+.ty{font-size:9px;font-weight:700;display:block;color:var(--mut);margin-top:2px;text-transform:none;letter-spacing:0}
+.y{color:var(--green);font-weight:900;font-size:15px}
+.n{color:#c7ccd1;font-weight:700}
+.g{color:var(--ablue);font-weight:800;font-size:11px}
+tbody tr:hover{background:#fafbfc}
+tr.admin{background:#fbfdff}
+.scope{font-size:11px;font-weight:700;color:var(--navy)}
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin:16px 2px 4px;font-size:12px;color:var(--mut);align-items:center}
+.legend b{color:var(--ink)}.chip{display:inline-block;width:13px;height:13px;border-radius:3px;vertical-align:-2px;margin-right:5px;border:1px solid var(--line)}
+.notes{margin-top:20px;border-top:1.5px solid var(--line);padding-top:16px}
+.notes h2{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--navy);margin-bottom:10px}
+.notes li{font-size:12.5px;color:#374151;line-height:1.6;margin:0 0 7px 18px}
+.flag{color:var(--rust);font-weight:700}
+.foot{margin-top:18px;color:#9aa3af;font-size:11px;font-family:ui-monospace,monospace}
+</style>
+<div class="top">
+  <svg class="brand" viewBox="0 0 24 24"><rect x="10" y="2" width="4" height="20" rx="1.4" fill="#00BCFF"/><rect x="2" y="10" width="20" height="4" rx="1.4" fill="#89D329"/></svg>
+  <div><h1>Governance Janus — Siapa Boleh Akses Apa</h1></div>
+</div>
+<p class="sub">Peta <b>governance antar-kolaborator</b>: role × section, dari <code>config/access.json</code>. Deny-by-default: kalau tak tercantum ✓ → <b>ditolak</b>. Ditegakkan di infra (<code>scope.can_access</code>), bukan sopan-santun LLM. Tiap orang cuma lihat yang jadi haknya — termasuk yang bikin sistem.</p>
+
+<div class="wrap"><table>
+<thead><tr>
+  <th class="role">Role (user)</th>
+  <th class="silo">A<span class="ty">silo</span></th>
+  <th class="shared">B<span class="ty">shared</span></th>
+  <th class="silo">C<span class="ty">silo</span></th>
+  <th class="shared">D<span class="ty">shared</span></th>
+  <th class="shared">E<span class="ty">shared</span></th>
+  <th class="shared">backbone<span class="ty">shared</span></th>
+  <th class="shared">meta<span class="ty">shared</span></th>
+  <th class="shared">analitik<span class="ty">gudang</span></th>
+  <th>Area</th><th>Edit</th>
+</tr></thead>
+<tbody>
+<tr><td class="role">TM<small>operator lapangan</small></td>
+  <td class="silo y">✓</td><td class="shared y">✓</td><td class="silo y">✓</td><td class="shared y">✓</td><td class="shared y">✓</td><td class="shared y">✓</td><td class="shared y">✓</td><td class="shared n">—</td>
+  <td class="scope">sendiri</td><td class="y">✓</td></tr>
+<tr><td class="role">MD<small>Widya</small></td>
+  <td class="silo n">—</td><td class="shared n">—</td><td class="silo n">—</td><td class="shared y">✓</td><td class="shared y">✓</td><td class="shared y">✓</td><td class="shared y">✓</td><td class="shared y">✓</td>
+  <td class="scope">semua</td><td class="g">setor*</td></tr>
+<tr><td class="role">CAC<small>David · +D-campaign</small></td>
+  <td class="silo n">—</td><td class="shared n">—</td><td class="silo n">—</td><td class="shared y">✓</td><td class="shared y">✓</td><td class="shared y">✓</td><td class="shared y">✓</td><td class="shared y">✓</td>
+  <td class="scope">semua</td><td class="g">setor*</td></tr>
+<tr><td class="role">ANALIS<small>belum di-assign</small></td>
+  <td class="silo n">—</td><td class="shared n">—</td><td class="silo n">—</td><td class="shared n">—</td><td class="shared y">✓</td><td class="shared y">✓</td><td class="shared y">✓</td><td class="shared y">✓</td>
+  <td class="scope">semua</td><td class="n">—</td></tr>
+<tr><td class="role">KONTRIBUTOR<small>belum di-assign · +demoplot</small></td>
+  <td class="silo n">—</td><td class="shared n">—</td><td class="silo n">—</td><td class="shared y">✓</td><td class="shared y">✓</td><td class="shared y">✓</td><td class="shared y">✓</td><td class="shared n">—</td>
+  <td class="scope">semua</td><td class="g">setor*</td></tr>
+</tbody></table></div>
+
+<div class="legend">
+  <span><span class="y">✓</span> boleh</span>
+  <span><span class="n">—</span> ditolak</span>
+  <span><span class="g">setor*</span> tak edit langsung, tapi bisa setor kontribusi (antre approve)</span>
+  <span><span class="chip" style="background:var(--silo)"></span><b>silo</b> = data pribadi per-TM</span>
+  <span><span class="chip" style="background:var(--shared)"></span><b>shared</b> = bersama</span>
+</div>
+
+<div class="notes">
+<h2>Yang wajib dipahami</h2>
+<ul>
+<li><b>E (design) &amp; meta (tool umum) = shared</b>: dibaca semua role. E dikelola terpusat (edit brand bukan per-TM); meta = kirim Telegram/render tabel, dipakai semua.</li>
+<li><b>Silo (A &amp; C)</b>: TM cuma nyentuh datanya SENDIRI (<code>area_scope: own</code> → <code>data-tm/&lt;tm&gt;/</code>). TM lain tak bisa lihat. Ditegakkan fisik, bukan filter.</li>
+<li><b>Shared (B/D/backbone/meta/analitik)</b>: lintas-area, dibaca role <code>area_scope: all</code>.</li>
+<li><b>Edit langsung cuma Abang + TM.</b> MD/CAC/KONTRIBUTOR <span class="g">setor*</span> = bisa nyumbang ke D lewat gerbang kontribusi (antre <code>pending→approved</code>), BUKAN edit file langsung. Jadi bukan read-only murni.</li>
+<li><b>analitik = gudang read-model</b> (David/Widya baca lintas-TM). <span class="flag">Status: Fase 0 — kode siap &amp; teruji, BELUM live</span> (nunggu data teritori + wiring ROG).</li>
+<li><b>ANALIS &amp; KONTRIBUTOR</b>: role sudah didefinisikan, <span class="flag">belum di-assign ke user mana pun</span> (siap untuk gelombang berikutnya).</li>
+</ul>
+</div>
+<p class="foot">Sumber: config/access.json · enforce: scripts/scope.py (can_access) + janus_mcp_lib.py · silo: silo_cap.py · Diperbarui 2026-07-18</p>

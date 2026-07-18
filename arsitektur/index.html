@@ -23,6 +23,7 @@ a.card span{font-size:13px;color:var(--muted)}
 footer{color:var(--muted);font-size:12px;text-align:center;margin-top:44px}
 footer a{color:var(--ablue)}
 .pill{display:inline-block;background:var(--navy);color:#fff;font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;border-radius:999px;padding:2px 10px;margin-left:8px;vertical-align:middle}
+.pill.wip{background:#9A5B00}
 </style>
 </head>
 <body>
@@ -37,11 +38,17 @@ footer a{color:var(--ablue)}
 <b>Baca 30 detik:</b> Janus = asisten AI Territory Manager Bayer yang jalan 24/7 di ROG Ally, dilayani lewat Telegram. Data disimpan sekali di <b>SoT</b> (satu topik = satu sumber kebenaran), diolah <b>satu engine</b> per topik, lalu dipanggil kembali oleh semua konsumen dari engine yang sama — alur <b>STORING → PROCESSING → RECALLING</b> di tiap section.
 </div>
 
+<h2>Mulai di sini — penjelas awam</h2>
+<div class="grid">
+  <a class="card" href="ai-vs-janus.onbrand.html"><b>AI Biasa vs Janus</b><span>Kenapa Janus beda dari chatbot biasa — memory, gateway Telegram, 24/7 proaktif</span></a>
+  <a class="card" href="user-loop.onbrand.html"><b>Alur Tanya → Jawab</b><span>Apa yang terjadi dari kamu ngetik sampai Janus balas — loop lengkap</span></a>
+</div>
+
 <!--BILLING:START-->
 <section class="billing">
   <div class="bhead"><h2>Pemakaian AI</h2><span class="bsub">per role · bulan Juli 2026</span></div>
-  <div class="btot"><b>Rp 76.951</b> <span class="bpct">149.6jt token</span></div>
-  <div class="btbl"><div class="brow"><span class="brole">CP-Semarang</span><span class="btok">98.1jt tk</span><span class="bidr">Rp 57.221</span></div><div class="brow"><span class="brole">MD</span><span class="btok">38.3jt tk</span><span class="bidr">Rp 13.038</span></div><div class="brow"><span class="brole">CAC</span><span class="btok">13.2jt tk</span><span class="bidr">Rp 6.692</span></div></div>
+  <div class="btot"><b>Rp 78.863</b> <span class="bpct">153.7jt token</span></div>
+  <div class="btbl"><div class="brow"><span class="brole">CP-Semarang</span><span class="btok">101.6jt tk</span><span class="bidr">Rp 59.080</span></div><div class="brow"><span class="brole">MD</span><span class="btok">38.7jt tk</span><span class="bidr">Rp 13.067</span></div><div class="brow"><span class="brole">CAC</span><span class="btok">13.5jt tk</span><span class="bidr">Rp 6.716</span></div></div>
   <p class="bnote">Per role — bukan per nama (halaman ini publik). Detail per user: <code>usage_report.py</code> di ROG. Diperbarui 2026-07-18.</p>
 </section>
 <style>
@@ -62,16 +69,17 @@ footer a{color:var(--ablue)}
 <!--BILLING:END-->
 <h2>Gambaran besar</h2>
 <div class="grid">
-  <a class="card" href="arsitektur-3-aktor.html"><b>Arsitektur 3 Aktor</b><span>Abang · Janus (DeepSeek) · Claude ROG/GitHub — alur deploy GitHub-first + keamanan gate</span></a>
+  <a class="card" href="arsitektur-3-aktor.onbrand.html"><b>Arsitektur 3 Aktor</b><span>Abang · Janus (DeepSeek) · Claude ROG/GitHub — alur deploy GitHub-first + keamanan gate</span></a>
+  <a class="card" href="read-model.onbrand.html"><b>Read-Model Multi-User <span class="pill wip">belum live</span></b><span>Sentralisasi CQRS: silo TM → gudang read-only → MCP analis</span></a>
 </div>
 
 <h2>Per section — alur storing → processing → recalling</h2>
 <div class="grid">
-  <a class="card" href="section-A.html"><b>Section A — User/TM</b><span>Budget, target, KPI</span></a>
-  <a class="card" href="section-B.html"><b>Section B — Bisnis</b><span>Program, protokol, kontrak</span></a>
-  <a class="card" href="section-C.html"><b>Section C — Kegiatan</b><span>Laporan, plan, settle SIM↔eksekusi</span></a>
-  <a class="card" href="section-D.html"><b>Section D — Knowledge</b><span>Produk, teknikal, RAG (owner: MD)</span></a>
-  <a class="card" href="section-E.html"><b>Section E — Design</b><span>Design gate: token, template, aset resmi</span></a>
+  <a class="card" href="section-A.onbrand.html"><b>Section A — User/TM</b><span>Budget, target, KPI</span></a>
+  <a class="card" href="section-B.onbrand.html"><b>Section B — Bisnis</b><span>Program, protokol, kontrak</span></a>
+  <a class="card" href="section-C.onbrand.html"><b>Section C — Kegiatan</b><span>Laporan, plan, settle SIM↔eksekusi</span></a>
+  <a class="card" href="section-D.onbrand.html"><b>Section D — Knowledge</b><span>Produk, teknikal, RAG (owner: MD)</span></a>
+  <a class="card" href="section-E.onbrand.html"><b>Section E — Design</b><span>Design gate: token, template, aset resmi</span></a>
 </div>
 
 <h2>Mau kontribusi?</h2>
@@ -80,12 +88,13 @@ Mulai dari diagram section yang kamu incar — kartu <b>"Mau kontribusi?"</b> di
 </div>
 
 <div class="grid">
+  <a class="card" href="governance-matrix.html"><b>Governance: Siapa Boleh Akses Apa</b><span>Matriks role × section — siapa boleh baca/tulis apa (super-admin · MD · CAC · TM)</span></a>
   <a class="card" href="../section.html"><b>Peta Governance Section</b><span>Lensa manifest: skills, tools, scope per section A–E</span></a>
   <a class="card" href="../interaksi.html"><b>Interaksi &amp; Aturan Antar-User</b><span>Jalur eskalasi, relay, review, kontribusi — mana yang sudah jalan, mana yang belum</span></a>
   <a class="card" href="../tools.html"><b>Peta Script Teknis</b><span>Graf 113 script + dependency (untuk developer)</span></a>
 </div>
 
-<footer>Janus · diagram dirender <a href="https://github.com/tt-a1i/archify">Archify</a> (MIT) dari JSON ter-commit — update terakhir 2026-07-12</footer>
+<footer>Janus · diagram gaya ikon dirender dari JSON ter-commit (<code>onbrand_diagram</code>) — update 2026-07-18 · graf teknis via <a href="https://github.com/tt-a1i/archify">Archify</a></footer>
 </div>
 </body>
 </html>
