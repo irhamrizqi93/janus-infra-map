@@ -72,6 +72,7 @@ textarea:focus{outline:none;border-color:var(--ablue)}
 .btn{width:100%;border:none;border-radius:13px;padding:15px;font-size:15.5px;font-weight:800;font-family:inherit;background:var(--ablue);color:#fff;cursor:pointer;transition:.08s}
 .btn:active{transform:scale(.99)}.btn[disabled]{background:var(--line);color:var(--ink4);cursor:not-allowed}
 .btn.ghost{background:transparent;color:var(--ink3);font-weight:700;padding:11px}
+.back{background:none;border:none;color:var(--ink3);font-size:12.5px;font-weight:700;font-family:inherit;cursor:pointer;padding:0 0 10px;display:none}
 .done{text-align:center;padding-top:24px}
 .tick{width:66px;height:66px;border-radius:50%;background:#f1f9e8;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}.tick svg{width:34px;height:34px}
 .sumsec{font-size:11px;font-weight:800;color:var(--ablue);text-transform:uppercase;letter-spacing:.04em;margin:16px 0 4px;text-align:left}
@@ -97,6 +98,7 @@ footer{text-align:center;color:var(--ink4);font-size:10.5px;padding:14px}
 </section>
 
 <section class="screen" id="s-quiz">
+  <button class="back" id="back" onclick="goBack()">← Kembali</button>
   <div class="prog"><i id="prog"></i></div>
   <div class="secban" id="secban">—</div>
   <div><span class="qtag" id="qtag"></span><span class="mtag" id="mtag"></span></div>
@@ -171,7 +173,9 @@ function setNext(it){const last=nextId(it)==="end"||!byId(nextId(it));
  bar.innerHTML=`<button class="btn" id="nx" ${ok(it)?"":"disabled"}>${last?"Selesai ✓":"Lanjut →"}</button>`;
  $("#nx").onclick=()=>advance(it);}
 
+function goBack(){if(!st.hist.length)return;st.qid=st.hist.pop();renderQ();}
 function renderQ(){show("#s-quiz");const it=byId(st.qid),b=$("#body");
+ $("#back").style.display=st.hist.length?"block":"none";
  const r=ROLES.find(x=>x.id===st.role),total=r.pathlen||4,pos=st.hist.length;
  $("#prog").style.width=`${Math.min(100,pos/total*100)}%`;
  $("#secban").textContent=SECNAME[it.sec]||"";
@@ -226,17 +230,32 @@ function copyJSON(){const t=JSON.stringify(payload());
  (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(
   ()=>{const b=$("#cpy");if(b){b.textContent="Tersalin ✓";setTimeout(()=>b.textContent="Salin jawaban 📋",1500);}},
   ()=>alert("Salin manual:\n\n"+t));}
+// Kirim LANGSUNG ke backend (anonim, peserta tak forward apa-apa). URL dari backend.json
+// (di-update watchdog tunnel). Gagal (tunnel mati) → fallback Simpan/Salin (nol data hilang).
+function submitOnline(){const btn=$("#send");if(btn){btn.disabled=true;btn.textContent="Mengirim…";}
+ fetch("backend.json",{cache:"no-store"}).then(r=>r.json()).then(cfg=>{
+   if(!cfg||!cfg.url)throw 0;
+   return fetch(cfg.url.replace(/\/+$/,"")+"/submit",{method:"POST",
+     headers:{"Content-Type":"application/json"},body:JSON.stringify(payload())});
+ }).then(r=>r.json()).then(d=>{if(!d||!d.ok)throw 0;
+   $("#sendwrap").innerHTML='<div style="text-align:center;color:var(--ink2);font-size:13.5px;font-weight:800;padding:4px 0">✅ Terkirim — makasih! 🙌<br><span style="font-weight:500;color:var(--ink4);font-size:11.5px">jawabanmu anonim & tersimpan aman</span></div>'
+     +'<button class="btn ghost" onclick="location.reload()">Isi lagi (peserta lain) ↻</button>';
+ }).catch(()=>{if(btn){btn.disabled=false;btn.textContent="Coba kirim lagi 🔁";}
+   const fb=$("#fallback");if(fb)fb.style.display="flex";});}
 function finish(){$("#prog").style.width="100%";const rn=ROLES.find(r=>r.id===st.role).name;
- saveLocal();
+ saveLocal();$("#back").style.display="none";
  let out=`<div class="sumsec">Peran: ${rn} · anonim</div><div class="sumcard">`;
  st.hist.forEach(id=>{const it=byId(id);
   out+=`<div class="sumrow"><b>${it.tag||id}:</b> <span>${fmt(it,st.ans[id])}</span></div>`;});
  out+='</div>';
  $("#sum").innerHTML=out;
- bar.innerHTML=`<div style="display:flex;flex-direction:column;gap:8px">
-   <button class="btn" onclick="exportJSON()">Simpan jawaban 💾</button>
-   <button class="btn ghost" id="cpy" onclick="copyJSON()">Salin jawaban 📋</button>
-   <button class="btn ghost" onclick="location.reload()">Isi lagi (peserta lain) ↻</button></div>`;
+ bar.innerHTML=`<div id="sendwrap" style="display:flex;flex-direction:column;gap:8px">
+   <button class="btn" id="send" onclick="submitOnline()">Kirim ke Janus →</button>
+   <div id="fallback" style="display:none;flex-direction:column;gap:8px">
+     <div style="text-align:center;font-size:11px;color:var(--ink4)">gagal kirim online — simpan & kirim manual ke Mas Irham:</div>
+     <button class="btn ghost" onclick="exportJSON()">Simpan jawaban 💾</button>
+     <button class="btn ghost" id="cpy" onclick="copyJSON()">Salin jawaban 📋</button>
+   </div></div>`;
  show("#s-done");
 }
 </script>
