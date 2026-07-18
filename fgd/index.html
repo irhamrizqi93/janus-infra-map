@@ -1,0 +1,243 @@
+<!doctype html><html lang="id"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title id="t-title">Kuis Janus</title>
+<style>
+:root{--navy:#10384F;--blue:#00BCFF;--green:#89D329;--ablue:#0071BC;--canvas:#F6F8F9;--surface:#fff;
+--line:rgba(16,56,79,.10);--hair:rgba(16,56,79,.08);--ink:#10384F;--ink2:#3E5B6D;--ink3:#6E8494;--ink4:#93A5B1}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{background:var(--canvas);color:var(--ink);font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;line-height:1.45;min-height:100vh;display:flex;justify-content:center}
+.app{width:100%;max-width:430px;background:var(--surface);min-height:100vh;position:relative;display:flex;flex-direction:column;overflow:hidden}
+header{display:flex;align-items:center;gap:10px;padding:16px 20px;border-bottom:1px solid var(--hair)}
+.cross{width:26px;height:26px;flex:0 0 auto}
+.hb{font-size:13px;font-weight:700;color:var(--navy)}.hb small{display:block;font-weight:500;color:var(--ink4);font-size:10.5px}
+.screen{flex:1;padding:22px 20px 110px;display:none;animation:fade .25s ease}.screen.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h1{font-size:25px;font-weight:800;letter-spacing:-.4px;line-height:1.15}
+.lead{color:var(--ink3);font-size:14px;margin:8px 0 20px}
+.sect{font-size:12px;font-weight:700;color:var(--ink2);margin:6px 0 10px}
+.roles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.role{border:1.5px solid var(--line);border-radius:13px;padding:15px 13px;text-align:left;background:var(--surface);cursor:pointer;transition:.15s}
+.role:active{transform:scale(.98)}.role .ic{width:30px;height:30px;margin-bottom:8px}
+.role b{font-size:15px;font-weight:800;display:block;color:var(--navy)}
+.role span{font-size:11px;color:var(--ink3);display:block;margin-top:2px;line-height:1.3}
+.focus{background:var(--navy);color:#fff;border-radius:14px;padding:16px 18px}
+.focus .k{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue)}
+.focus .v{font-size:17px;font-weight:800;margin-top:3px;line-height:1.25}
+.caps{background:#f1f9e8;border:1px solid #d7ecc3;border-radius:12px;padding:12px 14px;margin-top:14px}
+.caps .ck{font-size:11px;font-weight:800;color:#4d7a1e;display:block}
+.caps .cv{font-size:12.5px;color:var(--ink2);display:block;margin-top:4px;line-height:1.5}
+.steps{display:flex;gap:8px;margin-top:16px}
+.step{flex:1;background:var(--canvas);border:1px solid var(--line);border-radius:11px;padding:11px 10px}
+.step b{font-size:11px;color:var(--navy);font-weight:800;display:block}.step span{font-size:10px;color:var(--ink4)}
+.prog{height:6px;background:var(--line);border-radius:6px;overflow:hidden;margin-bottom:12px}
+.prog i{display:block;height:100%;background:var(--green);border-radius:6px;transition:width .3s}
+.secban{font-size:10.5px;font-weight:800;color:var(--ablue);letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px}
+.qtag{font-size:10px;font-weight:800;color:var(--ink4);letter-spacing:.04em;text-transform:uppercase;display:inline-block}
+.mtag{font-size:9.5px;font-weight:700;color:var(--ink4);float:right}
+.qn{font-size:11px;font-weight:600;color:var(--ink4);margin-top:4px}
+.q{font-size:19px;font-weight:800;letter-spacing:-.3px;margin:5px 0 14px;line-height:1.24}
+.hint{font-size:11.5px;color:var(--ink3);margin:-6px 0 13px}
+.opt{border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:8px;font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;display:flex;align-items:center;gap:11px;transition:.12s}
+.opt .dot{width:19px;height:19px;border-radius:50%;border:2px solid var(--ink4);flex:0 0 auto}
+.opt .box{width:19px;height:19px;border-radius:6px;border:2px solid var(--ink4);flex:0 0 auto;display:flex;align-items:center;justify-content:center}
+.opt .box svg{width:12px;height:12px;opacity:0}
+.opt.sel{border-color:var(--ablue);background:#f2f8fd}
+.opt.sel .dot{border-color:var(--ablue);background:var(--ablue);box-shadow:inset 0 0 0 3px #fff}
+.opt.sel .box{border-color:var(--ablue);background:var(--ablue)}.opt.sel .box svg{opacity:1}
+.rnum{width:22px;height:22px;border-radius:50%;flex:0 0 auto;border:2px solid var(--ink4);color:var(--ink4);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.opt.ranked{border-color:var(--ablue);background:#f2f8fd}.opt.ranked .rnum{border-color:var(--ablue);background:var(--ablue);color:#fff}
+.otherin{width:100%;border:1.5px dashed var(--line);border-radius:11px;padding:11px 13px;font-size:14px;font-family:inherit;color:var(--ink);margin-top:2px}
+.otherin:focus{outline:none;border-color:var(--ablue);border-style:solid}
+.rate{display:flex;gap:7px;margin:4px 0 6px}
+.rbtn{flex:1;aspect-ratio:1;border:1.5px solid var(--line);border-radius:12px;font-size:18px;font-weight:800;color:var(--ink3);background:var(--surface);cursor:pointer;transition:.12s}
+.rbtn.on{border-color:var(--ablue);background:var(--ablue);color:#fff}
+.rscale{display:flex;justify-content:space-between;font-size:11px;color:var(--ink4);margin-bottom:8px}
+textarea{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;font-size:15px;font-family:inherit;color:var(--ink)}
+textarea:focus{outline:none;border-color:var(--ablue)}
+.feat{border:1.5px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:14px}
+.feat .fname{background:var(--navy);color:#fff;font-size:14px;font-weight:800;padding:11px 15px;display:flex;align-items:center;gap:8px}
+.feat .fname .pill{background:var(--blue);color:var(--navy);font-size:9px;font-weight:800;padding:2px 7px;border-radius:99px;margin-left:auto}
+.feat .fcan{padding:11px 15px 4px;font-size:13px;color:var(--ink2);font-weight:600}
+.feat .fvis{padding:8px 15px}
+.feat .fex{padding:4px 15px 13px;font-size:12px;color:var(--ink3);font-style:italic}
+.fq{font-size:15px;font-weight:800;color:var(--navy);margin:2px 0 8px}
+.pickc{cursor:pointer;transition:.12s;position:relative}
+.pickc .fname .star{font-size:15px;line-height:1;margin-right:2px}
+.pickc.on{border-color:var(--green);box-shadow:0 0 0 2px var(--green) inset}
+.pickc.on .fname{background:var(--green);color:var(--navy)}
+.pickc.on .fname .pill{background:var(--navy);color:#fff}
+.pickcount{position:sticky;bottom:0;text-align:center;font-size:12px;font-weight:800;color:var(--ablue);padding:8px;background:var(--surface)}
+.pickcount.max{color:var(--green)}
+.bar{position:absolute;left:0;right:0;bottom:0;padding:14px 20px calc(14px + env(safe-area-inset-bottom));background:linear-gradient(to top,var(--surface) 80%,rgba(255,255,255,0));border-top:1px solid var(--hair)}
+.btn{width:100%;border:none;border-radius:13px;padding:15px;font-size:15.5px;font-weight:800;font-family:inherit;background:var(--ablue);color:#fff;cursor:pointer;transition:.08s}
+.btn:active{transform:scale(.99)}.btn[disabled]{background:var(--line);color:var(--ink4);cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--ink3);font-weight:700;padding:11px}
+.done{text-align:center;padding-top:24px}
+.tick{width:66px;height:66px;border-radius:50%;background:#f1f9e8;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}.tick svg{width:34px;height:34px}
+.sumsec{font-size:11px;font-weight:800;color:var(--ablue);text-transform:uppercase;letter-spacing:.04em;margin:16px 0 4px;text-align:left}
+.sumcard{background:var(--canvas);border:1px solid var(--hair);border-radius:13px;padding:4px 15px;text-align:left}
+.sumrow{font-size:12px;color:var(--ink2);padding:8px 0;border-top:1px solid var(--hair);display:flex;gap:8px}
+.sumrow:first-child{border:none}.sumrow b{color:var(--navy);flex:0 0 auto}
+footer{text-align:center;color:var(--ink4);font-size:10.5px;padding:14px}
+</style></head>
+<body><div class="app">
+<header><svg class="cross" viewBox="0 0 24 24"><rect x="10" y="2" width="4" height="20" rx="1.4" fill="#00BCFF"/><rect x="2" y="10" width="20" height="4" rx="1.4" fill="#89D329"/></svg>
+<div class="hb" id="t-brand"></div></header>
+
+<section class="screen on" id="s-landing">
+  <h1 id="t-headline"></h1>
+  <p class="lead" id="t-lead"></p>
+  <div class="sect" id="t-roleprompt"></div>
+  <div class="roles" id="roles"></div>
+</section>
+
+<section class="screen" id="s-intro">
+  <div class="focus"><div class="k" id="t-focusk">Fokus buat perananmu</div><div class="v" id="w-focus">—</div></div>
+  <div class="steps" id="t-steps"></div>
+</section>
+
+<section class="screen" id="s-quiz">
+  <div class="prog"><i id="prog"></i></div>
+  <div class="secban" id="secban">—</div>
+  <div><span class="qtag" id="qtag"></span><span class="mtag" id="mtag"></span></div>
+  <div class="qn" id="qn"></div>
+  <div class="q" id="q"></div>
+  <div class="hint" id="hint"></div>
+  <div id="body"></div>
+</section>
+
+<section class="screen" id="s-done">
+  <div class="done">
+    <div class="tick"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#89D329" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <h1 id="t-donetitle"></h1>
+    <p class="lead" id="t-donelead"></p>
+    <div id="sum"></div>
+  </div>
+</section>
+
+<div class="bar" id="bar"></div>
+<footer id="t-footer"></footer>
+</div>
+
+<script>
+const CK='<svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+// SPEC di-inject quiz_build.py dari file spec JSON (sumber kebenaran; JANGAN edit HTML tangan).
+const SPEC={"meta": {"id": "fgd-janus", "title": "FGD Janus", "brand": "Bayer CropScience · Central Java", "headline": "Janus untuk kamu.", "lead": "Bukan form — tinggal tap, ± 4 menit, anonim. Tiap jawabanmu nentuin pertanyaan berikutnya.", "roleprompt": "Kamu di tim ini sebagai…", "steps": [["Tinggal tap", "nggak ngetik"], ["Nyambung", "ikut jawabanmu"], ["Anonim", "jujur aja"]], "donetitle": "Makasih! 🙌", "donelead": "Masukanmu bikin Janus lebih pas & lebih ringan buat kerjamu.", "footer": "FGD Janus v8 · tap-only · berjenjang & lebih dalam · 2026-07-18"}, "sections": {"1": "Kerjamu", "2": "Kebutuhan & ganjalan", "3": "Fitur & maumu"}, "roles": [{"id": "tm", "name": "TM", "desc": "ujung tombak", "ic": "M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z", "focus": "KPI, target, program & kelola DR + kios/petani", "pathlen": 7, "questions": [{"id": "tm_main", "sec": 1, "tag": "Kerjamu", "type": "single", "q": "Tiap hari, apa yang paling makan waktu / bikin ribet?", "o": ["Cek KPI & target", "Kelola budget", "Pantau program", "Info kios & petani", "Manage DR"], "next": {"Cek KPI & target": "tm_d0", "Kelola budget": "tm_d1", "Pantau program": "tm_d2", "Info kios & petani": "tm_d3", "Manage DR": "tm_d4"}}, {"id": "tm_d0", "sec": 1, "tag": "Perdalam", "type": "single", "q": "Soal KPI/target, Janus paling ngebantu kalau bisa…?", "o": ["Kasih angka real-time (BRP)", "Ingetin target yang meleset", "Bandingin antar-kios/area", "Semua di atas"], "next": "tm_s0"}, {"id": "tm_d1", "sec": 1, "tag": "Perdalam", "type": "single", "q": "Soal budget, paling kepake kalau Janus…?", "o": ["Rekap settle/CA otomatis", "Ingetin budget over/sisa", "Tarik data cepat pas butuh", "Semua di atas"], "next": "tm_s0"}, {"id": "tm_d2", "sec": 1, "tag": "Perdalam", "type": "single", "q": "Soal program, paling ngebantu kalau…?", "o": ["Progress tiap program", "Ingetin deadline", "Tandain kios yang eligible", "Semua di atas"], "next": "tm_s0"}, {"id": "tm_d3", "sec": 1, "tag": "Perdalam", "type": "single", "q": "Soal kios/petani, paling ngebantu kalau…?", "o": ["Cari data kios cepat", "Peta status kios", "Ingetin kios perlu dikunjungi", "Semua di atas"], "next": "tm_s0"}, {"id": "tm_d4", "sec": 1, "tag": "Perdalam", "type": "single", "q": "Soal DR, paling ngebantu kalau…?", "o": ["Pantau kegiatan DR", "Ingetin DR perlu ditindak", "Lihat performa per-DR", "Semua di atas"], "next": "tm_s0"}, {"id": "tm_s0", "sec": 2, "tag": "Kerja lain", "type": "single", "q": "Selain itu, mana yang paling pengen Janus ringanin?", "next": "tm_s1", "o": ["Rekap laporan otomatis", "Cari data pas lagi butuh", "Ngingetin deadline/tugas", "Analisa cepat pas ketemu customer"]}, {"id": "tm_s1", "sec": 2, "tag": "Proaktif", "type": "multi", "q": "Janus paling guna kalau NGINGETIN kamu soal apa?", "next": "tm_s2", "o": ["Target belum kekejar", "Budget over/sisa", "Deadline program/laporan", "DR perlu ditindak", "Kios perlu dikunjungi"], "cap": 2, "hint": "Pilih maks 2."}, {"id": "tm_s2", "sec": 2, "tag": "Jujur", "type": "single", "q": "Jujur — apa yang paling bikin kamu ragu pakai Janus?", "next": "tm_pick", "o": ["Takut dipantau atasan", "Data areaku kelihatan TM lain", "Takut angka keliru", "Ribet / nambah kerjaan", "Gak ada, aman aja"]}, {"id": "tm_pick", "sec": 3, "tag": "Prioritas fitur", "type": "pick", "cap": 3, "q": "Kamu cuma dapat ⭐⭐⭐ — taruh di fitur yang paling kamu butuh BESOK PAGI.", "hint": "Tap maksimal 3. Fitur ini SUDAH ADA di Janus.", "items": [{"name": "Cek KPI & Target", "can": "tanya 'KPI aku berapa?' → angka real BRP", "ex": "Contoh: 'KPI R1 75% (target 88%), kurang 3 kios'", "v": "kpi"}, {"name": "Peta Kios / Area", "can": "sebaran kios & status di peta areamu", "ex": "Tiap titik = kios · hijau=aktif, merah=belum", "v": "map"}, {"name": "Serapan Produk (BRP)", "can": "penjualan produk per kios/bulan", "ex": "Contoh: 'Vayego naik 12%, Oberon turun di Demak'", "v": "chart"}, {"name": "Info Kios & DR", "can": "cari data kios/DR cepat", "ex": "Contoh: 'Sido Mulyo — R2, DR Budi, scan 3 hari lalu'", "v": null}, {"name": "Lapor Settle / CA", "can": "catat & rekap settle/CA otomatis", "ex": "Contoh: 'CA Juni 12 kegiatan Rp 4,2jt — 2 belum settle'", "v": null}], "next": "tm_wish"}, {"id": "tm_wish", "sec": 3, "tag": "Maumu", "type": "single", "q": "Kalau Janus nambah 1 kemampuan baru buat kamu, ke arah mana?", "o": ["Analisa lebih pinter/dalam", "Lebih otomatis (rekap & ingetin sendiri)", "Info lapangan/customer lebih dalam", "Tampilan/dashboard lebih enak", "Belum kepikiran"], "next": "end"}]}, {"id": "cac", "name": "CAC", "desc": "campaign", "ic": "M3 11l18-7-7 18-3-8z", "focus": "Serapan produk & pantau kegiatan (helicopter view)", "pathlen": 7, "questions": [{"id": "cac_main", "sec": 1, "tag": "Kerjamu", "type": "single", "q": "Bagian campaign apa yang paling ribet dipantau?", "o": ["Serapan produk per-area", "Monitoring kegiatan", "Efektivitas campaign", "Banding antar-area/TM"], "next": {"Serapan produk per-area": "cac_d0", "Monitoring kegiatan": "cac_d1", "Efektivitas campaign": "cac_d2", "Banding antar-area/TM": "cac_d3"}}, {"id": "cac_d0", "sec": 1, "tag": "Perdalam", "type": "single", "q": "Soal serapan produk, paling ngebantu kalau Janus…?", "o": ["Tunjukin per-area/produk", "Alert yang nurun", "Tren naik/turun", "Semua di atas"], "next": "cac_s0"}, {"id": "cac_d1", "sec": 1, "tag": "Perdalam", "type": "single", "q": "Soal monitoring kegiatan, paling kepake kalau…?", "o": ["Semua kegiatan di 1 peta", "Alert kegiatan telat", "Filter per-produk/jenis", "Semua di atas"], "next": "cac_s0"}, {"id": "cac_d2", "sec": 1, "tag": "Perdalam", "type": "single", "q": "Soal efektivitas campaign, paling ngebantu kalau…?", "o": ["Dampak campaign ke serapan", "Banding vs target", "Rekomendasi aksi", "Semua di atas"], "next": "cac_s0"}, {"id": "cac_d3", "sec": 1, "tag": "Perdalam", "type": "single", "q": "Soal banding antar-area, paling kepake kalau…?", "o": ["Ranking serapan", "Ranking biaya vs hasil", "Tandain yang under-perform", "Semua di atas"], "next": "cac_s0"}, {"id": "cac_s0", "sec": 2, "tag": "Analisa", "type": "single", "q": "Analisa mana yang paling kamu butuh rutin?", "next": "cac_s1", "o": ["Serapan per-area/produk", "Helicopter view kegiatan", "Efektivitas vs target", "Banding antar-TM/area"]}, {"id": "cac_s1", "sec": 2, "tag": "Proaktif", "type": "multi", "q": "Janus paling guna kalau ngingetin kamu soal apa?", "next": "cac_s2", "o": ["Serapan produk nurun", "Area/produk under-perform", "Kegiatan campaign telat", "Peluang dorong serapan", "Campaign nyasar target"], "cap": 2, "hint": "Pilih maks 2."}, {"id": "cac_s2", "sec": 2, "tag": "Ganjalan", "type": "single", "q": "Apa yang paling bikin campaign susah dipantau SEKARANG?", "next": "cac_pick", "o": ["Data serapan telat", "Kegiatan tersebar / gak kekumpul", "Susah bandingin antar-area", "Gak ada view menyeluruh"]}, {"id": "cac_pick", "sec": 3, "tag": "Prioritas fitur", "type": "pick", "cap": 3, "q": "Kamu cuma dapat ⭐⭐⭐ — taruh di fitur yang paling kamu butuh BESOK PAGI.", "hint": "Tap maksimal 3. Fitur ini SUDAH ADA di Janus.", "items": [{"name": "Serapan Produk (BRP)", "can": "penjualan produk per area/bulan", "ex": "Contoh: 'Vayego CJ 68% target — Demak top, Grobogan tertinggal'", "v": "chart"}, {"name": "Peta Sebaran Kegiatan", "can": "semua kegiatan CJ di 1 peta (helicopter view)", "ex": "Filter per-produk/jenis, sekali lihat semua", "v": "map"}, {"name": "Analisa Efektivitas Campaign", "can": "dampak campaign ke serapan", "ex": "Contoh: 'area ber-FED naik serapan +18% vs tanpa FED'", "v": "chart"}, {"name": "Banding Antar-Area", "can": "ranking area by serapan & biaya", "ex": "Contoh: 'ranking 6 area — efisiensi & hasil'", "v": null}, {"name": "Dashboard Papan DR", "can": "papan real-time semua kegiatan & status", "ex": "Buka link, semua kegiatan CJ live", "v": "dash"}], "next": "cac_wish"}, {"id": "cac_wish", "sec": 3, "tag": "Maumu", "type": "single", "q": "Kalau Janus nambah 1 kemampuan baru buat kamu, ke arah mana?", "o": ["Analisa lebih pinter/dalam", "Lebih otomatis (rekap & ingetin sendiri)", "Info lapangan/customer lebih dalam", "Tampilan/dashboard lebih enak", "Belum kepikiran"], "next": "end"}]}, {"id": "cidt", "name": "CIDT", "desc": "produk & knowledge", "ic": "M4 5h16v11H4zM8 20h8", "focus": "Knowledge, adopsi & feedback produk/kompetitor", "pathlen": 7, "questions": [{"id": "cidt_main", "sec": 1, "tag": "Kerjamu", "type": "single", "q": "Bagian kerja knowledge apa yang paling pengen dipermudah?", "o": ["Input & kelola knowledge", "Pantau adopsi di TM", "Feedback produk", "Pantau kompetitor"], "next": {"Input & kelola knowledge": "cidt_d0", "Pantau adopsi di TM": "cidt_d1", "Feedback produk": "cidt_d2", "Pantau kompetitor": "cidt_d3"}}, {"id": "cidt_d0", "sec": 1, "tag": "Perdalam", "type": "single", "q": "Soal kelola knowledge, paling ngebantu kalau Janus…?", "o": ["Setor→approve→jadi rujukan", "Protokol 1 sumber (anti versi-lama)", "Ingetin protokol perlu update", "Semua di atas"], "next": "cidt_s0"}, {"id": "cidt_d1", "sec": 1, "tag": "Perdalam", "type": "single", "q": "Soal adopsi di TM, paling kepake kalau…?", "o": ["Lihat knowledge kepakai/enggak", "Produk yang TM sering salah info", "Knowledge paling dicari", "Semua di atas"], "next": "cidt_s0"}, {"id": "cidt_d2", "sec": 1, "tag": "Perdalam", "type": "single", "q": "Soal feedback produk, paling ngebantu kalau…?", "o": ["Rangkum feedback lapangan", "Pisah per-produk", "Alert isu produk", "Semua di atas"], "next": "cidt_s0"}, {"id": "cidt_d3", "sec": 1, "tag": "Perdalam", "type": "single", "q": "Soal kompetitor, paling kepake kalau…?", "o": ["Gerakan kompetitor per-produk", "Banding vs produk kita", "Alert manuver baru", "Semua di atas"], "next": "cidt_s0"}, {"id": "cidt_s0", "sec": 2, "tag": "Pantau", "type": "single", "q": "Yang paling berguna kamu pantau apa?", "next": "cidt_s1", "o": ["Adopsi knowledge di TM", "Adopsi di customer/petani", "Feedback produk", "Efektivitas protokol/demoplot"]}, {"id": "cidt_s1", "sec": 2, "tag": "Proaktif", "type": "multi", "q": "Janus paling guna kalau ngingetin apa soal knowledge?", "next": "cidt_s2", "o": ["Knowledge jarang kepakai TM", "Produk yang TM sering salah info", "Feedback lapangan", "Gerakan kompetitor", "Protokol perlu update"], "cap": 2, "hint": "Pilih maks 2."}, {"id": "cidt_s2", "sec": 2, "tag": "Kontrol", "type": "single", "q": "Seberapa perlu kamu review/approve knowledge sebelum dipakai TM?", "next": "cidt_pick", "o": ["Wajib — semua lewat aku dulu", "Perlu buat yang sensitif aja", "Gak perlu — TM bisa langsung"]}, {"id": "cidt_pick", "sec": 3, "tag": "Prioritas fitur", "type": "pick", "cap": 3, "q": "Kamu cuma dapat ⭐⭐⭐ — taruh di fitur yang paling kamu butuh BESOK PAGI.", "hint": "Tap maksimal 3. Fitur ini SUDAH ADA di Janus.", "items": [{"name": "Cari Product Knowledge (RAG)", "can": "tanya teknis, dijawab + sumber protokol", "ex": "Contoh: 'dosis Vayego padi?' → jawaban + rujukan", "v": null}, {"name": "Data Demoplot", "can": "hasil demoplot per-area, efikasi head-to-head", "ex": "Contoh: 'Ambition vs kompetitor — +18% efikasi'", "v": "chart"}, {"name": "Setor & Kurasi Knowledge", "can": "TM setor temuan → kamu approve → jadi rujukan", "ex": "Kamu kontrol kualitas sebelum tayang ke TM", "v": null}, {"name": "Pantau Adopsi Knowledge", "can": "berapa TM/customer yang kepakai knowledge X", "ex": "Contoh: 'protokol Oberon dipakai 12 TM bulan ini'", "v": "chart"}, {"name": "Protokol Produk Terpusat", "can": "protokol resmi 1 sumber, anti versi-lama", "ex": "Semua TM baca protokol yang sama & terbaru", "v": null}], "next": "cidt_wish"}, {"id": "cidt_wish", "sec": 3, "tag": "Maumu", "type": "single", "q": "Kalau Janus nambah 1 kemampuan baru buat kamu, ke arah mana?", "o": ["Analisa lebih pinter/dalam", "Lebih otomatis (rekap & ingetin sendiri)", "Info lapangan/customer lebih dalam", "Tampilan/dashboard lebih enak", "Belum kepikiran"], "next": "end"}]}, {"id": "captain", "name": "Captain", "desc": "pimpin tim", "ic": "M12 3l7 4v5c0 4-3 7-7 8-4-1-7-4-7-8V7z", "focus": "Adopsi DR, governance & keamanan data", "pathlen": 8, "questions": [{"id": "captain_main", "sec": 1, "tag": "Kerjamu", "type": "single", "q": "Sebagai captain, apa yang paling kamu pantau di tim?", "o": ["Adopsi Janus sampai DR", "Performa & target tim", "Governance & keamanan", "Kualitas keputusan"], "next": {"Adopsi Janus sampai DR": "captain_d0", "Performa & target tim": "captain_d1", "Governance & keamanan": "captain_d2", "Kualitas keputusan": "captain_d3"}}, {"id": "captain_d0", "sec": 1, "tag": "Perdalam", "type": "single", "q": "Soal adopsi sampai DR, paling ngebantu kalau Janus…?", "o": ["Tunjukin adopsi per-DR/TM", "Tandain yang belum adopsi", "Ringkasan semua TM", "Semua di atas"], "next": "captain_s0"}, {"id": "captain_d1", "sec": 1, "tag": "Perdalam", "type": "single", "q": "Soal performa tim, paling kepake kalau…?", "o": ["Ringkasan KPI semua TM", "Peta capaian per-area", "Tren antar-bulan", "Semua di atas"], "next": "captain_s0"}, {"id": "captain_d2", "sec": 1, "tag": "Perdalam", "type": "single", "q": "Soal governance & keamanan, paling penting yang mana?", "o": ["Akses sesuai hak (anti-bocor)", "Audit trail (jejak akses)", "Angka dipertanggungjawabkan", "Semua di atas"], "next": "captain_s0"}, {"id": "captain_d3", "sec": 1, "tag": "Perdalam", "type": "single", "q": "Soal kualitas keputusan, paling ngebantu kalau…?", "o": ["Data satu sumber (konsisten)", "Alert anomali angka", "Bandingin antar-TM/area", "Semua di atas"], "next": "captain_s0"}, {"id": "captain_s0", "sec": 2, "tag": "Gambaran", "type": "single", "q": "Gambaran tim mana yang paling kamu butuh?", "next": "captain_s1", "o": ["Adopsi per-DR/TM", "Ringkasan semua TM", "Per-area / kabupaten", "Yang butuh bantuan"]}, {"id": "captain_s1", "sec": 2, "tag": "Proaktif", "type": "multi", "q": "Janus paling guna kalau ngingetin kamu soal apa?", "next": "captain_s2", "o": ["TM/area yang nurun", "Target meleset", "Kegiatan telat", "Anomali angka", "Adopsi DR rendah"], "cap": 2, "hint": "Pilih maks 2."}, {"id": "captain_s2", "sec": 2, "tag": "Data & keamanan", "type": "single", "q": "Soal data & keamanan, apa yang paling WAJIB dijamin Janus?", "next": "captain_s3", "o": ["Akses sesuai hak (anti-bocor antar-TM)", "Audit trail (jejak siapa akses apa)", "Angka dipertanggungjawabkan", "Kontrol penyalahgunaan"]}, {"id": "captain_s3", "sec": 2, "tag": "Ganjalan", "type": "single", "q": "Apa yang paling bikin kamu ragu rollout se-tim (sampai DR)?", "next": "captain_pick", "o": ["Data gak aman / bocor", "Angka gak bisa diandalkan", "Governance gak jelas", "TM/DR susah adopsi"]}, {"id": "captain_pick", "sec": 3, "tag": "Prioritas fitur", "type": "pick", "cap": 3, "q": "Kamu cuma dapat ⭐⭐⭐ — taruh di fitur yang paling kamu butuh BESOK PAGI.", "hint": "Tap maksimal 3. Fitur ini SUDAH ADA di Janus.", "items": [{"name": "Ringkasan KPI Tim", "can": "lihat capaian semua TM sekaligus", "ex": "Contoh: '6 TM — 4 on-track, 2 di bawah target R1'", "v": "kpi"}, {"name": "Peta Performa per-Area", "can": "peta CJ, warna = capaian target per-area", "ex": "Sekali lihat tau area mana yang tertinggal", "v": "map"}, {"name": "Governance / Akses", "can": "atur siapa boleh lihat apa (TM cuma areanya)", "ex": "Data TM-A gak kelihatan TM-B", "v": null}, {"name": "Audit-log", "can": "jejak siapa akses/ubah apa — anti-bocor", "ex": "Contoh: 'David buka roster jam 10:02 — tercatat'", "v": null}, {"name": "Dashboard Tim", "can": "papan performa & adopsi real-time", "ex": "Buka linknya, semua angka tim live", "v": "dash"}], "next": "captain_wish"}, {"id": "captain_wish", "sec": 3, "tag": "Maumu", "type": "single", "q": "Kalau Janus nambah 1 kemampuan baru buat kamu, ke arah mana?", "o": ["Analisa lebih pinter/dalam", "Lebih otomatis (rekap & ingetin sendiri)", "Info lapangan/customer lebih dalam", "Tampilan/dashboard lebih enak", "Belum kepikiran"], "next": "end"}]}]};
+const SECNAME=SPEC.sections;
+const ML=Object.assign({single:"pilih 1",multi:"pilih ≥1",rank:"urut prioritas",open:"isian bebas",pick:"pilih top-3"},SPEC.ml||{});
+const ROLES=SPEC.roles;
+function vis(k){
+ if(k==="map")return'<svg viewBox="0 0 200 78" width="100%"><rect x="1" y="1" width="198" height="76" rx="10" fill="#eef3f6" stroke="#d7e0e6"/><circle cx="45" cy="30" r="6" fill="#89D329"/><circle cx="88" cy="52" r="6" fill="#89D329"/><circle cx="130" cy="26" r="6" fill="#e0533a"/><circle cx="160" cy="55" r="6" fill="#89D329"/><circle cx="72" cy="20" r="6" fill="#e0533a"/><circle cx="115" cy="58" r="6" fill="#89D329"/><text x="10" y="72" font-size="8" fill="#6E8494">hijau = aktif · merah = belum</text></svg>';
+ if(k==="kpi")return'<svg viewBox="0 0 200 40" width="100%"><rect x="0" y="12" width="200" height="16" rx="8" fill="#eef3f6"/><rect x="0" y="12" width="150" height="16" rx="8" fill="#00BCFF"/><line x1="176" y1="6" x2="176" y2="34" stroke="#10384F" stroke-width="2"/><text x="6" y="9" font-size="9" fill="#10384F" font-weight="700">KPI 75%</text><text x="150" y="9" font-size="8" fill="#6E8494">target 88%</text></svg>';
+ if(k==="chart")return'<svg viewBox="0 0 200 46" width="100%"><g fill="#00BCFF"><rect x="8" y="20" width="20" height="24" rx="2"/><rect x="42" y="10" width="20" height="34" rx="2"/><rect x="76" y="26" width="20" height="18" rx="2"/><rect x="110" y="6" width="20" height="38" rx="2"/><rect x="144" y="18" width="20" height="26" rx="2"/></g><rect x="176" y="14" width="20" height="30" rx="2" fill="#89D329"/></svg>';
+ if(k==="dash")return'<svg viewBox="0 0 200 64" width="100%"><rect x="1" y="1" width="198" height="62" rx="8" fill="#eef3f6" stroke="#d7e0e6"/><rect x="8" y="8" width="55" height="22" rx="4" fill="#fff"/><rect x="8" y="8" width="55" height="4" rx="2" fill="#00BCFF"/><rect x="72" y="8" width="55" height="22" rx="4" fill="#fff"/><rect x="72" y="8" width="55" height="4" rx="2" fill="#89D329"/><rect x="136" y="8" width="56" height="22" rx="4" fill="#fff"/><rect x="136" y="8" width="56" height="4" rx="2" fill="#0071BC"/><g fill="#00BCFF"><rect x="10" y="40" width="13" height="16" rx="2"/><rect x="29" y="34" width="13" height="22" rx="2"/><rect x="48" y="44" width="13" height="12" rx="2"/><rect x="67" y="38" width="13" height="18" rx="2"/></g><text x="92" y="52" font-size="8" fill="#6E8494">papan live</text></svg>';
+ return"";
+}
+// Q per-role diturunkan dari SPEC.roles[].questions (sumber kebenaran = spec JSON).
+const Q={};ROLES.forEach(r=>{Q[r.id]=r.questions;});
+let st={role:"",qid:"",hist:[],ans:{},oth:{}};   // qid-based + branching (berjenjang), jawaban by id
+const $=s=>document.querySelector(s),bar=$("#bar");
+function show(id){document.querySelectorAll(".screen").forEach(e=>e.classList.remove("on"));$(id).classList.add("on");}
+function svg(p){return`<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#0071BC" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="${p}"/></svg>`;}
+// Isi teks halaman dari SPEC.meta (generik — kuis apa pun, bukan cuma FGD).
+(function applyMeta(){const m=SPEC.meta||{},set=(id,v)=>{const el=$("#"+id);if(el&&v!=null)el.textContent=v;};
+ document.title=m.title||"Kuis Janus";
+ const hb=$("#t-brand");if(hb)hb.innerHTML=`${m.title||"Kuis Janus"}<small>${m.brand||""}</small>`;
+ set("t-headline",m.headline);set("t-lead",m.lead);set("t-roleprompt",m.roleprompt||"Kamu di sini sebagai…");
+ set("t-donetitle",m.donetitle||"Makasih! 🙌");set("t-donelead",m.donelead);set("t-footer",m.footer);
+ set("t-focusk",m.focusk);set("t-capsk",m.capsk);
+ const stps=$("#t-steps");if(stps&&Array.isArray(m.steps))stps.innerHTML=m.steps.map(s=>`<div class="step"><b>${s[0]}</b><span>${s[1]}</span></div>`).join("");
+})();
+$("#roles").innerHTML=ROLES.map(r=>`<button class="role" data-r="${r.id}">${svg(r.ic)}<b>${r.name}</b><span>${r.desc}</span></button>`).join("");
+$("#roles").addEventListener("click",e=>{const b=e.target.closest(".role");if(!b)return;st.role=b.dataset.r;goIntro();});
+bar.innerHTML=`<div style="text-align:center;color:var(--ink4);font-size:12px">Pilih peranmu untuk mulai</div>`;
+
+function goIntro(){const r=ROLES.find(x=>x.id===st.role);$("#w-focus").textContent=r.focus;
+ bar.innerHTML=`<button class="btn" id="qs">Mulai →</button>`;$("#qs").onclick=()=>{st.qid=Q[st.role][0].id;st.hist=[];st.ans={};st.oth={};renderQ();};show("#s-intro");}
+
+function byId(id){return Q[st.role].find(q=>q.id===id);}
+function ok(it){const a=st.ans[it.id];
+ if(it.type==="multi"||it.type==="pick")return Array.isArray(a)&&a.length>0;
+ return a!=null&&a!=="";}
+// BERJENJANG: q.next = "id" (paksa), atau {opsi:"id","*":"id"} (cabang per pilihan), atau kosong (linear).
+function nextId(it){const a=st.ans[it.id];
+ if(typeof it.next==="string")return it.next;
+ if(it.next&&typeof it.next==="object")return it.next[a]||it.next["*"]||"end";
+ const arr=Q[st.role],idx=arr.findIndex(q=>q.id===it.id);
+ return (idx>=0&&idx<arr.length-1)?arr[idx+1].id:"end";}
+function advance(it){if(!st.hist.includes(it.id))st.hist.push(it.id);
+ const nx=nextId(it);if(nx==="end"||!byId(nx))finish();else{st.qid=nx;renderQ();}}
+function setNext(it){const last=nextId(it)==="end"||!byId(nextId(it));
+ bar.innerHTML=`<button class="btn" id="nx" ${ok(it)?"":"disabled"}>${last?"Selesai ✓":"Lanjut →"}</button>`;
+ $("#nx").onclick=()=>advance(it);}
+
+function renderQ(){show("#s-quiz");const it=byId(st.qid),b=$("#body");
+ const r=ROLES.find(x=>x.id===st.role),total=r.pathlen||4,pos=st.hist.length;
+ $("#prog").style.width=`${Math.min(100,pos/total*100)}%`;
+ $("#secban").textContent=SECNAME[it.sec]||"";
+ $("#qn").textContent=`Langkah ${pos+1}`;
+ $("#mtag").textContent="";
+ $("#hint").textContent=it.hint||"";
+ if(st.ans[it.id]===undefined)st.ans[it.id]=(it.type==="multi"||it.type==="pick")?[]:null;
+ $("#qtag").textContent=it.tag||"";$("#q").textContent=it.q;
+
+ if(it.type==="pick"){
+  const sel=st.ans[it.id],full=sel.length>=it.cap;
+  b.innerHTML=it.items.map((f,j)=>{const on=sel.includes(f.name);return`<div class="feat pickc${on?" on":""}" data-j="${j}">
+    <div class="fname"><span class="star">${on?"⭐":"☆"}</span>${f.name}<span class="pill">UDAH ADA</span></div>
+    <div class="fcan">Janus bisa: ${f.can}</div>${f.v?`<div class="fvis">${vis(f.v)}</div>`:""}<div class="fex">${f.ex}</div></div>`;}).join("")
+    +`<div class="pickcount${full?" max":""}">${sel.length}/${it.cap} dipilih${full?" · maks tercapai":""}</div>`;
+  b.querySelectorAll(".pickc").forEach(el=>el.onclick=()=>{const f=it.items[el.dataset.j].name,a=st.ans[it.id];
+    if(a.includes(f))a.splice(a.indexOf(f),1);else{if(a.length>=it.cap)return;a.push(f);}renderQ();});
+  setNext(it);
+ }else if(it.type==="multi"){
+  const sel=st.ans[it.id],cap=it.cap||0;
+  b.innerHTML=it.o.map((o,j)=>`<div class="opt${sel.includes(o)?" sel":""}" data-j="${j}"><span class="box">${CK}</span>${o}</div>`).join("")
+   +(cap?`<div class="pickcount${sel.length>=cap?" max":""}">${sel.length}/${cap} dipilih${sel.length>=cap?" · maks":""}</div>`:"");
+  b.querySelectorAll(".opt").forEach(el=>el.onclick=()=>{const o=it.o[el.dataset.j],a=st.ans[it.id];
+    if(a.includes(o))a.splice(a.indexOf(o),1);else{if(cap&&a.length>=cap)return;a.push(o);}renderQ();});
+  setNext(it);
+ }else{ // single — TAP LANGSUNG LANJUT (bukan form: nol tombol, nol ketik)
+  b.innerHTML=it.o.map((o,j)=>`<div class="opt${st.ans[it.id]===o?" sel":""}" data-j="${j}"><span class="dot"></span>${o}</div>`).join("");
+  b.querySelectorAll(".opt").forEach(el=>el.onclick=()=>{st.ans[it.id]=it.o[el.dataset.j];advance(it);});
+  bar.innerHTML=`<div style="text-align:center;color:var(--ink4);font-size:12px">Tap pilihanmu — lanjut otomatis ↓</div>`;
+ }
+}
+function fmt(it,a,o){let s;
+ if(a==null||a===""||(Array.isArray(a)&&!a.length))s="—";
+ else if(it.type==="pick")s=a.map(x=>"⭐"+x).join(" · ");
+ else if(it.type==="rank")s=a.map((x,k)=>`${k+1}.${x}`).join(" · ");
+ else if(it.type==="multi")s=a.join(" · ");
+ else s=a;
+ if(o&&o.trim())s=(s==="—"?"":s+" · ")+"Lainnya: "+o.trim();
+ return s;}
+// payload utk quiz_capture.py — {quiz,role,answers:[{qid,type,value,other}]}. ANONIM. qid = id pertanyaan
+// yang BENAR-BENAR dijawab (jalur cabang), bukan semua pertanyaan.
+function payload(){const qz=(SPEC.meta&&SPEC.meta.id)||"kuis";
+ return{quiz:qz,role:st.role,answers:st.hist.map(id=>{const it=byId(id),a=st.ans[id];
+  return{qid:id,type:it.type,value:(a===undefined||a==="")?null:a,other:null};})};}
+function saveLocal(){try{const qz=(SPEC.meta&&SPEC.meta.id)||"kuis";
+  localStorage.setItem(qz+"_"+st.role+"_"+Date.now(),JSON.stringify(payload()));}catch(e){}}
+function exportJSON(){const qz=(SPEC.meta&&SPEC.meta.id)||"kuis";
+ const blob=new Blob([JSON.stringify(payload(),null,2)],{type:"application/json"});
+ const u=URL.createObjectURL(blob),a=document.createElement("a");
+ a.href=u;a.download=qz+"-"+st.role+".json";a.click();URL.revokeObjectURL(u);}
+function copyJSON(){const t=JSON.stringify(payload());
+ (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(
+  ()=>{const b=$("#cpy");if(b){b.textContent="Tersalin ✓";setTimeout(()=>b.textContent="Salin jawaban 📋",1500);}},
+  ()=>alert("Salin manual:\n\n"+t));}
+function finish(){$("#prog").style.width="100%";const rn=ROLES.find(r=>r.id===st.role).name;
+ saveLocal();
+ let out=`<div class="sumsec">Peran: ${rn} · anonim</div><div class="sumcard">`;
+ st.hist.forEach(id=>{const it=byId(id);
+  out+=`<div class="sumrow"><b>${it.tag||id}:</b> <span>${fmt(it,st.ans[id])}</span></div>`;});
+ out+='</div>';
+ $("#sum").innerHTML=out;
+ bar.innerHTML=`<div style="display:flex;flex-direction:column;gap:8px">
+   <button class="btn" onclick="exportJSON()">Simpan jawaban 💾</button>
+   <button class="btn ghost" id="cpy" onclick="copyJSON()">Salin jawaban 📋</button>
+   <button class="btn ghost" onclick="location.reload()">Isi lagi (peserta lain) ↻</button></div>`;
+ show("#s-done");
+}
+</script>
+</body></html>
