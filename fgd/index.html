@@ -72,7 +72,9 @@ textarea:focus{outline:none;border-color:var(--ablue)}
 .btn{width:100%;border:none;border-radius:13px;padding:15px;font-size:15.5px;font-weight:800;font-family:inherit;background:var(--ablue);color:#fff;cursor:pointer;transition:.08s}
 .btn:active{transform:scale(.99)}.btn[disabled]{background:var(--line);color:var(--ink4);cursor:not-allowed}
 .btn.ghost{background:transparent;color:var(--ink3);font-weight:700;padding:11px}
-.back{background:none;border:none;color:var(--ink3);font-size:12.5px;font-weight:700;font-family:inherit;cursor:pointer;padding:0 0 10px;display:none}
+.navrow{display:flex;gap:10px}
+.navrow .btn{flex:1}
+.btn.back2{background:var(--canvas);color:var(--ink2);border:1.5px solid var(--line);flex:0 0 38%}
 .done{text-align:center;padding-top:24px}
 .tick{width:66px;height:66px;border-radius:50%;background:#f1f9e8;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}.tick svg{width:34px;height:34px}
 .sumsec{font-size:11px;font-weight:800;color:var(--ablue);text-transform:uppercase;letter-spacing:.04em;margin:16px 0 4px;text-align:left}
@@ -98,7 +100,6 @@ footer{text-align:center;color:var(--ink4);font-size:10.5px;padding:14px}
 </section>
 
 <section class="screen" id="s-quiz">
-  <button class="back" id="back" onclick="goBack()">← Kembali</button>
   <div class="prog"><i id="prog"></i></div>
   <div class="secban" id="secban">—</div>
   <div><span class="qtag" id="qtag"></span><span class="mtag" id="mtag"></span></div>
@@ -170,12 +171,12 @@ function nextId(it){const a=st.ans[it.id];
 function advance(it){if(!st.hist.includes(it.id))st.hist.push(it.id);
  const nx=nextId(it);if(nx==="end"||!byId(nx))finish();else{st.qid=nx;renderQ();}}
 function setNext(it){const last=nextId(it)==="end"||!byId(nextId(it));
- bar.innerHTML=`<button class="btn" id="nx" ${ok(it)?"":"disabled"}>${last?"Selesai ✓":"Lanjut →"}</button>`;
+ const back=st.hist.length?`<button class="btn back2" onclick="goBack()">← Kembali</button>`:"";
+ bar.innerHTML=`<div class="navrow">${back}<button class="btn" id="nx" ${ok(it)?"":"disabled"}>${last?"Selesai ✓":"Lanjut →"}</button></div>`;
  $("#nx").onclick=()=>advance(it);}
 
 function goBack(){if(!st.hist.length)return;st.qid=st.hist.pop();renderQ();}
 function renderQ(){show("#s-quiz");const it=byId(st.qid),b=$("#body");
- $("#back").style.display=st.hist.length?"block":"none";
  const r=ROLES.find(x=>x.id===st.role),total=r.pathlen||4,pos=st.hist.length;
  $("#prog").style.width=`${Math.min(100,pos/total*100)}%`;
  $("#secban").textContent=SECNAME[it.sec]||"";
@@ -201,10 +202,10 @@ function renderQ(){show("#s-quiz");const it=byId(st.qid),b=$("#body");
   b.querySelectorAll(".opt").forEach(el=>el.onclick=()=>{const o=it.o[el.dataset.j],a=st.ans[it.id];
     if(a.includes(o))a.splice(a.indexOf(o),1);else{if(cap&&a.length>=cap)return;a.push(o);}renderQ();});
   setNext(it);
- }else{ // single — TAP LANGSUNG LANJUT (bukan form: nol tombol, nol ketik)
+ }else{ // single — pilih dulu, lalu tombol Lanjut (tak kaget auto-loncat; konsisten semua tipe)
   b.innerHTML=it.o.map((o,j)=>`<div class="opt${st.ans[it.id]===o?" sel":""}" data-j="${j}"><span class="dot"></span>${o}</div>`).join("");
-  b.querySelectorAll(".opt").forEach(el=>el.onclick=()=>{st.ans[it.id]=it.o[el.dataset.j];advance(it);});
-  bar.innerHTML=`<div style="text-align:center;color:var(--ink4);font-size:12px">Tap pilihanmu — lanjut otomatis ↓</div>`;
+  b.querySelectorAll(".opt").forEach(el=>el.onclick=()=>{st.ans[it.id]=it.o[el.dataset.j];renderQ();});
+  setNext(it);
  }
 }
 function fmt(it,a,o){let s;
@@ -243,7 +244,7 @@ function submitOnline(){const btn=$("#send");if(btn){btn.disabled=true;btn.textC
  }).catch(()=>{if(btn){btn.disabled=false;btn.textContent="Coba kirim lagi 🔁";}
    const fb=$("#fallback");if(fb)fb.style.display="flex";});}
 function finish(){$("#prog").style.width="100%";const rn=ROLES.find(r=>r.id===st.role).name;
- saveLocal();$("#back").style.display="none";
+ saveLocal();
  let out=`<div class="sumsec">Peran: ${rn} · anonim</div><div class="sumcard">`;
  st.hist.forEach(id=>{const it=byId(id);
   out+=`<div class="sumrow"><b>${it.tag||id}:</b> <span>${fmt(it,st.ans[id])}</span></div>`;});
