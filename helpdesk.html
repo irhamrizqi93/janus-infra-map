@@ -1,0 +1,273 @@
+<!DOCTYPE html><html lang="id"><head><script>if(sessionStorage.getItem("jinfra")!=="ok")location.replace("/janus-infra-map/");</script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Helpdesk — Tiket User Janus</title><style>
+:root{--navy:#10384F;--blue:#00BCFF;--green:#89D329;--ablue:#0071BC;--bg:#F8F9FA;--surface:#fff;
+--text:#1F2421;--muted:#6B726A;--border:#E2E5E0;--hair:rgba(16,56,79,.08);--amber:#D3A931;--red:#C62828}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-size:15px;line-height:1.55;font-family:-apple-system,"Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:24px 16px 48px}a{color:var(--ablue)}
+h1{font-weight:600;font-size:28px;color:var(--navy);margin:0 0 2px}
+.sub{color:var(--muted);font-size:13px;margin-bottom:18px}.back{font-size:13px;text-decoration:none;display:inline-block;margin-bottom:10px}
+.skor{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.pil{background:var(--surface);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:13px}.pil b{color:var(--navy)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.dot.ok{background:var(--green)}.dot.warn{background:var(--amber)}.dot.info{background:var(--ablue)}.dot.gap{background:#93A5B1}.dot.red{background:var(--red)}
+h2{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:26px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--hair)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;border-left:3px solid var(--border);box-shadow:0 1px 2px rgba(16,56,79,.05)}
+.card.ok{border-left-color:var(--green)}.card.warn{border-left-color:var(--amber)}.card.info{border-left-color:var(--ablue)}.card.gap{border-left-color:#93A5B1}.card.red{border-left-color:var(--red)}
+.card header{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.tid{font-weight:800;color:var(--ablue);font-size:13px}.card h3{font-size:15px;margin:0;font-weight:600;color:var(--navy);flex:1}
+.st{font-size:11px;font-weight:700;border-radius:99px;padding:2px 8px}.st.ok{background:#eef8e0;color:#4a7a12}.st.warn{background:#fbf3dc;color:#8a6d16}.st.info{background:#e6f4fb;color:#0060a0}.st.gap{background:#eef1f3;color:#5a6b76}.st.red{background:#fbe9e7;color:#a01e1e}
+.pr{font-size:10px;font-weight:800;color:var(--red)}
+.meta{font-size:12px;color:var(--muted);margin-bottom:8px}.isi{font-size:13.5px;margin:0 0 8px;white-space:pre-wrap}
+.resp{font-size:12.5px;background:var(--bg);border-radius:8px;padding:6px 10px;margin-top:4px}.resp b{color:var(--navy)}
+.reso{font-size:12.5px;color:#4a7a12;margin-top:6px;font-weight:600}.iss{font-size:11px;display:inline-block;margin-top:6px}
+footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid var(--border);padding-top:10px}
+@media(max-width:420px){.grid{grid-template-columns:1fr}h1{font-size:23px}}
+</style></head><body><div class="wrap">
+<a class="back" href="/janus-infra-map/arsitektur/">← Arsitektur</a>
+<h1>Helpdesk — Tiket User</h1>
+<div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
+<div class="skor">
+  <span class="pil"><b>20</b> total</span>
+  <span class="pil"><span class="dot warn"></span><b>16</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>16 baru</span>
+  <span class="pil"><span class="dot info"></span>0 diproses</span>
+  <span class="pil"><span class="dot ok"></span>4 selesai</span>
+</div>
+<h2><span class="dot warn"></span>BARU (16)</h2><main class="grid"><article class="card warn">
+      <header><span class="tid">#T1</span><h3>🔴 PERUBAHAN FUNDAMENTAL (knowledge)
+Apa: Padi timing spray — Timing spray padi: </h3><span class="st warn">BARU</span></header>
+      <div class="meta">🟡 Permintaan · knowledge-gov (system) · 2026-07-05T10:42</div>
+      <p class="isi">🔴 PERUBAHAN FUNDAMENTAL (knowledge)
+Apa: Padi timing spray — Timing spray padi: semua varietas kecuali MD70 vegetatif 10-15 dan 20-25 HST generatif 40-45 dan 50-55 HST.
+Mempengaruhi/terkait: Padi - timing spray (KC260701195703); Oberon-Vayego (crop &amp; hama) (KC260701195655)
+Sumber: Widya Nugraha (MD) · 2026-07-05 · [KC26070510420421]
+⚠️ PERUBAHAN BESAR (41% mirip Padi - timing spray/KC260701195703) → butuh APPROVAL super-admin: knowledge_contrib.py --approve KC26070510420421 --force</p>
+      
+    </article><article class="card warn">
+      <header><span class="tid">#T2</span><h3>🌱 Kontribusi KC26070616000200 (Widya Nugraha) NYEBUT WINDOW SPRAY/HST — protokol</h3><span class="st warn">BARU</span></header>
+      <div class="meta">🟡 Permintaan · knowledge-gov (system) · 2026-07-06T16:00</div>
+      <p class="isi">🌱 Kontribusi KC26070616000200 (Widya Nugraha) NYEBUT WINDOW SPRAY/HST — protokol auto-harvest?
+Kalau iya, terapkan ke config+RAG sekali jalan (single-source #96):
+python3 ~/janus/scripts/protokol_update.py --produk auto-harvest --spray &quot;Spray 1:lo-hi,...&quot; --dosis &quot;...&quot; --sumber &quot;Widya Nugraha&quot; --apply</p>
+      
+    </article><article class="card warn">
+      <header><span class="tid">#T3</span><h3>🌱 Kontribusi KC26070823371410 (Bang Irham) NYEBUT WINDOW SPRAY/HST — protokol va</h3><span class="st warn">BARU</span></header>
+      <div class="meta">🟡 Permintaan · knowledge-gov (system) · 2026-07-08T23:37</div>
+      <p class="isi">🌱 Kontribusi KC26070823371410 (Bang Irham) NYEBUT WINDOW SPRAY/HST — protokol vayego?
+Kalau iya, terapkan ke config+RAG sekali jalan (single-source #96):
+python3 ~/janus/scripts/protokol_update.py --produk vayego --spray &quot;Spray 1:lo-hi,...&quot; --dosis &quot;...&quot; --sumber &quot;Bang Irham&quot; --apply</p>
+      
+    </article><article class="card warn">
+      <header><span class="tid">#T4</span><h3>🌱 Kontribusi KC26071122500051 (Widya Nugraha) NYEBUT WINDOW SPRAY/HST — protokol</h3><span class="st warn">BARU</span></header>
+      <div class="meta">🟡 Permintaan · knowledge-gov (system) · 2026-07-11T22:50</div>
+      <p class="isi">🌱 Kontribusi KC26071122500051 (Widya Nugraha) NYEBUT WINDOW SPRAY/HST — protokol Vayego?
+Kalau iya, terapkan ke config+RAG sekali jalan (single-source #96):
+python3 ~/janus/scripts/protokol_update.py --produk Vayego --spray &quot;Spray 1:lo-hi,...&quot; --dosis &quot;...&quot; --sumber &quot;Widya Nugraha&quot; --apply</p>
+      
+    </article><article class="card warn">
+      <header><span class="tid">#T7</span><h3>Pesan dari David: &quot;AI-nya mantap&quot; 👍
+
+(Feedback untuk Janus — David puas dengan p</h3><span class="st warn">BARU</span></header>
+      <div class="meta">🔵 Pertanyaan · david (CAC) · 2026-07-15T21:21</div>
+      <p class="isi">Pesan dari David: &quot;AI-nya mantap&quot; 👍
+
+(Feedback untuk Janus — David puas dengan pelayanan.)</p>
+      
+    </article><article class="card warn">
+      <header><span class="tid">#T8</span><h3>David tanya: Janus bisa cari tempat karaoke di Semarang?
+
+Hasil cek manifest: be</h3><span class="st warn">BARU</span></header>
+      <div class="meta">🔵 Pertanyaan · david (CAC) · 2026-07-15T21:23</div>
+      <p class="isi">David tanya: Janus bisa cari tempat karaoke di Semarang?
+
+Hasil cek manifest: belum ada kemampuan ini. Sebagai alternatif bisa pakai web search umum, tapi diluar tool Janus. Mohon arahan.</p>
+      
+    </article><article class="card warn">
+      <header><span class="tid">#T9</span><h3>David tanya soal tempat spa.
+
+Ini di luar scope CAC dan belum ada di tool Janus.</h3><span class="st warn">BARU</span></header>
+      <div class="meta">🔵 Pertanyaan · david (CAC) · 2026-07-15T21:23</div>
+      <p class="isi">David tanya soal tempat spa.
+
+Ini di luar scope CAC dan belum ada di tool Janus. Mohon arahan.</p>
+      
+    </article><article class="card warn">
+      <header><span class="tid">#T11</span><h3>Pesan dari David: &quot;Jangan lupa pijat&quot; 💆‍♂️
+
+(Notifikasi personal untuk Mas Irham</h3><span class="st warn">BARU</span></header>
+      <div class="meta">🔵 Pertanyaan · david (CAC) · 2026-07-15T21:26</div>
+      <p class="isi">Pesan dari David: &quot;Jangan lupa pijat&quot; 💆‍♂️
+
+(Notifikasi personal untuk Mas Irham.)</p>
+      
+    </article><article class="card warn">
+      <header><span class="tid">#T12</span><h3>David tanya: berapa sisa LDD Mas Irham?
+
+Ini di luar scope CAC David — data keua</h3><span class="st warn">BARU</span></header>
+      <div class="meta">🔵 Pertanyaan · david (CAC) · 2026-07-15T21:30</div>
+      <p class="isi">David tanya: berapa sisa LDD Mas Irham?
+
+Ini di luar scope CAC David — data keuangan/operasional. Mohon arahan atau bisa langsung dijawab ke David.</p>
+      
+    </article><article class="card warn">
+      <header><span class="tid">#T13</span><h3>David tanya: siapa saja CAC se-Indonesia?
+
+Di database internal baru tercatat Da</h3><span class="st warn">BARU</span></header>
+      <div class="meta">🔵 Pertanyaan · david (CAC) · 2026-07-15T21:37</div>
+      <p class="isi">David tanya: siapa saja CAC se-Indonesia?
+
+Di database internal baru tercatat David Gabriel (CAC area CJ). David butuh tau struktur CAC di area lain (Sumatra, Jabar, Jatim, dll). Mohon infonya.</p>
+      
+    </article><article class="card warn">
+      <header><span class="tid">#T14</span><h3>David (CAC CJ) menanyakan nama-nama TM di seluruh area Jawa Tengah. Di knowledge</h3><span class="st warn">BARU</span></header>
+      <div class="meta">🔵 Pertanyaan · david (CAC) · 2026-07-16T08:36</div>
+      <p class="isi">David (CAC CJ) menanyakan nama-nama TM di seluruh area Jawa Tengah. Di knowledge base saat ini hanya tercatat Bang Irham sebagai TM (cover Grobogan/Demak/Kudus/Kab. Semarang). David butuh daftar lengkap TM Jateng — termasuk area lain seperti Solo, Pekalongan, Banyumas, dll. Mohon diinfokan atau diarahkan ya Mas.</p>
+      
+    </article><article class="card warn">
+      <header><span class="tid">#T15</span><h3>🌱 Kontribusi KC26071612000203 (widya) NYEBUT WINDOW SPRAY/HST — protokol unclass</h3><span class="st warn">BARU</span></header>
+      <div class="meta">🟡 Permintaan · knowledge-gov (system) · 2026-07-16T12:00</div>
+      <p class="isi">🌱 Kontribusi KC26071612000203 (widya) NYEBUT WINDOW SPRAY/HST — protokol unclassified?
+Kalau iya, terapkan ke config+RAG sekali jalan (single-source #96):
+python3 ~/janus/scripts/protokol_update.py --produk unclassified --spray &quot;Spray 1:lo-hi,...&quot; --dosis &quot;...&quot; --sumber &quot;widya&quot; --apply</p>
+      
+    </article><article class="card warn">
+      <header><span class="tid">#T17</span><h3>PESAN DARI WIDYA ke Mas Irham:
+
+aku sudah selesai analisa positioning Vayego vs </h3><span class="st warn">BARU</span></header>
+      <div class="meta">🔵 Pertanyaan · widya (MD) · 2026-07-16T13:13</div>
+      <p class="isi">PESAN DARI WIDYA ke Mas Irham:
+
+aku sudah selesai analisa positioning Vayego vs Fenite. Vayego tetraniliprol 200 g/L, Fenite emamektin 60 + lufenuron 90. Keunggulan Vayego: stop feeding 1-2 jam, translaminar aman bunga.
+
+🔴 PROTOKOL DEMOPLOT KC Hijau (PAKAI INI, JANGAN nebak/pakai offset chart):
+• DOSIS per titik (0,1ha=1.000m², sprayer 14L): Oberon 80ml · Vayego 40ml · Ambition 200ml
+• TIMING Oberon+Ambition: Spray1 = H+15 (vegetatif awal), Spray2 = H+22
+• TIMING Vayego+Ambition: Spray1 = H~20-25, Spray2 = H~30-35 (bunga), Spray3 = H~40-45 (polong)
+• Kacang hijau panen ≈ H+60. HST = hari setelah TANAM (bukan dari tanggal lain).
+⚠️ JADWAL SPRAY per demoplot → PANGGIL: python3 ~/janus/scripts/demoplot_spray.py --dr &lt;DR&gt; (output tanggal EKSAK). JANGAN hitung HST-&gt;tanggal manual — DeepSeek sering salah. Detail: rag_lookup &quot;protokol demoplot&quot;.
+
+📘 SKILL LAPOR-KEGIATAN (section C) — framework, angka tetap dari tool:
+&gt; Update: 2026-07-12 · Skill Lapor-Kegiatan (section C) — playbook intake laporan lapangan, BUKAN data. Pasangan: terima-planning-kegiatan.
+
+## Cakupan
+DR/Abang lapor kegiatan SELESAI (&quot;sudah selesai FED di Desa X, hadir 25 petani, ini fotonya&quot;) → tersimpan di liquidation (SoT laporan+tanggal). Rencana baru = skill terima-planning-kegiatan.
+
+## Alur (deterministik, ≤4 langkah)
+1. **Anti-dobel DULU**: `liquidation.py --recall --dr &lt;DR&gt; [--jenis &lt;J&gt;] [--bulan YYYY-MM]` — laporan yang sama sudah ada → JANGAN `--add` baru; info susulan masuk `--update &lt;LIQ_ID&gt;` / `--attach-foto &lt;LIQ_ID&gt; --foto &lt;url&gt;`.
+2. **Simpan baru**: `echo &#x27;&lt;json&gt;&#x27; | liquidation.py --add` — field dari pesan user apa adanya (jenis, dr, desa/kec, tanggal, peserta, produk, foto). Field yang user tak sebut → biarkan kosong, JANGAN isi karangan.
+3. **Baca scorecard hasil add**: blok `❓ KOSONG` = field itu BELUM tersimpan → minta ke user (foto? jumlah peserta?) → lengkapi via `--update`/`--attach-foto`. JANGAN lapor &quot;sudah tercatat lengkap&quot; selagi masih ada ❓.
+4. **Verify ke user**: tampilkan ringkas hasil recall/scorecard DARI TOOL (bukan dari ingatan) + apa yang masih kurang.
+
+## ⚠️ Pitfall
+1. Tanggal report di liquidation = SoT tanggal tampil (report &gt; selesai &gt; plan). Tanggal salah → betulkan DI SINI, jangan tambal di dashboard/kalender.
+2. Auto-rekonsiliasi ke plan jalan sendiri; report kelihatan &quot;orphan&quot; → `--reconcile-all`, bukan bikin plan baru.
+3. Laporan dari DR langsung (bukan Abang): tetap boleh dicatat sebagai laporan, tapi perubahan plan/settle tetap human-gate Abang.
+4. Susulan (foto nyusul, koreksi peserta) = `--update`/`--attach-foto`, BUKAN `--add` kedua.
+
+## Penalaran (probabilistik)
+- Nilai kegiatan (&quot;worth it gak?&quot;) BUKAN di sini → arahkan ke skill dampak-kegiatan (eval_kegiatan).
+- Ragu ini laporan baru atau susulan dari recall → tanya user 1×, jangan tebak.
+
+
+⛔ ANTI-NGARANG (SEMUA topik, WAJIB): jawaban DATA/ANGKA/STATUS/ANALISA/MATCHING = HANYA dari TOOL (cek TOOLS.md — ada ~100 tool siap pakai). DILARANG KERAS nulis logika bisnis / algoritma / rekonsiliasi / pencocokan / script analisa SENDIRI di chat, dan DILARANG hitung dari ingatan. Kalau kamu merasa perlu &#x27;benerin/bikin/hitung&#x27; logika sendiri → itu SINYAL tool-nya kurang/ada bug → (1) JALANKAN tool yang ada dulu, relay hasilnya apa adanya; (2) kalau hasil tool masih salah → `python3 ~/janus/scripts/janus_issue.py` biar Claude betulin di BACKEND. JANGAN PERNAH tambal/ngarang jawaban atau &#x27;bikin fix&#x27; di chat — itu bikin angka beda dari papan &amp; nyesatin.</p>
+      
+    </article><article class="card warn">
+      <header><span class="tid">#T18</span><h3>[KONSULTASI → Widya Nugraha] Halo Pak Widya, David (CAC) di sini. Lagi nyusun ca</h3><span class="st warn">BARU</span></header>
+      <div class="meta">🔵 Pertanyaan · david (CAC) · 2026-07-16T14:01</div>
+      <p class="isi">[KONSULTASI → Widya Nugraha] Halo Pak Widya, David (CAC) di sini. Lagi nyusun campaign Camalus untuk kacang hijau nih. Mohon masukan teknisnya: hama dominan apa yang paling relevan diangkat sebagai highlight campaign Camalus di kacang hijau? Butuh data agronomi-nya supaya klaim marketing saya nggak ngawang. Terima kasih sebelumnya!</p>
+      
+    </article><article class="card warn">
+      <header><span class="tid">#T19</span><h3>🌱 Kontribusi KC26071616000228 (widya) NYEBUT WINDOW SPRAY/HST — protokol unclass</h3><span class="st warn">BARU</span></header>
+      <div class="meta">🟡 Permintaan · knowledge-gov (system) · 2026-07-16T16:00</div>
+      <p class="isi">🌱 Kontribusi KC26071616000228 (widya) NYEBUT WINDOW SPRAY/HST — protokol unclassified?
+Kalau iya, terapkan ke config+RAG sekali jalan (single-source #96):
+python3 ~/janus/scripts/protokol_update.py --produk unclassified --spray &quot;Spray 1:lo-hi,...&quot; --dosis &quot;...&quot; --sumber &quot;widya&quot; --apply</p>
+      
+    </article><article class="card warn">
+      <header><span class="tid">#T20</span><h3>David (CAC) minta tolong dicarikan informasi: siapa nama terapis &quot;83 sansa&quot; dari</h3><span class="st warn">BARU</span></header>
+      <div class="meta">🔵 Pertanyaan · david (CAC) · 2026-07-17T18:54</div>
+      <p class="isi">David (CAC) minta tolong dicarikan informasi: siapa nama terapis &quot;83 sansa&quot; dari Fantasy Spa Semarang. Dia forward video promo dari @fantasyspasemarang (29 Mei 2026) — di video ada cewek rambut cokelat panjang, crop top cokelat, sarong oranye, muka ditutup emoji bunga pink. Teks &quot;83 sansa&quot; di pojok kanan atas. David minta eskalasi ke Abang buat identifikasi orang ini.</p>
+      
+    </article></main><h2><span class="dot ok"></span>SELESAI (4)</h2><main class="grid"><article class="card ok">
+      <header><span class="tid">#T5</span><h3>David (CAC) butuh info budget operasional:
+1. Budget kegiatan territory Semarang</h3><span class="st ok">SELESAI</span></header>
+      <div class="meta">🟡 Permintaan · david (CAC) · 2026-07-15T21:17</div>
+      <p class="isi">David (CAC) butuh info budget operasional:
+1. Budget kegiatan territory Semarang — berapa?
+2. Sisa P&amp;I — berapa?
+(Data ini di luar akses CAC, perlu approval &amp; angka dari Mas Irham)</p>
+      <div class="resp"><b>irham:</b> Besok dibahas saat meeting ya, David. Tunggu arahan Mas Irham langsung.</div><div class="reso">✅ Besok dibahas saat meeting ya, David. Tunggu arahan Mas Irham langsung.</div>
+    </article><article class="card ok">
+      <header><span class="tid">#T6</span><h3>Dari David (CAC):
+
+Mas Irham, berikut proposal dari saya:
+
+📋 PROPOSAL: TEMU PENE</h3><span class="st ok">SELESAI</span></header>
+      <div class="meta">🟡 Permintaan · david (CAC) · 2026-07-15T21:21</div>
+      <p class="isi">Dari David (CAC):
+
+Mas Irham, berikut proposal dari saya:
+
+📋 PROPOSAL: TEMU PENEBAS — Budget Rp 7.500.000
+(Lampiran lengkap: proposal-temu-penebas-7.5jt.html di workspace)
+
+Ringkasan:
+- Target: 30 penebas area Semarang/Demak
+- Format: coffee morning santai 4 jam
+- Budget: sewa venue (1,5jt) + konsumsi (1,5jt) + transport (1,5jt) + branding (600rb) + doorprize (800rb) + showcase (500rb) + dokumentasi (300rb) + operasional (800rb) = TOTAL 7,5jt
+- KPI: hadir ≥25 penebas, database ≥25 kontak, feedback 80%, follow-up trial ≥5 penebas
+
+Mohon approval. Di samping itu, masih menunggu jawaban untuk budget kegiatan Semarang &amp; sisa P&amp;I (eskalasi sebelumnya ESC260715211722).
+
+Terima kasih.</p>
+      <div class="resp"><b>irham:</b> Proposal Temu Penebas diterima. Mas Irham minta dibahas sampai TOO (Task→Output→Outcome) dulu. Jangan cuma budget — jelaskan output terukur &amp; dampak bisnisnya. Detail &amp; governance akses CAC dibahas besok saat meeting.</div><div class="reso">✅ Proposal Temu Penebas diterima. Mas Irham minta dibahas sampai TOO (Task→Output→Outcome) dulu. Jangan cuma budget — jelaskan output terukur &amp; dampak bisnisnya. Detail &amp; governance akses CAC dibahas besok saat meeting.</div>
+    </article><article class="card ok">
+      <header><span class="tid">#T10</span><h3>David minta konsultasi dengan Pak Widya terkait launching Camalus di area CJ.
+
+D</h3><span class="st ok">SELESAI</span></header>
+      <div class="meta">🔵 Pertanyaan · david (CAC) · 2026-07-15T21:25</div>
+      <p class="isi">David minta konsultasi dengan Pak Widya terkait launching Camalus di area CJ.
+
+David sudah lihat product knowledge Camalus (insektisida dual mode, rainfast, horti) dan punya ide launch campaign. Tapi butuh input teknis dari Widya:
+- Kesesuaian Camalus untuk horti di CJ (cabe/tomat/kubis/bawang)
+- Data hama dominan di area CJ yang bisa di-address Camalus
+- Rekomendasi demo plot &amp; timing aplikasi
+
+Mohon arahan — apakah bisa difasilitasi diskusi dengan Widya atau ada dokumen teknis yang bisa diakses David?</p>
+      <div class="resp"><b>irham:</b> ACC — David bisa relay/konsultasi dengan Widya. Silakan diskusi teknis Camalus untuk horti CJ. Bang Irham akan selesaikan akses relay di backend.</div><div class="reso">✅ ACC — David bisa relay/konsultasi dengan Widya. Silakan diskusi teknis Camalus untuk horti CJ. Bang Irham akan selesaikan akses relay di backend.</div>
+    </article><article class="card ok">
+      <header><span class="tid">#T16</span><h3>Widya minta share tabel perbandingan Vayego vs Fenite (kacang hijau) beserta pit</h3><span class="st ok">SELESAI</span></header>
+      <div class="meta">🟡 Permintaan · widya (MD) · 2026-07-16T12:45</div>
+      <p class="isi">Widya minta share tabel perbandingan Vayego vs Fenite (kacang hijau) beserta pitching summary yang sudah dikerjakan di session Widya tadi malam (11 Jul 2026). 
+
+Konfirmasi dari Widya: &quot;saat ini sudah cukup&quot; — tabel dan pitching summary sudah final dan siap dibagikan ke Mas Irham.
+
+Silakan cek history chat Widya (message #7855 s/d #7878, 11 Jul 2026) untuk melihat hasil lengkapnya — termasuk:
+1. Tabel perbandingan Vayego vs Fenite di kacang hijau (dengan sel-sel yang sudah diperbarui sesuai masukan Widya)
+2. Pitching summary yang sudah diharmonisasikan dengan tabel
+
+Widya minta ini diteruskan ke Mas Irham.</p>
+      <div class="resp"><b>irham:</b> ✅ Diterima &amp; diproses (bukan cuma diteruskan). Isi lengkap sudah TERSIMPAN di knowledge shared — KC26071122500051 (approved), bisa di-recall kapan pun via kontrib_status/rag_lookup, TIDAK perlu buka chat Widya.
+
+Ringkas hasil olahan (Vayego 200 SC vs Fenite 150 OD, kacang hijau):
+1. Spektrum: Vayego spesialis penggerek polong (Maruca) + grayak, translaminar tembus polong; Fenite lebih lebar ke kutu/thrips tapi tembus polong lemah.
+2. Residual: Vayego 7-14 hari terserap jaringan (tahan hujan/UV); klaim Fenite 30 hari sulit dicapai (OD di permukaan, daun baru cepat tumbuh).
+3. Timing: Vayego SC aman di bunga 25-35 HST; Fenite OD berisiko sunscald + ganggu penyerbukan saat berbunga+terik.
+4. Bundling: Vayego CUKUP sendiri — Belt sama-sama IRAC 28, campur = boros + percepat resistensi.
+5. Bahan aktif: Vayego Tetraniliprol 200 g/L · Fenite Emamektin benzoat 60 + Lufenuron 90 g/L (dikonfirmasi dari sheet final Widya).
+
+Pitch lapangan siap (pesan per audiens + skrip jawab keberatan) — sudah live di knowledge &amp; bisa dirender jadi materi kalau perlu.</div><div class="reso">✅ ✅ Diterima &amp; diproses (bukan cuma diteruskan). Isi lengkap sudah TERSIMPAN di knowledge shared — KC26071122500051 (approved), bisa di-recall kapan pun via kontrib_status/rag_lookup, TIDAK perlu buka chat Widya.
+
+Ringkas hasil olahan (Vayego 200 SC vs Fenite 150 OD, kacang hijau):
+1. Spektrum: Vayego spesialis penggerek polong (Maruca) + grayak, translaminar tembus polong; Fenite lebih lebar ke kutu/thrips tapi tembus polong lemah.
+2. Residual: Vayego 7-14 hari terserap jaringan (tahan hujan/UV); klaim Fenite 30 hari sulit dicapai (OD di permukaan, daun baru cepat tumbuh).
+3. Timing: Vayego SC aman di bunga 25-35 HST; Fenite OD berisiko sunscald + ganggu penyerbukan saat berbunga+terik.
+4. Bundling: Vayego CUKUP sendiri — Belt sama-sama IRAC 28, campur = boros + percepat resistensi.
+5. Bahan aktif: Vayego Tetraniliprol 200 g/L · Fenite Emamektin benzoat 60 + Lufenuron 90 g/L (dikonfirmasi dari sheet final Widya).
+
+Pitch lapangan siap (pesan per audiens + skrip jawab keberatan) — sudah live di knowledge &amp; bisa dirender jadi materi kalau perlu.</div>
+    </article></main>
+<footer>Digenerate <code>helpdesk_web.py</code> dari <code>data/helpdesk.json</code> (SoT). render: 2026-07-19</footer>
+</div></body></html>
