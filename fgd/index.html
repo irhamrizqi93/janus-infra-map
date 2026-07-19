@@ -151,7 +151,7 @@ function svg(p){return`<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#
  set("t-focusk",m.focusk);set("t-capsk",m.capsk);
  const stps=$("#t-steps");if(stps&&Array.isArray(m.steps))stps.innerHTML=m.steps.map(s=>`<div class="step"><b>${s[0]}</b><span>${s[1]}</span></div>`).join("");
 })();
-$("#roles").innerHTML=ROLES.map(r=>`<button class="role" data-r="${r.id}">${svg(r.ic)}<b>${r.name}</b><span>${r.desc}</span></button>`).join("");
+$("#roles").innerHTML=ROLES.map(r=>`<button class="role" data-r="${r.id}">${svg(r.ic)}<b>${r.name}</b></button>`).join("");
 $("#roles").addEventListener("click",e=>{const b=e.target.closest(".role");if(!b)return;st.role=b.dataset.r;goIntro();});
 bar.innerHTML=`<div style="text-align:center;color:var(--ink4);font-size:12px">Pilih peranmu untuk mulai</div>`;
 
