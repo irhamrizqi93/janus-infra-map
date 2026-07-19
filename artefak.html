@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="id"><head><script>if(sessionStorage.getItem("jinfra")!=="ok")location.replace("/janus-infra-map/");</script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Katalog Artefak — Janus</title><style>
+:root{--navy:#10384F;--blue:#00BCFF;--green:#89D329;--ablue:#0071BC;--bg:#F8F9FA;--surface:#fff;
+--text:#1F2421;--muted:#6B726A;--border:#E2E5E0;--hair:rgba(16,56,79,.08);--amber:#D3A931;--red:#93A5B1}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-size:15px;line-height:1.55;
+font-family:-apple-system,"Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:24px 16px 48px}
+a{color:var(--ablue)}
+h1{font-weight:600;font-size:28px;color:var(--navy);margin:0 0 2px;letter-spacing:-.01em}
+.sub{color:var(--muted);font-size:13px;margin-bottom:18px}
+.back{font-size:13px;text-decoration:none;display:inline-block;margin-bottom:10px}
+.skor{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.pil{background:var(--surface);border:1px solid var(--border);border-radius:99px;padding:4px 12px;font-size:13px}
+.pil b{color:var(--navy)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:1px}
+.dot.ok{background:var(--green)}.dot.warn{background:var(--amber)}.dot.gap{background:var(--red)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;
+border-left:3px solid var(--border);box-shadow:0 1px 2px rgba(16,56,79,.05);display:flex;flex-direction:column}
+.card.ok{border-left-color:var(--green)}
+.card.warn{border-left-color:var(--amber)}
+.card.gap{border-left-color:var(--red)}
+.card header{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.card .ic{font-size:18px;line-height:1}
+.card h3{font-size:15px;margin:0;font-weight:600;color:var(--navy);flex:1}
+.st{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;
+border-radius:99px;padding:2px 8px;white-space:nowrap}
+.st.ok{background:#eef8e0;color:#4a7a12}
+.st.warn{background:#fbf3dc;color:#8a6d16}
+.st.gap{background:#eef1f3;color:#5a6b76}
+dl{margin:0 0 12px;display:grid;grid-template-columns:56px 1fr;gap:4px 8px;font-size:13px}
+dt{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em;padding-top:2px}
+dd{margin:0;min-width:0}
+dd.tuj{color:var(--text);line-height:1.5}
+.open{margin-top:auto;align-self:flex-start;font-size:13px;font-weight:600;text-decoration:none;
+background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:6px 12px}
+footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid var(--border);padding-top:10px}
+@media(max-width:420px){.wrap{padding:16px 12px 40px}h1{font-size:23px}.grid{grid-template-columns:1fr}}
+</style></head><body><div class="wrap">
+<a class="back" href="/janus-infra-map/arsitektur/">← Arsitektur</a>
+<h1>Katalog Artefak</h1>
+<div class="sub">Semua artefak yang pernah di-generate &amp; dipublish — <b>link</b>, <b>tgl dibuat</b>, <b>tujuan</b>, <b>status</b>. Satu tempat buat tahu apa yang ada.</div>
+
+<div class="skor">
+  <span class="pil"><b>5</b> artefak</span>
+  <span class="pil"><span class="dot ok"></span><b>5</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span><b>0</b> draft</span>
+  <span class="pil"><span class="dot gap"></span><b>0</b> arsip</span>
+</div>
+
+<main class="grid"><article class="card ok">
+      <header><span class="ic">📋</span><h3>Kuis FGD Discovery Multi-User</h3><span class="st ok">aktif</span></header>
+      <dl>
+        <dt>tipe</dt><dd>kuis</dd>
+        <dt>dibuat</dt><dd>2026-07-18</dd>
+        <dt>tujuan</dt><dd class="tuj">Gali kebutuhan tiap role (TM/CAC/CIDT/Captain) buat prioritas fitur Janus. Anonim, submit langsung ke backend + notif tiap jawaban.</dd>
+      </dl>
+      <a class="open" href="/janus-infra-map/fgd/" target="_blank" rel="noopener">Buka →</a>
+    </article><article class="card ok">
+      <header><span class="ic">🗺️</span><h3>Diagram Arsitektur (gaya ikon)</h3><span class="st ok">aktif</span></header>
+      <dl>
+        <dt>tipe</dt><dd>diagram</dd>
+        <dt>dibuat</dt><dd>2026-07-18</dd>
+        <dt>tujuan</dt><dd class="tuj">Peta sistem Janus buat awam &amp; kontributor: 3 aktor, alur per-section (storing→processing→recalling), AI-biasa vs Janus, read-model.</dd>
+      </dl>
+      <a class="open" href="/janus-infra-map/arsitektur/" target="_blank" rel="noopener">Buka →</a>
+    </article><article class="card ok">
+      <header><span class="ic">🗺️</span><h3>Matriks Governance (role x section)</h3><span class="st ok">aktif</span></header>
+      <dl>
+        <dt>tipe</dt><dd>diagram</dd>
+        <dt>dibuat</dt><dd>2026-07-18</dd>
+        <dt>tujuan</dt><dd class="tuj">Siapa boleh baca/tulis apa: super-admin, MD, CAC, TM x section A-E.</dd>
+      </dl>
+      <a class="open" href="/janus-infra-map/arsitektur/governance-matrix.html" target="_blank" rel="noopener">Buka →</a>
+    </article><article class="card ok">
+      <header><span class="ic">📄</span><h3>Peta Interaksi Antar-User</h3><span class="st ok">aktif</span></header>
+      <dl>
+        <dt>tipe</dt><dd>halaman</dd>
+        <dt>dibuat</dt><dd>2026-07-15</dd>
+        <dt>tujuan</dt><dd class="tuj">Jalur eskalasi/relay/review/kontribusi antar-user: mana yang sudah jalan, mana yang belum (+ nomor issue).</dd>
+      </dl>
+      <a class="open" href="/janus-infra-map/interaksi.html" target="_blank" rel="noopener">Buka →</a>
+    </article><article class="card ok">
+      <header><span class="ic">📕</span><h3>Panduan Infra (PDF)</h3><span class="st ok">aktif</span></header>
+      <dl>
+        <dt>tipe</dt><dd>pdf</dd>
+        <dt>dibuat</dt><dd>2026-07-13</dd>
+        <dt>tujuan</dt><dd class="tuj">Panduan infrastruktur Janus buat diunduh/dibagi.</dd>
+      </dl>
+      <a class="open" href="/janus-infra-map/panduan_infra.pdf" target="_blank" rel="noopener">Buka →</a>
+    </article></main>
+
+<footer>Digenerate <code>infra_artefak.py</code> dari <code>data/config/artefak.json</code> (sumber tunggal — nol hardcode).
+Tambah artefak → edit JSON itu lalu regenerate. Update: 2026-07-19 · render: 2026-07-19</footer>
+</div></body></html>
