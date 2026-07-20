@@ -30,12 +30,12 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
   <span class="pil"><b>21</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>4</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>2 baru</span>
+  <span class="pil"><span class="dot warn"></span><b>3</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>1 baru</span>
   <span class="pil"><span class="dot info"></span>2 diproses</span>
-  <span class="pil"><span class="dot ok"></span>10 selesai</span>
+  <span class="pil"><span class="dot ok"></span>11 selesai</span>
 </div>
-<h2><span class="dot warn"></span>BARU (2)</h2><main class="grid"><article class="card warn">
+<h2><span class="dot warn"></span>BARU (1)</h2><main class="grid"><article class="card warn">
       <header><span class="tid">#T17</span><h3>PESAN DARI WIDYA ke Mas Irham:
 
 aku sudah selesai analisa positioning Vayego vs </h3><span class="st warn">BARU</span></header>
@@ -76,22 +76,6 @@ DR/Abang lapor kegiatan SELESAI (&quot;sudah selesai FED di Desa X, hadir 25 pet
 
 ⛔ ANTI-NGARANG (SEMUA topik, WAJIB): jawaban DATA/ANGKA/STATUS/ANALISA/MATCHING = HANYA dari TOOL (cek TOOLS.md — ada ~100 tool siap pakai). DILARANG KERAS nulis logika bisnis / algoritma / rekonsiliasi / pencocokan / script analisa SENDIRI di chat, dan DILARANG hitung dari ingatan. Kalau kamu merasa perlu &#x27;benerin/bikin/hitung&#x27; logika sendiri → itu SINYAL tool-nya kurang/ada bug → (1) JALANKAN tool yang ada dulu, relay hasilnya apa adanya; (2) kalau hasil tool masih salah → `python3 ~/janus/scripts/janus_issue.py` biar Claude betulin di BACKEND. JANGAN PERNAH tambal/ngarang jawaban atau &#x27;bikin fix&#x27; di chat — itu bikin angka beda dari papan &amp; nyesatin.</p>
       
-    </article><article class="card warn">
-      <header><span class="tid">#T22</span><h3>Sistem: set target pace kuartal per kios</h3><span class="st warn">BARU</span></header>
-      <div class="meta">🟡 Permintaan · irham (super-admin) · 2026-07-20T11:36 · 🔧 Claude</div>
-      <p class="isi">Saat ini target kios hanya ada per semester (S1/S2). Tidak ada split kuartalan (Q1/Q2/Q3/Q4) di level kios.
-
-Yang terjadi: ketika ditanya &quot;target Q3 Bunga Arum berapa&quot;, Janus harus menghitung manual dari proporsi q_pct di kpi_targets.json (Q3=20% FY).
-
-Yang dibutuhkan:
-1. `target_analyst.py` bisa tampilkan target per kuartal (bukan cuma S1/S2)
-2. Atau field target_Q1/Q2/Q3/Q4 di data target per kios
-3. Sehingga query &quot;target Q3 [kios]&quot; langsung keluar angka, tidak perlu kalkulasi manual tiap kali
-
-Data pendukung: q_pct sudah ada di kpi_targets.json (Q1=25%, Q2=30%, Q3=20%, Q4=25%). Tinggal mapping ke target FY per kios.
-
-Prioritas: normal</p>
-      
     </article></main><h2><span class="dot info"></span>DIPROSES (2)</h2><main class="grid"><article class="card info">
       <header><span class="tid">#T12</span><h3>David tanya: berapa sisa LDD Mas Irham?
 
@@ -106,7 +90,7 @@ Ini di luar scope CAC David — data keuangan/operasional. Mohon arahan atau bis
       <div class="meta">🔵 Pertanyaan · david (CAC) · 2026-07-16T08:36 · 👤 Abang</div>
       <p class="isi">David (CAC CJ) menanyakan nama-nama TM di seluruh area Jawa Tengah. Di knowledge base saat ini hanya tercatat Bang Irham sebagai TM (cover Grobogan/Demak/Kudus/Kab. Semarang). David butuh daftar lengkap TM Jateng — termasuk area lain seperti Solo, Pekalongan, Banyumas, dll. Mohon diinfokan atau diarahkan ya Mas.</p>
       <div class="resp"><b>irham:</b> Perlu — nunggu data daftar TM Jateng dari Mas Irham/David.</div>
-    </article></main><h2><span class="dot ok"></span>SELESAI (10)</h2><main class="grid"><article class="card ok">
+    </article></main><h2><span class="dot ok"></span>SELESAI (11)</h2><main class="grid"><article class="card ok">
       <header><span class="tid">#T1</span><h3>🔴 PERUBAHAN FUNDAMENTAL (knowledge)
 Apa: Padi timing spray — Timing spray padi: </h3><span class="st ok">SELESAI</span></header>
       <div class="meta">🟡 Permintaan · knowledge-gov (system) · 2026-07-05T10:42 · 🔧 Claude</div>
@@ -229,6 +213,22 @@ Pitch lapangan siap (pesan per audiens + skrip jawab keberatan) — sudah live d
 Kalau iya, terapkan ke config+RAG sekali jalan (single-source #96):
 python3 ~/janus/scripts/protokol_update.py --produk unclassified --spray &quot;Spray 1:lo-hi,...&quot; --dosis &quot;...&quot; --sumber &quot;widya&quot; --apply</p>
       <div class="reso">✅ Knowledge sudah masuk RAG (recall terverifikasi) — BUKAN perubahan window spray demoplot. Nudge ini keyword false-positive (nyebut HST). protokol_spray.json TIDAK diubah biar jadwal demoplot oberon/vayego tetap benar. Placeholder command (produk &#x27;auto-harvest&#x27;/&#x27;unclassified&#x27;, spray &#x27;lo-hi&#x27;) memang bukan protokol nyata.</div>
+    </article><article class="card ok">
+      <header><span class="tid">#T22</span><h3>Sistem: set target pace kuartal per kios</h3><span class="st ok">SELESAI</span></header>
+      <div class="meta">🟡 Permintaan · irham (super-admin) · 2026-07-20T11:36 · 🔧 Claude</div>
+      <p class="isi">Saat ini target kios hanya ada per semester (S1/S2). Tidak ada split kuartalan (Q1/Q2/Q3/Q4) di level kios.
+
+Yang terjadi: ketika ditanya &quot;target Q3 Bunga Arum berapa&quot;, Janus harus menghitung manual dari proporsi q_pct di kpi_targets.json (Q3=20% FY).
+
+Yang dibutuhkan:
+1. `target_analyst.py` bisa tampilkan target per kuartal (bukan cuma S1/S2)
+2. Atau field target_Q1/Q2/Q3/Q4 di data target per kios
+3. Sehingga query &quot;target Q3 [kios]&quot; langsung keluar angka, tidak perlu kalkulasi manual tiap kali
+
+Data pendukung: q_pct sudah ada di kpi_targets.json (Q1=25%, Q2=30%, Q3=20%, Q4=25%). Tinggal mapping ke target FY per kios.
+
+Prioritas: normal</p>
+      <div class="resp"><b>irham:</b> Dibangun: target_analyst --mode kuartal. Kolom Q1-Q4 target sudah ADA per-kios di Excel (bukan cuma semester) — di-expose langsung, nol proporsi manual.</div><div class="reso">✅ target_analyst.py --mode kuartal --kios X --kuartal Q3 → angka per-kios langsung. Routing sot.js + TOOLS.md + capabilities updated. Bunga Arum Q3=3.223 (verified). test_target_kuartal.</div>
     </article></main><h2><span class="dot gap"></span>DITUTUP (3)</h2><main class="grid"><article class="card gap">
       <header><span class="tid">#T7</span><h3>Pesan dari David: &quot;AI-nya mantap&quot; 👍
 
