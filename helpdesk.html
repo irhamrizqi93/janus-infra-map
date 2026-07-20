@@ -30,30 +30,12 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
   <span class="pil"><b>22</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>4</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>2 baru</span>
+  <span class="pil"><span class="dot warn"></span><b>3</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>1 baru</span>
   <span class="pil"><span class="dot info"></span>2 diproses</span>
-  <span class="pil"><span class="dot ok"></span>11 selesai</span>
+  <span class="pil"><span class="dot ok"></span>12 selesai</span>
 </div>
-<h2><span class="dot warn"></span>BARU (2)</h2><main class="grid"><article class="card warn">
-      <header><span class="tid">#T23</span><h3>LIQ auto-link GAGAL — DSR/DMR routing salah (2x hari ini)</h3><span class="st warn">BARU</span><span class="pr">🔺 URGENT</span></header>
-      <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-20T18:10 · 🔧 Claude</div>
-      <p class="isi">20 Jul 2026 — 2x gagal auto-link plan↔LIQ karena salah routing DSR vs DMR:
-
-1. **Heppy FED Wdee Tani** (LIQ260720180007): LIQ dibuat dengan dsr=&quot;Beni putra&quot; (DSR Kios), padahal FED acuannya DMR=&quot;Heppy Fahroni&quot;. Plan tidak ke-link otomatis, harus fix manual.
-
-2. Insiden pertama hari ini (cek log).
-
-AKAR MASALAH:
-- FED = DMR (DR Petani), ODP/BC = DSR (DR Kios) — ini aturan dasar yang sudah ada di Skill Kios
-- Saat create LIQ, field dsr HARUS diisi nama eksekutor yang benar (DMR utk FED, DSR utk ODP/BC)
-- Janus salah interpretasi: lihat &quot;DSR: Beni&quot; di laporan → langsung pakai sbg dsr LIQ, padahal itu cuma konteks area
-
-BUTUH:
-- Guard di liquidation.py: kalau jenis=FED dan dsr bukan DMR → warning/block
-- Atau: auto-correct dsr berdasarkan jenis (FED→DMR, ODP/BC→DSR)</p>
-      
-    </article><article class="card warn">
+<h2><span class="dot warn"></span>BARU (1)</h2><main class="grid"><article class="card warn">
       <header><span class="tid">#T17</span><h3>PESAN DARI WIDYA ke Mas Irham:
 
 aku sudah selesai analisa positioning Vayego vs </h3><span class="st warn">BARU</span></header>
@@ -108,7 +90,25 @@ Ini di luar scope CAC David — data keuangan/operasional. Mohon arahan atau bis
       <div class="meta">🔵 Pertanyaan · david (CAC) · 2026-07-16T08:36 · 👤 Abang</div>
       <p class="isi">David (CAC CJ) menanyakan nama-nama TM di seluruh area Jawa Tengah. Di knowledge base saat ini hanya tercatat Bang Irham sebagai TM (cover Grobogan/Demak/Kudus/Kab. Semarang). David butuh daftar lengkap TM Jateng — termasuk area lain seperti Solo, Pekalongan, Banyumas, dll. Mohon diinfokan atau diarahkan ya Mas.</p>
       <div class="resp"><b>irham:</b> Perlu — nunggu data daftar TM Jateng dari Mas Irham/David.</div>
-    </article></main><h2><span class="dot ok"></span>SELESAI (11)</h2><main class="grid"><article class="card ok">
+    </article></main><h2><span class="dot ok"></span>SELESAI (12)</h2><main class="grid"><article class="card ok">
+      <header><span class="tid">#T23</span><h3>LIQ auto-link GAGAL — DSR/DMR routing salah (2x hari ini)</h3><span class="st ok">SELESAI</span><span class="pr">🔺 URGENT</span></header>
+      <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-20T18:10 · 🔧 Claude</div>
+      <p class="isi">20 Jul 2026 — 2x gagal auto-link plan↔LIQ karena salah routing DSR vs DMR:
+
+1. **Heppy FED Wdee Tani** (LIQ260720180007): LIQ dibuat dengan dsr=&quot;Beni putra&quot; (DSR Kios), padahal FED acuannya DMR=&quot;Heppy Fahroni&quot;. Plan tidak ke-link otomatis, harus fix manual.
+
+2. Insiden pertama hari ini (cek log).
+
+AKAR MASALAH:
+- FED = DMR (DR Petani), ODP/BC = DSR (DR Kios) — ini aturan dasar yang sudah ada di Skill Kios
+- Saat create LIQ, field dsr HARUS diisi nama eksekutor yang benar (DMR utk FED, DSR utk ODP/BC)
+- Janus salah interpretasi: lihat &quot;DSR: Beni&quot; di laporan → langsung pakai sbg dsr LIQ, padahal itu cuma konteks area
+
+BUTUH:
+- Guard di liquidation.py: kalau jenis=FED dan dsr bukan DMR → warning/block
+- Atau: auto-correct dsr berdasarkan jenis (FED→DMR, ODP/BC→DSR)</p>
+      <div class="resp"><b>irham:</b> Root = REGRESI parser kecamatan-ku (fix 19 Jul). Format &quot;Desa, Kecamatan, Kabupaten-tanpa-label&quot; salah baca kabupaten sbg kecamatan (Undaan→Kudus). BUKAN DSR/DMR routing. Fixed + test regresi. Nudge DMR untuk FED ditambah.</div><div class="reso">✅ Parser kecamatan diperbaiki (urutan desa→kec→kab) + 2 kasus regresi ke test. 0 record genuinely broken. Nudge validate() FED-tanpa-DMR.</div>
+    </article><article class="card ok">
       <header><span class="tid">#T1</span><h3>🔴 PERUBAHAN FUNDAMENTAL (knowledge)
 Apa: Padi timing spray — Timing spray padi: </h3><span class="st ok">SELESAI</span></header>
       <div class="meta">🟡 Permintaan · knowledge-gov (system) · 2026-07-05T10:42 · 🔧 Claude</div>
