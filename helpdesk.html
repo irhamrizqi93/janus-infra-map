@@ -29,11 +29,11 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <h1>Helpdesk — Tiket User</h1>
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
-  <span class="pil"><b>22</b> total</span>
+  <span class="pil"><b>23</b> total</span>
   <span class="pil"><span class="dot warn"></span><b>3</b> aktif</span>
   <span class="pil"><span class="dot warn"></span>1 baru</span>
   <span class="pil"><span class="dot info"></span>2 diproses</span>
-  <span class="pil"><span class="dot ok"></span>12 selesai</span>
+  <span class="pil"><span class="dot ok"></span>13 selesai</span>
 </div>
 <h2><span class="dot warn"></span>BARU (1)</h2><main class="grid"><article class="card warn">
       <header><span class="tid">#T17</span><h3>PESAN DARI WIDYA ke Mas Irham:
@@ -90,7 +90,7 @@ Ini di luar scope CAC David — data keuangan/operasional. Mohon arahan atau bis
       <div class="meta">🔵 Pertanyaan · david (CAC) · 2026-07-16T08:36 · 👤 Abang</div>
       <p class="isi">David (CAC CJ) menanyakan nama-nama TM di seluruh area Jawa Tengah. Di knowledge base saat ini hanya tercatat Bang Irham sebagai TM (cover Grobogan/Demak/Kudus/Kab. Semarang). David butuh daftar lengkap TM Jateng — termasuk area lain seperti Solo, Pekalongan, Banyumas, dll. Mohon diinfokan atau diarahkan ya Mas.</p>
       <div class="resp"><b>irham:</b> Perlu — nunggu data daftar TM Jateng dari Mas Irham/David.</div>
-    </article></main><h2><span class="dot ok"></span>SELESAI (12)</h2><main class="grid"><article class="card ok">
+    </article></main><h2><span class="dot ok"></span>SELESAI (13)</h2><main class="grid"><article class="card ok">
       <header><span class="tid">#T23</span><h3>LIQ auto-link GAGAL — DSR/DMR routing salah (2x hari ini)</h3><span class="st ok">SELESAI</span><span class="pr">🔺 URGENT</span></header>
       <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-20T18:10 · 🔧 Claude</div>
       <p class="isi">20 Jul 2026 — 2x gagal auto-link plan↔LIQ karena salah routing DSR vs DMR:
@@ -108,6 +108,11 @@ BUTUH:
 - Guard di liquidation.py: kalau jenis=FED dan dsr bukan DMR → warning/block
 - Atau: auto-correct dsr berdasarkan jenis (FED→DMR, ODP/BC→DSR)</p>
       <div class="resp"><b>irham:</b> Root = REGRESI parser kecamatan-ku (fix 19 Jul). Format &quot;Desa, Kecamatan, Kabupaten-tanpa-label&quot; salah baca kabupaten sbg kecamatan (Undaan→Kudus). BUKAN DSR/DMR routing. Fixed + test regresi. Nudge DMR untuk FED ditambah.</div><div class="reso">✅ Parser kecamatan diperbaiki (urutan desa→kec→kab) + 2 kasus regresi ke test. 0 record genuinely broken. Nudge validate() FED-tanpa-DMR.</div>
+    </article><article class="card ok">
+      <header><span class="tid">#T24</span><h3>GCAL: Janus pakai Google Workspace MCP bukan gcal.py — invite irham.rizqi.p@gmail.com hilang</h3><span class="st ok">SELESAI</span><span class="pr">🔺 URGENT</span></header>
+      <div class="meta">🔴 Masalah · irham (?) · 2026-07-21T14:42 · ⚪ off-scope</div>
+      <p class="isi">Kronologi: 21 Jul 2026 Bang Irham minta buat event Meeting offline Kios Mahkota Tani. Janus pakai Google Workspace MCP langsung BUKAN gcal.py. Akar: gcal.py sudah hardcode GUEST=irham.rizqi.p@gmail.com (auto-invite), tapi MCP tidak. Janus salah pilih jalur. Perbaikan sementara: rule #4 masuk MEMORY.md + vault note + event di-update. Solusi diminta Bang Irham: enforce semua GCAL lewat gcal.py atau tambah guard di MCP supaya auto-invite.</p>
+      <div class="resp"><b>irham:</b> Root: routing GCAL tak pernah ada di sot.js (habit cuma prosa/doc → DeepSeek bypass). Fix 2-lapis: sot.js GCAL-gate + tool-guard R6 hard-block MCP calendar-write → paksa gcal.py (auto-invite). test 33/33, live.</div><div class="reso">✅ GCAL enforced di router+guard (bukan lagi doc-only). Buat/ubah event WAJIB gcal.py; MCP calendar-write diblok. Auto-invite pulih.</div>
     </article><article class="card ok">
       <header><span class="tid">#T1</span><h3>🔴 PERUBAHAN FUNDAMENTAL (knowledge)
 Apa: Padi timing spray — Timing spray padi: </h3><span class="st ok">SELESAI</span></header>
