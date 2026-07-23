@@ -31,11 +31,11 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <div class="skor">
   <span class="pil"><b>24</b> total</span>
   <span class="pil"><span class="dot warn"></span><b>4</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>2 baru</span>
-  <span class="pil"><span class="dot info"></span>2 diproses</span>
+  <span class="pil"><span class="dot warn"></span>1 baru</span>
+  <span class="pil"><span class="dot info"></span>3 diproses</span>
   <span class="pil"><span class="dot ok"></span>13 selesai</span>
 </div>
-<h2><span class="dot warn"></span>BARU (2)</h2><main class="grid"><article class="card warn">
+<h2><span class="dot warn"></span>BARU (1)</h2><main class="grid"><article class="card warn">
       <header><span class="tid">#T17</span><h3>PESAN DARI WIDYA ke Mas Irham:
 
 aku sudah selesai analisa positioning Vayego vs </h3><span class="st warn">BARU</span></header>
@@ -76,19 +76,7 @@ DR/Abang lapor kegiatan SELESAI (&quot;sudah selesai FED di Desa X, hadir 25 pet
 
 ⛔ ANTI-NGARANG (SEMUA topik, WAJIB): jawaban DATA/ANGKA/STATUS/ANALISA/MATCHING = HANYA dari TOOL (cek TOOLS.md — ada ~100 tool siap pakai). DILARANG KERAS nulis logika bisnis / algoritma / rekonsiliasi / pencocokan / script analisa SENDIRI di chat, dan DILARANG hitung dari ingatan. Kalau kamu merasa perlu &#x27;benerin/bikin/hitung&#x27; logika sendiri → itu SINYAL tool-nya kurang/ada bug → (1) JALANKAN tool yang ada dulu, relay hasilnya apa adanya; (2) kalau hasil tool masih salah → `python3 ~/janus/scripts/janus_issue.py` biar Claude betulin di BACKEND. JANGAN PERNAH tambal/ngarang jawaban atau &#x27;bikin fix&#x27; di chat — itu bikin angka beda dari papan &amp; nyesatin.</p>
       
-    </article><article class="card warn">
-      <header><span class="tid">#T25</span><h3>Heppy FED Undaan Kidul 22 Jun — settle_recon bilang belum settle vs SoT 4/4 done</h3><span class="st warn">BARU</span></header>
-      <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-23T09:31 · 🔧 Claude</div>
-      <p class="isi">Setelah fetch &amp; kroscek CA Juli 2026 Periode I (folder: 1MCemEgxIJ8VlohP6rgwgl6ilK_rqT-bk), settle_recon.py --dr Heppy --bulan 2026-06 menampilkan:
-
-▷ BELUM SETTLE: FED Undaan/Undaan Kidul 2026-06-22
-
-Sementara SoT (demand_projects.json): Heppy FED Juni = 4/4 done.
-Hanya 3 yang match CA. CA Juni P-II ada settle 23 Jun untuk Undaan Kidul, tapi sudah di-override ke Ngemplak 30 Jun — bukan untuk kegiatan 22 Jun.
-
-Perlu dicek: apakah memang belum settle atau matching yang salah?</p>
-      
-    </article></main><h2><span class="dot info"></span>DIPROSES (2)</h2><main class="grid"><article class="card info">
+    </article></main><h2><span class="dot info"></span>DIPROSES (3)</h2><main class="grid"><article class="card info">
       <header><span class="tid">#T12</span><h3>David tanya: berapa sisa LDD Mas Irham?
 
 Ini di luar scope CAC David — data keua</h3><span class="st info">DIPROSES</span></header>
@@ -102,6 +90,28 @@ Ini di luar scope CAC David — data keuangan/operasional. Mohon arahan atau bis
       <div class="meta">🔵 Pertanyaan · david (CAC) · 2026-07-16T08:36 · 👤 Abang</div>
       <p class="isi">David (CAC CJ) menanyakan nama-nama TM di seluruh area Jawa Tengah. Di knowledge base saat ini hanya tercatat Bang Irham sebagai TM (cover Grobogan/Demak/Kudus/Kab. Semarang). David butuh daftar lengkap TM Jateng — termasuk area lain seperti Solo, Pekalongan, Banyumas, dll. Mohon diinfokan atau diarahkan ya Mas.</p>
       <div class="resp"><b>irham:</b> Perlu — nunggu data daftar TM Jateng dari Mas Irham/David.</div>
+    </article><article class="card info">
+      <header><span class="tid">#T25</span><h3>Heppy FED Undaan Kidul 22 Jun — settle_recon bilang belum settle vs SoT 4/4 done</h3><span class="st info">DIPROSES</span></header>
+      <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-23T09:31 · 🔧 Claude</div>
+      <p class="isi">Setelah fetch &amp; kroscek CA Juli 2026 Periode I (folder: 1MCemEgxIJ8VlohP6rgwgl6ilK_rqT-bk), settle_recon.py --dr Heppy --bulan 2026-06 menampilkan:
+
+▷ BELUM SETTLE: FED Undaan/Undaan Kidul 2026-06-22
+
+Sementara SoT (demand_projects.json): Heppy FED Juni = 4/4 done.
+Hanya 3 yang match CA. CA Juni P-II ada settle 23 Jun untuk Undaan Kidul, tapi sudah di-override ke Ngemplak 30 Jun — bukan untuk kegiatan 22 Jun.
+
+Perlu dicek: apakah memang belum settle atau matching yang salah?</p>
+      <div class="resp"><b>Claude Code (dev):</b> Hasil kroscek CA (backend): BUKAN bug matching — genuinely belum-settle, dan itu SENGAJA sesuai klarifikasi DR sendiri.
+
+Di data/config/settle_overrides.json ada 2 override Heppy yang saling terkait:
+• Ngemplak 30 Jun → status &#x27;settled&#x27; (pakai CA Undaan Kidul 23 Jun, di-shift)
+• Undaan Kidul 22 Jun → status &#x27;belum&#x27; (note: CA Undaan Kidul dipakai utk Ngemplak → kegiatan ini perlu settlement terpisah)
+
+Artinya settle_recon melapor PERSIS sesuai keputusan DR. &#x27;4/4 done&#x27; di SoT = 4 kegiatan DIEKSEKUSI; settlement itu axis terpisah → 3/4 sudah match CA, 1 (Undaan Kidul 22 Jun) masih nunggu CA-nya sendiri.
+
+Tindak lanjut operasional (bukan bug): FED Undaan Kidul 22 Jun perlu CA/liquidation sendiri, ATAU DR konfirmasi kalau memang tak akan diliquidasi. Tak ada yang perlu dibetulin di kode.
+
+Catatan: issue #211 (Janus salah bikin di GitHub) sudah kututup — ke depan Janus tak bisa bikin GitHub issue lagi, semua ke tiket ini.</div>
     </article></main><h2><span class="dot ok"></span>SELESAI (13)</h2><main class="grid"><article class="card ok">
       <header><span class="tid">#T23</span><h3>LIQ auto-link GAGAL — DSR/DMR routing salah (2x hari ini)</h3><span class="st ok">SELESAI</span><span class="pr">🔺 URGENT</span></header>
       <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-20T18:10 · 🔧 Claude</div>
