@@ -29,13 +29,66 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <h1>Helpdesk — Tiket User</h1>
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
-  <span class="pil"><b>24</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>4</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>1 baru</span>
+  <span class="pil"><b>25</b> total</span>
+  <span class="pil"><span class="dot warn"></span><b>5</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>2 baru</span>
   <span class="pil"><span class="dot info"></span>3 diproses</span>
   <span class="pil"><span class="dot ok"></span>13 selesai</span>
 </div>
-<h2><span class="dot warn"></span>BARU (1)</h2><main class="grid"><article class="card warn">
+<h2><span class="dot warn"></span>BARU (2)</h2><main class="grid"><article class="card warn">
+      <header><span class="tid">#T26</span><h3>[FATAL] Database BRP hilang — duckdb kosong + brp_query gagal total (25 Jul 2026)</h3><span class="st warn">BARU</span><span class="pr">🔺 URGENT</span></header>
+      <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-25T00:55 · 🔧 Claude</div>
+      <p class="isi">## Kronologi
+
+**00:48** — Bang Irham minta update BRP terbaru + kirim file `ID_Sales_Log_25-07-2026` (234 baris, 21-24 Jul)
+
+**00:49** — Janus cek `~/janus/data/input/` → lihat symlink `BRP_20260630.xlsx` (30 Juni). Tidak cek `data/brp/2026/` langsung. Klaim &quot;file terakhir BRP_20260630&quot; — **SALAH**.
+
+**00:51** — Bang Irham marah: &quot;Datamu hilang atau gimana anjing. Ini lho terakhir 22 juli updatenya tolol&quot;
+
+**00:51** — Janus cek `data/brp/2026/` → nemu `BRP_2026_YTD_20260722_071442.xlsx` (31.572 baris, s.d. 22 Jul). Status harian juga tulis &quot;BRP: 22 Jul 2026&quot;.
+
+**00:51** — Cek `brp_master.duckdb` → **TABEL KOSONG SEMUA** (0 tabel). Database korup/hilang, tidak diketahui kapan dan kenapa.
+
+**00:51** — Rebuild dari file 22 Jul → berhasil buat `BRP_2026_YTD_20260725_005156.xlsx`
+
+**00:52** — Merge file baru 24 Jul → output `BRP_2026_YTD_20260725_005201.xlsx` (31.725 baris). 154 baris baru, 80 duplikat.
+
+**00:52** — Cache rebuild GAGAL: `CAST(&quot;Penjualan (Poin)&quot; AS DOUBLE)` error karena 2 baris Belt Expert kosong.
+
+**00:53** — Fix bug: `CAST` → `TRY_CAST` di `brp_query.py` baris 133-135 (poin, rupiah, volume).
+
+**00:53** — Delete file rebuild duplikat. Final: 31.725 baris, 1 Jan – 24 Jul 2026.
+
+## Root Cause
+
+1. **Database `brp_master.duckdb` hilang/kosong** — semua tabel (scans, targets, dr_mapping) lenyap. Tidak jelas trigger: bisa korupsi DuckDB, proses cleanup salah, atau failure saat write sebelumnya.
+
+2. **Status harian tidak validasi realtime** — jam 07:04 masih klaim &quot;BRP: 22 Jul 2026&quot; padahal query sudah error (tabel kosong). Status cuma baca timestamp file, tidak test query.
+
+3. **Error handling `load_db()` tidak cukup agresif** — fallback dari cache ke rebuild jalan, tapi `brp_merge.py` refresh cache gagal diam-diam (hanya print warning, tidak fallback ke rebuild penuh).
+
+4. **Bug `brp_query.py`** — `CAST` seharusnya `TRY_CAST` untuk poin/rupiah/volume. Data kotor (sel kosong) bikin seluruh query gagal, harusnya NULL saja.
+
+## Dampak
+
+- **brp_query error total** untuk SEMUA query (bukan cuma query yang kena baris kosong)
+- **Semua analisa BRP lumpuh** — KPI, gap, top kios, dll tidak bisa diakses
+- **Potensi salah keputusan** kalau Janus tidak sadar dan menjawab dari memory/ingatan
+
+## Yang Sudah Diperbaiki
+
+- [x] Rebuild database dari file + merge file baru (31.725 baris)
+- [x] Fix `brp_query.py`: CAST → TRY_CAST (poin/rupiah/volume)
+
+## Yang Perlu TINDAK LANJUT (DEV)
+
+1. **Investigasi kenapa duckdb hilang** — cek log, cek apakah ada proses yang nge-drop table
+2. **Health check BRP** — tambah validasi: test SELECT COUNT(*) FROM scans saat heartbeat, bukan cuma cek timestamp file
+3. **brp_merge.py** — refresh cache gagal harusnya fallback ke rebuild penuh (bukan cuma warning)
+4. **Status harian** — jangan cuma baca timestamp file, validasi query realtime</p>
+      
+    </article><article class="card warn">
       <header><span class="tid">#T17</span><h3>PESAN DARI WIDYA ke Mas Irham:
 
 aku sudah selesai analisa positioning Vayego vs </h3><span class="st warn">BARU</span></header>
