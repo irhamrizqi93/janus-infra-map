@@ -30,12 +30,12 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
   <span class="pil"><b>25</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>5</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>2 baru</span>
-  <span class="pil"><span class="dot info"></span>3 diproses</span>
+  <span class="pil"><span class="dot warn"></span><b>3</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>1 baru</span>
+  <span class="pil"><span class="dot info"></span>2 diproses</span>
   <span class="pil"><span class="dot ok"></span>13 selesai</span>
 </div>
-<h2><span class="dot warn"></span>BARU (2)</h2><main class="grid"><article class="card warn">
+<h2><span class="dot warn"></span>BARU (1)</h2><main class="grid"><article class="card warn">
       <header><span class="tid">#T26</span><h3>[FATAL] Database BRP hilang — duckdb kosong + brp_query gagal total (25 Jul 2026)</h3><span class="st warn">BARU</span><span class="pr">🔺 URGENT</span></header>
       <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-25T00:55 · 🔧 Claude</div>
       <p class="isi">## Kronologi
@@ -88,48 +88,7 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 3. **brp_merge.py** — refresh cache gagal harusnya fallback ke rebuild penuh (bukan cuma warning)
 4. **Status harian** — jangan cuma baca timestamp file, validasi query realtime</p>
       
-    </article><article class="card warn">
-      <header><span class="tid">#T17</span><h3>PESAN DARI WIDYA ke Mas Irham:
-
-aku sudah selesai analisa positioning Vayego vs </h3><span class="st warn">BARU</span></header>
-      <div class="meta">🔵 Pertanyaan · widya (MD) · 2026-07-16T13:13 · 🔧 Claude</div>
-      <p class="isi">PESAN DARI WIDYA ke Mas Irham:
-
-aku sudah selesai analisa positioning Vayego vs Fenite. Vayego tetraniliprol 200 g/L, Fenite emamektin 60 + lufenuron 90. Keunggulan Vayego: stop feeding 1-2 jam, translaminar aman bunga.
-
-🔴 PROTOKOL DEMOPLOT KC Hijau (PAKAI INI, JANGAN nebak/pakai offset chart):
-• DOSIS per titik (0,1ha=1.000m², sprayer 14L): Oberon 80ml · Vayego 40ml · Ambition 200ml
-• TIMING Oberon+Ambition: Spray1 = H+15 (vegetatif awal), Spray2 = H+22
-• TIMING Vayego+Ambition: Spray1 = H~20-25, Spray2 = H~30-35 (bunga), Spray3 = H~40-45 (polong)
-• Kacang hijau panen ≈ H+60. HST = hari setelah TANAM (bukan dari tanggal lain).
-⚠️ JADWAL SPRAY per demoplot → PANGGIL: python3 ~/janus/scripts/demoplot_spray.py --dr &lt;DR&gt; (output tanggal EKSAK). JANGAN hitung HST-&gt;tanggal manual — DeepSeek sering salah. Detail: rag_lookup &quot;protokol demoplot&quot;.
-
-📘 SKILL LAPOR-KEGIATAN (section C) — framework, angka tetap dari tool:
-&gt; Update: 2026-07-12 · Skill Lapor-Kegiatan (section C) — playbook intake laporan lapangan, BUKAN data. Pasangan: terima-planning-kegiatan.
-
-## Cakupan
-DR/Abang lapor kegiatan SELESAI (&quot;sudah selesai FED di Desa X, hadir 25 petani, ini fotonya&quot;) → tersimpan di liquidation (SoT laporan+tanggal). Rencana baru = skill terima-planning-kegiatan.
-
-## Alur (deterministik, ≤4 langkah)
-1. **Anti-dobel DULU**: `liquidation.py --recall --dr &lt;DR&gt; [--jenis &lt;J&gt;] [--bulan YYYY-MM]` — laporan yang sama sudah ada → JANGAN `--add` baru; info susulan masuk `--update &lt;LIQ_ID&gt;` / `--attach-foto &lt;LIQ_ID&gt; --foto &lt;url&gt;`.
-2. **Simpan baru**: `echo &#x27;&lt;json&gt;&#x27; | liquidation.py --add` — field dari pesan user apa adanya (jenis, dr, desa/kec, tanggal, peserta, produk, foto). Field yang user tak sebut → biarkan kosong, JANGAN isi karangan.
-3. **Baca scorecard hasil add**: blok `❓ KOSONG` = field itu BELUM tersimpan → minta ke user (foto? jumlah peserta?) → lengkapi via `--update`/`--attach-foto`. JANGAN lapor &quot;sudah tercatat lengkap&quot; selagi masih ada ❓.
-4. **Verify ke user**: tampilkan ringkas hasil recall/scorecard DARI TOOL (bukan dari ingatan) + apa yang masih kurang.
-
-## ⚠️ Pitfall
-1. Tanggal report di liquidation = SoT tanggal tampil (report &gt; selesai &gt; plan). Tanggal salah → betulkan DI SINI, jangan tambal di dashboard/kalender.
-2. Auto-rekonsiliasi ke plan jalan sendiri; report kelihatan &quot;orphan&quot; → `--reconcile-all`, bukan bikin plan baru.
-3. Laporan dari DR langsung (bukan Abang): tetap boleh dicatat sebagai laporan, tapi perubahan plan/settle tetap human-gate Abang.
-4. Susulan (foto nyusul, koreksi peserta) = `--update`/`--attach-foto`, BUKAN `--add` kedua.
-
-## Penalaran (probabilistik)
-- Nilai kegiatan (&quot;worth it gak?&quot;) BUKAN di sini → arahkan ke skill dampak-kegiatan (eval_kegiatan).
-- Ragu ini laporan baru atau susulan dari recall → tanya user 1×, jangan tebak.
-
-
-⛔ ANTI-NGARANG (SEMUA topik, WAJIB): jawaban DATA/ANGKA/STATUS/ANALISA/MATCHING = HANYA dari TOOL (cek TOOLS.md — ada ~100 tool siap pakai). DILARANG KERAS nulis logika bisnis / algoritma / rekonsiliasi / pencocokan / script analisa SENDIRI di chat, dan DILARANG hitung dari ingatan. Kalau kamu merasa perlu &#x27;benerin/bikin/hitung&#x27; logika sendiri → itu SINYAL tool-nya kurang/ada bug → (1) JALANKAN tool yang ada dulu, relay hasilnya apa adanya; (2) kalau hasil tool masih salah → `python3 ~/janus/scripts/janus_issue.py` biar Claude betulin di BACKEND. JANGAN PERNAH tambal/ngarang jawaban atau &#x27;bikin fix&#x27; di chat — itu bikin angka beda dari papan &amp; nyesatin.</p>
-      
-    </article></main><h2><span class="dot info"></span>DIPROSES (3)</h2><main class="grid"><article class="card info">
+    </article></main><h2><span class="dot info"></span>DIPROSES (2)</h2><main class="grid"><article class="card info">
       <header><span class="tid">#T12</span><h3>David tanya: berapa sisa LDD Mas Irham?
 
 Ini di luar scope CAC David — data keua</h3><span class="st info">DIPROSES</span></header>
@@ -143,28 +102,6 @@ Ini di luar scope CAC David — data keuangan/operasional. Mohon arahan atau bis
       <div class="meta">🔵 Pertanyaan · david (CAC) · 2026-07-16T08:36 · 👤 Abang</div>
       <p class="isi">David (CAC CJ) menanyakan nama-nama TM di seluruh area Jawa Tengah. Di knowledge base saat ini hanya tercatat Bang Irham sebagai TM (cover Grobogan/Demak/Kudus/Kab. Semarang). David butuh daftar lengkap TM Jateng — termasuk area lain seperti Solo, Pekalongan, Banyumas, dll. Mohon diinfokan atau diarahkan ya Mas.</p>
       <div class="resp"><b>irham:</b> Perlu — nunggu data daftar TM Jateng dari Mas Irham/David.</div>
-    </article><article class="card info">
-      <header><span class="tid">#T25</span><h3>Heppy FED Undaan Kidul 22 Jun — settle_recon bilang belum settle vs SoT 4/4 done</h3><span class="st info">DIPROSES</span></header>
-      <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-23T09:31 · 🔧 Claude</div>
-      <p class="isi">Setelah fetch &amp; kroscek CA Juli 2026 Periode I (folder: 1MCemEgxIJ8VlohP6rgwgl6ilK_rqT-bk), settle_recon.py --dr Heppy --bulan 2026-06 menampilkan:
-
-▷ BELUM SETTLE: FED Undaan/Undaan Kidul 2026-06-22
-
-Sementara SoT (demand_projects.json): Heppy FED Juni = 4/4 done.
-Hanya 3 yang match CA. CA Juni P-II ada settle 23 Jun untuk Undaan Kidul, tapi sudah di-override ke Ngemplak 30 Jun — bukan untuk kegiatan 22 Jun.
-
-Perlu dicek: apakah memang belum settle atau matching yang salah?</p>
-      <div class="resp"><b>Claude Code (dev):</b> Hasil kroscek CA (backend): BUKAN bug matching — genuinely belum-settle, dan itu SENGAJA sesuai klarifikasi DR sendiri.
-
-Di data/config/settle_overrides.json ada 2 override Heppy yang saling terkait:
-• Ngemplak 30 Jun → status &#x27;settled&#x27; (pakai CA Undaan Kidul 23 Jun, di-shift)
-• Undaan Kidul 22 Jun → status &#x27;belum&#x27; (note: CA Undaan Kidul dipakai utk Ngemplak → kegiatan ini perlu settlement terpisah)
-
-Artinya settle_recon melapor PERSIS sesuai keputusan DR. &#x27;4/4 done&#x27; di SoT = 4 kegiatan DIEKSEKUSI; settlement itu axis terpisah → 3/4 sudah match CA, 1 (Undaan Kidul 22 Jun) masih nunggu CA-nya sendiri.
-
-Tindak lanjut operasional (bukan bug): FED Undaan Kidul 22 Jun perlu CA/liquidation sendiri, ATAU DR konfirmasi kalau memang tak akan diliquidasi. Tak ada yang perlu dibetulin di kode.
-
-Catatan: issue #211 (Janus salah bikin di GitHub) sudah kututup — ke depan Janus tak bisa bikin GitHub issue lagi, semua ke tiket ini.</div>
     </article></main><h2><span class="dot ok"></span>SELESAI (13)</h2><main class="grid"><article class="card ok">
       <header><span class="tid">#T23</span><h3>LIQ auto-link GAGAL — DSR/DMR routing salah (2x hari ini)</h3><span class="st ok">SELESAI</span><span class="pr">🔺 URGENT</span></header>
       <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-20T18:10 · 🔧 Claude</div>
@@ -327,7 +264,7 @@ Data pendukung: q_pct sudah ada di kpi_targets.json (Q1=25%, Q2=30%, Q3=20%, Q4=
 
 Prioritas: normal</p>
       <div class="resp"><b>irham:</b> Dibangun: target_analyst --mode kuartal. Kolom Q1-Q4 target sudah ADA per-kios di Excel (bukan cuma semester) — di-expose langsung, nol proporsi manual.</div><div class="reso">✅ target_analyst.py --mode kuartal --kios X --kuartal Q3 → angka per-kios langsung. Routing sot.js + TOOLS.md + capabilities updated. Bunga Arum Q3=3.223 (verified). test_target_kuartal.</div>
-    </article></main><h2><span class="dot gap"></span>DITUTUP (3)</h2><main class="grid"><article class="card gap">
+    </article></main><h2><span class="dot gap"></span>DITUTUP (5)</h2><main class="grid"><article class="card gap">
       <header><span class="tid">#T7</span><h3>Pesan dari David: &quot;AI-nya mantap&quot; 👍
 
 (Feedback untuk Janus — David puas dengan p</h3><span class="st gap">DITUTUP</span></header>
@@ -346,10 +283,73 @@ Prioritas: normal</p>
 (Notifikasi personal untuk Mas Irham.)</p>
       <div class="reso">✅ Pesan personal — diteruskan, bukan tiket kerja.</div>
     </article><article class="card gap">
+      <header><span class="tid">#T17</span><h3>PESAN DARI WIDYA ke Mas Irham:
+
+aku sudah selesai analisa positioning Vayego vs </h3><span class="st gap">DITUTUP</span></header>
+      <div class="meta">🔵 Pertanyaan · widya (MD) · 2026-07-16T13:13 · 🔧 Claude</div>
+      <p class="isi">PESAN DARI WIDYA ke Mas Irham:
+
+aku sudah selesai analisa positioning Vayego vs Fenite. Vayego tetraniliprol 200 g/L, Fenite emamektin 60 + lufenuron 90. Keunggulan Vayego: stop feeding 1-2 jam, translaminar aman bunga.
+
+🔴 PROTOKOL DEMOPLOT KC Hijau (PAKAI INI, JANGAN nebak/pakai offset chart):
+• DOSIS per titik (0,1ha=1.000m², sprayer 14L): Oberon 80ml · Vayego 40ml · Ambition 200ml
+• TIMING Oberon+Ambition: Spray1 = H+15 (vegetatif awal), Spray2 = H+22
+• TIMING Vayego+Ambition: Spray1 = H~20-25, Spray2 = H~30-35 (bunga), Spray3 = H~40-45 (polong)
+• Kacang hijau panen ≈ H+60. HST = hari setelah TANAM (bukan dari tanggal lain).
+⚠️ JADWAL SPRAY per demoplot → PANGGIL: python3 ~/janus/scripts/demoplot_spray.py --dr &lt;DR&gt; (output tanggal EKSAK). JANGAN hitung HST-&gt;tanggal manual — DeepSeek sering salah. Detail: rag_lookup &quot;protokol demoplot&quot;.
+
+📘 SKILL LAPOR-KEGIATAN (section C) — framework, angka tetap dari tool:
+&gt; Update: 2026-07-12 · Skill Lapor-Kegiatan (section C) — playbook intake laporan lapangan, BUKAN data. Pasangan: terima-planning-kegiatan.
+
+## Cakupan
+DR/Abang lapor kegiatan SELESAI (&quot;sudah selesai FED di Desa X, hadir 25 petani, ini fotonya&quot;) → tersimpan di liquidation (SoT laporan+tanggal). Rencana baru = skill terima-planning-kegiatan.
+
+## Alur (deterministik, ≤4 langkah)
+1. **Anti-dobel DULU**: `liquidation.py --recall --dr &lt;DR&gt; [--jenis &lt;J&gt;] [--bulan YYYY-MM]` — laporan yang sama sudah ada → JANGAN `--add` baru; info susulan masuk `--update &lt;LIQ_ID&gt;` / `--attach-foto &lt;LIQ_ID&gt; --foto &lt;url&gt;`.
+2. **Simpan baru**: `echo &#x27;&lt;json&gt;&#x27; | liquidation.py --add` — field dari pesan user apa adanya (jenis, dr, desa/kec, tanggal, peserta, produk, foto). Field yang user tak sebut → biarkan kosong, JANGAN isi karangan.
+3. **Baca scorecard hasil add**: blok `❓ KOSONG` = field itu BELUM tersimpan → minta ke user (foto? jumlah peserta?) → lengkapi via `--update`/`--attach-foto`. JANGAN lapor &quot;sudah tercatat lengkap&quot; selagi masih ada ❓.
+4. **Verify ke user**: tampilkan ringkas hasil recall/scorecard DARI TOOL (bukan dari ingatan) + apa yang masih kurang.
+
+## ⚠️ Pitfall
+1. Tanggal report di liquidation = SoT tanggal tampil (report &gt; selesai &gt; plan). Tanggal salah → betulkan DI SINI, jangan tambal di dashboard/kalender.
+2. Auto-rekonsiliasi ke plan jalan sendiri; report kelihatan &quot;orphan&quot; → `--reconcile-all`, bukan bikin plan baru.
+3. Laporan dari DR langsung (bukan Abang): tetap boleh dicatat sebagai laporan, tapi perubahan plan/settle tetap human-gate Abang.
+4. Susulan (foto nyusul, koreksi peserta) = `--update`/`--attach-foto`, BUKAN `--add` kedua.
+
+## Penalaran (probabilistik)
+- Nilai kegiatan (&quot;worth it gak?&quot;) BUKAN di sini → arahkan ke skill dampak-kegiatan (eval_kegiatan).
+- Ragu ini laporan baru atau susulan dari recall → tanya user 1×, jangan tebak.
+
+
+⛔ ANTI-NGARANG (SEMUA topik, WAJIB): jawaban DATA/ANGKA/STATUS/ANALISA/MATCHING = HANYA dari TOOL (cek TOOLS.md — ada ~100 tool siap pakai). DILARANG KERAS nulis logika bisnis / algoritma / rekonsiliasi / pencocokan / script analisa SENDIRI di chat, dan DILARANG hitung dari ingatan. Kalau kamu merasa perlu &#x27;benerin/bikin/hitung&#x27; logika sendiri → itu SINYAL tool-nya kurang/ada bug → (1) JALANKAN tool yang ada dulu, relay hasilnya apa adanya; (2) kalau hasil tool masih salah → `python3 ~/janus/scripts/janus_issue.py` biar Claude betulin di BACKEND. JANGAN PERNAH tambal/ngarang jawaban atau &#x27;bikin fix&#x27; di chat — itu bikin angka beda dari papan &amp; nyesatin.</p>
+      <div class="reso">✅ Pesan/analisa Widya (positioning Vayego vs Fenite) sudah tersampaikan ke Abang. Bukan bug/task backend — relay selesai, ditutup 25 Jul.</div>
+    </article><article class="card gap">
       <header><span class="tid">#T18</span><h3>[KONSULTASI → Widya Nugraha] Halo Pak Widya, David (CAC) di sini. Lagi nyusun ca</h3><span class="st gap">DITUTUP</span></header>
       <div class="meta">🔵 Pertanyaan · david (CAC) · 2026-07-16T14:01 · 👤 Abang</div>
       <p class="isi">[KONSULTASI → Widya Nugraha] Halo Pak Widya, David (CAC) di sini. Lagi nyusun campaign Camalus untuk kacang hijau nih. Mohon masukan teknisnya: hama dominan apa yang paling relevan diangkat sebagai highlight campaign Camalus di kacang hijau? Butuh data agronomi-nya supaya klaim marketing saya nggak ngawang. Terima kasih sebelumnya!</p>
       <div class="reso">✅ Diarahkan langsung David↔Widya via fitur konsultasi — tak perlu lewat Mas Irham.</div>
+    </article><article class="card gap">
+      <header><span class="tid">#T25</span><h3>Heppy FED Undaan Kidul 22 Jun — settle_recon bilang belum settle vs SoT 4/4 done</h3><span class="st gap">DITUTUP</span></header>
+      <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-23T09:31 · 🔧 Claude</div>
+      <p class="isi">Setelah fetch &amp; kroscek CA Juli 2026 Periode I (folder: 1MCemEgxIJ8VlohP6rgwgl6ilK_rqT-bk), settle_recon.py --dr Heppy --bulan 2026-06 menampilkan:
+
+▷ BELUM SETTLE: FED Undaan/Undaan Kidul 2026-06-22
+
+Sementara SoT (demand_projects.json): Heppy FED Juni = 4/4 done.
+Hanya 3 yang match CA. CA Juni P-II ada settle 23 Jun untuk Undaan Kidul, tapi sudah di-override ke Ngemplak 30 Jun — bukan untuk kegiatan 22 Jun.
+
+Perlu dicek: apakah memang belum settle atau matching yang salah?</p>
+      <div class="resp"><b>Claude Code (dev):</b> Hasil kroscek CA (backend): BUKAN bug matching — genuinely belum-settle, dan itu SENGAJA sesuai klarifikasi DR sendiri.
+
+Di data/config/settle_overrides.json ada 2 override Heppy yang saling terkait:
+• Ngemplak 30 Jun → status &#x27;settled&#x27; (pakai CA Undaan Kidul 23 Jun, di-shift)
+• Undaan Kidul 22 Jun → status &#x27;belum&#x27; (note: CA Undaan Kidul dipakai utk Ngemplak → kegiatan ini perlu settlement terpisah)
+
+Artinya settle_recon melapor PERSIS sesuai keputusan DR. &#x27;4/4 done&#x27; di SoT = 4 kegiatan DIEKSEKUSI; settlement itu axis terpisah → 3/4 sudah match CA, 1 (Undaan Kidul 22 Jun) masih nunggu CA-nya sendiri.
+
+Tindak lanjut operasional (bukan bug): FED Undaan Kidul 22 Jun perlu CA/liquidation sendiri, ATAU DR konfirmasi kalau memang tak akan diliquidasi. Tak ada yang perlu dibetulin di kode.
+
+Catatan: issue #211 (Janus salah bikin di GitHub) sudah kututup — ke depan Janus tak bisa bikin GitHub issue lagi, semua ke tiket ini.</div><div class="reso">✅ Kroscek CA selesai: BUKAN bug matching — Heppy Undaan Kidul genuinely belum-settle &amp; itu SENGAJA sesuai klarifikasi DR (override settle_overrides.json). Tak ada perbaikan backend. Resolved via diskusi Abang&lt;-&gt;Janus, ditutup 25 Jul.</div>
     </article></main><h2><span class="dot red"></span>DITOLAK (4)</h2><main class="grid"><article class="card red">
       <header><span class="tid">#T8</span><h3>David tanya: Janus bisa cari tempat karaoke di Semarang?
 
