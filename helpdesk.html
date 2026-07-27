@@ -29,13 +29,30 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <h1>Helpdesk — Tiket User</h1>
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
-  <span class="pil"><b>25</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>2</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>0 baru</span>
+  <span class="pil"><b>27</b> total</span>
+  <span class="pil"><span class="dot warn"></span><b>4</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>2 baru</span>
   <span class="pil"><span class="dot info"></span>2 diproses</span>
   <span class="pil"><span class="dot ok"></span>14 selesai</span>
 </div>
-<h2><span class="dot info"></span>DIPROSES (2)</h2><main class="grid"><article class="card info">
+<h2><span class="dot warn"></span>BARU (2)</h2><main class="grid"><article class="card warn">
+      <header><span class="tid">#T27</span><h3>[GAP] Tidak ada template laporan ringkasan kegiatan ke kios</h3><span class="st warn">BARU</span></header>
+      <div class="meta">🟡 Permintaan · irham (owner) · 2026-07-27T20:14 · 👤 Abang</div>
+      <p class="isi">Bang Irham minta presentasi kegiatan Bayer ke pemilik kios R1 Anugrah Sumber Tani (Pulokulon, Grobogan). Butuh 1 halaman PDF + peta untuk 5 kegiatan Jun-Ags. Yang dikerjakan: fetch brp_query+kegiatan_recall, peta via peta.py, PDF via onbrand_pdf.py (fallback, bukan template ideal). Gap: design_preflight.py status:none — tidak ada template laporan ringkasan kegiatan. Request Bang Irham: review flow, tambah template.</p>
+      
+    </article><article class="card warn">
+      <header><span class="tid">#T28</span><h3>[BUG] add-q3 demand_project: kecamatan &amp; tanggal tidak tersimpan ke JSON</h3><span class="st warn">BARU</span></header>
+      <div class="meta">🔴 Masalah · irham (owner) · 2026-07-27T21:39 · 🔧 Claude</div>
+      <p class="isi">Flow: papan DR → ACC plan Denny FED 31 Jul Harjowinangun Godong → add-q3 dijalankan.
+
+Yang tersimpan: desa, crop, quarter, kabupaten.
+Yang KOSONG: kecamatan (jadi &#x27;-&#x27;), tanggal (tidak ada key).
+
+Fix manual: edit JSON langsung tambah &quot;kecamatan&quot;: &quot;Godong&quot;, &quot;tanggal&quot;: &quot;2026-07-31&quot;.
+
+Sudah dicatat di lessons.py [L-260727212813]. Butuh fix di kode demand_project.py mode add-q3.</p>
+      
+    </article></main><h2><span class="dot info"></span>DIPROSES (2)</h2><main class="grid"><article class="card info">
       <header><span class="tid">#T12</span><h3>David tanya: berapa sisa LDD Mas Irham?
 
 Ini di luar scope CAC David — data keua</h3><span class="st info">DIPROSES</span></header>
