@@ -30,33 +30,12 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
   <span class="pil"><b>28</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>3</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>1 baru</span>
+  <span class="pil"><span class="dot warn"></span><b>2</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>0 baru</span>
   <span class="pil"><span class="dot info"></span>2 diproses</span>
-  <span class="pil"><span class="dot ok"></span>16 selesai</span>
+  <span class="pil"><span class="dot ok"></span>17 selesai</span>
 </div>
-<h2><span class="dot warn"></span>BARU (1)</h2><main class="grid"><article class="card warn">
-      <header><span class="tid">#T29</span><h3>Duplikat plan tidak terdeteksi — Heppy 27 Jul (Klambu vs TIMNAS DAY)</h3><span class="st warn">BARU</span></header>
-      <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-28T08:51 · 🔧 Claude</div>
-      <p class="isi">**Masalah:** Plan Klambu #1 (Heppy FED Klambu Sep 2026) dan TIMNAS DAY #10 (Heppy FED Jul-Sep 2026) adalah kegiatan yang SAMA — FED Heppy 27 Juli 2026 di Gatet, Undaan, Kudus. Tapi sistem menganggapnya dua plan berbeda karena dibuat di dua project berbeda.
-
-**Kronologi:**
-1. Plan Klambu #1 dibuat duluan (buffer Semesta Agro, Klambu, Grobogan)
-2. Plan TIMNAS DAY #10 dibuat kemudian (Jul-Sep Demak Kudus, Undaan)
-3. Laporan likuidasi masuk tgl 27 Jul malam → auto-link ke plan #10 (TIMNAS DAY) karena match DR+produk+tanggal
-4. Plan Klambu #1 tetap OPEN → muncul sebagai &quot;telat 1 hari&quot; di KPI PAGI 28 Jul
-
-**Akar:**
-- Dua plan untuk DR sama, tanggal sama, tidak terdeteksi sebagai duplikat
-- Lokasi di plan (Klambu, Grobogan) vs realita laporan (Gatet, Undaan, Kudus) berbeda → tidak match saat auto-link
-
-**Penanganan sementara:** Plan Klambu #1 dibatalkan (status batal). Laporan sudah benar tersambung ke plan TIMNAS DAY #10.
-
-**Yang dibutuhkan dari backend:**
-1. Deteksi/peringatan duplikat: plan untuk DR yang sama di tanggal yang sama
-2. Atau: mekanisme merge plan antar-project saat laporan masuk (auto-close plan duplikat)</p>
-      
-    </article></main><h2><span class="dot info"></span>DIPROSES (2)</h2><main class="grid"><article class="card info">
+<h2><span class="dot info"></span>DIPROSES (2)</h2><main class="grid"><article class="card info">
       <header><span class="tid">#T12</span><h3>David tanya: berapa sisa LDD Mas Irham?
 
 Ini di luar scope CAC David — data keua</h3><span class="st info">DIPROSES</span></header>
@@ -70,7 +49,7 @@ Ini di luar scope CAC David — data keuangan/operasional. Mohon arahan atau bis
       <div class="meta">🔵 Pertanyaan · david (CAC) · 2026-07-16T08:36 · 👤 Abang</div>
       <p class="isi">David (CAC CJ) menanyakan nama-nama TM di seluruh area Jawa Tengah. Di knowledge base saat ini hanya tercatat Bang Irham sebagai TM (cover Grobogan/Demak/Kudus/Kab. Semarang). David butuh daftar lengkap TM Jateng — termasuk area lain seperti Solo, Pekalongan, Banyumas, dll. Mohon diinfokan atau diarahkan ya Mas.</p>
       <div class="resp"><b>irham:</b> Perlu — nunggu data daftar TM Jateng dari Mas Irham/David.</div>
-    </article></main><h2><span class="dot ok"></span>SELESAI (16)</h2><main class="grid"><article class="card ok">
+    </article></main><h2><span class="dot ok"></span>SELESAI (17)</h2><main class="grid"><article class="card ok">
       <header><span class="tid">#T23</span><h3>LIQ auto-link GAGAL — DSR/DMR routing salah (2x hari ini)</h3><span class="st ok">SELESAI</span><span class="pr">🔺 URGENT</span></header>
       <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-20T18:10 · 🔧 Claude</div>
       <p class="isi">20 Jul 2026 — 2x gagal auto-link plan↔LIQ karena salah routing DSR vs DMR:
@@ -307,6 +286,27 @@ Fix manual: edit JSON langsung tambah &quot;kecamatan&quot;: &quot;Godong&quot;,
 
 Sudah dicatat di lessons.py [L-260727212813]. Butuh fix di kode demand_project.py mode add-q3.</p>
       <div class="reso">✅ Akar: mismatch kosakata field — papan DR forward pakai &#x27;kec&#x27;/&#x27;baru&#x27;, tapi builder add-q3 (dan _validate_activities/_tm) cuma baca &#x27;kecamatan&#x27;/&#x27;tanggal&#x27; → hilang senyap (× DeepSeek getas mapping). Fix: helper toleran-alias _kec_of (kecamatan|kec) + _tgl_of (tanggal|tgl|baru) dipakai ketiga builder DR. Test tests/test_demand_q3_aliases.py 3/3. Record Denny sudah di-fix manual sebelumnya; ini fix KODE biar tak berulang.</div>
+    </article><article class="card ok">
+      <header><span class="tid">#T29</span><h3>Duplikat plan tidak terdeteksi — Heppy 27 Jul (Klambu vs TIMNAS DAY)</h3><span class="st ok">SELESAI</span></header>
+      <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-28T08:51 · 🔧 Claude</div>
+      <p class="isi">**Masalah:** Plan Klambu #1 (Heppy FED Klambu Sep 2026) dan TIMNAS DAY #10 (Heppy FED Jul-Sep 2026) adalah kegiatan yang SAMA — FED Heppy 27 Juli 2026 di Gatet, Undaan, Kudus. Tapi sistem menganggapnya dua plan berbeda karena dibuat di dua project berbeda.
+
+**Kronologi:**
+1. Plan Klambu #1 dibuat duluan (buffer Semesta Agro, Klambu, Grobogan)
+2. Plan TIMNAS DAY #10 dibuat kemudian (Jul-Sep Demak Kudus, Undaan)
+3. Laporan likuidasi masuk tgl 27 Jul malam → auto-link ke plan #10 (TIMNAS DAY) karena match DR+produk+tanggal
+4. Plan Klambu #1 tetap OPEN → muncul sebagai &quot;telat 1 hari&quot; di KPI PAGI 28 Jul
+
+**Akar:**
+- Dua plan untuk DR sama, tanggal sama, tidak terdeteksi sebagai duplikat
+- Lokasi di plan (Klambu, Grobogan) vs realita laporan (Gatet, Undaan, Kudus) berbeda → tidak match saat auto-link
+
+**Penanganan sementara:** Plan Klambu #1 dibatalkan (status batal). Laporan sudah benar tersambung ke plan TIMNAS DAY #10.
+
+**Yang dibutuhkan dari backend:**
+1. Deteksi/peringatan duplikat: plan untuk DR yang sama di tanggal yang sama
+2. Atau: mekanisme merge plan antar-project saat laporan masuk (auto-close plan duplikat)</p>
+      <div class="reso">✅ Opsi A (deteksi+flag, BUKAN auto-close — anti insiden auto-mutation). Akar: auto-link (find_exec_match) cocok jenis+kecamatan, bukan tanggal → plan DR+tgl+jenis sama di kecamatan BEDA jadi hantu, nyangkut &#x27;telat&#x27; palsu. Fix di demand_project.py: (1) helper find_dup_plans (lintas project); (2) reconcile_exec flag sibling &#x27;dup_suspect&#x27; saat report nge-link + pesan ke owner; (3) review_activities keluarkan dup_suspect dari &#x27;overdue&#x27; (tak jadi telat) → bucket sendiri, tampil di format_review 🟣; (4) add-q3 warning saat buat plan DR+tgl+jenis sama. Test tests/test_dup_plan_detect.py 5/5. Owner tetap yg batalkan (flag, bukan auto).</div>
     </article></main><h2><span class="dot gap"></span>DITUTUP (5)</h2><main class="grid"><article class="card gap">
       <header><span class="tid">#T7</span><h3>Pesan dari David: &quot;AI-nya mantap&quot; 👍
 
