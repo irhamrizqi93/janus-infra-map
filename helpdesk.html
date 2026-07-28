@@ -29,13 +29,34 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <h1>Helpdesk — Tiket User</h1>
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
-  <span class="pil"><b>27</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>2</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>0 baru</span>
+  <span class="pil"><b>28</b> total</span>
+  <span class="pil"><span class="dot warn"></span><b>3</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>1 baru</span>
   <span class="pil"><span class="dot info"></span>2 diproses</span>
   <span class="pil"><span class="dot ok"></span>16 selesai</span>
 </div>
-<h2><span class="dot info"></span>DIPROSES (2)</h2><main class="grid"><article class="card info">
+<h2><span class="dot warn"></span>BARU (1)</h2><main class="grid"><article class="card warn">
+      <header><span class="tid">#T29</span><h3>Duplikat plan tidak terdeteksi — Heppy 27 Jul (Klambu vs TIMNAS DAY)</h3><span class="st warn">BARU</span></header>
+      <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-28T08:51 · 🔧 Claude</div>
+      <p class="isi">**Masalah:** Plan Klambu #1 (Heppy FED Klambu Sep 2026) dan TIMNAS DAY #10 (Heppy FED Jul-Sep 2026) adalah kegiatan yang SAMA — FED Heppy 27 Juli 2026 di Gatet, Undaan, Kudus. Tapi sistem menganggapnya dua plan berbeda karena dibuat di dua project berbeda.
+
+**Kronologi:**
+1. Plan Klambu #1 dibuat duluan (buffer Semesta Agro, Klambu, Grobogan)
+2. Plan TIMNAS DAY #10 dibuat kemudian (Jul-Sep Demak Kudus, Undaan)
+3. Laporan likuidasi masuk tgl 27 Jul malam → auto-link ke plan #10 (TIMNAS DAY) karena match DR+produk+tanggal
+4. Plan Klambu #1 tetap OPEN → muncul sebagai &quot;telat 1 hari&quot; di KPI PAGI 28 Jul
+
+**Akar:**
+- Dua plan untuk DR sama, tanggal sama, tidak terdeteksi sebagai duplikat
+- Lokasi di plan (Klambu, Grobogan) vs realita laporan (Gatet, Undaan, Kudus) berbeda → tidak match saat auto-link
+
+**Penanganan sementara:** Plan Klambu #1 dibatalkan (status batal). Laporan sudah benar tersambung ke plan TIMNAS DAY #10.
+
+**Yang dibutuhkan dari backend:**
+1. Deteksi/peringatan duplikat: plan untuk DR yang sama di tanggal yang sama
+2. Atau: mekanisme merge plan antar-project saat laporan masuk (auto-close plan duplikat)</p>
+      
+    </article></main><h2><span class="dot info"></span>DIPROSES (2)</h2><main class="grid"><article class="card info">
       <header><span class="tid">#T12</span><h3>David tanya: berapa sisa LDD Mas Irham?
 
 Ini di luar scope CAC David — data keua</h3><span class="st info">DIPROSES</span></header>
