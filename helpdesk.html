@@ -30,24 +30,12 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
   <span class="pil"><b>27</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>3</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>1 baru</span>
+  <span class="pil"><span class="dot warn"></span><b>2</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>0 baru</span>
   <span class="pil"><span class="dot info"></span>2 diproses</span>
-  <span class="pil"><span class="dot ok"></span>15 selesai</span>
+  <span class="pil"><span class="dot ok"></span>16 selesai</span>
 </div>
-<h2><span class="dot warn"></span>BARU (1)</h2><main class="grid"><article class="card warn">
-      <header><span class="tid">#T28</span><h3>[BUG] add-q3 demand_project: kecamatan &amp; tanggal tidak tersimpan ke JSON</h3><span class="st warn">BARU</span></header>
-      <div class="meta">🔴 Masalah · irham (owner) · 2026-07-27T21:39 · 🔧 Claude</div>
-      <p class="isi">Flow: papan DR → ACC plan Denny FED 31 Jul Harjowinangun Godong → add-q3 dijalankan.
-
-Yang tersimpan: desa, crop, quarter, kabupaten.
-Yang KOSONG: kecamatan (jadi &#x27;-&#x27;), tanggal (tidak ada key).
-
-Fix manual: edit JSON langsung tambah &quot;kecamatan&quot;: &quot;Godong&quot;, &quot;tanggal&quot;: &quot;2026-07-31&quot;.
-
-Sudah dicatat di lessons.py [L-260727212813]. Butuh fix di kode demand_project.py mode add-q3.</p>
-      
-    </article></main><h2><span class="dot info"></span>DIPROSES (2)</h2><main class="grid"><article class="card info">
+<h2><span class="dot info"></span>DIPROSES (2)</h2><main class="grid"><article class="card info">
       <header><span class="tid">#T12</span><h3>David tanya: berapa sisa LDD Mas Irham?
 
 Ini di luar scope CAC David — data keua</h3><span class="st info">DIPROSES</span></header>
@@ -61,7 +49,7 @@ Ini di luar scope CAC David — data keuangan/operasional. Mohon arahan atau bis
       <div class="meta">🔵 Pertanyaan · david (CAC) · 2026-07-16T08:36 · 👤 Abang</div>
       <p class="isi">David (CAC CJ) menanyakan nama-nama TM di seluruh area Jawa Tengah. Di knowledge base saat ini hanya tercatat Bang Irham sebagai TM (cover Grobogan/Demak/Kudus/Kab. Semarang). David butuh daftar lengkap TM Jateng — termasuk area lain seperti Solo, Pekalongan, Banyumas, dll. Mohon diinfokan atau diarahkan ya Mas.</p>
       <div class="resp"><b>irham:</b> Perlu — nunggu data daftar TM Jateng dari Mas Irham/David.</div>
-    </article></main><h2><span class="dot ok"></span>SELESAI (15)</h2><main class="grid"><article class="card ok">
+    </article></main><h2><span class="dot ok"></span>SELESAI (16)</h2><main class="grid"><article class="card ok">
       <header><span class="tid">#T23</span><h3>LIQ auto-link GAGAL — DSR/DMR routing salah (2x hari ini)</h3><span class="st ok">SELESAI</span><span class="pr">🔺 URGENT</span></header>
       <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-20T18:10 · 🔧 Claude</div>
       <p class="isi">20 Jul 2026 — 2x gagal auto-link plan↔LIQ karena salah routing DSR vs DMR:
@@ -286,6 +274,18 @@ Prioritas: normal</p>
       <div class="meta">🟡 Permintaan · irham (owner) · 2026-07-27T20:14 · 👤 Abang</div>
       <p class="isi">Bang Irham minta presentasi kegiatan Bayer ke pemilik kios R1 Anugrah Sumber Tani (Pulokulon, Grobogan). Butuh 1 halaman PDF + peta untuk 5 kegiatan Jun-Ags. Yang dikerjakan: fetch brp_query+kegiatan_recall, peta via peta.py, PDF via onbrand_pdf.py (fallback, bukan template ideal). Gap: design_preflight.py status:none — tidak ada template laporan ringkasan kegiatan. Request Bang Irham: review flow, tambah template.</p>
       <div class="reso">✅ Template &#x27;laporan-kegiatan-kios&#x27; DIBANGUN + DIDAFTARKAN di design/catalog.json (html_compose, 1-lembar A4 landscape, tabel kegiatan + peta embed + on-brand). design_preflight sekarang balik template_id ini (bukan status:none) → Janus berhenti fallback ke onbrand_pdf. Fix collision: regex cap-dr diperketat (tak lagi nyangkut &#x27;laporan kegiatan kios&#x27;). Peta: field &#x27;peta&#x27;=path PNG dari peta.py (auto-embed data-URI). Gold sample dirender. AKAR: standar cuma ditulis prosa di DESIGN_REFERENCE (yg design_preflight TAK baca) — sekarang jadi catalog entry + generator nyata.</div>
+    </article><article class="card ok">
+      <header><span class="tid">#T28</span><h3>[BUG] add-q3 demand_project: kecamatan &amp; tanggal tidak tersimpan ke JSON</h3><span class="st ok">SELESAI</span></header>
+      <div class="meta">🔴 Masalah · irham (owner) · 2026-07-27T21:39 · 🔧 Claude</div>
+      <p class="isi">Flow: papan DR → ACC plan Denny FED 31 Jul Harjowinangun Godong → add-q3 dijalankan.
+
+Yang tersimpan: desa, crop, quarter, kabupaten.
+Yang KOSONG: kecamatan (jadi &#x27;-&#x27;), tanggal (tidak ada key).
+
+Fix manual: edit JSON langsung tambah &quot;kecamatan&quot;: &quot;Godong&quot;, &quot;tanggal&quot;: &quot;2026-07-31&quot;.
+
+Sudah dicatat di lessons.py [L-260727212813]. Butuh fix di kode demand_project.py mode add-q3.</p>
+      <div class="reso">✅ Akar: mismatch kosakata field — papan DR forward pakai &#x27;kec&#x27;/&#x27;baru&#x27;, tapi builder add-q3 (dan _validate_activities/_tm) cuma baca &#x27;kecamatan&#x27;/&#x27;tanggal&#x27; → hilang senyap (× DeepSeek getas mapping). Fix: helper toleran-alias _kec_of (kecamatan|kec) + _tgl_of (tanggal|tgl|baru) dipakai ketiga builder DR. Test tests/test_demand_q3_aliases.py 3/3. Record Denny sudah di-fix manual sebelumnya; ini fix KODE biar tak berulang.</div>
     </article></main><h2><span class="dot gap"></span>DITUTUP (5)</h2><main class="grid"><article class="card gap">
       <header><span class="tid">#T7</span><h3>Pesan dari David: &quot;AI-nya mantap&quot; 👍
 
@@ -405,5 +405,5 @@ Di database internal baru tercatat David Gabriel (CAC area CJ). David butuh tau 
       <p class="isi">David (CAC) minta tolong dicarikan informasi: siapa nama terapis &quot;83 sansa&quot; dari Fantasy Spa Semarang. Dia forward video promo dari @fantasyspasemarang (29 Mei 2026) — di video ada cewek rambut cokelat panjang, crop top cokelat, sarong oranye, muka ditutup emoji bunga pink. Teks &quot;83 sansa&quot; di pojok kanan atas. David minta eskalasi ke Abang buat identifikasi orang ini.</p>
       <div class="reso">✅ Di luar lingkup Janus + tidak pantas (identifikasi orang dari video).</div>
     </article></main>
-<footer>Digenerate <code>helpdesk_web.py</code> dari <code>data/helpdesk.json</code> (SoT). render: 2026-07-27</footer>
+<footer>Digenerate <code>helpdesk_web.py</code> dari <code>data/helpdesk.json</code> (SoT). render: 2026-07-28</footer>
 </div></body></html>
