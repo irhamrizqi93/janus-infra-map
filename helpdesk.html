@@ -29,13 +29,30 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <h1>Helpdesk — Tiket User</h1>
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
-  <span class="pil"><b>28</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>2</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>0 baru</span>
+  <span class="pil"><b>29</b> total</span>
+  <span class="pil"><span class="dot warn"></span><b>3</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>1 baru</span>
   <span class="pil"><span class="dot info"></span>2 diproses</span>
   <span class="pil"><span class="dot ok"></span>17 selesai</span>
 </div>
-<h2><span class="dot info"></span>DIPROSES (2)</h2><main class="grid"><article class="card info">
+<h2><span class="dot warn"></span>BARU (1)</h2><main class="grid"><article class="card warn">
+      <header><span class="tid">#T30</span><h3>Janus salah query field direct selling di liquidation.json</h3><span class="st warn">BARU</span></header>
+      <div class="meta">🔴 Masalah · irham (TM) · 2026-07-29T15:10 · 🔧 Claude</div>
+      <p class="isi">Insiden 29 Jul: saat fetch data kegiatan untuk tabel &#x27;Buffer Anugrah Sumber Tani&#x27;, kolom Direct Selling kosong karena Janus membaca field &#x27;nilai&#x27; (yang jarang terisi) alih-alih &#x27;nilai_spot_rp&#x27; (yang selalu ada). Akar: field yang benar = nilai_spot_rp (ada di semua record), field yang salah dibaca = nilai (hanya 2 dari 10 record). Sudah difiks di sesi ini. Permintaan: evaluasi apakah perlu (a) rename field di liquidation schema, (b) guard auto-populate nilai dari nilai_spot_rp, atau (c) cukup lessons.py.</p>
+      <div class="resp"><b>irham:</b> UPDATE 29 Jul 15:20 — tambahan temuan:
+
+1. Insiden DR salah: kolom DR dipaksa mapping berdasarkan role (DMR=FED, DSR=ODP/BC) → ODP/BC Fani salah ditulis &#x27;Safii&#x27;. Akar: liquidation.json field &#x27;dsr&#x27; menyimpan siapa yang MELAPORKAN, bukan siapa yang RESPONSIBLE. Fani kerjakan ODP/BC sendiri, bukan Safii.
+
+2. Yang sudah dikoreksi:
+- ODP/BC di area BLF Fani → DR = Fani (bukan Safii)
+- FED di area Alvian yang dsr=Safii → DR = Alvian (cross-check ke demand_project)
+
+3. Pelajaran (L-260729151925): jangan paksa mapping DR pakai aturan baku role. Pakai responsible person dari demand_project/liquidation.
+
+Total dampak: 8 dari 23 baris DR salah (6 ODP/BC + 2 FED).
+
+Saran perbaikan sistemik: field &#x27;dsr&#x27; di liquidation kurang jelas (reporting vs responsible). Mungkin perlu field &#x27;responsible_dr&#x27; atau auto-cross-check ke area mapping.</div>
+    </article></main><h2><span class="dot info"></span>DIPROSES (2)</h2><main class="grid"><article class="card info">
       <header><span class="tid">#T12</span><h3>David tanya: berapa sisa LDD Mas Irham?
 
 Ini di luar scope CAC David — data keua</h3><span class="st info">DIPROSES</span></header>
