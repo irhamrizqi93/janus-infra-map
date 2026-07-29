@@ -30,29 +30,12 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
   <span class="pil"><b>29</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>3</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>1 baru</span>
+  <span class="pil"><span class="dot warn"></span><b>2</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>0 baru</span>
   <span class="pil"><span class="dot info"></span>2 diproses</span>
-  <span class="pil"><span class="dot ok"></span>17 selesai</span>
+  <span class="pil"><span class="dot ok"></span>18 selesai</span>
 </div>
-<h2><span class="dot warn"></span>BARU (1)</h2><main class="grid"><article class="card warn">
-      <header><span class="tid">#T30</span><h3>Janus salah query field direct selling di liquidation.json</h3><span class="st warn">BARU</span></header>
-      <div class="meta">🔴 Masalah · irham (TM) · 2026-07-29T15:10 · 🔧 Claude</div>
-      <p class="isi">Insiden 29 Jul: saat fetch data kegiatan untuk tabel &#x27;Buffer Anugrah Sumber Tani&#x27;, kolom Direct Selling kosong karena Janus membaca field &#x27;nilai&#x27; (yang jarang terisi) alih-alih &#x27;nilai_spot_rp&#x27; (yang selalu ada). Akar: field yang benar = nilai_spot_rp (ada di semua record), field yang salah dibaca = nilai (hanya 2 dari 10 record). Sudah difiks di sesi ini. Permintaan: evaluasi apakah perlu (a) rename field di liquidation schema, (b) guard auto-populate nilai dari nilai_spot_rp, atau (c) cukup lessons.py.</p>
-      <div class="resp"><b>irham:</b> UPDATE 29 Jul 15:20 — tambahan temuan:
-
-1. Insiden DR salah: kolom DR dipaksa mapping berdasarkan role (DMR=FED, DSR=ODP/BC) → ODP/BC Fani salah ditulis &#x27;Safii&#x27;. Akar: liquidation.json field &#x27;dsr&#x27; menyimpan siapa yang MELAPORKAN, bukan siapa yang RESPONSIBLE. Fani kerjakan ODP/BC sendiri, bukan Safii.
-
-2. Yang sudah dikoreksi:
-- ODP/BC di area BLF Fani → DR = Fani (bukan Safii)
-- FED di area Alvian yang dsr=Safii → DR = Alvian (cross-check ke demand_project)
-
-3. Pelajaran (L-260729151925): jangan paksa mapping DR pakai aturan baku role. Pakai responsible person dari demand_project/liquidation.
-
-Total dampak: 8 dari 23 baris DR salah (6 ODP/BC + 2 FED).
-
-Saran perbaikan sistemik: field &#x27;dsr&#x27; di liquidation kurang jelas (reporting vs responsible). Mungkin perlu field &#x27;responsible_dr&#x27; atau auto-cross-check ke area mapping.</div>
-    </article></main><h2><span class="dot info"></span>DIPROSES (2)</h2><main class="grid"><article class="card info">
+<h2><span class="dot info"></span>DIPROSES (2)</h2><main class="grid"><article class="card info">
       <header><span class="tid">#T12</span><h3>David tanya: berapa sisa LDD Mas Irham?
 
 Ini di luar scope CAC David — data keua</h3><span class="st info">DIPROSES</span></header>
@@ -66,7 +49,7 @@ Ini di luar scope CAC David — data keuangan/operasional. Mohon arahan atau bis
       <div class="meta">🔵 Pertanyaan · david (CAC) · 2026-07-16T08:36 · 👤 Abang</div>
       <p class="isi">David (CAC CJ) menanyakan nama-nama TM di seluruh area Jawa Tengah. Di knowledge base saat ini hanya tercatat Bang Irham sebagai TM (cover Grobogan/Demak/Kudus/Kab. Semarang). David butuh daftar lengkap TM Jateng — termasuk area lain seperti Solo, Pekalongan, Banyumas, dll. Mohon diinfokan atau diarahkan ya Mas.</p>
       <div class="resp"><b>irham:</b> Perlu — nunggu data daftar TM Jateng dari Mas Irham/David.</div>
-    </article></main><h2><span class="dot ok"></span>SELESAI (17)</h2><main class="grid"><article class="card ok">
+    </article></main><h2><span class="dot ok"></span>SELESAI (18)</h2><main class="grid"><article class="card ok">
       <header><span class="tid">#T23</span><h3>LIQ auto-link GAGAL — DSR/DMR routing salah (2x hari ini)</h3><span class="st ok">SELESAI</span><span class="pr">🔺 URGENT</span></header>
       <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-20T18:10 · 🔧 Claude</div>
       <p class="isi">20 Jul 2026 — 2x gagal auto-link plan↔LIQ karena salah routing DSR vs DMR:
@@ -324,6 +307,23 @@ Sudah dicatat di lessons.py [L-260727212813]. Butuh fix di kode demand_project.p
 1. Deteksi/peringatan duplikat: plan untuk DR yang sama di tanggal yang sama
 2. Atau: mekanisme merge plan antar-project saat laporan masuk (auto-close plan duplikat)</p>
       <div class="reso">✅ Opsi A (deteksi+flag, BUKAN auto-close — anti insiden auto-mutation). Akar: auto-link (find_exec_match) cocok jenis+kecamatan, bukan tanggal → plan DR+tgl+jenis sama di kecamatan BEDA jadi hantu, nyangkut &#x27;telat&#x27; palsu. Fix di demand_project.py: (1) helper find_dup_plans (lintas project); (2) reconcile_exec flag sibling &#x27;dup_suspect&#x27; saat report nge-link + pesan ke owner; (3) review_activities keluarkan dup_suspect dari &#x27;overdue&#x27; (tak jadi telat) → bucket sendiri, tampil di format_review 🟣; (4) add-q3 warning saat buat plan DR+tgl+jenis sama. Test tests/test_dup_plan_detect.py 5/5. Owner tetap yg batalkan (flag, bukan auto).</div>
+    </article><article class="card ok">
+      <header><span class="tid">#T30</span><h3>Janus salah query field direct selling di liquidation.json</h3><span class="st ok">SELESAI</span></header>
+      <div class="meta">🔴 Masalah · irham (TM) · 2026-07-29T15:10 · 🔧 Claude</div>
+      <p class="isi">Insiden 29 Jul: saat fetch data kegiatan untuk tabel &#x27;Buffer Anugrah Sumber Tani&#x27;, kolom Direct Selling kosong karena Janus membaca field &#x27;nilai&#x27; (yang jarang terisi) alih-alih &#x27;nilai_spot_rp&#x27; (yang selalu ada). Akar: field yang benar = nilai_spot_rp (ada di semua record), field yang salah dibaca = nilai (hanya 2 dari 10 record). Sudah difiks di sesi ini. Permintaan: evaluasi apakah perlu (a) rename field di liquidation schema, (b) guard auto-populate nilai dari nilai_spot_rp, atau (c) cukup lessons.py.</p>
+      <div class="resp"><b>irham:</b> UPDATE 29 Jul 15:20 — tambahan temuan:
+
+1. Insiden DR salah: kolom DR dipaksa mapping berdasarkan role (DMR=FED, DSR=ODP/BC) → ODP/BC Fani salah ditulis &#x27;Safii&#x27;. Akar: liquidation.json field &#x27;dsr&#x27; menyimpan siapa yang MELAPORKAN, bukan siapa yang RESPONSIBLE. Fani kerjakan ODP/BC sendiri, bukan Safii.
+
+2. Yang sudah dikoreksi:
+- ODP/BC di area BLF Fani → DR = Fani (bukan Safii)
+- FED di area Alvian yang dsr=Safii → DR = Alvian (cross-check ke demand_project)
+
+3. Pelajaran (L-260729151925): jangan paksa mapping DR pakai aturan baku role. Pakai responsible person dari demand_project/liquidation.
+
+Total dampak: 8 dari 23 baris DR salah (6 ODP/BC + 2 FED).
+
+Saran perbaikan sistemik: field &#x27;dsr&#x27; di liquidation kurang jelas (reporting vs responsible). Mungkin perlu field &#x27;responsible_dr&#x27; atau auto-cross-check ke area mapping.</div><div class="reso">✅ Opsi: bersihkan + guard tool (BUKAN rename/alias). Akar: field &#x27;nilai&#x27; = SAMPAH duplikat (10 record, 10/10 identik nilai_spot_rp, NOL kode nulis/baca) → jebakan; Janus hand-query JSON mentah alih-alih pakai tool. Kode liquidation.py SUDAH benar (pakai nilai_spot_rp konsisten). Fix: (1) HAPUS 10 field &#x27;nilai&#x27; liar (nol kehilangan data, verified==nilai_spot_rp, backup diambil); (2) guard TOOLS.md: nilai direct-selling per kegiatan/kios/buffer = `liquidation.py --recall --kios X` (nilai_spot_rp), JANGAN hand-query. Tool SUDAH mampu filter --kios + surface nilai (terbukti utk Anugrah). Bukan alias (hindari drift field duplikat).</div>
     </article></main><h2><span class="dot gap"></span>DITUTUP (5)</h2><main class="grid"><article class="card gap">
       <header><span class="tid">#T7</span><h3>Pesan dari David: &quot;AI-nya mantap&quot; 👍
 
