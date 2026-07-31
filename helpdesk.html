@@ -30,29 +30,12 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
   <span class="pil"><b>31</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>1</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>1 baru</span>
+  <span class="pil"><span class="dot warn"></span><b>0</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>0 baru</span>
   <span class="pil"><span class="dot info"></span>0 diproses</span>
-  <span class="pil"><span class="dot ok"></span>19 selesai</span>
+  <span class="pil"><span class="dot ok"></span>20 selesai</span>
 </div>
-<h2><span class="dot warn"></span>BARU (1)</h2><main class="grid"><article class="card warn">
-      <header><span class="tid">#T31</span><h3>Update Forecast Q3: format /KPI &amp; aturan warna</h3><span class="st warn">BARU</span><span class="pr">🔺 URGENT</span></header>
-      <div class="meta">🟡 Permintaan · irham (?) · 2026-07-31T08:15 · 🔧 Claude</div>
-      <p class="isi">Bang Irham minta update format Forecast Q3 (table_render.py --mode fc):
-
-1. Aturan warna % pencapaian:
-- &lt; 50% → Merah
-- &gt; 80% → Kuning
-- &gt; 100% → Hijau
-
-2. Format command:
-- /KPI → format tahunan (FY)
-- /KPI + Quartal → format kuartalan
-- Kalau belum ada breakdown bulanan → pakai agregat quartal
-
-3. Referensi: tabel Forecast Q3 dikirim 31 Jul (BRP s.d. 30 Jul)</p>
-      
-    </article></main><h2><span class="dot ok"></span>SELESAI (19)</h2><main class="grid"><article class="card ok">
+<h2><span class="dot ok"></span>SELESAI (20)</h2><main class="grid"><article class="card ok">
       <header><span class="tid">#T23</span><h3>LIQ auto-link GAGAL — DSR/DMR routing salah (2x hari ini)</h3><span class="st ok">SELESAI</span><span class="pr">🔺 URGENT</span></header>
       <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-20T18:10 · 🔧 Claude</div>
       <p class="isi">20 Jul 2026 — 2x gagal auto-link plan↔LIQ karena salah routing DSR vs DMR:
@@ -133,6 +116,23 @@ BUTUH:
 #1 AKAR (kenapa duckdb kosong): tak konklusif (tak ada log trigger). TAPI dimitigasi: load_db kini cek ISI cache (COUNT scans), bukan cuma mtime -&gt; cache kosong/korup dgn mtime fresh TAK lagi disajikan senyap, langsung rebuild dari sumber. Tervalidasi: cache-kosong-&gt;rebuild 31.725 baris.
 #4 status realtime: kpi_summary baca file langsung (sudah robust); jalur brp_query kini self-heal + health-cron mengalarm.
 Sisa opsional (belum): investigasi forensik penyebab hilang (butuh log DuckDB yg tak ada).</div><div class="reso">✅ Fix preventif+akar dipasang (cache-sanity self-heal + brp_health cron alert). Recurrence dicegah walau penyebab awal tak diketahui. Root-cause forensik = opsional (buka lagi kalau perlu).</div>
+    </article><article class="card ok">
+      <header><span class="tid">#T31</span><h3>Update Forecast Q3: format /KPI &amp; aturan warna</h3><span class="st ok">SELESAI</span><span class="pr">🔺 URGENT</span></header>
+      <div class="meta">🟡 Permintaan · irham (?) · 2026-07-31T08:15 · 🔧 Claude</div>
+      <p class="isi">Bang Irham minta update format Forecast Q3 (table_render.py --mode fc):
+
+1. Aturan warna % pencapaian:
+- &lt; 50% → Merah
+- &gt; 80% → Kuning
+- &gt; 100% → Hijau
+
+2. Format command:
+- /KPI → format tahunan (FY)
+- /KPI + Quartal → format kuartalan
+- Kalau belum ada breakdown bulanan → pakai agregat quartal
+
+3. Referensi: tabel Forecast Q3 dikirim 31 Jul (BRP s.d. 30 Jul)</p>
+      <div class="reso">✅ Part 1 (warna): konvensi 1-sumber pct_band (&lt;80 merah/80-100 kuning/&gt;=100 hijau) di table_render+kpi_summary+board (fix 3 konvensi beda). Part 2 (format): fc_data_quartal fallback — TM tanpa monthly_forecast otomatis dapat AGREGAT KUARTAL (Q1-Q4 FC=target/Ach=BRP) bukan kosong; routing /KPI=FY (kpi_summary), forecast=fc (monthly-atau-quartal). Multi-TM safe.</div>
     </article><article class="card ok">
       <header><span class="tid">#T32</span><h3>Heppy: Tambahan Plan TIMNAS DAY tanpa request — double-count &amp; reschedule gagal</h3><span class="st ok">SELESAI</span><span class="pr">🔺 URGENT</span></header>
       <div class="meta">🔴 Masalah · irham (?) · 2026-07-31T08:32 · 🔧 Claude</div>
