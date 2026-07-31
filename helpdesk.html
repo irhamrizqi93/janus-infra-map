@@ -29,13 +29,30 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <h1>Helpdesk — Tiket User</h1>
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
-  <span class="pil"><b>29</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>0</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>0 baru</span>
+  <span class="pil"><b>30</b> total</span>
+  <span class="pil"><span class="dot warn"></span><b>1</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>1 baru</span>
   <span class="pil"><span class="dot info"></span>0 diproses</span>
   <span class="pil"><span class="dot ok"></span>18 selesai</span>
 </div>
-<h2><span class="dot ok"></span>SELESAI (18)</h2><main class="grid"><article class="card ok">
+<h2><span class="dot warn"></span>BARU (1)</h2><main class="grid"><article class="card warn">
+      <header><span class="tid">#T31</span><h3>Update Forecast Q3: format /KPI &amp; aturan warna</h3><span class="st warn">BARU</span><span class="pr">🔺 URGENT</span></header>
+      <div class="meta">🟡 Permintaan · irham (?) · 2026-07-31T08:15 · 🔧 Claude</div>
+      <p class="isi">Bang Irham minta update format Forecast Q3 (table_render.py --mode fc):
+
+1. Aturan warna % pencapaian:
+- &lt; 50% → Merah
+- &gt; 80% → Kuning
+- &gt; 100% → Hijau
+
+2. Format command:
+- /KPI → format tahunan (FY)
+- /KPI + Quartal → format kuartalan
+- Kalau belum ada breakdown bulanan → pakai agregat quartal
+
+3. Referensi: tabel Forecast Q3 dikirim 31 Jul (BRP s.d. 30 Jul)</p>
+      
+    </article></main><h2><span class="dot ok"></span>SELESAI (18)</h2><main class="grid"><article class="card ok">
       <header><span class="tid">#T23</span><h3>LIQ auto-link GAGAL — DSR/DMR routing salah (2x hari ini)</h3><span class="st ok">SELESAI</span><span class="pr">🔺 URGENT</span></header>
       <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-20T18:10 · 🔧 Claude</div>
       <p class="isi">20 Jul 2026 — 2x gagal auto-link plan↔LIQ karena salah routing DSR vs DMR:
