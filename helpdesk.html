@@ -37,13 +37,32 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <h1>Helpdesk — Tiket User</h1>
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
-  <span class="pil"><b>31</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>0</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>0 baru</span>
+  <span class="pil"><b>32</b> total</span>
+  <span class="pil"><span class="dot warn"></span><b>1</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>1 baru</span>
   <span class="pil"><span class="dot info"></span>0 diproses</span>
   <span class="pil"><span class="dot ok"></span>20 selesai</span>
 </div>
-<h2><span class="dot ok"></span>SELESAI (20)</h2><div class="list"><details class="card ok">
+<h2><span class="dot warn"></span>BARU (1)</h2><div class="list"><details class="card warn" open>
+      <summary><span class="pr">🔺</span><span class="tid">#T33</span><span class="kic">🟡</span><span class="jd">Rombak total slash command /kpi — support Q3 + PNG format</span><span class="st warn">BARU</span></summary>
+      <div class="bd">
+        <div class="meta">🟡 Permintaan · irham (super-admin) · 2026-07-31T14:52 · 🔧 Claude</div>
+        <p class="isi">Saat ini `/kpi` hanya support H1. Diminta `/kpi Q3` → gagal karena:
+1. `kpi_summary.py` hardcode H1, tidak ada parameter quarter
+2. Format output markdown-text, bukan PNG (standar yang diminta: template KPI PNG seperti Q3 template di `data/templates/kpi/kpi_template_q3_2026.png`)
+3. Data Q3 = July-August-September, dengan pace berbasis bulan berjalan
+4. DR mapping di BRP tidak langsung — harus resolve dari distrik → kecamatan → DR (cross-reference retailer_lookup)
+
+Yang diminta:
+- `/kpi` → default ke quarter berjalan (Q3 sekarang)
+- `/kpi Q3` → KPI Q3 dalam format PNG (table_render.py)
+- `/kpi H1` → backward compatible ke H1
+- Template: tabel DR (Beni/Safii/Resa) + Focus Products (Ambition/Decis/Nativo/Vayego/Council/Folicur) + % vs target quarter + footer
+
+Prioritas: normal</p>
+        
+      </div>
+    </details></div><h2><span class="dot ok"></span>SELESAI (20)</h2><div class="list"><details class="card ok">
       <summary><span class="pr">🔺</span><span class="tid">#T23</span><span class="kic">🔴</span><span class="jd">LIQ auto-link GAGAL — DSR/DMR routing salah (2x hari ini)</span><span class="st ok">SELESAI</span></summary>
       <div class="bd">
         <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-20T18:10 · 🔧 Claude</div>
