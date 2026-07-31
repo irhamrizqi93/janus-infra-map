@@ -30,12 +30,12 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
   <span class="pil"><b>31</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>2</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>2 baru</span>
+  <span class="pil"><span class="dot warn"></span><b>1</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>1 baru</span>
   <span class="pil"><span class="dot info"></span>0 diproses</span>
-  <span class="pil"><span class="dot ok"></span>18 selesai</span>
+  <span class="pil"><span class="dot ok"></span>19 selesai</span>
 </div>
-<h2><span class="dot warn"></span>BARU (2)</h2><main class="grid"><article class="card warn">
+<h2><span class="dot warn"></span>BARU (1)</h2><main class="grid"><article class="card warn">
       <header><span class="tid">#T31</span><h3>Update Forecast Q3: format /KPI &amp; aturan warna</h3><span class="st warn">BARU</span><span class="pr">🔺 URGENT</span></header>
       <div class="meta">🟡 Permintaan · irham (?) · 2026-07-31T08:15 · 🔧 Claude</div>
       <p class="isi">Bang Irham minta update format Forecast Q3 (table_render.py --mode fc):
@@ -52,47 +52,7 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 
 3. Referensi: tabel Forecast Q3 dikirim 31 Jul (BRP s.d. 30 Jul)</p>
       
-    </article><article class="card warn">
-      <header><span class="tid">#T32</span><h3>Heppy: Tambahan Plan TIMNAS DAY tanpa request — double-count &amp; reschedule gagal</h3><span class="st warn">BARU</span><span class="pr">🔺 URGENT</span></header>
-      <div class="meta">🔴 Masalah · irham (?) · 2026-07-31T08:32 · 🔧 Claude</div>
-      <p class="isi">Kronologi:
-
-Riwayat Reschedule Plan #7 (dari history demand_projects.json):
-- 22 Jul 06:10: #7 reschedule 11 Ags ke 31 Ags (papan DR)
-- 26 Jul 08:30: #7 reschedule 31 Ags ke 31 Jul (papan DR)
-- TIDAK ADA reschedule 31 Jul ke 27 Jul
-
-Kondisi sekarang (31 Jul pagi):
-- Plan #7: BELUM done, 31 Jul, Undaan Tengah/Kaliwungu, Padi, Nugroho Tani
-- Plan #10: Done (TIMNAS DAY), 27 Jul, Undaan, Kacang Hijau, tanpa kios
-
-Temuan Masalah:
-
-1. Plan #10 (TIMNAS DAY) muncul sebagai TAMBAHAN, bukan hasil RESCHEDULE
-   Heppy bilang: ganti Plan #7 (31 Jul) ke 27 Jul
-   Yang terjadi: Plan #7 tetap 31 Jul, Plan #10 BARU dibuat 27 Jul
-   Akibat: double-count, Heppy punya 10 plan dengan overlap tanggal
-
-2. Plan #10 tidak punya liquidation report
-   Marked done tapi 0 foto, 0 nilai, tidak terhubung ke liquidation
-   Berbeda dari semua plan Heppy lain yang punya pasangan LIQ
-
-3. Lokasi dan crop tidak konsisten
-   Plan #7: Kaliwungu, Padi, Nugroho Tani
-   Plan #10: Undaan, Kacang Hijau, tanpa kios
-   Kalau ini reschedule, seharusnya detail sama (hanya tanggal berubah)
-
-4. Pelanggaran alur: tambahan plan tanpa request
-   TAMBAH PLAN harus lewat forward Abang = ACC
-   Plan #10 muncul tanpa jejak request yang jelas
-
-Yang Perlu Diperbaiki:
-1. Investigasi: dari mana asal Plan #10 (dashboard TAMBAH PLAN/auto-add/bug reschedule)
-2. Hardening: TAMBAH PLAN harus divalidasi, tidak boleh auto-create
-3. Cleanup: merge Plan #7 + #10 atau hapus salah satu
-4. Guard: rule di dashboard/Janus agar tidak double-count plan yang sama</p>
-      
-    </article></main><h2><span class="dot ok"></span>SELESAI (18)</h2><main class="grid"><article class="card ok">
+    </article></main><h2><span class="dot ok"></span>SELESAI (19)</h2><main class="grid"><article class="card ok">
       <header><span class="tid">#T23</span><h3>LIQ auto-link GAGAL — DSR/DMR routing salah (2x hari ini)</h3><span class="st ok">SELESAI</span><span class="pr">🔺 URGENT</span></header>
       <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-20T18:10 · 🔧 Claude</div>
       <p class="isi">20 Jul 2026 — 2x gagal auto-link plan↔LIQ karena salah routing DSR vs DMR:
@@ -173,6 +133,46 @@ BUTUH:
 #1 AKAR (kenapa duckdb kosong): tak konklusif (tak ada log trigger). TAPI dimitigasi: load_db kini cek ISI cache (COUNT scans), bukan cuma mtime -&gt; cache kosong/korup dgn mtime fresh TAK lagi disajikan senyap, langsung rebuild dari sumber. Tervalidasi: cache-kosong-&gt;rebuild 31.725 baris.
 #4 status realtime: kpi_summary baca file langsung (sudah robust); jalur brp_query kini self-heal + health-cron mengalarm.
 Sisa opsional (belum): investigasi forensik penyebab hilang (butuh log DuckDB yg tak ada).</div><div class="reso">✅ Fix preventif+akar dipasang (cache-sanity self-heal + brp_health cron alert). Recurrence dicegah walau penyebab awal tak diketahui. Root-cause forensik = opsional (buka lagi kalau perlu).</div>
+    </article><article class="card ok">
+      <header><span class="tid">#T32</span><h3>Heppy: Tambahan Plan TIMNAS DAY tanpa request — double-count &amp; reschedule gagal</h3><span class="st ok">SELESAI</span><span class="pr">🔺 URGENT</span></header>
+      <div class="meta">🔴 Masalah · irham (?) · 2026-07-31T08:32 · 🔧 Claude</div>
+      <p class="isi">Kronologi:
+
+Riwayat Reschedule Plan #7 (dari history demand_projects.json):
+- 22 Jul 06:10: #7 reschedule 11 Ags ke 31 Ags (papan DR)
+- 26 Jul 08:30: #7 reschedule 31 Ags ke 31 Jul (papan DR)
+- TIDAK ADA reschedule 31 Jul ke 27 Jul
+
+Kondisi sekarang (31 Jul pagi):
+- Plan #7: BELUM done, 31 Jul, Undaan Tengah/Kaliwungu, Padi, Nugroho Tani
+- Plan #10: Done (TIMNAS DAY), 27 Jul, Undaan, Kacang Hijau, tanpa kios
+
+Temuan Masalah:
+
+1. Plan #10 (TIMNAS DAY) muncul sebagai TAMBAHAN, bukan hasil RESCHEDULE
+   Heppy bilang: ganti Plan #7 (31 Jul) ke 27 Jul
+   Yang terjadi: Plan #7 tetap 31 Jul, Plan #10 BARU dibuat 27 Jul
+   Akibat: double-count, Heppy punya 10 plan dengan overlap tanggal
+
+2. Plan #10 tidak punya liquidation report
+   Marked done tapi 0 foto, 0 nilai, tidak terhubung ke liquidation
+   Berbeda dari semua plan Heppy lain yang punya pasangan LIQ
+
+3. Lokasi dan crop tidak konsisten
+   Plan #7: Kaliwungu, Padi, Nugroho Tani
+   Plan #10: Undaan, Kacang Hijau, tanpa kios
+   Kalau ini reschedule, seharusnya detail sama (hanya tanggal berubah)
+
+4. Pelanggaran alur: tambahan plan tanpa request
+   TAMBAH PLAN harus lewat forward Abang = ACC
+   Plan #10 muncul tanpa jejak request yang jelas
+
+Yang Perlu Diperbaiki:
+1. Investigasi: dari mana asal Plan #10 (dashboard TAMBAH PLAN/auto-add/bug reschedule)
+2. Hardening: TAMBAH PLAN harus divalidasi, tidak boleh auto-create
+3. Cleanup: merge Plan #7 + #10 atau hapus salah satu
+4. Guard: rule di dashboard/Janus agar tidak double-count plan yang sama</p>
+      <div class="reso">✅ Investigasi (agent): hipotesis tiket SALAH — Plan #10 bukan reschedule #7 gagal, tapi ditambah via add-q3 utk nampung laporan orphan. Double-count sebenarnya #10(TIMNAS)↔Klambu#1 = RE-REPORT insiden T29 (Klambu sudah batal). TAPI buka celah nyata: guard dup_suspect T29 di-key ke DR field → kegiatan sama di identitas terpecah (laporan dsr=Beni, TIMNAS dr=&#x27;-&#x27;, Klambu dr=Heppy) → &#x27;Beni&#x27;≠&#x27;Heppy&#x27; → Klambu di-SKIP (guard menyembunyikan dup). Fix: find_dup_plans resolve owner ke DR-Petani/Kios KECAMATAN (bukan field dr) via _owner_names → tahan identitas terpecah; + mode_add_q3 flag DURABLE (dup_suspect, bukan warning diabaikan). Bukan hard-block (konsisten T29 flag-not-mutate). Test test_dup_plan_detect 6/6 (+skenario T32). Reschedule terverifikasi TAK pernah bikin plan baru.</div>
     </article><article class="card ok">
       <header><span class="tid">#T1</span><h3>🔴 PERUBAHAN FUNDAMENTAL (knowledge)
 Apa: Padi timing spray — Timing spray padi: </h3><span class="st ok">SELESAI</span></header>
