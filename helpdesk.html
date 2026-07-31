@@ -35,7 +35,7 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
   <span class="pil"><span class="dot info"></span>0 diproses</span>
   <span class="pil"><span class="dot ok"></span>20 selesai</span>
 </div>
-<h2><span class="dot ok"></span>SELESAI (20)</h2><main class="grid"><details class="card ok">
+<h2><span class="dot ok"></span>SELESAI (20)</h2><div class="list"><details class="card ok">
       <summary><span class="pr">🔺</span><span class="tid">#T23</span><span class="kic">🔴</span><span class="jd">LIQ auto-link GAGAL — DSR/DMR routing salah (2x hari ini)</span><span class="st ok">SELESAI</span></summary>
       <div class="bd">
         <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-20T18:10 · 🔧 Claude</div>
@@ -407,7 +407,7 @@ Total dampak: 8 dari 23 baris DR salah (6 ODP/BC + 2 FED).
 
 Saran perbaikan sistemik: field &#x27;dsr&#x27; di liquidation kurang jelas (reporting vs responsible). Mungkin perlu field &#x27;responsible_dr&#x27; atau auto-cross-check ke area mapping.</div><div class="reso">✅ Opsi: bersihkan + guard tool (BUKAN rename/alias). Akar: field &#x27;nilai&#x27; = SAMPAH duplikat (10 record, 10/10 identik nilai_spot_rp, NOL kode nulis/baca) → jebakan; Janus hand-query JSON mentah alih-alih pakai tool. Kode liquidation.py SUDAH benar (pakai nilai_spot_rp konsisten). Fix: (1) HAPUS 10 field &#x27;nilai&#x27; liar (nol kehilangan data, verified==nilai_spot_rp, backup diambil); (2) guard TOOLS.md: nilai direct-selling per kegiatan/kios/buffer = `liquidation.py --recall --kios X` (nilai_spot_rp), JANGAN hand-query. Tool SUDAH mampu filter --kios + surface nilai (terbukti utk Anugrah). Bukan alias (hindari drift field duplikat).</div>
       </div>
-    </details></main><h2><span class="dot gap"></span>DITUTUP (7)</h2><main class="grid"><details class="card gap">
+    </details></div><h2><span class="dot gap"></span>DITUTUP (7)</h2><div class="list"><details class="card gap">
       <summary><span class="tid">#T7</span><span class="kic">🔵</span><span class="jd">Pesan dari David: &quot;AI-nya mantap&quot; 👍
 
 (Feedback untuk Janus — David puas dengan p</span><span class="st gap">DITUTUP</span></summary>
@@ -521,7 +521,7 @@ Tindak lanjut operasional (bukan bug): FED Undaan Kidul 22 Jun perlu CA/liquidat
 
 Catatan: issue #211 (Janus salah bikin di GitHub) sudah kututup — ke depan Janus tak bisa bikin GitHub issue lagi, semua ke tiket ini.</div><div class="reso">✅ Kroscek CA selesai: BUKAN bug matching — Heppy Undaan Kidul genuinely belum-settle &amp; itu SENGAJA sesuai klarifikasi DR (override settle_overrides.json). Tak ada perbaikan backend. Resolved via diskusi Abang&lt;-&gt;Janus, ditutup 25 Jul.</div>
       </div>
-    </details></main><h2><span class="dot red"></span>DITOLAK (4)</h2><main class="grid"><details class="card red">
+    </details></div><h2><span class="dot red"></span>DITOLAK (4)</h2><div class="list"><details class="card red">
       <summary><span class="tid">#T8</span><span class="kic">🔵</span><span class="jd">David tanya: Janus bisa cari tempat karaoke di Semarang?
 
 Hasil cek manifest: be</span><span class="st red">DITOLAK</span></summary>
@@ -561,6 +561,6 @@ Di database internal baru tercatat David Gabriel (CAC area CJ). David butuh tau 
         <p class="isi">David (CAC) minta tolong dicarikan informasi: siapa nama terapis &quot;83 sansa&quot; dari Fantasy Spa Semarang. Dia forward video promo dari @fantasyspasemarang (29 Mei 2026) — di video ada cewek rambut cokelat panjang, crop top cokelat, sarong oranye, muka ditutup emoji bunga pink. Teks &quot;83 sansa&quot; di pojok kanan atas. David minta eskalasi ke Abang buat identifikasi orang ini.</p>
         <div class="reso">✅ Di luar lingkup Janus + tidak pantas (identifikasi orang dari video).</div>
       </div>
-    </details></main>
+    </details></div>
 <footer>Digenerate <code>helpdesk_web.py</code> dari <code>data/helpdesk.json</code> (SoT). render: 2026-07-31</footer>
 </div></body></html>
