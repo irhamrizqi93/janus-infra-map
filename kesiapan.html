@@ -64,7 +64,7 @@ body{background:var(--canvas);font-family:var(--font);color:var(--ink);font-size
   <select id="fst" onchange="rend()"><option value="">Semua status</option><option value="kurang">Kurang saja</option><option value="ok">Lengkap saja</option></select>
 </div>
 <div id="detail"></div>
-<div class="foot">Data fondasi = disiapkan 1× saat gabung. BRP/kegiatan (update terus) TIDAK dihitung.<br>LIVE dari data tiap TM · 01 Aug 2026 17:18</div>
+<div class="foot">Data fondasi = disiapkan 1× saat gabung. BRP/kegiatan (update terus) TIDAK dihitung.<br>LIVE dari data tiap TM · 01 Aug 2026 17:20</div>
 </div>
 
 <script>
@@ -82,7 +82,7 @@ function base(kios,kec,dsr){return {
  4:["ok",kios+" kios (R2)"],5:["miss","belum ada"],6:["miss","belum ada"]};}
 function baseDet(){return {1:{hint:"isi identitas + konfirmasi teritori"},2:{hint:"tambah DR Petani (DMR)"},
  3:{hint:"isi DR Petani tiap kecamatan"},5:{hint:"minta target KPI ke HO"},6:{hint:"minta target poin per kios ke HO"}};}
-var TMS=[{"name": "Bang Irham", "area": "CP Semarang · acuan", "st": {"1": ["ok", "acuan"], "2": ["ok", "acuan"], "3": ["ok", "acuan"], "4": ["ok", "acuan"], "5": ["ok", "acuan"], "6": ["ok", "acuan"]}, "det": {}}, {"name": "Hanif", "area": "CP - Pekalongan · 143 kios", "st": {"1": ["miss", "belum ada"], "2": ["half", "6 DSR, DMR belum"], "3": ["half", "45 kec, DMR kosong"], "4": ["ok", "143 kios"], "5": ["miss", "belum ada"], "6": ["miss", "belum ada"]}, "det": {"1": {"hint": "isi identitas + konfirmasi teritori"}, "2": {"hint": "tambah DR Petani (DMR) tiap kecamatan"}, "3": {"hint": "isi DR Petani tiap kecamatan"}, "5": {"hint": "minta target KPI ke HO"}, "6": {"hint": "minta target poin per kios ke HO"}}}, {"name": "Dharma", "area": "CP - Solo Raya · 267 kios", "st": {"1": ["ok", "Darma Nur Arifin"], "2": ["half", "2 DSR, DMR belum"], "3": ["half", "84 kec, DMR kosong"], "4": ["ok", "267 kios"], "5": ["ok", "ada"], "6": ["ok", "ada"]}, "det": {"2": {"hint": "tambah DR Petani (DMR) tiap kecamatan"}, "3": {"hint": "isi DR Petani tiap kecamatan"}}}];
+var TMS=[{"name": "Bang Irham", "area": "CP Semarang · acuan", "st": {"1": ["ok", "acuan"], "2": ["ok", "acuan"], "3": ["ok", "acuan"], "4": ["ok", "acuan"], "5": ["ok", "acuan"], "6": ["ok", "acuan"]}, "det": {}}, {"name": "Hanif", "area": "CP - Pekalongan · 143 kios", "st": {"1": ["miss", "belum ada"], "2": ["half", "6 DSR, DMR belum"], "3": ["half", "45 kec, DMR kosong"], "4": ["ok", "143 kios"], "5": ["miss", "belum ada"], "6": ["miss", "belum ada"]}, "det": {"1": {"hint": "isi identitas + konfirmasi teritori"}, "2": {"hint": "tambah DR Petani (DMR) tiap kecamatan"}, "3": {"hint": "isi DR Petani tiap kecamatan"}, "5": {"hint": "minta target KPI ke HO"}, "6": {"hint": "minta target poin per kios ke HO"}}}, {"name": "Dharma", "area": "CP - Solo Raya · 267 kios", "st": {"1": ["ok", "Darma Nur Arifin"], "2": ["half", "2 DSR, DMR belum"], "3": ["half", "84 kec, DMR kosong"], "4": ["ok", "267 kios"], "5": ["ok", "ada"], "6": ["miss", "belum ada"]}, "det": {"2": {"hint": "tambah DR Petani (DMR) tiap kecamatan"}, "3": {"hint": "isi DR Petani tiap kecamatan"}, "6": {"hint": "minta target poin per kios ke HO"}}}];
 var ICO={ok:"✓",half:"◐",miss:"○"};
 function score(t){var s=0;ITEMS.forEach(function(it){var k=t.st[it.n][0];s+=k==='ok'?1:k==='half'?.5:0;});return Math.round(s/ITEMS.length*100);}
 function nok(t){return ITEMS.filter(function(it){return t.st[it.n][0]==='ok';}).length;}
