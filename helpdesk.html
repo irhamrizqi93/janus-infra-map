@@ -38,31 +38,12 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
   <span class="pil"><b>33</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>1</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>1 baru</span>
+  <span class="pil"><span class="dot warn"></span><b>0</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>0 baru</span>
   <span class="pil"><span class="dot info"></span>0 diproses</span>
-  <span class="pil"><span class="dot ok"></span>21 selesai</span>
+  <span class="pil"><span class="dot ok"></span>22 selesai</span>
 </div>
-<h2><span class="dot warn"></span>BARU (1)</h2><div class="list"><details class="card warn" open>
-      <summary><span class="pr">🔺</span><span class="tid">#T33</span><span class="kic">🟡</span><span class="jd">Rombak total slash command /kpi — support Q3 + PNG format</span><span class="st warn">BARU</span></summary>
-      <div class="bd">
-        <div class="meta">🟡 Permintaan · irham (super-admin) · 2026-07-31T14:52 · 🔧 Claude</div>
-        <p class="isi">Saat ini `/kpi` hanya support H1. Diminta `/kpi Q3` → gagal karena:
-1. `kpi_summary.py` hardcode H1, tidak ada parameter quarter
-2. Format output markdown-text, bukan PNG (standar yang diminta: template KPI PNG seperti Q3 template di `data/templates/kpi/kpi_template_q3_2026.png`)
-3. Data Q3 = July-August-September, dengan pace berbasis bulan berjalan
-4. DR mapping di BRP tidak langsung — harus resolve dari distrik → kecamatan → DR (cross-reference retailer_lookup)
-
-Yang diminta:
-- `/kpi` → default ke quarter berjalan (Q3 sekarang)
-- `/kpi Q3` → KPI Q3 dalam format PNG (table_render.py)
-- `/kpi H1` → backward compatible ke H1
-- Template: tabel DR (Beni/Safii/Resa) + Focus Products (Ambition/Decis/Nativo/Vayego/Council/Folicur) + % vs target quarter + footer
-
-Prioritas: normal</p>
-        <div class="resp"><b>irham:</b> [DEV] Combine dgn kerjaan template forecast PNG (table_render.py --mode fc/fcroll). KPI Q3 PNG reuse gaya render sama (tabel DR, warna %, footer). Dikerjakan sesudah T34.</div>
-      </div>
-    </details></div><h2><span class="dot ok"></span>SELESAI (21)</h2><div class="list"><details class="card ok">
+<h2><span class="dot ok"></span>SELESAI (22)</h2><div class="list"><details class="card ok">
       <summary><span class="pr">🔺</span><span class="tid">#T23</span><span class="kic">🔴</span><span class="jd">LIQ auto-link GAGAL — DSR/DMR routing salah (2x hari ini)</span><span class="st ok">SELESAI</span></summary>
       <div class="bd">
         <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-20T18:10 · 🔧 Claude</div>
@@ -209,6 +190,25 @@ Yang Perlu Diperbaiki:
 3. Cleanup: merge Plan #7 + #10 atau hapus salah satu
 4. Guard: rule di dashboard/Janus agar tidak double-count plan yang sama</p>
         <div class="reso">✅ Investigasi (agent): hipotesis tiket SALAH — Plan #10 bukan reschedule #7 gagal, tapi ditambah via add-q3 utk nampung laporan orphan. Double-count sebenarnya #10(TIMNAS)↔Klambu#1 = RE-REPORT insiden T29 (Klambu sudah batal). TAPI buka celah nyata: guard dup_suspect T29 di-key ke DR field → kegiatan sama di identitas terpecah (laporan dsr=Beni, TIMNAS dr=&#x27;-&#x27;, Klambu dr=Heppy) → &#x27;Beni&#x27;≠&#x27;Heppy&#x27; → Klambu di-SKIP (guard menyembunyikan dup). Fix: find_dup_plans resolve owner ke DR-Petani/Kios KECAMATAN (bukan field dr) via _owner_names → tahan identitas terpecah; + mode_add_q3 flag DURABLE (dup_suspect, bukan warning diabaikan). Bukan hard-block (konsisten T29 flag-not-mutate). Test test_dup_plan_detect 6/6 (+skenario T32). Reschedule terverifikasi TAK pernah bikin plan baru. | SISTEMIK (konteks Abang 31 Jul): akar sebenarnya = LAPORAN ORPHAN → Janus BIKIN PLAN BARU (Plan #10 TIMNAS nampung laporan Gatet/Undaan yg tak match Klambu#1 krn kecamatan salah-label). Guard priming JANUS_ROUTING: laporan orphan ⛔ JANGAN bikin plan baru — cek mislabel (bandingkan DESA) → reschedule plan lama; kalau tak ada → FLAG + tanya Abang; TAMBAH PLAN wajib lewat ACC, bukan auto-add. + dedup owner-resolve (sudah). DATA: Plan #7 (Kaliwungu/Padi/31 Jul) ternyata kegiatan BEDA (Heppy conflate dgn eksekusi Gatet/Kacang-Hijau 27 Jul=#10) → #7 genuinely pending, sistem BENAR nampilkan &#x27;hari ini&#x27;. Perlu Abang konfirmasi ke Heppy: #7 masih to-do?</div>
+      </div>
+    </details><details class="card ok">
+      <summary><span class="pr">🔺</span><span class="tid">#T33</span><span class="kic">🟡</span><span class="jd">Rombak total slash command /kpi — support Q3 + PNG format</span><span class="st ok">SELESAI</span></summary>
+      <div class="bd">
+        <div class="meta">🟡 Permintaan · irham (super-admin) · 2026-07-31T14:52 · 🔧 Claude</div>
+        <p class="isi">Saat ini `/kpi` hanya support H1. Diminta `/kpi Q3` → gagal karena:
+1. `kpi_summary.py` hardcode H1, tidak ada parameter quarter
+2. Format output markdown-text, bukan PNG (standar yang diminta: template KPI PNG seperti Q3 template di `data/templates/kpi/kpi_template_q3_2026.png`)
+3. Data Q3 = July-August-September, dengan pace berbasis bulan berjalan
+4. DR mapping di BRP tidak langsung — harus resolve dari distrik → kecamatan → DR (cross-reference retailer_lookup)
+
+Yang diminta:
+- `/kpi` → default ke quarter berjalan (Q3 sekarang)
+- `/kpi Q3` → KPI Q3 dalam format PNG (table_render.py)
+- `/kpi H1` → backward compatible ke H1
+- Template: tabel DR (Beni/Safii/Resa) + Focus Products (Ambition/Decis/Nativo/Vayego/Council/Folicur) + % vs target quarter + footer
+
+Prioritas: normal</p>
+        <div class="resp"><b>irham:</b> [DEV] Combine dgn kerjaan template forecast PNG (table_render.py --mode fc/fcroll). KPI Q3 PNG reuse gaya render sama (tabel DR, warna %, footer). Dikerjakan sesudah T34.</div><div class="reso">✅ table_render.py --mode kpiq [--quarter Q3/H1] + kpi_summary.kpi_data(). /kpi=auto kuartal berjalan, /kpi Q3, /kpi H1. PNG gaya fc/fcroll (TM R1/R2+DR+Focus Products, target kuartal vs BRP +warna%). Reuse kerjaan forecast. Routing+TOOLS update.</div>
       </div>
     </details><details class="card ok">
       <summary><span class="tid">#T1</span><span class="kic">🟡</span><span class="jd">🔴 PERUBAHAN FUNDAMENTAL (knowledge)
