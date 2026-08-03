@@ -37,13 +37,13 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <h1>Helpdesk — Tiket User</h1>
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
-  <span class="pil"><b>32</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>1</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>1 baru</span>
+  <span class="pil"><b>33</b> total</span>
+  <span class="pil"><span class="dot warn"></span><b>2</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>2 baru</span>
   <span class="pil"><span class="dot info"></span>0 diproses</span>
   <span class="pil"><span class="dot ok"></span>20 selesai</span>
 </div>
-<h2><span class="dot warn"></span>BARU (1)</h2><div class="list"><details class="card warn" open>
+<h2><span class="dot warn"></span>BARU (2)</h2><div class="list"><details class="card warn" open>
       <summary><span class="pr">🔺</span><span class="tid">#T33</span><span class="kic">🟡</span><span class="jd">Rombak total slash command /kpi — support Q3 + PNG format</span><span class="st warn">BARU</span></summary>
       <div class="bd">
         <div class="meta">🟡 Permintaan · irham (super-admin) · 2026-07-31T14:52 · 🔧 Claude</div>
@@ -60,6 +60,17 @@ Yang diminta:
 - Template: tabel DR (Beni/Safii/Resa) + Focus Products (Ambition/Decis/Nativo/Vayego/Council/Folicur) + % vs target quarter + footer
 
 Prioritas: normal</p>
+        
+      </div>
+    </details><details class="card warn" open>
+      <summary><span class="tid">#T34</span><span class="kic">🟡</span><span class="jd">Auto-sync gcal ↔ dashboard kegiatan DR</span><span class="st warn">BARU</span></summary>
+      <div class="bd">
+        <div class="meta">🟡 Permintaan · irham (super-admin) · 2026-08-03T16:01 · 👤 Abang</div>
+        <p class="isi">Masalah sistemik: DR ubah jadwal kegiatan lewat dashboard → gcal TIDAK auto- update. Harus sync manual lewat command. 
+
+Contoh hari ini: Heppy ubah SFed dari 3 Ags ke 18 Ags. Dashboard udah berubah, tapi gcal masih 3 Ags — baru ke-update setelah Janus update manual.
+
+Butuh: cron/auto-sync biar perubahan jadwal di dashboard langsung ke-reflect di Google Calendar tanpa intervensi manual.</p>
         
       </div>
     </details></div><h2><span class="dot ok"></span>SELESAI (20)</h2><div class="list"><details class="card ok">
