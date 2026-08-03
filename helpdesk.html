@@ -38,12 +38,12 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
   <span class="pil"><b>33</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>2</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>2 baru</span>
+  <span class="pil"><span class="dot warn"></span><b>1</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>1 baru</span>
   <span class="pil"><span class="dot info"></span>0 diproses</span>
-  <span class="pil"><span class="dot ok"></span>20 selesai</span>
+  <span class="pil"><span class="dot ok"></span>21 selesai</span>
 </div>
-<h2><span class="dot warn"></span>BARU (2)</h2><div class="list"><details class="card warn" open>
+<h2><span class="dot warn"></span>BARU (1)</h2><div class="list"><details class="card warn" open>
       <summary><span class="pr">🔺</span><span class="tid">#T33</span><span class="kic">🟡</span><span class="jd">Rombak total slash command /kpi — support Q3 + PNG format</span><span class="st warn">BARU</span></summary>
       <div class="bd">
         <div class="meta">🟡 Permintaan · irham (super-admin) · 2026-07-31T14:52 · 🔧 Claude</div>
@@ -62,18 +62,7 @@ Yang diminta:
 Prioritas: normal</p>
         <div class="resp"><b>irham:</b> [DEV] Combine dgn kerjaan template forecast PNG (table_render.py --mode fc/fcroll). KPI Q3 PNG reuse gaya render sama (tabel DR, warna %, footer). Dikerjakan sesudah T34.</div>
       </div>
-    </details><details class="card warn" open>
-      <summary><span class="tid">#T34</span><span class="kic">🟡</span><span class="jd">Auto-sync gcal ↔ dashboard kegiatan DR</span><span class="st warn">BARU</span></summary>
-      <div class="bd">
-        <div class="meta">🟡 Permintaan · irham (super-admin) · 2026-08-03T16:01 · 👤 Abang</div>
-        <p class="isi">Masalah sistemik: DR ubah jadwal kegiatan lewat dashboard → gcal TIDAK auto- update. Harus sync manual lewat command. 
-
-Contoh hari ini: Heppy ubah SFed dari 3 Ags ke 18 Ags. Dashboard udah berubah, tapi gcal masih 3 Ags — baru ke-update setelah Janus update manual.
-
-Butuh: cron/auto-sync biar perubahan jadwal di dashboard langsung ke-reflect di Google Calendar tanpa intervensi manual.</p>
-        <div class="resp"><b>irham:</b> [KOREKSI scope] Bukan semua kegiatan DR. Kalender = PRIBADI Abang (invite dari burner), KHUSUS special activity TM yang dipilih. Masalah: (1) set gcal utk activity TM, (2) reschedule di dashboard TAK auto-update event gcal-nya. Fix: link activity&lt;-&gt;gcal_event_id + auto-sync dashboard-&gt;gcal utk activity yg ber-link saja (§430 tetap aman: cuma yg dipilih).</div>
-      </div>
-    </details></div><h2><span class="dot ok"></span>SELESAI (20)</h2><div class="list"><details class="card ok">
+    </details></div><h2><span class="dot ok"></span>SELESAI (21)</h2><div class="list"><details class="card ok">
       <summary><span class="pr">🔺</span><span class="tid">#T23</span><span class="kic">🔴</span><span class="jd">LIQ auto-link GAGAL — DSR/DMR routing salah (2x hari ini)</span><span class="st ok">SELESAI</span></summary>
       <div class="bd">
         <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-20T18:10 · 🔧 Claude</div>
@@ -444,6 +433,17 @@ Sudah dicatat di lessons.py [L-260727212813]. Butuh fix di kode demand_project.p
 Total dampak: 8 dari 23 baris DR salah (6 ODP/BC + 2 FED).
 
 Saran perbaikan sistemik: field &#x27;dsr&#x27; di liquidation kurang jelas (reporting vs responsible). Mungkin perlu field &#x27;responsible_dr&#x27; atau auto-cross-check ke area mapping.</div><div class="reso">✅ Opsi: bersihkan + guard tool (BUKAN rename/alias). Akar: field &#x27;nilai&#x27; = SAMPAH duplikat (10 record, 10/10 identik nilai_spot_rp, NOL kode nulis/baca) → jebakan; Janus hand-query JSON mentah alih-alih pakai tool. Kode liquidation.py SUDAH benar (pakai nilai_spot_rp konsisten). Fix: (1) HAPUS 10 field &#x27;nilai&#x27; liar (nol kehilangan data, verified==nilai_spot_rp, backup diambil); (2) guard TOOLS.md: nilai direct-selling per kegiatan/kios/buffer = `liquidation.py --recall --kios X` (nilai_spot_rp), JANGAN hand-query. Tool SUDAH mampu filter --kios + surface nilai (terbukti utk Anugrah). Bukan alias (hindari drift field duplikat).</div>
+      </div>
+    </details><details class="card ok">
+      <summary><span class="tid">#T34</span><span class="kic">🟡</span><span class="jd">Auto-sync gcal ↔ dashboard kegiatan DR</span><span class="st ok">SELESAI</span></summary>
+      <div class="bd">
+        <div class="meta">🟡 Permintaan · irham (super-admin) · 2026-08-03T16:01 · 👤 Abang</div>
+        <p class="isi">Masalah sistemik: DR ubah jadwal kegiatan lewat dashboard → gcal TIDAK auto- update. Harus sync manual lewat command. 
+
+Contoh hari ini: Heppy ubah SFed dari 3 Ags ke 18 Ags. Dashboard udah berubah, tapi gcal masih 3 Ags — baru ke-update setelah Janus update manual.
+
+Butuh: cron/auto-sync biar perubahan jadwal di dashboard langsung ke-reflect di Google Calendar tanpa intervensi manual.</p>
+        <div class="resp"><b>irham:</b> [KOREKSI scope] Bukan semua kegiatan DR. Kalender = PRIBADI Abang (invite dari burner), KHUSUS special activity TM yang dipilih. Masalah: (1) set gcal utk activity TM, (2) reschedule di dashboard TAK auto-update event gcal-nya. Fix: link activity&lt;-&gt;gcal_event_id + auto-sync dashboard-&gt;gcal utk activity yg ber-link saja (§430 tetap aman: cuma yg dipilih).</div><div class="reso">✅ gcal_sync.py: &#x27;set&#x27; link activity-event_id (special activity dipilih), cron reconcile 30mnt patch gcal pas jadwal geser dashboard. Live-tested 3-&gt;18 Ags. Kalender pribadi tetap bersih. Event SFed lama perlu di-set ulang 1x biar ikut auto-sync.</div>
       </div>
     </details></div><h2><span class="dot gap"></span>DITUTUP (7)</h2><div class="list"><details class="card gap">
       <summary><span class="tid">#T7</span><span class="kic">🔵</span><span class="jd">Pesan dari David: &quot;AI-nya mantap&quot; 👍
