@@ -60,7 +60,7 @@ Yang diminta:
 - Template: tabel DR (Beni/Safii/Resa) + Focus Products (Ambition/Decis/Nativo/Vayego/Council/Folicur) + % vs target quarter + footer
 
 Prioritas: normal</p>
-        
+        <div class="resp"><b>irham:</b> [DEV] Combine dgn kerjaan template forecast PNG (table_render.py --mode fc/fcroll). KPI Q3 PNG reuse gaya render sama (tabel DR, warna %, footer). Dikerjakan sesudah T34.</div>
       </div>
     </details><details class="card warn" open>
       <summary><span class="tid">#T34</span><span class="kic">🟡</span><span class="jd">Auto-sync gcal ↔ dashboard kegiatan DR</span><span class="st warn">BARU</span></summary>
@@ -71,7 +71,7 @@ Prioritas: normal</p>
 Contoh hari ini: Heppy ubah SFed dari 3 Ags ke 18 Ags. Dashboard udah berubah, tapi gcal masih 3 Ags — baru ke-update setelah Janus update manual.
 
 Butuh: cron/auto-sync biar perubahan jadwal di dashboard langsung ke-reflect di Google Calendar tanpa intervensi manual.</p>
-        
+        <div class="resp"><b>irham:</b> [KOREKSI scope] Bukan semua kegiatan DR. Kalender = PRIBADI Abang (invite dari burner), KHUSUS special activity TM yang dipilih. Masalah: (1) set gcal utk activity TM, (2) reschedule di dashboard TAK auto-update event gcal-nya. Fix: link activity&lt;-&gt;gcal_event_id + auto-sync dashboard-&gt;gcal utk activity yg ber-link saja (§430 tetap aman: cuma yg dipilih).</div>
       </div>
     </details></div><h2><span class="dot ok"></span>SELESAI (20)</h2><div class="list"><details class="card ok">
       <summary><span class="pr">🔺</span><span class="tid">#T23</span><span class="kic">🔴</span><span class="jd">LIQ auto-link GAGAL — DSR/DMR routing salah (2x hari ini)</span><span class="st ok">SELESAI</span></summary>
