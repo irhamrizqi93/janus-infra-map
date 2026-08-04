@@ -37,13 +37,13 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <h1>Helpdesk — Tiket User</h1>
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
-  <span class="pil"><b>33</b> total</span>
+  <span class="pil"><b>34</b> total</span>
   <span class="pil"><span class="dot warn"></span><b>0</b> aktif</span>
   <span class="pil"><span class="dot warn"></span>0 baru</span>
   <span class="pil"><span class="dot info"></span>0 diproses</span>
-  <span class="pil"><span class="dot ok"></span>22 selesai</span>
+  <span class="pil"><span class="dot ok"></span>23 selesai</span>
 </div>
-<h2><span class="dot ok"></span>SELESAI (22)</h2><div class="list"><details class="card ok">
+<h2><span class="dot ok"></span>SELESAI (23)</h2><div class="list"><details class="card ok">
       <summary><span class="pr">🔺</span><span class="tid">#T23</span><span class="kic">🔴</span><span class="jd">LIQ auto-link GAGAL — DSR/DMR routing salah (2x hari ini)</span><span class="st ok">SELESAI</span></summary>
       <div class="bd">
         <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-20T18:10 · 🔧 Claude</div>
@@ -209,6 +209,22 @@ Yang diminta:
 
 Prioritas: normal</p>
         <div class="resp"><b>irham:</b> [DEV] Combine dgn kerjaan template forecast PNG (table_render.py --mode fc/fcroll). KPI Q3 PNG reuse gaya render sama (tabel DR, warna %, footer). Dikerjakan sesudah T34.</div><div class="reso">✅ table_render.py --mode kpiq [--quarter Q3/H1] + kpi_summary.kpi_data(). /kpi=auto kuartal berjalan, /kpi Q3, /kpi H1. PNG gaya fc/fcroll (TM R1/R2+DR+Focus Products, target kuartal vs BRP +warna%). Reuse kerjaan forecast. Routing+TOOLS update.</div>
+      </div>
+    </details><details class="card ok">
+      <summary><span class="pr">🔺</span><span class="tid">#T35</span><span class="kic">🔴</span><span class="jd">Janus salah bedakan direct selling vs biaya kegiatan (berulang)</span><span class="st ok">SELESAI</span></summary>
+      <div class="bd">
+        <div class="meta">🔴 Masalah · irham (super-admin) · 2026-08-04T07:29 · 🔧 Claude</div>
+        <p class="isi">4 Agustus 2026 — laporan FED Dwiky/Angga: Janus bandingkan nilai direct selling Rp 600rb dengan plan budget Rp 400rb, seolah &quot;realisasi vs plan&quot;.
+
+Padahal:
+- Direct selling = hasil penjualan di tempat (nilai_spot_rp)
+- Plan budget = biaya kegiatan (Rp 400rb)
+- Dua kategori BERBEDA, tidak boleh dibandingkan
+
+Bang Irham: &quot;Ini sudah kasus ke berapa kamu tanya hal ini&quot;
+
+Perlu guard di sistem: kalau ada field nilai_spot_rp, JANGAN bandingkan dengan plan budget. Atau setidaknya rule tegas di MEMORY.md yang tidak akan dilanggar.</p>
+        <div class="reso">✅ Guard KODE dipasang: sot.js SELLGUARD (inject aturan tiap konteks direct-selling/likuidasi) + CORE §9 rule immutable + lessons L-260804073532 (guarded) + test. Direct selling (nilai_spot) ≠ biaya kegiatan (budget) — dilarang dibandingkan. Deploy via ROG pull + gateway restart.</div>
       </div>
     </details><details class="card ok">
       <summary><span class="tid">#T1</span><span class="kic">🟡</span><span class="jd">🔴 PERUBAHAN FUNDAMENTAL (knowledge)
