@@ -37,13 +37,34 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <h1>Helpdesk — Tiket User</h1>
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
-  <span class="pil"><b>34</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>0</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>0 baru</span>
+  <span class="pil"><b>35</b> total</span>
+  <span class="pil"><span class="dot warn"></span><b>1</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>1 baru</span>
   <span class="pil"><span class="dot info"></span>0 diproses</span>
   <span class="pil"><span class="dot ok"></span>23 selesai</span>
 </div>
-<h2><span class="dot ok"></span>SELESAI (23)</h2><div class="list"><details class="card ok">
+<h2><span class="dot warn"></span>BARU (1)</h2><div class="list"><details class="card warn" open>
+      <summary><span class="pr">🔺</span><span class="tid">#T36</span><span class="kic">🔴</span><span class="jd">Analisa Oberon Speed red flag — 3 kegagalan</span><span class="st warn">BARU</span></summary>
+      <div class="bd">
+        <div class="meta">🔴 Masalah · irham (owner) · 2026-08-05T15:01 · 🔧 Claude</div>
+        <p class="isi">## 3 Kegagalan Analisa Oberon Speed (5 Ags 2026)
+
+### 1. GAGAL PARSING LIQ — field detail vs items
+Search cuma di &#x27;detail&#x27;, tapi LIQ punya 2 format: detail (lama) dan items (baru). Hasil search pertama: 0 Oberon. Abang tunjuk contoh → baru sadar ada field items. Fix: liquidation recall HARUS cek kedua field.
+
+### 2. SCOPE SALAH — diminta Oberon Speed, dijawab semua Oberon (39 LIQ campur)
+Keyword &#x27;oberon speed&#x27; vs &#x27;oberon&#x27; tidak difilter. Nama produk di LIQ tidak konsisten: &#x27;Oberon Speed&#x27; / &#x27;Oberon speed&#x27; / &#x27;Oberon&#x27; (padahal 27 items &#x27;Oberon&#x27; tanpa Speed kemungkinan besar produk sama).
+
+### 3. HARGA NGARANG — Rp 410rb/botol dari imputasi
+Dihitung dari BRP scan Rp 24,6jt/30L → infer sendiri tanpa query tool. Harga BRP scan = retail ke petani BUKAN direct selling. Melanggar ANTI-NGARANG di SOUL.md.
+
+### AKAR
+- liquidation recall/search harus cek detail+items
+- Perlu normalisasi nama produk di LIQ
+- Janus HARUS query tool utk harga, tidak boleh hitung sendiri</p>
+        
+      </div>
+    </details></div><h2><span class="dot ok"></span>SELESAI (23)</h2><div class="list"><details class="card ok">
       <summary><span class="pr">🔺</span><span class="tid">#T23</span><span class="kic">🔴</span><span class="jd">LIQ auto-link GAGAL — DSR/DMR routing salah (2x hari ini)</span><span class="st ok">SELESAI</span></summary>
       <div class="bd">
         <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-20T18:10 · 🔧 Claude</div>
