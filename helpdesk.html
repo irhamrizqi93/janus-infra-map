@@ -37,13 +37,13 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <h1>Helpdesk — Tiket User</h1>
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
-  <span class="pil"><b>36</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>2</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>1 baru</span>
+  <span class="pil"><b>38</b> total</span>
+  <span class="pil"><span class="dot warn"></span><b>4</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>3 baru</span>
   <span class="pil"><span class="dot info"></span>1 diproses</span>
   <span class="pil"><span class="dot ok"></span>23 selesai</span>
 </div>
-<h2><span class="dot warn"></span>BARU (1)</h2><div class="list"><details class="card warn" open>
+<h2><span class="dot warn"></span>BARU (3)</h2><div class="list"><details class="card warn" open>
       <summary><span class="pr">🔺</span><span class="tid">#T36</span><span class="kic">🔴</span><span class="jd">Analisa Oberon Speed red flag — 3 kegagalan</span><span class="st warn">BARU</span></summary>
       <div class="bd">
         <div class="meta">🔴 Masalah · irham (owner) · 2026-08-05T15:01 · 🔧 Claude</div>
@@ -62,6 +62,48 @@ Dihitung dari BRP scan Rp 24,6jt/30L → infer sendiri tanpa query tool. Harga B
 - liquidation recall/search harus cek detail+items
 - Perlu normalisasi nama produk di LIQ
 - Janus HARUS query tool utk harga, tidak boleh hitung sendiri</p>
+        
+      </div>
+    </details><details class="card warn" open>
+      <summary><span class="pr">🔺</span><span class="tid">#T38</span><span class="kic">🔴</span><span class="jd">Janus nyaris bocorkan data area internal ke kontributor lain (Council R2 -24% di draft blast)</span><span class="st warn">BARU</span></summary>
+      <div class="bd">
+        <div class="meta">🔴 Masalah · irham (super-admin) · 2026-08-06T12:42 · 🔧 Claude</div>
+        <p class="isi">## Insiden
+Saat drafting pesan Council Complete untuk Dharma (TM Solo Raya) &amp; David (CAC), Janus menyertakan data area internal Bang Irham:
+- &quot;Council R2 Jan-Jul 2026: 105 kg/L, 6 kios (↓24% YoY)&quot;
+- &quot;BASF Luxinum baru launching&quot;
+
+Data ini dari BRP area sendiri — TIDAK BOLEH di-share ke Dharma atau David (beda area/role).
+
+## Root Cause
+Janus tidak sadar konteks &quot;blast ke orang lain&quot; = data area sendiri HARUS disensor. Saat drafting, otomatis menambahkan konteks area sebagai &quot;tambahan&quot; tanpa filter.
+
+## Guard Proposal
+1. Rule eksplisit: SETIAP draft yang akan dikirim ke user lain → STRIP semua angka/data dari area sendiri
+2. Sebelum relay/request_review → wajib cek: &quot;apa ada data/angka internal area sendiri di teks ini?&quot;
+3. Semua data area-spesifik (BRP, kios, volume) HARUS dihapus sebelum dikirim ke user beda area</p>
+        
+      </div>
+    </details><details class="card warn" open>
+      <summary><span class="tid">#T39</span><span class="kic">🟡</span><span class="jd">Mekanisme sharing session knowledge ke user lain + follow-up topik belum dibalas</span><span class="st warn">BARU</span></summary>
+      <div class="bd">
+        <div class="meta">🟡 Permintaan · irham (super-admin) · 2026-08-06T12:45 · 👤 Abang</div>
+        <p class="isi">## Kebutuhan
+Setiap ada tambahan knowledge (seperti diskusi Council Complete hari ini), perlu mekanisme TERSTRUKTUR untuk:
+
+1. **Sharing session** — setelah knowledge dicatat/diproses Janus → bisa di-share ke user lain yang relevan (MD/CAC/TM lain) untuk memperkuat knowledge bersama. Bukan sekadar forward teks, tapi punya struktur: topik, poin kunci, role siapa yang dituju, dan jejak balasannya.
+
+2. **Follow-up tracking** — kalau ada topik yang belum dibalas oleh user yang ditanya → ada mekanisme reminder/eskalasi. Misalnya: Dharma belum jawab insight tambahan Council setelah 3 hari → Janus bisa follow-up atau Abang di-notif.
+
+## Use Case Hari Ini
+- Abang diskusi Council Complete → Janus olah jadi 3 poin kunci
+- Kirim ke Dharma (TM) dan David (CAC) minta insight tambahan
+- **Gap:** Tidak ada mekanisme untuk track apakah mereka sudah balas, dan tidak ada follow-up otomatis kalau belum
+
+## Proposal (detail di backend)
+- Store: `knowledge_shares.json` — tracking siapa dikasih topik apa, status balas, due date follow-up
+- Flow: submit → share ke user (via relay/review) → track response → auto-remind kalau overdue
+- Janus bisa recall: &quot;topik X sudah dishare ke siapa, siapa belum balas&quot;</p>
         
       </div>
     </details></div><h2><span class="dot info"></span>DIPROSES (1)</h2><div class="list"><details class="card info" open>
