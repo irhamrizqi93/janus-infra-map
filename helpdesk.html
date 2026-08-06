@@ -39,11 +39,11 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <div class="skor">
   <span class="pil"><b>36</b> total</span>
   <span class="pil"><span class="dot warn"></span><b>2</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>2 baru</span>
-  <span class="pil"><span class="dot info"></span>0 diproses</span>
+  <span class="pil"><span class="dot warn"></span>1 baru</span>
+  <span class="pil"><span class="dot info"></span>1 diproses</span>
   <span class="pil"><span class="dot ok"></span>23 selesai</span>
 </div>
-<h2><span class="dot warn"></span>BARU (2)</h2><div class="list"><details class="card warn" open>
+<h2><span class="dot warn"></span>BARU (1)</h2><div class="list"><details class="card warn" open>
       <summary><span class="pr">🔺</span><span class="tid">#T36</span><span class="kic">🔴</span><span class="jd">Analisa Oberon Speed red flag — 3 kegagalan</span><span class="st warn">BARU</span></summary>
       <div class="bd">
         <div class="meta">🔴 Masalah · irham (owner) · 2026-08-05T15:01 · 🔧 Claude</div>
@@ -64,8 +64,8 @@ Dihitung dari BRP scan Rp 24,6jt/30L → infer sendiri tanpa query tool. Harga B
 - Janus HARUS query tool utk harga, tidak boleh hitung sendiri</p>
         
       </div>
-    </details><details class="card warn" open>
-      <summary><span class="pr">🔺</span><span class="tid">#T37</span><span class="kic">🔴</span><span class="jd">Ricestar YoY: Janus banding 2025 full-year vs 2026 YTD → salah report -49% (actual +37%)</span><span class="st warn">BARU</span></summary>
+    </details></div><h2><span class="dot info"></span>DIPROSES (1)</h2><div class="list"><details class="card info" open>
+      <summary><span class="pr">🔺</span><span class="tid">#T37</span><span class="kic">🔴</span><span class="jd">Ricestar YoY: Janus banding 2025 full-year vs 2026 YTD → salah report -49% (actual +37%)</span><span class="st info">DIPROSES</span></summary>
       <div class="bd">
         <div class="meta">🔴 Masalah · irham (super-admin) · 2026-08-06T11:53 · 🔧 Claude</div>
         <p class="isi">## Request User
@@ -102,7 +102,28 @@ Dihitung dari BRP scan Rp 24,6jt/30L → infer sendiri tanpa query tool. Harga B
 2. `brp_query.py`: tambah mode `--same-period` yang auto-filter kedua tahun ke bulan yang sama (max bulan di tahun lebih pendek)
 3. Atau: default YoY = Jan-N tahun ini vs Jan-N tahun lalu (N = bulan terakhir data tahun ini)
 4. Short-term guard: Janus SELALU sebut periode data (&quot;Jan-Jul 2025&quot;) bukan &quot;YTD&quot; saat tahun berbeda</p>
-        
+        <div class="resp"><b>irham:</b> ## TEMUAN TAMBAHAN: R1+R2 TERCAMPUR
+
+User minta &quot;volume di R2&quot; — Janus serve R1+R2 tanpa filter.
+
+### Angka yang Disajikan
+1,810 kg/L (R1+R2 combined) — padahal user minta R2 only:
+- R2 = 1,170 kg/L
+- R1 = 640 kg/L (tercampur)
+
+### Data Sebenarnya (R2 Only, Jan-Jul)
+- 2025: 960 kg/L (8 kios)
+- 2026: 1,170 kg/L (15 kios)
+- Growth: **+21.9%** (bukan +37.1% seperti koreksi pertama, apalagi -49% seperti awal)
+
+### Root Cause
+- Kolom type = `NEW_TEXT CP type` (bukan `Tipe label`)
+- brp_query.py output gabung R1+R2 (🔶 R2 + 🔷 R1) tanpa auto-filter
+- Janus tidak sadar harus pisah R1/R2 saat user spesifik minta R2
+
+### Proposal Tambahan
+- brp_query.py: tambah flag `--r2-only` untuk auto-filter
+- Janus guard: kalau user sebut &quot;R2&quot; / &quot;kios&quot; → pastikan output hanya R2</div>
       </div>
     </details></div><h2><span class="dot ok"></span>SELESAI (23)</h2><div class="list"><details class="card ok">
       <summary><span class="pr">🔺</span><span class="tid">#T23</span><span class="kic">🔴</span><span class="jd">LIQ auto-link GAGAL — DSR/DMR routing salah (2x hari ini)</span><span class="st ok">SELESAI</span></summary>
