@@ -38,10 +38,10 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
   <span class="pil"><b>38</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>2</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span><b>1</b> aktif</span>
   <span class="pil"><span class="dot warn"></span>1 baru</span>
-  <span class="pil"><span class="dot info"></span>1 diproses</span>
-  <span class="pil"><span class="dot ok"></span>25 selesai</span>
+  <span class="pil"><span class="dot info"></span>0 diproses</span>
+  <span class="pil"><span class="dot ok"></span>26 selesai</span>
 </div>
 <h2><span class="dot warn"></span>BARU (1)</h2><div class="list"><details class="card warn" open>
       <summary><span class="tid">#T39</span><span class="kic">🟡</span><span class="jd">Mekanisme sharing session knowledge ke user lain + follow-up topik belum dibalas</span><span class="st warn">BARU</span></summary>
@@ -65,68 +65,7 @@ Setiap ada tambahan knowledge (seperti diskusi Council Complete hari ini), perlu
 - Janus bisa recall: &quot;topik X sudah dishare ke siapa, siapa belum balas&quot;</p>
         
       </div>
-    </details></div><h2><span class="dot info"></span>DIPROSES (1)</h2><div class="list"><details class="card info" open>
-      <summary><span class="pr">🔺</span><span class="tid">#T37</span><span class="kic">🔴</span><span class="jd">Ricestar YoY: Janus banding 2025 full-year vs 2026 YTD → salah report -49% (actual +37%)</span><span class="st info">DIPROSES</span></summary>
-      <div class="bd">
-        <div class="meta">🔴 Masalah · irham (super-admin) · 2026-08-06T11:53 · 🔧 Claude</div>
-        <p class="isi">## Request User
-&quot;ytd ricestar vs py [previous year] dengan periode yang sama berapa growth volume di r2&quot;
-
-## Cara Janus Parsing
-1. &quot;py&quot; = dikira produk (Pyanchor), bukan &quot;previous year&quot; → tanya balik
-2. User klarifikasi: &quot;previous year&quot;
-3. Janus query: `brp_query(&quot;ricestar&quot;, year=&quot;2025&quot;)` dan `brp_query(&quot;ricestar&quot;, year=&quot;2026&quot;)`
-4. Output:
-   - 2025: 3,560 kg/L (19 kios) → ini data FULL YEAR (Jan-Des)
-   - 2026: 1,810 kg/L (21 kios) → ini data YTD (Jan-Agu)
-
-## Output yang Diberikan ke User
-| | 2025 | 2026 | Δ |
-|---|---|---|---|
-| Volume | 3,560 kg/L | 1,810 kg/L | ↓49% |
-
-## Kesalahan
-- Periode TIDAK apple-to-apple: 2025 = full year vs 2026 = YTD
-- Janus TIDAK cross-check apakah kedua periode sama panjang
-- User curiga (&quot;aku turun 49%?&quot;), Janus baru cek ulang
-
-## Data Sebenarnya (Jan-Jul 2025 vs Jan-Jul 2026)
-- 2025 Jan-Jul: 1,320 kg/L (12 kios)
-- 2026 Jan-Jul: 1,810 kg/L (20 kios)
-- Growth: **+37.1%** (bukan -49%)
-
-## Root Cause
-`brp_query.py` untuk year=2025 pakai file `BRP_2025_Full_Year.xlsx` (Jan-Des penuh), sedangkan year=2026 pakai `BRP_2026_YTD_...xlsx` (YTD). Tool tidak auto-filter ke periode setara saat banding tahun.
-
-## Proposal Perbaikan
-1. Janus rule: setiap banding YoY → WAJIB verifikasi periode sama (cek month range kedua file)
-2. `brp_query.py`: tambah mode `--same-period` yang auto-filter kedua tahun ke bulan yang sama (max bulan di tahun lebih pendek)
-3. Atau: default YoY = Jan-N tahun ini vs Jan-N tahun lalu (N = bulan terakhir data tahun ini)
-4. Short-term guard: Janus SELALU sebut periode data (&quot;Jan-Jul 2025&quot;) bukan &quot;YTD&quot; saat tahun berbeda</p>
-        <div class="resp"><b>irham:</b> ## TEMUAN TAMBAHAN: R1+R2 TERCAMPUR
-
-User minta &quot;volume di R2&quot; — Janus serve R1+R2 tanpa filter.
-
-### Angka yang Disajikan
-1,810 kg/L (R1+R2 combined) — padahal user minta R2 only:
-- R2 = 1,170 kg/L
-- R1 = 640 kg/L (tercampur)
-
-### Data Sebenarnya (R2 Only, Jan-Jul)
-- 2025: 960 kg/L (8 kios)
-- 2026: 1,170 kg/L (15 kios)
-- Growth: **+21.9%** (bukan +37.1% seperti koreksi pertama, apalagi -49% seperti awal)
-
-### Root Cause
-- Kolom type = `NEW_TEXT CP type` (bukan `Tipe label`)
-- brp_query.py output gabung R1+R2 (🔶 R2 + 🔷 R1) tanpa auto-filter
-- Janus tidak sadar harus pisah R1/R2 saat user spesifik minta R2
-
-### Proposal Tambahan
-- brp_query.py: tambah flag `--r2-only` untuk auto-filter
-- Janus guard: kalau user sebut &quot;R2&quot; / &quot;kios&quot; → pastikan output hanya R2</div>
-      </div>
-    </details></div><h2><span class="dot ok"></span>SELESAI (25)</h2><div class="list"><details class="card ok">
+    </details></div><h2><span class="dot ok"></span>SELESAI (26)</h2><div class="list"><details class="card ok">
       <summary><span class="pr">🔺</span><span class="tid">#T23</span><span class="kic">🔴</span><span class="jd">LIQ auto-link GAGAL — DSR/DMR routing salah (2x hari ini)</span><span class="st ok">SELESAI</span></summary>
       <div class="bd">
         <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-20T18:10 · 🔧 Claude</div>
@@ -329,6 +268,67 @@ Dihitung dari BRP scan Rp 24,6jt/30L → infer sendiri tanpa query tool. Harga B
 - Perlu normalisasi nama produk di LIQ
 - Janus HARUS query tool utk harga, tidak boleh hitung sendiri</p>
         <div class="reso">✅ 3 kegagalan tuntas (verifikasi 6 Ags): #1 items_of baca items+produk_detail+detail (recall pakai items_flat) → 45 kegiatan Oberon ketemu, bukan 0. #2 bayer_catalog.nama_display normalisasi Oberon/Oberon Speed/oberon → kanonik &#x27;Oberon&#x27; (harga konsisten 82rb/pcs). #3 harga dari price-list Bayer via valuate_items (Rp21,6jt), bukan imputasi BRP-scan (aturan #3: direct-selling SELALU harga Bayer).</div>
+      </div>
+    </details><details class="card ok">
+      <summary><span class="pr">🔺</span><span class="tid">#T37</span><span class="kic">🔴</span><span class="jd">Ricestar YoY: Janus banding 2025 full-year vs 2026 YTD → salah report -49% (actual +37%)</span><span class="st ok">SELESAI</span></summary>
+      <div class="bd">
+        <div class="meta">🔴 Masalah · irham (super-admin) · 2026-08-06T11:53 · 🔧 Claude</div>
+        <p class="isi">## Request User
+&quot;ytd ricestar vs py [previous year] dengan periode yang sama berapa growth volume di r2&quot;
+
+## Cara Janus Parsing
+1. &quot;py&quot; = dikira produk (Pyanchor), bukan &quot;previous year&quot; → tanya balik
+2. User klarifikasi: &quot;previous year&quot;
+3. Janus query: `brp_query(&quot;ricestar&quot;, year=&quot;2025&quot;)` dan `brp_query(&quot;ricestar&quot;, year=&quot;2026&quot;)`
+4. Output:
+   - 2025: 3,560 kg/L (19 kios) → ini data FULL YEAR (Jan-Des)
+   - 2026: 1,810 kg/L (21 kios) → ini data YTD (Jan-Agu)
+
+## Output yang Diberikan ke User
+| | 2025 | 2026 | Δ |
+|---|---|---|---|
+| Volume | 3,560 kg/L | 1,810 kg/L | ↓49% |
+
+## Kesalahan
+- Periode TIDAK apple-to-apple: 2025 = full year vs 2026 = YTD
+- Janus TIDAK cross-check apakah kedua periode sama panjang
+- User curiga (&quot;aku turun 49%?&quot;), Janus baru cek ulang
+
+## Data Sebenarnya (Jan-Jul 2025 vs Jan-Jul 2026)
+- 2025 Jan-Jul: 1,320 kg/L (12 kios)
+- 2026 Jan-Jul: 1,810 kg/L (20 kios)
+- Growth: **+37.1%** (bukan -49%)
+
+## Root Cause
+`brp_query.py` untuk year=2025 pakai file `BRP_2025_Full_Year.xlsx` (Jan-Des penuh), sedangkan year=2026 pakai `BRP_2026_YTD_...xlsx` (YTD). Tool tidak auto-filter ke periode setara saat banding tahun.
+
+## Proposal Perbaikan
+1. Janus rule: setiap banding YoY → WAJIB verifikasi periode sama (cek month range kedua file)
+2. `brp_query.py`: tambah mode `--same-period` yang auto-filter kedua tahun ke bulan yang sama (max bulan di tahun lebih pendek)
+3. Atau: default YoY = Jan-N tahun ini vs Jan-N tahun lalu (N = bulan terakhir data tahun ini)
+4. Short-term guard: Janus SELALU sebut periode data (&quot;Jan-Jul 2025&quot;) bukan &quot;YTD&quot; saat tahun berbeda</p>
+        <div class="resp"><b>irham:</b> ## TEMUAN TAMBAHAN: R1+R2 TERCAMPUR
+
+User minta &quot;volume di R2&quot; — Janus serve R1+R2 tanpa filter.
+
+### Angka yang Disajikan
+1,810 kg/L (R1+R2 combined) — padahal user minta R2 only:
+- R2 = 1,170 kg/L
+- R1 = 640 kg/L (tercampur)
+
+### Data Sebenarnya (R2 Only, Jan-Jul)
+- 2025: 960 kg/L (8 kios)
+- 2026: 1,170 kg/L (15 kios)
+- Growth: **+21.9%** (bukan +37.1% seperti koreksi pertama, apalagi -49% seperti awal)
+
+### Root Cause
+- Kolom type = `NEW_TEXT CP type` (bukan `Tipe label`)
+- brp_query.py output gabung R1+R2 (🔶 R2 + 🔷 R1) tanpa auto-filter
+- Janus tidak sadar harus pisah R1/R2 saat user spesifik minta R2
+
+### Proposal Tambahan
+- brp_query.py: tambah flag `--r2-only` untuk auto-filter
+- Janus guard: kalau user sebut &quot;R2&quot; / &quot;kios&quot; → pastikan output hanya R2</div><div class="reso">✅ brp_query.q_yoy + CLI --yoy (6 Ags): (1) samain rentang bulan ke bulan LENGKAP terakhir (Jan..N, exclude bulan berjalan parsial) → fix banding 2025 full-year vs 2026 YTD; (2) PISAH R1/R2 (tipe=None dua-duanya, --type R2 saja) → fix R1+R2 kecampur; (3) sebut periode eksplisit. Validasi: Ricestar Jan-Jul R2 +22% R1 +78% (gabung +37% = ground-truth ticket), bukan -49%. Routing JANUS_ROUTING+TOOLS.md, habit_guard 60/60, test_brp_yoy.</div>
       </div>
     </details><details class="card ok">
       <summary><span class="pr">🔺</span><span class="tid">#T38</span><span class="kic">🔴</span><span class="jd">Janus nyaris bocorkan data area internal ke kontributor lain (Council R2 -24% di draft blast)</span><span class="st ok">SELESAI</span></summary>
