@@ -38,32 +38,12 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
   <span class="pil"><b>38</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>3</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>2 baru</span>
+  <span class="pil"><span class="dot warn"></span><b>2</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>1 baru</span>
   <span class="pil"><span class="dot info"></span>1 diproses</span>
-  <span class="pil"><span class="dot ok"></span>24 selesai</span>
+  <span class="pil"><span class="dot ok"></span>25 selesai</span>
 </div>
-<h2><span class="dot warn"></span>BARU (2)</h2><div class="list"><details class="card warn" open>
-      <summary><span class="pr">🔺</span><span class="tid">#T38</span><span class="kic">🔴</span><span class="jd">Janus nyaris bocorkan data area internal ke kontributor lain (Council R2 -24% di draft blast)</span><span class="st warn">BARU</span></summary>
-      <div class="bd">
-        <div class="meta">🔴 Masalah · irham (super-admin) · 2026-08-06T12:42 · 🔧 Claude</div>
-        <p class="isi">## Insiden
-Saat drafting pesan Council Complete untuk Dharma (TM Solo Raya) &amp; David (CAC), Janus menyertakan data area internal Bang Irham:
-- &quot;Council R2 Jan-Jul 2026: 105 kg/L, 6 kios (↓24% YoY)&quot;
-- &quot;BASF Luxinum baru launching&quot;
-
-Data ini dari BRP area sendiri — TIDAK BOLEH di-share ke Dharma atau David (beda area/role).
-
-## Root Cause
-Janus tidak sadar konteks &quot;blast ke orang lain&quot; = data area sendiri HARUS disensor. Saat drafting, otomatis menambahkan konteks area sebagai &quot;tambahan&quot; tanpa filter.
-
-## Guard Proposal
-1. Rule eksplisit: SETIAP draft yang akan dikirim ke user lain → STRIP semua angka/data dari area sendiri
-2. Sebelum relay/request_review → wajib cek: &quot;apa ada data/angka internal area sendiri di teks ini?&quot;
-3. Semua data area-spesifik (BRP, kios, volume) HARUS dihapus sebelum dikirim ke user beda area</p>
-        
-      </div>
-    </details><details class="card warn" open>
+<h2><span class="dot warn"></span>BARU (1)</h2><div class="list"><details class="card warn" open>
       <summary><span class="tid">#T39</span><span class="kic">🟡</span><span class="jd">Mekanisme sharing session knowledge ke user lain + follow-up topik belum dibalas</span><span class="st warn">BARU</span></summary>
       <div class="bd">
         <div class="meta">🟡 Permintaan · irham (super-admin) · 2026-08-06T12:45 · 👤 Abang</div>
@@ -146,7 +126,7 @@ User minta &quot;volume di R2&quot; — Janus serve R1+R2 tanpa filter.
 - brp_query.py: tambah flag `--r2-only` untuk auto-filter
 - Janus guard: kalau user sebut &quot;R2&quot; / &quot;kios&quot; → pastikan output hanya R2</div>
       </div>
-    </details></div><h2><span class="dot ok"></span>SELESAI (24)</h2><div class="list"><details class="card ok">
+    </details></div><h2><span class="dot ok"></span>SELESAI (25)</h2><div class="list"><details class="card ok">
       <summary><span class="pr">🔺</span><span class="tid">#T23</span><span class="kic">🔴</span><span class="jd">LIQ auto-link GAGAL — DSR/DMR routing salah (2x hari ini)</span><span class="st ok">SELESAI</span></summary>
       <div class="bd">
         <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-20T18:10 · 🔧 Claude</div>
@@ -349,6 +329,26 @@ Dihitung dari BRP scan Rp 24,6jt/30L → infer sendiri tanpa query tool. Harga B
 - Perlu normalisasi nama produk di LIQ
 - Janus HARUS query tool utk harga, tidak boleh hitung sendiri</p>
         <div class="reso">✅ 3 kegagalan tuntas (verifikasi 6 Ags): #1 items_of baca items+produk_detail+detail (recall pakai items_flat) → 45 kegiatan Oberon ketemu, bukan 0. #2 bayer_catalog.nama_display normalisasi Oberon/Oberon Speed/oberon → kanonik &#x27;Oberon&#x27; (harga konsisten 82rb/pcs). #3 harga dari price-list Bayer via valuate_items (Rp21,6jt), bukan imputasi BRP-scan (aturan #3: direct-selling SELALU harga Bayer).</div>
+      </div>
+    </details><details class="card ok">
+      <summary><span class="pr">🔺</span><span class="tid">#T38</span><span class="kic">🔴</span><span class="jd">Janus nyaris bocorkan data area internal ke kontributor lain (Council R2 -24% di draft blast)</span><span class="st ok">SELESAI</span></summary>
+      <div class="bd">
+        <div class="meta">🔴 Masalah · irham (super-admin) · 2026-08-06T12:42 · 🔧 Claude</div>
+        <p class="isi">## Insiden
+Saat drafting pesan Council Complete untuk Dharma (TM Solo Raya) &amp; David (CAC), Janus menyertakan data area internal Bang Irham:
+- &quot;Council R2 Jan-Jul 2026: 105 kg/L, 6 kios (↓24% YoY)&quot;
+- &quot;BASF Luxinum baru launching&quot;
+
+Data ini dari BRP area sendiri — TIDAK BOLEH di-share ke Dharma atau David (beda area/role).
+
+## Root Cause
+Janus tidak sadar konteks &quot;blast ke orang lain&quot; = data area sendiri HARUS disensor. Saat drafting, otomatis menambahkan konteks area sebagai &quot;tambahan&quot; tanpa filter.
+
+## Guard Proposal
+1. Rule eksplisit: SETIAP draft yang akan dikirim ke user lain → STRIP semua angka/data dari area sendiri
+2. Sebelum relay/request_review → wajib cek: &quot;apa ada data/angka internal area sendiri di teks ini?&quot;
+3. Semua data area-spesifik (BRP, kios, volume) HARUS dihapus sebelum dikirim ke user beda area</p>
+        <div class="reso">✅ Guard deterministik anti-bocor (6 Ags): outbound_guard.scan_internal deteksi metrik area-internal (kg/L, kios, YoY%, R1/R2, BRP, Rp) di jalur review_thread.create (owner-&gt;user lain) → DITAHAN sebelum relay, minta sensor. Sengaja sempit (tanggal/slide lolos). activity_share sudah whitelist-safe. Terdaftar habit_guard 59/59 + test_outbound_guard.</div>
       </div>
     </details><details class="card ok">
       <summary><span class="tid">#T1</span><span class="kic">🟡</span><span class="jd">🔴 PERUBAHAN FUNDAMENTAL (knowledge)
