@@ -37,13 +37,13 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <h1>Helpdesk — Tiket User</h1>
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
-  <span class="pil"><b>35</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>1</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>1 baru</span>
+  <span class="pil"><b>36</b> total</span>
+  <span class="pil"><span class="dot warn"></span><b>2</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>2 baru</span>
   <span class="pil"><span class="dot info"></span>0 diproses</span>
   <span class="pil"><span class="dot ok"></span>23 selesai</span>
 </div>
-<h2><span class="dot warn"></span>BARU (1)</h2><div class="list"><details class="card warn" open>
+<h2><span class="dot warn"></span>BARU (2)</h2><div class="list"><details class="card warn" open>
       <summary><span class="pr">🔺</span><span class="tid">#T36</span><span class="kic">🔴</span><span class="jd">Analisa Oberon Speed red flag — 3 kegagalan</span><span class="st warn">BARU</span></summary>
       <div class="bd">
         <div class="meta">🔴 Masalah · irham (owner) · 2026-08-05T15:01 · 🔧 Claude</div>
@@ -62,6 +62,46 @@ Dihitung dari BRP scan Rp 24,6jt/30L → infer sendiri tanpa query tool. Harga B
 - liquidation recall/search harus cek detail+items
 - Perlu normalisasi nama produk di LIQ
 - Janus HARUS query tool utk harga, tidak boleh hitung sendiri</p>
+        
+      </div>
+    </details><details class="card warn" open>
+      <summary><span class="pr">🔺</span><span class="tid">#T37</span><span class="kic">🔴</span><span class="jd">Ricestar YoY: Janus banding 2025 full-year vs 2026 YTD → salah report -49% (actual +37%)</span><span class="st warn">BARU</span></summary>
+      <div class="bd">
+        <div class="meta">🔴 Masalah · irham (super-admin) · 2026-08-06T11:53 · 🔧 Claude</div>
+        <p class="isi">## Request User
+&quot;ytd ricestar vs py [previous year] dengan periode yang sama berapa growth volume di r2&quot;
+
+## Cara Janus Parsing
+1. &quot;py&quot; = dikira produk (Pyanchor), bukan &quot;previous year&quot; → tanya balik
+2. User klarifikasi: &quot;previous year&quot;
+3. Janus query: `brp_query(&quot;ricestar&quot;, year=&quot;2025&quot;)` dan `brp_query(&quot;ricestar&quot;, year=&quot;2026&quot;)`
+4. Output:
+   - 2025: 3,560 kg/L (19 kios) → ini data FULL YEAR (Jan-Des)
+   - 2026: 1,810 kg/L (21 kios) → ini data YTD (Jan-Agu)
+
+## Output yang Diberikan ke User
+| | 2025 | 2026 | Δ |
+|---|---|---|---|
+| Volume | 3,560 kg/L | 1,810 kg/L | ↓49% |
+
+## Kesalahan
+- Periode TIDAK apple-to-apple: 2025 = full year vs 2026 = YTD
+- Janus TIDAK cross-check apakah kedua periode sama panjang
+- User curiga (&quot;aku turun 49%?&quot;), Janus baru cek ulang
+
+## Data Sebenarnya (Jan-Jul 2025 vs Jan-Jul 2026)
+- 2025 Jan-Jul: 1,320 kg/L (12 kios)
+- 2026 Jan-Jul: 1,810 kg/L (20 kios)
+- Growth: **+37.1%** (bukan -49%)
+
+## Root Cause
+`brp_query.py` untuk year=2025 pakai file `BRP_2025_Full_Year.xlsx` (Jan-Des penuh), sedangkan year=2026 pakai `BRP_2026_YTD_...xlsx` (YTD). Tool tidak auto-filter ke periode setara saat banding tahun.
+
+## Proposal Perbaikan
+1. Janus rule: setiap banding YoY → WAJIB verifikasi periode sama (cek month range kedua file)
+2. `brp_query.py`: tambah mode `--same-period` yang auto-filter kedua tahun ke bulan yang sama (max bulan di tahun lebih pendek)
+3. Atau: default YoY = Jan-N tahun ini vs Jan-N tahun lalu (N = bulan terakhir data tahun ini)
+4. Short-term guard: Janus SELALU sebut periode data (&quot;Jan-Jul 2025&quot;) bukan &quot;YTD&quot; saat tahun berbeda</p>
         
       </div>
     </details></div><h2><span class="dot ok"></span>SELESAI (23)</h2><div class="list"><details class="card ok">
