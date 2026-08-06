@@ -38,33 +38,12 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
   <span class="pil"><b>38</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>4</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>3 baru</span>
+  <span class="pil"><span class="dot warn"></span><b>3</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>2 baru</span>
   <span class="pil"><span class="dot info"></span>1 diproses</span>
-  <span class="pil"><span class="dot ok"></span>23 selesai</span>
+  <span class="pil"><span class="dot ok"></span>24 selesai</span>
 </div>
-<h2><span class="dot warn"></span>BARU (3)</h2><div class="list"><details class="card warn" open>
-      <summary><span class="pr">🔺</span><span class="tid">#T36</span><span class="kic">🔴</span><span class="jd">Analisa Oberon Speed red flag — 3 kegagalan</span><span class="st warn">BARU</span></summary>
-      <div class="bd">
-        <div class="meta">🔴 Masalah · irham (owner) · 2026-08-05T15:01 · 🔧 Claude</div>
-        <p class="isi">## 3 Kegagalan Analisa Oberon Speed (5 Ags 2026)
-
-### 1. GAGAL PARSING LIQ — field detail vs items
-Search cuma di &#x27;detail&#x27;, tapi LIQ punya 2 format: detail (lama) dan items (baru). Hasil search pertama: 0 Oberon. Abang tunjuk contoh → baru sadar ada field items. Fix: liquidation recall HARUS cek kedua field.
-
-### 2. SCOPE SALAH — diminta Oberon Speed, dijawab semua Oberon (39 LIQ campur)
-Keyword &#x27;oberon speed&#x27; vs &#x27;oberon&#x27; tidak difilter. Nama produk di LIQ tidak konsisten: &#x27;Oberon Speed&#x27; / &#x27;Oberon speed&#x27; / &#x27;Oberon&#x27; (padahal 27 items &#x27;Oberon&#x27; tanpa Speed kemungkinan besar produk sama).
-
-### 3. HARGA NGARANG — Rp 410rb/botol dari imputasi
-Dihitung dari BRP scan Rp 24,6jt/30L → infer sendiri tanpa query tool. Harga BRP scan = retail ke petani BUKAN direct selling. Melanggar ANTI-NGARANG di SOUL.md.
-
-### AKAR
-- liquidation recall/search harus cek detail+items
-- Perlu normalisasi nama produk di LIQ
-- Janus HARUS query tool utk harga, tidak boleh hitung sendiri</p>
-        
-      </div>
-    </details><details class="card warn" open>
+<h2><span class="dot warn"></span>BARU (2)</h2><div class="list"><details class="card warn" open>
       <summary><span class="pr">🔺</span><span class="tid">#T38</span><span class="kic">🔴</span><span class="jd">Janus nyaris bocorkan data area internal ke kontributor lain (Council R2 -24% di draft blast)</span><span class="st warn">BARU</span></summary>
       <div class="bd">
         <div class="meta">🔴 Masalah · irham (super-admin) · 2026-08-06T12:42 · 🔧 Claude</div>
@@ -167,7 +146,7 @@ User minta &quot;volume di R2&quot; — Janus serve R1+R2 tanpa filter.
 - brp_query.py: tambah flag `--r2-only` untuk auto-filter
 - Janus guard: kalau user sebut &quot;R2&quot; / &quot;kios&quot; → pastikan output hanya R2</div>
       </div>
-    </details></div><h2><span class="dot ok"></span>SELESAI (23)</h2><div class="list"><details class="card ok">
+    </details></div><h2><span class="dot ok"></span>SELESAI (24)</h2><div class="list"><details class="card ok">
       <summary><span class="pr">🔺</span><span class="tid">#T23</span><span class="kic">🔴</span><span class="jd">LIQ auto-link GAGAL — DSR/DMR routing salah (2x hari ini)</span><span class="st ok">SELESAI</span></summary>
       <div class="bd">
         <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-20T18:10 · 🔧 Claude</div>
@@ -349,6 +328,27 @@ Bang Irham: &quot;Ini sudah kasus ke berapa kamu tanya hal ini&quot;
 
 Perlu guard di sistem: kalau ada field nilai_spot_rp, JANGAN bandingkan dengan plan budget. Atau setidaknya rule tegas di MEMORY.md yang tidak akan dilanggar.</p>
         <div class="reso">✅ Guard KODE dipasang: sot.js SELLGUARD (inject aturan tiap konteks direct-selling/likuidasi) + CORE §9 rule immutable + lessons L-260804073532 (guarded) + test. Direct selling (nilai_spot) ≠ biaya kegiatan (budget) — dilarang dibandingkan. Deploy via ROG pull + gateway restart.</div>
+      </div>
+    </details><details class="card ok">
+      <summary><span class="pr">🔺</span><span class="tid">#T36</span><span class="kic">🔴</span><span class="jd">Analisa Oberon Speed red flag — 3 kegagalan</span><span class="st ok">SELESAI</span></summary>
+      <div class="bd">
+        <div class="meta">🔴 Masalah · irham (owner) · 2026-08-05T15:01 · 🔧 Claude</div>
+        <p class="isi">## 3 Kegagalan Analisa Oberon Speed (5 Ags 2026)
+
+### 1. GAGAL PARSING LIQ — field detail vs items
+Search cuma di &#x27;detail&#x27;, tapi LIQ punya 2 format: detail (lama) dan items (baru). Hasil search pertama: 0 Oberon. Abang tunjuk contoh → baru sadar ada field items. Fix: liquidation recall HARUS cek kedua field.
+
+### 2. SCOPE SALAH — diminta Oberon Speed, dijawab semua Oberon (39 LIQ campur)
+Keyword &#x27;oberon speed&#x27; vs &#x27;oberon&#x27; tidak difilter. Nama produk di LIQ tidak konsisten: &#x27;Oberon Speed&#x27; / &#x27;Oberon speed&#x27; / &#x27;Oberon&#x27; (padahal 27 items &#x27;Oberon&#x27; tanpa Speed kemungkinan besar produk sama).
+
+### 3. HARGA NGARANG — Rp 410rb/botol dari imputasi
+Dihitung dari BRP scan Rp 24,6jt/30L → infer sendiri tanpa query tool. Harga BRP scan = retail ke petani BUKAN direct selling. Melanggar ANTI-NGARANG di SOUL.md.
+
+### AKAR
+- liquidation recall/search harus cek detail+items
+- Perlu normalisasi nama produk di LIQ
+- Janus HARUS query tool utk harga, tidak boleh hitung sendiri</p>
+        <div class="reso">✅ 3 kegagalan tuntas (verifikasi 6 Ags): #1 items_of baca items+produk_detail+detail (recall pakai items_flat) → 45 kegiatan Oberon ketemu, bukan 0. #2 bayer_catalog.nama_display normalisasi Oberon/Oberon Speed/oberon → kanonik &#x27;Oberon&#x27; (harga konsisten 82rb/pcs). #3 harga dari price-list Bayer via valuate_items (Rp21,6jt), bukan imputasi BRP-scan (aturan #3: direct-selling SELALU harga Bayer).</div>
       </div>
     </details><details class="card ok">
       <summary><span class="tid">#T1</span><span class="kic">🟡</span><span class="jd">🔴 PERUBAHAN FUNDAMENTAL (knowledge)
