@@ -38,12 +38,12 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
   <span class="pil"><b>40</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>3</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>3 baru</span>
+  <span class="pil"><span class="dot warn"></span><b>1</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>1 baru</span>
   <span class="pil"><span class="dot info"></span>0 diproses</span>
-  <span class="pil"><span class="dot ok"></span>26 selesai</span>
+  <span class="pil"><span class="dot ok"></span>28 selesai</span>
 </div>
-<h2><span class="dot warn"></span>BARU (3)</h2><div class="list"><details class="card warn" open>
+<h2><span class="dot warn"></span>BARU (1)</h2><div class="list"><details class="card warn" open>
       <summary><span class="tid">#T39</span><span class="kic">🟡</span><span class="jd">Mekanisme sharing session knowledge ke user lain + follow-up topik belum dibalas</span><span class="st warn">BARU</span></summary>
       <div class="bd">
         <div class="meta">🟡 Permintaan · irham (super-admin) · 2026-08-06T12:45 · 👤 Abang</div>
@@ -65,51 +65,7 @@ Setiap ada tambahan knowledge (seperti diskusi Council Complete hari ini), perlu
 - Janus bisa recall: &quot;topik X sudah dishare ke siapa, siapa belum balas&quot;</p>
         
       </div>
-    </details><details class="card warn" open>
-      <summary><span class="tid">#T40</span><span class="kic">🔴</span><span class="jd">Auto-validasi desa/kecamatan saat input/revisi plan dari dashboard</span><span class="st warn">BARU</span></summary>
-      <div class="bd">
-        <div class="meta">🔴 Masalah · irham (owner) · 2026-08-07T08:43 · 🔧 Claude</div>
-        <p class="isi">## Masalah
-Plan DR dari dashboard bisa di-input dengan kecamatan/desa yang tidak sesuai — tidak ada auto-check.
-
-### Contoh (7 Ags 2026)
-- Plan Angga ODP 6 Ags: tercatat kec=Bandungan, crop=Sayuran, kios=Auliya Tani
-- Eksekusi aktual: kec=Tanggungharjo, crop=Tembakau-Jagung, kios=Sari Tani Sejahtera
-- Akibat: plan tidak auto-match ke laporan, dashboard salah tampil
-
-### Akar
-Tidak ada validasi silang antara lokasi plan vs master data (kecamatan/desa/kios). Input dari dashboard tidak di-cross-check.
-
-### Proposal
-1. Saat plan di-input, auto-validasi: desa wajib valid di kecamatan tersebut (cross-check ke master kios/kecamatan mapping)
-2. Jika desa tidak dikenal → warning + minta konfirmasi
-3. Label plan sebaiknya auto-generate dari data (kec·Buffer: kios), bukan teks bebas</p>
-        
-      </div>
-    </details><details class="card warn" open>
-      <summary><span class="tid">#T41</span><span class="kic">🔴</span><span class="jd">Deteksi bentrok plan: label/lokasi duplikat dalam 1 project</span><span class="st warn">BARU</span></summary>
-      <div class="bd">
-        <div class="meta">🔴 Masalah · irham (owner) · 2026-08-07T08:43 · 🔧 Claude</div>
-        <p class="isi">## Masalah
-Dua aktivitas dalam 1 project bisa punya label/lokasi identik → auto-link liquidation salah sasaran.
-
-### Contoh (7 Ags 2026)
-- Fani BLF Jul-Sep 2026 punya 2 aktivitas dengan label :
-  - [5] 31 Jul — sudah done (LIQ260801094512)
-  - [6] 14 Ags — masih planned
-- Saat LIQ260806095034 (FED Fani 5 Ags, Tani Mandiri) diproses, auto-link kena activity [6] (14 Ags) karena label sama — padahal yang dimaksud activity lain
-- Akibat: plan 14 Ags (belum terjadi) terlanjur marked &#x27;done&#x27;, selesai 2026-08-14 (tanggal depan!)
-
-### Akar
-Auto-match liquidation→plan pakai pencocokan label/lokasi. Label duplikat bikin ambiguous match.
-
-### Proposal
-1. Saat tambah aktivitas ke project, deteksi label/lokasi/kecamatan yang sudah ada → warning/block
-2. Auto-link liquidation→plan: selain label, cocokkan juga TANGGAL (range ±N hari) sebagai filter tambahan
-3. Jika tetap ambiguous (beberapa kandidat cocok), JANGAN auto-done — flag ke owner untuk resolve manual</p>
-        
-      </div>
-    </details></div><h2><span class="dot ok"></span>SELESAI (26)</h2><div class="list"><details class="card ok">
+    </details></div><h2><span class="dot ok"></span>SELESAI (28)</h2><div class="list"><details class="card ok">
       <summary><span class="pr">🔺</span><span class="tid">#T23</span><span class="kic">🔴</span><span class="jd">LIQ auto-link GAGAL — DSR/DMR routing salah (2x hari ini)</span><span class="st ok">SELESAI</span></summary>
       <div class="bd">
         <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-20T18:10 · 🔧 Claude</div>
@@ -628,6 +584,50 @@ Contoh hari ini: Heppy ubah SFed dari 3 Ags ke 18 Ags. Dashboard udah berubah, t
 
 Butuh: cron/auto-sync biar perubahan jadwal di dashboard langsung ke-reflect di Google Calendar tanpa intervensi manual.</p>
         <div class="resp"><b>irham:</b> [KOREKSI scope] Bukan semua kegiatan DR. Kalender = PRIBADI Abang (invite dari burner), KHUSUS special activity TM yang dipilih. Masalah: (1) set gcal utk activity TM, (2) reschedule di dashboard TAK auto-update event gcal-nya. Fix: link activity&lt;-&gt;gcal_event_id + auto-sync dashboard-&gt;gcal utk activity yg ber-link saja (§430 tetap aman: cuma yg dipilih).</div><div class="reso">✅ gcal_sync.py: &#x27;set&#x27; link activity-event_id (special activity dipilih), cron reconcile 30mnt patch gcal pas jadwal geser dashboard. Live-tested 3-&gt;18 Ags. Kalender pribadi tetap bersih. Event SFed lama perlu di-set ulang 1x biar ikut auto-sync.</div>
+      </div>
+    </details><details class="card ok">
+      <summary><span class="tid">#T40</span><span class="kic">🔴</span><span class="jd">Auto-validasi desa/kecamatan saat input/revisi plan dari dashboard</span><span class="st ok">SELESAI</span></summary>
+      <div class="bd">
+        <div class="meta">🔴 Masalah · irham (owner) · 2026-08-07T08:43 · 🔧 Claude</div>
+        <p class="isi">## Masalah
+Plan DR dari dashboard bisa di-input dengan kecamatan/desa yang tidak sesuai — tidak ada auto-check.
+
+### Contoh (7 Ags 2026)
+- Plan Angga ODP 6 Ags: tercatat kec=Bandungan, crop=Sayuran, kios=Auliya Tani
+- Eksekusi aktual: kec=Tanggungharjo, crop=Tembakau-Jagung, kios=Sari Tani Sejahtera
+- Akibat: plan tidak auto-match ke laporan, dashboard salah tampil
+
+### Akar
+Tidak ada validasi silang antara lokasi plan vs master data (kecamatan/desa/kios). Input dari dashboard tidak di-cross-check.
+
+### Proposal
+1. Saat plan di-input, auto-validasi: desa wajib valid di kecamatan tersebut (cross-check ke master kios/kecamatan mapping)
+2. Jika desa tidak dikenal → warning + minta konfirmasi
+3. Label plan sebaiknya auto-generate dari data (kec·Buffer: kios), bukan teks bebas</p>
+        <div class="reso">✅ geo_resolver.validate (cek desa vs kec di backbone) + apply_actions._geo_warn (papan DR: warning desa!=kec/crop-nyampur, tak blok). Swarm fix 44 false-positive (collapse se-provinsi) + seat-village 6 kec + parse_lokasi crash. Exhaustif 0 FP dari 1097 triple. Scan nyata: 8 plan geo-suspect (Ardhi &#x27;bonang tanaman padi&#x27;, Sendangharjo/Ngaringan, dst) buat Abang cek. +test_geo_resolver.</div>
+      </div>
+    </details><details class="card ok">
+      <summary><span class="tid">#T41</span><span class="kic">🔴</span><span class="jd">Deteksi bentrok plan: label/lokasi duplikat dalam 1 project</span><span class="st ok">SELESAI</span></summary>
+      <div class="bd">
+        <div class="meta">🔴 Masalah · irham (owner) · 2026-08-07T08:43 · 🔧 Claude</div>
+        <p class="isi">## Masalah
+Dua aktivitas dalam 1 project bisa punya label/lokasi identik → auto-link liquidation salah sasaran.
+
+### Contoh (7 Ags 2026)
+- Fani BLF Jul-Sep 2026 punya 2 aktivitas dengan label :
+  - [5] 31 Jul — sudah done (LIQ260801094512)
+  - [6] 14 Ags — masih planned
+- Saat LIQ260806095034 (FED Fani 5 Ags, Tani Mandiri) diproses, auto-link kena activity [6] (14 Ags) karena label sama — padahal yang dimaksud activity lain
+- Akibat: plan 14 Ags (belum terjadi) terlanjur marked &#x27;done&#x27;, selesai 2026-08-14 (tanggal depan!)
+
+### Akar
+Auto-match liquidation→plan pakai pencocokan label/lokasi. Label duplikat bikin ambiguous match.
+
+### Proposal
+1. Saat tambah aktivitas ke project, deteksi label/lokasi/kecamatan yang sudah ada → warning/block
+2. Auto-link liquidation→plan: selain label, cocokkan juga TANGGAL (range ±N hari) sebagai filter tambahan
+3. Jika tetap ambiguous (beberapa kandidat cocok), JANGAN auto-done — flag ke owner untuk resolve manual</p>
+        <div class="reso">✅ find_exec_match: proximity tanggal (±31hr, pilih terdekat) + guard anti-tutup-plan-masa-depan (FUTURE_PLAN_GRACE=2, exec 5 Ags tak bisa nutup buffer 14 Ags) + ambigu-&gt;flag. Label duplikat=by-design buffer (18 project) -&gt; fix di disambiguasi bukan larang. Swarm: 110 auto-link nyata, 0 regresi. +test_reconcile_proximity.</div>
       </div>
     </details></div><h2><span class="dot gap"></span>DITUTUP (7)</h2><div class="list"><details class="card gap">
       <summary><span class="tid">#T7</span><span class="kic">🔵</span><span class="jd">Pesan dari David: &quot;AI-nya mantap&quot; 👍
