@@ -37,13 +37,13 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <h1>Helpdesk — Tiket User</h1>
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
-  <span class="pil"><b>40</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>1</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>1 baru</span>
+  <span class="pil"><b>41</b> total</span>
+  <span class="pil"><span class="dot warn"></span><b>2</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>2 baru</span>
   <span class="pil"><span class="dot info"></span>0 diproses</span>
   <span class="pil"><span class="dot ok"></span>28 selesai</span>
 </div>
-<h2><span class="dot warn"></span>BARU (1)</h2><div class="list"><details class="card warn" open>
+<h2><span class="dot warn"></span>BARU (2)</h2><div class="list"><details class="card warn" open>
       <summary><span class="tid">#T39</span><span class="kic">🟡</span><span class="jd">Mekanisme sharing session knowledge ke user lain + follow-up topik belum dibalas</span><span class="st warn">BARU</span></summary>
       <div class="bd">
         <div class="meta">🟡 Permintaan · irham (super-admin) · 2026-08-06T12:45 · 👤 Abang</div>
@@ -63,6 +63,31 @@ Setiap ada tambahan knowledge (seperti diskusi Council Complete hari ini), perlu
 - Store: `knowledge_shares.json` — tracking siapa dikasih topik apa, status balas, due date follow-up
 - Flow: submit → share ke user (via relay/review) → track response → auto-remind kalau overdue
 - Janus bisa recall: &quot;topik X sudah dishare ke siapa, siapa belum balas&quot;</p>
+        
+      </div>
+    </details><details class="card warn" open>
+      <summary><span class="tid">#T42</span><span class="kic">🔴</span><span class="jd">Perkuat validasi hierarki desa/kecamatan + auto web-search saat nama tak dikenal</span><span class="st warn">BARU</span></summary>
+      <div class="bd">
+        <div class="meta">🔴 Masalah · irham (owner) · 2026-08-07T22:48 · 🔧 Claude</div>
+        <p class="isi">## Masalah
+Saat input lokasi plan/laporan, nama desa yang tidak match tidak di-flag — bisa jadi dusun (bukan desa), nama salah eja, atau hierarki kabupaten/kecamatan/desa tidak valid.
+
+### Kasus nyata (7 Ags 2026)
+- Laporan SFED Heppy: lokasi &quot;Kaliyoso, Undaan, Kudus&quot;
+- Kaliyoso = dusun, BUKAN desa. Desa sebenarnya: Karangrowo
+- Janus tidak search web dulu, malah klaim &quot;desa tak dikenal, mau catat pakai apa?&quot;
+- Akibat: data musim tanam sempat salah entry (Kaliyoso), harus dikoreksi manual
+
+### Akar
+1. Tidak ada validasi hierarki: nama dusun bisa lolos sebagai desa tanpa flag
+2. Tidak ada trigger auto web-search saat nama tak cocok dengan master data
+3. Akan makin fatal saat user lain (Widya/David) mulai input — mereka bisa asal entry nama
+
+### Proposal
+1. **Validasi hierarki**: saat input plan/laporan, cross-check desa→kecamatan→kabupaten ke master data (retailer_lookup/kecamatan_mapping). Kalau hierarki tidak match → TOLAK + beri hint koreksi
+2. **Auto web-search**: kalau nama lokasi tidak dikenal di master data → trigger web_search otomatis untuk cek apakah itu dusun/desa/nama alternatif → baru minta klarifikasi ke user DENGAN hasil search
+3. **Flag &quot;nama tidak dikenal&quot;**: jangan diam — selalu kasih warning + saran (mis. &quot;Kaliyoso tidak ada di data, mungkin dusun di Karangrowo?&quot;)
+4. **Trigger ini berlaku buat SEMUA user** (bukan cuma owner), karena user lain (Widya/David) juga akan input lokasi</p>
         
       </div>
     </details></div><h2><span class="dot ok"></span>SELESAI (28)</h2><div class="list"><details class="card ok">
