@@ -37,13 +37,13 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <h1>Helpdesk — Tiket User</h1>
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
-  <span class="pil"><b>41</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>2</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>2 baru</span>
+  <span class="pil"><b>42</b> total</span>
+  <span class="pil"><span class="dot warn"></span><b>3</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>3 baru</span>
   <span class="pil"><span class="dot info"></span>0 diproses</span>
   <span class="pil"><span class="dot ok"></span>28 selesai</span>
 </div>
-<h2><span class="dot warn"></span>BARU (2)</h2><div class="list"><details class="card warn" open>
+<h2><span class="dot warn"></span>BARU (3)</h2><div class="list"><details class="card warn" open>
       <summary><span class="tid">#T39</span><span class="kic">🟡</span><span class="jd">Mekanisme sharing session knowledge ke user lain + follow-up topik belum dibalas</span><span class="st warn">BARU</span></summary>
       <div class="bd">
         <div class="meta">🟡 Permintaan · irham (super-admin) · 2026-08-06T12:45 · 👤 Abang</div>
@@ -88,6 +88,20 @@ Saat input lokasi plan/laporan, nama desa yang tidak match tidak di-flag — bis
 2. **Auto web-search**: kalau nama lokasi tidak dikenal di master data → trigger web_search otomatis untuk cek apakah itu dusun/desa/nama alternatif → baru minta klarifikasi ke user DENGAN hasil search
 3. **Flag &quot;nama tidak dikenal&quot;**: jangan diam — selalu kasih warning + saran (mis. &quot;Kaliyoso tidak ada di data, mungkin dusun di Karangrowo?&quot;)
 4. **Trigger ini berlaku buat SEMUA user** (bukan cuma owner), karena user lain (Widya/David) juga akan input lokasi</p>
+        
+      </div>
+    </details><details class="card warn" open>
+      <summary><span class="tid">#T43</span><span class="kic">🔴</span><span class="jd">gcal_sync tidak auto-discover kegiatan TM — hanya 5 dari 16 yang masuk kalender</span><span class="st warn">BARU</span></summary>
+      <div class="bd">
+        <div class="meta">🔴 Masalah · irham (super-admin) · 2026-08-11T13:02 · 🔧 Claude</div>
+        <p class="isi">gcal_sync.py hanya sync kegiatan yang manual di-set via `gcal_sync.py set`, tidak auto-discover semua kegiatan TM dari demand_projects.json maupun budget_tambahan.json.
+
+Saat ini:
+- 5 kegiatan sudah sync (manual set)
+- 6 SFED di demand_projects belum sync
+- 5 program Marketing/BLF di budget_tambahan belum sync (Ambition Day, Mini Vayego Fest x2, Oberon Spinwheel, Tour Petani)
+
+Harusnya: semua kegiatan TM (SFED + Marketing/BLF) auto-discover dan sync ke Google Calendar tanpa perlu manual set satu-satu. Budget_tambahan yang punya --tgl-eksekusi juga harus ikut masuk kalender.</p>
         
       </div>
     </details></div><h2><span class="dot ok"></span>SELESAI (28)</h2><div class="list"><details class="card ok">
