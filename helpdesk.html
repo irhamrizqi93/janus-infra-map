@@ -37,74 +37,60 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <h1>Helpdesk — Tiket User</h1>
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
-  <span class="pil"><b>22</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>3</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>1 baru</span>
-  <span class="pil"><span class="dot info"></span>2 diproses</span>
-  <span class="pil"><span class="dot ok"></span>12 selesai</span>
+  <span class="pil"><b>43</b> total</span>
+  <span class="pil"><span class="dot warn"></span><b>2</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>2 baru</span>
+  <span class="pil"><span class="dot info"></span>0 diproses</span>
+  <span class="pil"><span class="dot ok"></span>30 selesai</span>
 </div>
-<h2><span class="dot warn"></span>BARU (1)</h2><div class="list"><details class="card warn" open>
-      <summary><span class="tid">#T17</span><span class="kic">🔵</span><span class="jd">PESAN DARI WIDYA ke Mas Irham:
-
-aku sudah selesai analisa positioning Vayego vs </span><span class="st warn">BARU</span></summary>
+<h2><span class="dot warn"></span>BARU (2)</h2><div class="list"><details class="card warn" open>
+      <summary><span class="tid">#T39</span><span class="kic">🟡</span><span class="jd">Mekanisme sharing session knowledge ke user lain + follow-up topik belum dibalas</span><span class="st warn">BARU</span></summary>
       <div class="bd">
-        <div class="meta">🔵 Pertanyaan · widya (MD) · 2026-07-16T13:13 · 🔧 Claude</div>
-        <p class="isi">PESAN DARI WIDYA ke Mas Irham:
+        <div class="meta">🟡 Permintaan · irham (super-admin) · 2026-08-06T12:45 · 👤 Abang</div>
+        <p class="isi">## Kebutuhan
+Setiap ada tambahan knowledge (seperti diskusi Council Complete hari ini), perlu mekanisme TERSTRUKTUR untuk:
 
-aku sudah selesai analisa positioning Vayego vs Fenite. Vayego tetraniliprol 200 g/L, Fenite emamektin 60 + lufenuron 90. Keunggulan Vayego: stop feeding 1-2 jam, translaminar aman bunga.
+1. **Sharing session** — setelah knowledge dicatat/diproses Janus → bisa di-share ke user lain yang relevan (MD/CAC/TM lain) untuk memperkuat knowledge bersama. Bukan sekadar forward teks, tapi punya struktur: topik, poin kunci, role siapa yang dituju, dan jejak balasannya.
 
-🔴 PROTOKOL DEMOPLOT KC Hijau (PAKAI INI, JANGAN nebak/pakai offset chart):
-• DOSIS per titik (0,1ha=1.000m², sprayer 14L): Oberon 80ml · Vayego 40ml · Ambition 200ml
-• TIMING Oberon+Ambition: Spray1 = H+15 (vegetatif awal), Spray2 = H+22
-• TIMING Vayego+Ambition: Spray1 = H~20-25, Spray2 = H~30-35 (bunga), Spray3 = H~40-45 (polong)
-• Kacang hijau panen ≈ H+60. HST = hari setelah TANAM (bukan dari tanggal lain).
-⚠️ JADWAL SPRAY per demoplot → PANGGIL: python3 ~/janus/scripts/demoplot_spray.py --dr &lt;DR&gt; (output tanggal EKSAK). JANGAN hitung HST-&gt;tanggal manual — DeepSeek sering salah. Detail: rag_lookup &quot;protokol demoplot&quot;.
+2. **Follow-up tracking** — kalau ada topik yang belum dibalas oleh user yang ditanya → ada mekanisme reminder/eskalasi. Misalnya: Dharma belum jawab insight tambahan Council setelah 3 hari → Janus bisa follow-up atau Abang di-notif.
 
-📘 SKILL LAPOR-KEGIATAN (section C) — framework, angka tetap dari tool:
-&gt; Update: 2026-07-12 · Skill Lapor-Kegiatan (section C) — playbook intake laporan lapangan, BUKAN data. Pasangan: terima-planning-kegiatan.
+## Use Case Hari Ini
+- Abang diskusi Council Complete → Janus olah jadi 3 poin kunci
+- Kirim ke Dharma (TM) dan David (CAC) minta insight tambahan
+- **Gap:** Tidak ada mekanisme untuk track apakah mereka sudah balas, dan tidak ada follow-up otomatis kalau belum
 
-## Cakupan
-DR/Abang lapor kegiatan SELESAI (&quot;sudah selesai FED di Desa X, hadir 25 petani, ini fotonya&quot;) → tersimpan di liquidation (SoT laporan+tanggal). Rencana baru = skill terima-planning-kegiatan.
-
-## Alur (deterministik, ≤4 langkah)
-1. **Anti-dobel DULU**: `liquidation.py --recall --dr &lt;DR&gt; [--jenis &lt;J&gt;] [--bulan YYYY-MM]` — laporan yang sama sudah ada → JANGAN `--add` baru; info susulan masuk `--update &lt;LIQ_ID&gt;` / `--attach-foto &lt;LIQ_ID&gt; --foto &lt;url&gt;`.
-2. **Simpan baru**: `echo &#x27;&lt;json&gt;&#x27; | liquidation.py --add` — field dari pesan user apa adanya (jenis, dr, desa/kec, tanggal, peserta, produk, foto). Field yang user tak sebut → biarkan kosong, JANGAN isi karangan.
-3. **Baca scorecard hasil add**: blok `❓ KOSONG` = field itu BELUM tersimpan → minta ke user (foto? jumlah peserta?) → lengkapi via `--update`/`--attach-foto`. JANGAN lapor &quot;sudah tercatat lengkap&quot; selagi masih ada ❓.
-4. **Verify ke user**: tampilkan ringkas hasil recall/scorecard DARI TOOL (bukan dari ingatan) + apa yang masih kurang.
-
-## ⚠️ Pitfall
-1. Tanggal report di liquidation = SoT tanggal tampil (report &gt; selesai &gt; plan). Tanggal salah → betulkan DI SINI, jangan tambal di dashboard/kalender.
-2. Auto-rekonsiliasi ke plan jalan sendiri; report kelihatan &quot;orphan&quot; → `--reconcile-all`, bukan bikin plan baru.
-3. Laporan dari DR langsung (bukan Abang): tetap boleh dicatat sebagai laporan, tapi perubahan plan/settle tetap human-gate Abang.
-4. Susulan (foto nyusul, koreksi peserta) = `--update`/`--attach-foto`, BUKAN `--add` kedua.
-
-## Penalaran (probabilistik)
-- Nilai kegiatan (&quot;worth it gak?&quot;) BUKAN di sini → arahkan ke skill dampak-kegiatan (eval_kegiatan).
-- Ragu ini laporan baru atau susulan dari recall → tanya user 1×, jangan tebak.
-
-
-⛔ ANTI-NGARANG (SEMUA topik, WAJIB): jawaban DATA/ANGKA/STATUS/ANALISA/MATCHING = HANYA dari TOOL (cek TOOLS.md — ada ~100 tool siap pakai). DILARANG KERAS nulis logika bisnis / algoritma / rekonsiliasi / pencocokan / script analisa SENDIRI di chat, dan DILARANG hitung dari ingatan. Kalau kamu merasa perlu &#x27;benerin/bikin/hitung&#x27; logika sendiri → itu SINYAL tool-nya kurang/ada bug → (1) JALANKAN tool yang ada dulu, relay hasilnya apa adanya; (2) kalau hasil tool masih salah → `python3 ~/janus/scripts/janus_issue.py` biar Claude betulin di BACKEND. JANGAN PERNAH tambal/ngarang jawaban atau &#x27;bikin fix&#x27; di chat — itu bikin angka beda dari papan &amp; nyesatin.</p>
+## Proposal (detail di backend)
+- Store: `knowledge_shares.json` — tracking siapa dikasih topik apa, status balas, due date follow-up
+- Flow: submit → share ke user (via relay/review) → track response → auto-remind kalau overdue
+- Janus bisa recall: &quot;topik X sudah dishare ke siapa, siapa belum balas&quot;</p>
         
       </div>
-    </details></div><h2><span class="dot info"></span>DIPROSES (2)</h2><div class="list"><details class="card info" open>
-      <summary><span class="tid">#T12</span><span class="kic">🔵</span><span class="jd">David tanya: berapa sisa LDD Mas Irham?
-
-Ini di luar scope CAC David — data keua</span><span class="st info">DIPROSES</span></summary>
+    </details><details class="card warn" open>
+      <summary><span class="tid">#T42</span><span class="kic">🔴</span><span class="jd">Perkuat validasi hierarki desa/kecamatan + auto web-search saat nama tak dikenal</span><span class="st warn">BARU</span></summary>
       <div class="bd">
-        <div class="meta">🔵 Pertanyaan · david (CAC) · 2026-07-15T21:30 · 👤 Abang</div>
-        <p class="isi">David tanya: berapa sisa LDD Mas Irham?
+        <div class="meta">🔴 Masalah · irham (owner) · 2026-08-07T22:48 · 🔧 Claude</div>
+        <p class="isi">## Masalah
+Saat input lokasi plan/laporan, nama desa yang tidak match tidak di-flag — bisa jadi dusun (bukan desa), nama salah eja, atau hierarki kabupaten/kecamatan/desa tidak valid.
 
-Ini di luar scope CAC David — data keuangan/operasional. Mohon arahan atau bisa langsung dijawab ke David.</p>
-        <div class="resp"><b>irham:</b> Ranah CAC (budget marketing). Data belum ada di sistem — belum pernah diinput/dibahas. Dibahas menyusul.</div>
+### Kasus nyata (7 Ags 2026)
+- Laporan SFED Heppy: lokasi &quot;Kaliyoso, Undaan, Kudus&quot;
+- Kaliyoso = dusun, BUKAN desa. Desa sebenarnya: Karangrowo
+- Janus tidak search web dulu, malah klaim &quot;desa tak dikenal, mau catat pakai apa?&quot;
+- Akibat: data musim tanam sempat salah entry (Kaliyoso), harus dikoreksi manual
+
+### Akar
+1. Tidak ada validasi hierarki: nama dusun bisa lolos sebagai desa tanpa flag
+2. Tidak ada trigger auto web-search saat nama tak cocok dengan master data
+3. Akan makin fatal saat user lain (Widya/David) mulai input — mereka bisa asal entry nama
+
+### Proposal
+1. **Validasi hierarki**: saat input plan/laporan, cross-check desa→kecamatan→kabupaten ke master data (retailer_lookup/kecamatan_mapping). Kalau hierarki tidak match → TOLAK + beri hint koreksi
+2. **Auto web-search**: kalau nama lokasi tidak dikenal di master data → trigger web_search otomatis untuk cek apakah itu dusun/desa/nama alternatif → baru minta klarifikasi ke user DENGAN hasil search
+3. **Flag &quot;nama tidak dikenal&quot;**: jangan diam — selalu kasih warning + saran (mis. &quot;Kaliyoso tidak ada di data, mungkin dusun di Karangrowo?&quot;)
+4. **Trigger ini berlaku buat SEMUA user** (bukan cuma owner), karena user lain (Widya/David) juga akan input lokasi</p>
+        
       </div>
-    </details><details class="card info" open>
-      <summary><span class="tid">#T14</span><span class="kic">🔵</span><span class="jd">David (CAC CJ) menanyakan nama-nama TM di seluruh area Jawa Tengah. Di knowledge</span><span class="st info">DIPROSES</span></summary>
-      <div class="bd">
-        <div class="meta">🔵 Pertanyaan · david (CAC) · 2026-07-16T08:36 · 👤 Abang</div>
-        <p class="isi">David (CAC CJ) menanyakan nama-nama TM di seluruh area Jawa Tengah. Di knowledge base saat ini hanya tercatat Bang Irham sebagai TM (cover Grobogan/Demak/Kudus/Kab. Semarang). David butuh daftar lengkap TM Jateng — termasuk area lain seperti Solo, Pekalongan, Banyumas, dll. Mohon diinfokan atau diarahkan ya Mas.</p>
-        <div class="resp"><b>irham:</b> Perlu — nunggu data daftar TM Jateng dari Mas Irham/David.</div>
-      </div>
-    </details></div><h2><span class="dot ok"></span>SELESAI (12)</h2><div class="list"><details class="card ok">
+    </details></div><h2><span class="dot ok"></span>SELESAI (30)</h2><div class="list"><details class="card ok">
       <summary><span class="pr">🔺</span><span class="tid">#T23</span><span class="kic">🔴</span><span class="jd">LIQ auto-link GAGAL — DSR/DMR routing salah (2x hari ini)</span><span class="st ok">SELESAI</span></summary>
       <div class="bd">
         <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-20T18:10 · 🔧 Claude</div>
@@ -123,6 +109,278 @@ BUTUH:
 - Guard di liquidation.py: kalau jenis=FED dan dsr bukan DMR → warning/block
 - Atau: auto-correct dsr berdasarkan jenis (FED→DMR, ODP/BC→DSR)</p>
         <div class="resp"><b>irham:</b> Root = REGRESI parser kecamatan-ku (fix 19 Jul). Format &quot;Desa, Kecamatan, Kabupaten-tanpa-label&quot; salah baca kabupaten sbg kecamatan (Undaan→Kudus). BUKAN DSR/DMR routing. Fixed + test regresi. Nudge DMR untuk FED ditambah.</div><div class="reso">✅ Parser kecamatan diperbaiki (urutan desa→kec→kab) + 2 kasus regresi ke test. 0 record genuinely broken. Nudge validate() FED-tanpa-DMR.</div>
+      </div>
+    </details><details class="card ok">
+      <summary><span class="pr">🔺</span><span class="tid">#T24</span><span class="kic">🔴</span><span class="jd">GCAL: Janus pakai Google Workspace MCP bukan gcal.py — invite irham.rizqi.p@gmail.com hilang</span><span class="st ok">SELESAI</span></summary>
+      <div class="bd">
+        <div class="meta">🔴 Masalah · irham (?) · 2026-07-21T14:42 · ⚪ off-scope</div>
+        <p class="isi">Kronologi: 21 Jul 2026 Bang Irham minta buat event Meeting offline Kios Mahkota Tani. Janus pakai Google Workspace MCP langsung BUKAN gcal.py. Akar: gcal.py sudah hardcode GUEST=irham.rizqi.p@gmail.com (auto-invite), tapi MCP tidak. Janus salah pilih jalur. Perbaikan sementara: rule #4 masuk MEMORY.md + vault note + event di-update. Solusi diminta Bang Irham: enforce semua GCAL lewat gcal.py atau tambah guard di MCP supaya auto-invite.</p>
+        <div class="resp"><b>irham:</b> Root: routing GCAL tak pernah ada di sot.js (habit cuma prosa/doc → DeepSeek bypass). Fix 2-lapis: sot.js GCAL-gate + tool-guard R6 hard-block MCP calendar-write → paksa gcal.py (auto-invite). test 33/33, live.</div><div class="reso">✅ GCAL enforced di router+guard (bukan lagi doc-only). Buat/ubah event WAJIB gcal.py; MCP calendar-write diblok. Auto-invite pulih.</div>
+      </div>
+    </details><details class="card ok">
+      <summary><span class="pr">🔺</span><span class="tid">#T26</span><span class="kic">🔴</span><span class="jd">[FATAL] Database BRP hilang — duckdb kosong + brp_query gagal total (25 Jul 2026)</span><span class="st ok">SELESAI</span></summary>
+      <div class="bd">
+        <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-25T00:55 · 🔧 Claude</div>
+        <p class="isi">## Kronologi
+
+**00:48** — Bang Irham minta update BRP terbaru + kirim file `ID_Sales_Log_25-07-2026` (234 baris, 21-24 Jul)
+
+**00:49** — Janus cek `~/janus/data/input/` → lihat symlink `BRP_20260630.xlsx` (30 Juni). Tidak cek `data/brp/2026/` langsung. Klaim &quot;file terakhir BRP_20260630&quot; — **SALAH**.
+
+**00:51** — Bang Irham marah: &quot;Datamu hilang atau gimana anjing. Ini lho terakhir 22 juli updatenya tolol&quot;
+
+**00:51** — Janus cek `data/brp/2026/` → nemu `BRP_2026_YTD_20260722_071442.xlsx` (31.572 baris, s.d. 22 Jul). Status harian juga tulis &quot;BRP: 22 Jul 2026&quot;.
+
+**00:51** — Cek `brp_master.duckdb` → **TABEL KOSONG SEMUA** (0 tabel). Database korup/hilang, tidak diketahui kapan dan kenapa.
+
+**00:51** — Rebuild dari file 22 Jul → berhasil buat `BRP_2026_YTD_20260725_005156.xlsx`
+
+**00:52** — Merge file baru 24 Jul → output `BRP_2026_YTD_20260725_005201.xlsx` (31.725 baris). 154 baris baru, 80 duplikat.
+
+**00:52** — Cache rebuild GAGAL: `CAST(&quot;Penjualan (Poin)&quot; AS DOUBLE)` error karena 2 baris Belt Expert kosong.
+
+**00:53** — Fix bug: `CAST` → `TRY_CAST` di `brp_query.py` baris 133-135 (poin, rupiah, volume).
+
+**00:53** — Delete file rebuild duplikat. Final: 31.725 baris, 1 Jan – 24 Jul 2026.
+
+## Root Cause
+
+1. **Database `brp_master.duckdb` hilang/kosong** — semua tabel (scans, targets, dr_mapping) lenyap. Tidak jelas trigger: bisa korupsi DuckDB, proses cleanup salah, atau failure saat write sebelumnya.
+
+2. **Status harian tidak validasi realtime** — jam 07:04 masih klaim &quot;BRP: 22 Jul 2026&quot; padahal query sudah error (tabel kosong). Status cuma baca timestamp file, tidak test query.
+
+3. **Error handling `load_db()` tidak cukup agresif** — fallback dari cache ke rebuild jalan, tapi `brp_merge.py` refresh cache gagal diam-diam (hanya print warning, tidak fallback ke rebuild penuh).
+
+4. **Bug `brp_query.py`** — `CAST` seharusnya `TRY_CAST` untuk poin/rupiah/volume. Data kotor (sel kosong) bikin seluruh query gagal, harusnya NULL saja.
+
+## Dampak
+
+- **brp_query error total** untuk SEMUA query (bukan cuma query yang kena baris kosong)
+- **Semua analisa BRP lumpuh** — KPI, gap, top kios, dll tidak bisa diakses
+- **Potensi salah keputusan** kalau Janus tidak sadar dan menjawab dari memory/ingatan
+
+## Yang Sudah Diperbaiki
+
+- [x] Rebuild database dari file + merge file baru (31.725 baris)
+- [x] Fix `brp_query.py`: CAST → TRY_CAST (poin/rupiah/volume)
+
+## Yang Perlu TINDAK LANJUT (DEV)
+
+1. **Investigasi kenapa duckdb hilang** — cek log, cek apakah ada proses yang nge-drop table
+2. **Health check BRP** — tambah validasi: test SELECT COUNT(*) FROM scans saat heartbeat, bukan cuma cek timestamp file
+3. **brp_merge.py** — refresh cache gagal harusnya fallback ke rebuild penuh (bukan cuma warning)
+4. **Status harian** — jangan cuma baca timestamp file, validasi query realtime</p>
+        <div class="resp"><b>Claude Code (dev):</b> Follow-up DEV dikerjakan (Claude, 25 Jul):
+#2 health-check REALTIME: fungsi brp_query.brp_health() (query COUNT scans, bukan timestamp) di-wire ke cron janus_health (tiap 2 jam) -&gt; BRP kosong/mati = alert Telegram.
+#3 fallback rebuild: OTOMATIS via fix akar di bawah (cache kosong -&gt; rebuild).
+#1 AKAR (kenapa duckdb kosong): tak konklusif (tak ada log trigger). TAPI dimitigasi: load_db kini cek ISI cache (COUNT scans), bukan cuma mtime -&gt; cache kosong/korup dgn mtime fresh TAK lagi disajikan senyap, langsung rebuild dari sumber. Tervalidasi: cache-kosong-&gt;rebuild 31.725 baris.
+#4 status realtime: kpi_summary baca file langsung (sudah robust); jalur brp_query kini self-heal + health-cron mengalarm.
+Sisa opsional (belum): investigasi forensik penyebab hilang (butuh log DuckDB yg tak ada).</div><div class="reso">✅ Fix preventif+akar dipasang (cache-sanity self-heal + brp_health cron alert). Recurrence dicegah walau penyebab awal tak diketahui. Root-cause forensik = opsional (buka lagi kalau perlu).</div>
+      </div>
+    </details><details class="card ok">
+      <summary><span class="pr">🔺</span><span class="tid">#T31</span><span class="kic">🟡</span><span class="jd">Update Forecast Q3: format /KPI &amp; aturan warna</span><span class="st ok">SELESAI</span></summary>
+      <div class="bd">
+        <div class="meta">🟡 Permintaan · irham (?) · 2026-07-31T08:15 · 🔧 Claude</div>
+        <p class="isi">Bang Irham minta update format Forecast Q3 (table_render.py --mode fc):
+
+1. Aturan warna % pencapaian:
+- &lt; 50% → Merah
+- &gt; 80% → Kuning
+- &gt; 100% → Hijau
+
+2. Format command:
+- /KPI → format tahunan (FY)
+- /KPI + Quartal → format kuartalan
+- Kalau belum ada breakdown bulanan → pakai agregat quartal
+
+3. Referensi: tabel Forecast Q3 dikirim 31 Jul (BRP s.d. 30 Jul)</p>
+        <div class="reso">✅ Part 1 (warna): konvensi 1-sumber pct_band (&lt;80 merah/80-100 kuning/&gt;=100 hijau) di table_render+kpi_summary+board (fix 3 konvensi beda). Part 2 (format): fc_data_quartal fallback — TM tanpa monthly_forecast otomatis dapat AGREGAT KUARTAL (Q1-Q4 FC=target/Ach=BRP) bukan kosong; routing /KPI=FY (kpi_summary), forecast=fc (monthly-atau-quartal). Multi-TM safe.</div>
+      </div>
+    </details><details class="card ok">
+      <summary><span class="pr">🔺</span><span class="tid">#T32</span><span class="kic">🔴</span><span class="jd">Heppy: Tambahan Plan TIMNAS DAY tanpa request — double-count &amp; reschedule gagal</span><span class="st ok">SELESAI</span></summary>
+      <div class="bd">
+        <div class="meta">🔴 Masalah · irham (?) · 2026-07-31T08:32 · 🔧 Claude</div>
+        <p class="isi">Kronologi:
+
+Riwayat Reschedule Plan #7 (dari history demand_projects.json):
+- 22 Jul 06:10: #7 reschedule 11 Ags ke 31 Ags (papan DR)
+- 26 Jul 08:30: #7 reschedule 31 Ags ke 31 Jul (papan DR)
+- TIDAK ADA reschedule 31 Jul ke 27 Jul
+
+Kondisi sekarang (31 Jul pagi):
+- Plan #7: BELUM done, 31 Jul, Undaan Tengah/Kaliwungu, Padi, Nugroho Tani
+- Plan #10: Done (TIMNAS DAY), 27 Jul, Undaan, Kacang Hijau, tanpa kios
+
+Temuan Masalah:
+
+1. Plan #10 (TIMNAS DAY) muncul sebagai TAMBAHAN, bukan hasil RESCHEDULE
+   Heppy bilang: ganti Plan #7 (31 Jul) ke 27 Jul
+   Yang terjadi: Plan #7 tetap 31 Jul, Plan #10 BARU dibuat 27 Jul
+   Akibat: double-count, Heppy punya 10 plan dengan overlap tanggal
+
+2. Plan #10 tidak punya liquidation report
+   Marked done tapi 0 foto, 0 nilai, tidak terhubung ke liquidation
+   Berbeda dari semua plan Heppy lain yang punya pasangan LIQ
+
+3. Lokasi dan crop tidak konsisten
+   Plan #7: Kaliwungu, Padi, Nugroho Tani
+   Plan #10: Undaan, Kacang Hijau, tanpa kios
+   Kalau ini reschedule, seharusnya detail sama (hanya tanggal berubah)
+
+4. Pelanggaran alur: tambahan plan tanpa request
+   TAMBAH PLAN harus lewat forward Abang = ACC
+   Plan #10 muncul tanpa jejak request yang jelas
+
+Yang Perlu Diperbaiki:
+1. Investigasi: dari mana asal Plan #10 (dashboard TAMBAH PLAN/auto-add/bug reschedule)
+2. Hardening: TAMBAH PLAN harus divalidasi, tidak boleh auto-create
+3. Cleanup: merge Plan #7 + #10 atau hapus salah satu
+4. Guard: rule di dashboard/Janus agar tidak double-count plan yang sama</p>
+        <div class="reso">✅ Investigasi (agent): hipotesis tiket SALAH — Plan #10 bukan reschedule #7 gagal, tapi ditambah via add-q3 utk nampung laporan orphan. Double-count sebenarnya #10(TIMNAS)↔Klambu#1 = RE-REPORT insiden T29 (Klambu sudah batal). TAPI buka celah nyata: guard dup_suspect T29 di-key ke DR field → kegiatan sama di identitas terpecah (laporan dsr=Beni, TIMNAS dr=&#x27;-&#x27;, Klambu dr=Heppy) → &#x27;Beni&#x27;≠&#x27;Heppy&#x27; → Klambu di-SKIP (guard menyembunyikan dup). Fix: find_dup_plans resolve owner ke DR-Petani/Kios KECAMATAN (bukan field dr) via _owner_names → tahan identitas terpecah; + mode_add_q3 flag DURABLE (dup_suspect, bukan warning diabaikan). Bukan hard-block (konsisten T29 flag-not-mutate). Test test_dup_plan_detect 6/6 (+skenario T32). Reschedule terverifikasi TAK pernah bikin plan baru. | SISTEMIK (konteks Abang 31 Jul): akar sebenarnya = LAPORAN ORPHAN → Janus BIKIN PLAN BARU (Plan #10 TIMNAS nampung laporan Gatet/Undaan yg tak match Klambu#1 krn kecamatan salah-label). Guard priming JANUS_ROUTING: laporan orphan ⛔ JANGAN bikin plan baru — cek mislabel (bandingkan DESA) → reschedule plan lama; kalau tak ada → FLAG + tanya Abang; TAMBAH PLAN wajib lewat ACC, bukan auto-add. + dedup owner-resolve (sudah). DATA: Plan #7 (Kaliwungu/Padi/31 Jul) ternyata kegiatan BEDA (Heppy conflate dgn eksekusi Gatet/Kacang-Hijau 27 Jul=#10) → #7 genuinely pending, sistem BENAR nampilkan &#x27;hari ini&#x27;. Perlu Abang konfirmasi ke Heppy: #7 masih to-do?</div>
+      </div>
+    </details><details class="card ok">
+      <summary><span class="pr">🔺</span><span class="tid">#T33</span><span class="kic">🟡</span><span class="jd">Rombak total slash command /kpi — support Q3 + PNG format</span><span class="st ok">SELESAI</span></summary>
+      <div class="bd">
+        <div class="meta">🟡 Permintaan · irham (super-admin) · 2026-07-31T14:52 · 🔧 Claude</div>
+        <p class="isi">Saat ini `/kpi` hanya support H1. Diminta `/kpi Q3` → gagal karena:
+1. `kpi_summary.py` hardcode H1, tidak ada parameter quarter
+2. Format output markdown-text, bukan PNG (standar yang diminta: template KPI PNG seperti Q3 template di `data/templates/kpi/kpi_template_q3_2026.png`)
+3. Data Q3 = July-August-September, dengan pace berbasis bulan berjalan
+4. DR mapping di BRP tidak langsung — harus resolve dari distrik → kecamatan → DR (cross-reference retailer_lookup)
+
+Yang diminta:
+- `/kpi` → default ke quarter berjalan (Q3 sekarang)
+- `/kpi Q3` → KPI Q3 dalam format PNG (table_render.py)
+- `/kpi H1` → backward compatible ke H1
+- Template: tabel DR (Beni/Safii/Resa) + Focus Products (Ambition/Decis/Nativo/Vayego/Council/Folicur) + % vs target quarter + footer
+
+Prioritas: normal</p>
+        <div class="resp"><b>irham:</b> [DEV] Combine dgn kerjaan template forecast PNG (table_render.py --mode fc/fcroll). KPI Q3 PNG reuse gaya render sama (tabel DR, warna %, footer). Dikerjakan sesudah T34.</div><div class="reso">✅ table_render.py --mode kpiq [--quarter Q3/H1] + kpi_summary.kpi_data(). /kpi=auto kuartal berjalan, /kpi Q3, /kpi H1. PNG gaya fc/fcroll (TM R1/R2+DR+Focus Products, target kuartal vs BRP +warna%). Reuse kerjaan forecast. Routing+TOOLS update.</div>
+      </div>
+    </details><details class="card ok">
+      <summary><span class="pr">🔺</span><span class="tid">#T35</span><span class="kic">🔴</span><span class="jd">Janus salah bedakan direct selling vs biaya kegiatan (berulang)</span><span class="st ok">SELESAI</span></summary>
+      <div class="bd">
+        <div class="meta">🔴 Masalah · irham (super-admin) · 2026-08-04T07:29 · 🔧 Claude</div>
+        <p class="isi">4 Agustus 2026 — laporan FED Dwiky/Angga: Janus bandingkan nilai direct selling Rp 600rb dengan plan budget Rp 400rb, seolah &quot;realisasi vs plan&quot;.
+
+Padahal:
+- Direct selling = hasil penjualan di tempat (nilai_spot_rp)
+- Plan budget = biaya kegiatan (Rp 400rb)
+- Dua kategori BERBEDA, tidak boleh dibandingkan
+
+Bang Irham: &quot;Ini sudah kasus ke berapa kamu tanya hal ini&quot;
+
+Perlu guard di sistem: kalau ada field nilai_spot_rp, JANGAN bandingkan dengan plan budget. Atau setidaknya rule tegas di MEMORY.md yang tidak akan dilanggar.</p>
+        <div class="reso">✅ Guard KODE dipasang: sot.js SELLGUARD (inject aturan tiap konteks direct-selling/likuidasi) + CORE §9 rule immutable + lessons L-260804073532 (guarded) + test. Direct selling (nilai_spot) ≠ biaya kegiatan (budget) — dilarang dibandingkan. Deploy via ROG pull + gateway restart.</div>
+      </div>
+    </details><details class="card ok">
+      <summary><span class="pr">🔺</span><span class="tid">#T36</span><span class="kic">🔴</span><span class="jd">Analisa Oberon Speed red flag — 3 kegagalan</span><span class="st ok">SELESAI</span></summary>
+      <div class="bd">
+        <div class="meta">🔴 Masalah · irham (owner) · 2026-08-05T15:01 · 🔧 Claude</div>
+        <p class="isi">## 3 Kegagalan Analisa Oberon Speed (5 Ags 2026)
+
+### 1. GAGAL PARSING LIQ — field detail vs items
+Search cuma di &#x27;detail&#x27;, tapi LIQ punya 2 format: detail (lama) dan items (baru). Hasil search pertama: 0 Oberon. Abang tunjuk contoh → baru sadar ada field items. Fix: liquidation recall HARUS cek kedua field.
+
+### 2. SCOPE SALAH — diminta Oberon Speed, dijawab semua Oberon (39 LIQ campur)
+Keyword &#x27;oberon speed&#x27; vs &#x27;oberon&#x27; tidak difilter. Nama produk di LIQ tidak konsisten: &#x27;Oberon Speed&#x27; / &#x27;Oberon speed&#x27; / &#x27;Oberon&#x27; (padahal 27 items &#x27;Oberon&#x27; tanpa Speed kemungkinan besar produk sama).
+
+### 3. HARGA NGARANG — Rp 410rb/botol dari imputasi
+Dihitung dari BRP scan Rp 24,6jt/30L → infer sendiri tanpa query tool. Harga BRP scan = retail ke petani BUKAN direct selling. Melanggar ANTI-NGARANG di SOUL.md.
+
+### AKAR
+- liquidation recall/search harus cek detail+items
+- Perlu normalisasi nama produk di LIQ
+- Janus HARUS query tool utk harga, tidak boleh hitung sendiri</p>
+        <div class="reso">✅ 3 kegagalan tuntas (verifikasi 6 Ags): #1 items_of baca items+produk_detail+detail (recall pakai items_flat) → 45 kegiatan Oberon ketemu, bukan 0. #2 bayer_catalog.nama_display normalisasi Oberon/Oberon Speed/oberon → kanonik &#x27;Oberon&#x27; (harga konsisten 82rb/pcs). #3 harga dari price-list Bayer via valuate_items (Rp21,6jt), bukan imputasi BRP-scan (aturan #3: direct-selling SELALU harga Bayer).</div>
+      </div>
+    </details><details class="card ok">
+      <summary><span class="pr">🔺</span><span class="tid">#T37</span><span class="kic">🔴</span><span class="jd">Ricestar YoY: Janus banding 2025 full-year vs 2026 YTD → salah report -49% (actual +37%)</span><span class="st ok">SELESAI</span></summary>
+      <div class="bd">
+        <div class="meta">🔴 Masalah · irham (super-admin) · 2026-08-06T11:53 · 🔧 Claude</div>
+        <p class="isi">## Request User
+&quot;ytd ricestar vs py [previous year] dengan periode yang sama berapa growth volume di r2&quot;
+
+## Cara Janus Parsing
+1. &quot;py&quot; = dikira produk (Pyanchor), bukan &quot;previous year&quot; → tanya balik
+2. User klarifikasi: &quot;previous year&quot;
+3. Janus query: `brp_query(&quot;ricestar&quot;, year=&quot;2025&quot;)` dan `brp_query(&quot;ricestar&quot;, year=&quot;2026&quot;)`
+4. Output:
+   - 2025: 3,560 kg/L (19 kios) → ini data FULL YEAR (Jan-Des)
+   - 2026: 1,810 kg/L (21 kios) → ini data YTD (Jan-Agu)
+
+## Output yang Diberikan ke User
+| | 2025 | 2026 | Δ |
+|---|---|---|---|
+| Volume | 3,560 kg/L | 1,810 kg/L | ↓49% |
+
+## Kesalahan
+- Periode TIDAK apple-to-apple: 2025 = full year vs 2026 = YTD
+- Janus TIDAK cross-check apakah kedua periode sama panjang
+- User curiga (&quot;aku turun 49%?&quot;), Janus baru cek ulang
+
+## Data Sebenarnya (Jan-Jul 2025 vs Jan-Jul 2026)
+- 2025 Jan-Jul: 1,320 kg/L (12 kios)
+- 2026 Jan-Jul: 1,810 kg/L (20 kios)
+- Growth: **+37.1%** (bukan -49%)
+
+## Root Cause
+`brp_query.py` untuk year=2025 pakai file `BRP_2025_Full_Year.xlsx` (Jan-Des penuh), sedangkan year=2026 pakai `BRP_2026_YTD_...xlsx` (YTD). Tool tidak auto-filter ke periode setara saat banding tahun.
+
+## Proposal Perbaikan
+1. Janus rule: setiap banding YoY → WAJIB verifikasi periode sama (cek month range kedua file)
+2. `brp_query.py`: tambah mode `--same-period` yang auto-filter kedua tahun ke bulan yang sama (max bulan di tahun lebih pendek)
+3. Atau: default YoY = Jan-N tahun ini vs Jan-N tahun lalu (N = bulan terakhir data tahun ini)
+4. Short-term guard: Janus SELALU sebut periode data (&quot;Jan-Jul 2025&quot;) bukan &quot;YTD&quot; saat tahun berbeda</p>
+        <div class="resp"><b>irham:</b> ## TEMUAN TAMBAHAN: R1+R2 TERCAMPUR
+
+User minta &quot;volume di R2&quot; — Janus serve R1+R2 tanpa filter.
+
+### Angka yang Disajikan
+1,810 kg/L (R1+R2 combined) — padahal user minta R2 only:
+- R2 = 1,170 kg/L
+- R1 = 640 kg/L (tercampur)
+
+### Data Sebenarnya (R2 Only, Jan-Jul)
+- 2025: 960 kg/L (8 kios)
+- 2026: 1,170 kg/L (15 kios)
+- Growth: **+21.9%** (bukan +37.1% seperti koreksi pertama, apalagi -49% seperti awal)
+
+### Root Cause
+- Kolom type = `NEW_TEXT CP type` (bukan `Tipe label`)
+- brp_query.py output gabung R1+R2 (🔶 R2 + 🔷 R1) tanpa auto-filter
+- Janus tidak sadar harus pisah R1/R2 saat user spesifik minta R2
+
+### Proposal Tambahan
+- brp_query.py: tambah flag `--r2-only` untuk auto-filter
+- Janus guard: kalau user sebut &quot;R2&quot; / &quot;kios&quot; → pastikan output hanya R2</div><div class="reso">✅ brp_query.q_yoy + CLI --yoy (6 Ags): (1) samain rentang bulan ke bulan LENGKAP terakhir (Jan..N, exclude bulan berjalan parsial) → fix banding 2025 full-year vs 2026 YTD; (2) PISAH R1/R2 (tipe=None dua-duanya, --type R2 saja) → fix R1+R2 kecampur; (3) sebut periode eksplisit. Validasi: Ricestar Jan-Jul R2 +22% R1 +78% (gabung +37% = ground-truth ticket), bukan -49%. Routing JANUS_ROUTING+TOOLS.md, habit_guard 60/60, test_brp_yoy.</div>
+      </div>
+    </details><details class="card ok">
+      <summary><span class="pr">🔺</span><span class="tid">#T38</span><span class="kic">🔴</span><span class="jd">Janus nyaris bocorkan data area internal ke kontributor lain (Council R2 -24% di draft blast)</span><span class="st ok">SELESAI</span></summary>
+      <div class="bd">
+        <div class="meta">🔴 Masalah · irham (super-admin) · 2026-08-06T12:42 · 🔧 Claude</div>
+        <p class="isi">## Insiden
+Saat drafting pesan Council Complete untuk Dharma (TM Solo Raya) &amp; David (CAC), Janus menyertakan data area internal Bang Irham:
+- &quot;Council R2 Jan-Jul 2026: 105 kg/L, 6 kios (↓24% YoY)&quot;
+- &quot;BASF Luxinum baru launching&quot;
+
+Data ini dari BRP area sendiri — TIDAK BOLEH di-share ke Dharma atau David (beda area/role).
+
+## Root Cause
+Janus tidak sadar konteks &quot;blast ke orang lain&quot; = data area sendiri HARUS disensor. Saat drafting, otomatis menambahkan konteks area sebagai &quot;tambahan&quot; tanpa filter.
+
+## Guard Proposal
+1. Rule eksplisit: SETIAP draft yang akan dikirim ke user lain → STRIP semua angka/data dari area sendiri
+2. Sebelum relay/request_review → wajib cek: &quot;apa ada data/angka internal area sendiri di teks ini?&quot;
+3. Semua data area-spesifik (BRP, kios, volume) HARUS dihapus sebelum dikirim ke user beda area</p>
+        <div class="reso">✅ Guard deterministik anti-bocor (6 Ags): outbound_guard.scan_internal deteksi metrik area-internal (kg/L, kios, YoY%, R1/R2, BRP, Rp) di jalur review_thread.create (owner-&gt;user lain) → DITAHAN sebelum relay, minta sensor. Sengaja sempit (tanggal/slide lolos). activity_share sudah whitelist-safe. Terdaftar habit_guard 59/59 + test_outbound_guard.</div>
+      </div>
+    </details><details class="card ok">
+      <summary><span class="pr">🔺</span><span class="tid">#T44</span><span class="kic">🔴</span><span class="jd">demand_project --mode show crash: KeyError area &#x27;Angga (Grobogan+Demak+Semarang)&#x27;</span><span class="st ok">SELESAI</span></summary>
+      <div class="bd">
+        <div class="meta">🔴 Masalah · irham (TM) · 2026-08-13T09:02 · 🔧 Claude</div>
+        <p class="isi">Bug backend (ditemukan Janus 13 Ags saat betulkan ODP Resa Angga):\n\n-  crash  di  (baris ~285, ).\n- Akar: project Resa Angga pakai field , tapi key ini TIDAK ada di .\n- Dampak: semua project Resa Angga (angga-odp-bc-*) gagal di-render  / budget block. Data tetap aman, cuma tampilan error.\n\nFix (buat DEV): daftarkan area Resa Angga di AREA_BUDGET ATAU normalkan area key ke area terdaftar (Demak Kudus/Grobogan/...).</p>
+        <div class="resp"><b>janus:</b> KOREKSI isi (backtick ke-swallow shell): file scripts/demand_project.py, fungsi area_total() baris ~285, error KeyError: &#x27;Angga (Grobogan+Demak+Semarang)&#x27; — key area ini TIDAK terdaftar di konstanta AREA_BUDGET. Project Resa Angga (angga-odp-bc-*) pakai area &#x27;Angga (Grobogan+Demak+Semarang)&#x27;. Fix DEV: daftarkan key itu di AREA_BUDGET, atau normalkan area project ke area terdaftar.</div><div class="reso">✅ Fixed: _budget_block toleran — area tak terdaftar di AREA_BUDGET tak crash --mode show (kena 3 project: Angga/Beni/Legacy). Commit 1d7e409, test 3/3.</div>
       </div>
     </details><details class="card ok">
       <summary><span class="tid">#T1</span><span class="kic">🟡</span><span class="jd">🔴 PERUBAHAN FUNDAMENTAL (knowledge)
@@ -285,7 +543,139 @@ Data pendukung: q_pct sudah ada di kpi_targets.json (Q1=25%, Q2=30%, Q3=20%, Q4=
 Prioritas: normal</p>
         <div class="resp"><b>irham:</b> Dibangun: target_analyst --mode kuartal. Kolom Q1-Q4 target sudah ADA per-kios di Excel (bukan cuma semester) — di-expose langsung, nol proporsi manual.</div><div class="reso">✅ target_analyst.py --mode kuartal --kios X --kuartal Q3 → angka per-kios langsung. Routing sot.js + TOOLS.md + capabilities updated. Bunga Arum Q3=3.223 (verified). test_target_kuartal.</div>
       </div>
-    </details></div><h2><span class="dot gap"></span>DITUTUP (3)</h2><div class="list"><details class="card gap">
+    </details><details class="card ok">
+      <summary><span class="tid">#T27</span><span class="kic">🟡</span><span class="jd">[GAP] Tidak ada template laporan ringkasan kegiatan ke kios</span><span class="st ok">SELESAI</span></summary>
+      <div class="bd">
+        <div class="meta">🟡 Permintaan · irham (owner) · 2026-07-27T20:14 · 👤 Abang</div>
+        <p class="isi">Bang Irham minta presentasi kegiatan Bayer ke pemilik kios R1 Anugrah Sumber Tani (Pulokulon, Grobogan). Butuh 1 halaman PDF + peta untuk 5 kegiatan Jun-Ags. Yang dikerjakan: fetch brp_query+kegiatan_recall, peta via peta.py, PDF via onbrand_pdf.py (fallback, bukan template ideal). Gap: design_preflight.py status:none — tidak ada template laporan ringkasan kegiatan. Request Bang Irham: review flow, tambah template.</p>
+        <div class="reso">✅ Template &#x27;laporan-kegiatan-kios&#x27; DIBANGUN + DIDAFTARKAN di design/catalog.json (html_compose, 1-lembar A4 landscape, tabel kegiatan + peta embed + on-brand). design_preflight sekarang balik template_id ini (bukan status:none) → Janus berhenti fallback ke onbrand_pdf. Fix collision: regex cap-dr diperketat (tak lagi nyangkut &#x27;laporan kegiatan kios&#x27;). Peta: field &#x27;peta&#x27;=path PNG dari peta.py (auto-embed data-URI). Gold sample dirender. AKAR: standar cuma ditulis prosa di DESIGN_REFERENCE (yg design_preflight TAK baca) — sekarang jadi catalog entry + generator nyata.</div>
+      </div>
+    </details><details class="card ok">
+      <summary><span class="tid">#T28</span><span class="kic">🔴</span><span class="jd">[BUG] add-q3 demand_project: kecamatan &amp; tanggal tidak tersimpan ke JSON</span><span class="st ok">SELESAI</span></summary>
+      <div class="bd">
+        <div class="meta">🔴 Masalah · irham (owner) · 2026-07-27T21:39 · 🔧 Claude</div>
+        <p class="isi">Flow: papan DR → ACC plan Denny FED 31 Jul Harjowinangun Godong → add-q3 dijalankan.
+
+Yang tersimpan: desa, crop, quarter, kabupaten.
+Yang KOSONG: kecamatan (jadi &#x27;-&#x27;), tanggal (tidak ada key).
+
+Fix manual: edit JSON langsung tambah &quot;kecamatan&quot;: &quot;Godong&quot;, &quot;tanggal&quot;: &quot;2026-07-31&quot;.
+
+Sudah dicatat di lessons.py [L-260727212813]. Butuh fix di kode demand_project.py mode add-q3.</p>
+        <div class="reso">✅ Akar: mismatch kosakata field — papan DR forward pakai &#x27;kec&#x27;/&#x27;baru&#x27;, tapi builder add-q3 (dan _validate_activities/_tm) cuma baca &#x27;kecamatan&#x27;/&#x27;tanggal&#x27; → hilang senyap (× DeepSeek getas mapping). Fix: helper toleran-alias _kec_of (kecamatan|kec) + _tgl_of (tanggal|tgl|baru) dipakai ketiga builder DR. Test tests/test_demand_q3_aliases.py 3/3. Record Denny sudah di-fix manual sebelumnya; ini fix KODE biar tak berulang.</div>
+      </div>
+    </details><details class="card ok">
+      <summary><span class="tid">#T29</span><span class="kic">🔴</span><span class="jd">Duplikat plan tidak terdeteksi — Heppy 27 Jul (Klambu vs TIMNAS DAY)</span><span class="st ok">SELESAI</span></summary>
+      <div class="bd">
+        <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-28T08:51 · 🔧 Claude</div>
+        <p class="isi">**Masalah:** Plan Klambu #1 (Heppy FED Klambu Sep 2026) dan TIMNAS DAY #10 (Heppy FED Jul-Sep 2026) adalah kegiatan yang SAMA — FED Heppy 27 Juli 2026 di Gatet, Undaan, Kudus. Tapi sistem menganggapnya dua plan berbeda karena dibuat di dua project berbeda.
+
+**Kronologi:**
+1. Plan Klambu #1 dibuat duluan (buffer Semesta Agro, Klambu, Grobogan)
+2. Plan TIMNAS DAY #10 dibuat kemudian (Jul-Sep Demak Kudus, Undaan)
+3. Laporan likuidasi masuk tgl 27 Jul malam → auto-link ke plan #10 (TIMNAS DAY) karena match DR+produk+tanggal
+4. Plan Klambu #1 tetap OPEN → muncul sebagai &quot;telat 1 hari&quot; di KPI PAGI 28 Jul
+
+**Akar:**
+- Dua plan untuk DR sama, tanggal sama, tidak terdeteksi sebagai duplikat
+- Lokasi di plan (Klambu, Grobogan) vs realita laporan (Gatet, Undaan, Kudus) berbeda → tidak match saat auto-link
+
+**Penanganan sementara:** Plan Klambu #1 dibatalkan (status batal). Laporan sudah benar tersambung ke plan TIMNAS DAY #10.
+
+**Yang dibutuhkan dari backend:**
+1. Deteksi/peringatan duplikat: plan untuk DR yang sama di tanggal yang sama
+2. Atau: mekanisme merge plan antar-project saat laporan masuk (auto-close plan duplikat)</p>
+        <div class="reso">✅ Opsi A (deteksi+flag, BUKAN auto-close — anti insiden auto-mutation). Akar: auto-link (find_exec_match) cocok jenis+kecamatan, bukan tanggal → plan DR+tgl+jenis sama di kecamatan BEDA jadi hantu, nyangkut &#x27;telat&#x27; palsu. Fix di demand_project.py: (1) helper find_dup_plans (lintas project); (2) reconcile_exec flag sibling &#x27;dup_suspect&#x27; saat report nge-link + pesan ke owner; (3) review_activities keluarkan dup_suspect dari &#x27;overdue&#x27; (tak jadi telat) → bucket sendiri, tampil di format_review 🟣; (4) add-q3 warning saat buat plan DR+tgl+jenis sama. Test tests/test_dup_plan_detect.py 5/5. Owner tetap yg batalkan (flag, bukan auto).</div>
+      </div>
+    </details><details class="card ok">
+      <summary><span class="tid">#T30</span><span class="kic">🔴</span><span class="jd">Janus salah query field direct selling di liquidation.json</span><span class="st ok">SELESAI</span></summary>
+      <div class="bd">
+        <div class="meta">🔴 Masalah · irham (TM) · 2026-07-29T15:10 · 🔧 Claude</div>
+        <p class="isi">Insiden 29 Jul: saat fetch data kegiatan untuk tabel &#x27;Buffer Anugrah Sumber Tani&#x27;, kolom Direct Selling kosong karena Janus membaca field &#x27;nilai&#x27; (yang jarang terisi) alih-alih &#x27;nilai_spot_rp&#x27; (yang selalu ada). Akar: field yang benar = nilai_spot_rp (ada di semua record), field yang salah dibaca = nilai (hanya 2 dari 10 record). Sudah difiks di sesi ini. Permintaan: evaluasi apakah perlu (a) rename field di liquidation schema, (b) guard auto-populate nilai dari nilai_spot_rp, atau (c) cukup lessons.py.</p>
+        <div class="resp"><b>irham:</b> UPDATE 29 Jul 15:20 — tambahan temuan:
+
+1. Insiden DR salah: kolom DR dipaksa mapping berdasarkan role (DMR=FED, DSR=ODP/BC) → ODP/BC Fani salah ditulis &#x27;Safii&#x27;. Akar: liquidation.json field &#x27;dsr&#x27; menyimpan siapa yang MELAPORKAN, bukan siapa yang RESPONSIBLE. Fani kerjakan ODP/BC sendiri, bukan Safii.
+
+2. Yang sudah dikoreksi:
+- ODP/BC di area BLF Fani → DR = Fani (bukan Safii)
+- FED di area Alvian yang dsr=Safii → DR = Alvian (cross-check ke demand_project)
+
+3. Pelajaran (L-260729151925): jangan paksa mapping DR pakai aturan baku role. Pakai responsible person dari demand_project/liquidation.
+
+Total dampak: 8 dari 23 baris DR salah (6 ODP/BC + 2 FED).
+
+Saran perbaikan sistemik: field &#x27;dsr&#x27; di liquidation kurang jelas (reporting vs responsible). Mungkin perlu field &#x27;responsible_dr&#x27; atau auto-cross-check ke area mapping.</div><div class="reso">✅ Opsi: bersihkan + guard tool (BUKAN rename/alias). Akar: field &#x27;nilai&#x27; = SAMPAH duplikat (10 record, 10/10 identik nilai_spot_rp, NOL kode nulis/baca) → jebakan; Janus hand-query JSON mentah alih-alih pakai tool. Kode liquidation.py SUDAH benar (pakai nilai_spot_rp konsisten). Fix: (1) HAPUS 10 field &#x27;nilai&#x27; liar (nol kehilangan data, verified==nilai_spot_rp, backup diambil); (2) guard TOOLS.md: nilai direct-selling per kegiatan/kios/buffer = `liquidation.py --recall --kios X` (nilai_spot_rp), JANGAN hand-query. Tool SUDAH mampu filter --kios + surface nilai (terbukti utk Anugrah). Bukan alias (hindari drift field duplikat).</div>
+      </div>
+    </details><details class="card ok">
+      <summary><span class="tid">#T34</span><span class="kic">🟡</span><span class="jd">Auto-sync gcal ↔ dashboard kegiatan DR</span><span class="st ok">SELESAI</span></summary>
+      <div class="bd">
+        <div class="meta">🟡 Permintaan · irham (super-admin) · 2026-08-03T16:01 · 👤 Abang</div>
+        <p class="isi">Masalah sistemik: DR ubah jadwal kegiatan lewat dashboard → gcal TIDAK auto- update. Harus sync manual lewat command. 
+
+Contoh hari ini: Heppy ubah SFed dari 3 Ags ke 18 Ags. Dashboard udah berubah, tapi gcal masih 3 Ags — baru ke-update setelah Janus update manual.
+
+Butuh: cron/auto-sync biar perubahan jadwal di dashboard langsung ke-reflect di Google Calendar tanpa intervensi manual.</p>
+        <div class="resp"><b>irham:</b> [KOREKSI scope] Bukan semua kegiatan DR. Kalender = PRIBADI Abang (invite dari burner), KHUSUS special activity TM yang dipilih. Masalah: (1) set gcal utk activity TM, (2) reschedule di dashboard TAK auto-update event gcal-nya. Fix: link activity&lt;-&gt;gcal_event_id + auto-sync dashboard-&gt;gcal utk activity yg ber-link saja (§430 tetap aman: cuma yg dipilih).</div><div class="reso">✅ gcal_sync.py: &#x27;set&#x27; link activity-event_id (special activity dipilih), cron reconcile 30mnt patch gcal pas jadwal geser dashboard. Live-tested 3-&gt;18 Ags. Kalender pribadi tetap bersih. Event SFed lama perlu di-set ulang 1x biar ikut auto-sync.</div>
+      </div>
+    </details><details class="card ok">
+      <summary><span class="tid">#T40</span><span class="kic">🔴</span><span class="jd">Auto-validasi desa/kecamatan saat input/revisi plan dari dashboard</span><span class="st ok">SELESAI</span></summary>
+      <div class="bd">
+        <div class="meta">🔴 Masalah · irham (owner) · 2026-08-07T08:43 · 🔧 Claude</div>
+        <p class="isi">## Masalah
+Plan DR dari dashboard bisa di-input dengan kecamatan/desa yang tidak sesuai — tidak ada auto-check.
+
+### Contoh (7 Ags 2026)
+- Plan Angga ODP 6 Ags: tercatat kec=Bandungan, crop=Sayuran, kios=Auliya Tani
+- Eksekusi aktual: kec=Tanggungharjo, crop=Tembakau-Jagung, kios=Sari Tani Sejahtera
+- Akibat: plan tidak auto-match ke laporan, dashboard salah tampil
+
+### Akar
+Tidak ada validasi silang antara lokasi plan vs master data (kecamatan/desa/kios). Input dari dashboard tidak di-cross-check.
+
+### Proposal
+1. Saat plan di-input, auto-validasi: desa wajib valid di kecamatan tersebut (cross-check ke master kios/kecamatan mapping)
+2. Jika desa tidak dikenal → warning + minta konfirmasi
+3. Label plan sebaiknya auto-generate dari data (kec·Buffer: kios), bukan teks bebas</p>
+        <div class="reso">✅ geo_resolver.validate (cek desa vs kec di backbone) + apply_actions._geo_warn (papan DR: warning desa!=kec/crop-nyampur, tak blok). Swarm fix 44 false-positive (collapse se-provinsi) + seat-village 6 kec + parse_lokasi crash. Exhaustif 0 FP dari 1097 triple. Scan nyata: 8 plan geo-suspect (Ardhi &#x27;bonang tanaman padi&#x27;, Sendangharjo/Ngaringan, dst) buat Abang cek. +test_geo_resolver.</div>
+      </div>
+    </details><details class="card ok">
+      <summary><span class="tid">#T41</span><span class="kic">🔴</span><span class="jd">Deteksi bentrok plan: label/lokasi duplikat dalam 1 project</span><span class="st ok">SELESAI</span></summary>
+      <div class="bd">
+        <div class="meta">🔴 Masalah · irham (owner) · 2026-08-07T08:43 · 🔧 Claude</div>
+        <p class="isi">## Masalah
+Dua aktivitas dalam 1 project bisa punya label/lokasi identik → auto-link liquidation salah sasaran.
+
+### Contoh (7 Ags 2026)
+- Fani BLF Jul-Sep 2026 punya 2 aktivitas dengan label :
+  - [5] 31 Jul — sudah done (LIQ260801094512)
+  - [6] 14 Ags — masih planned
+- Saat LIQ260806095034 (FED Fani 5 Ags, Tani Mandiri) diproses, auto-link kena activity [6] (14 Ags) karena label sama — padahal yang dimaksud activity lain
+- Akibat: plan 14 Ags (belum terjadi) terlanjur marked &#x27;done&#x27;, selesai 2026-08-14 (tanggal depan!)
+
+### Akar
+Auto-match liquidation→plan pakai pencocokan label/lokasi. Label duplikat bikin ambiguous match.
+
+### Proposal
+1. Saat tambah aktivitas ke project, deteksi label/lokasi/kecamatan yang sudah ada → warning/block
+2. Auto-link liquidation→plan: selain label, cocokkan juga TANGGAL (range ±N hari) sebagai filter tambahan
+3. Jika tetap ambiguous (beberapa kandidat cocok), JANGAN auto-done — flag ke owner untuk resolve manual</p>
+        <div class="reso">✅ find_exec_match: proximity tanggal (±31hr, pilih terdekat) + guard anti-tutup-plan-masa-depan (FUTURE_PLAN_GRACE=2, exec 5 Ags tak bisa nutup buffer 14 Ags) + ambigu-&gt;flag. Label duplikat=by-design buffer (18 project) -&gt; fix di disambiguasi bukan larang. Swarm: 110 auto-link nyata, 0 regresi. +test_reconcile_proximity.</div>
+      </div>
+    </details><details class="card ok">
+      <summary><span class="tid">#T43</span><span class="kic">🔴</span><span class="jd">gcal_sync tidak auto-discover kegiatan TM — hanya 5 dari 16 yang masuk kalender</span><span class="st ok">SELESAI</span></summary>
+      <div class="bd">
+        <div class="meta">🔴 Masalah · irham (super-admin) · 2026-08-11T13:02 · 🔧 Claude</div>
+        <p class="isi">gcal_sync.py hanya sync kegiatan yang manual di-set via `gcal_sync.py set`, tidak auto-discover semua kegiatan TM dari demand_projects.json maupun budget_tambahan.json.
+
+Saat ini:
+- 5 kegiatan sudah sync (manual set)
+- 6 SFED di demand_projects belum sync
+- 5 program Marketing/BLF di budget_tambahan belum sync (Ambition Day, Mini Vayego Fest x2, Oberon Spinwheel, Tour Petani)
+
+Harusnya: semua kegiatan TM (SFED + Marketing/BLF) auto-discover dan sync ke Google Calendar tanpa perlu manual set satu-satu. Budget_tambahan yang punya --tgl-eksekusi juga harus ikut masuk kalender.</p>
+        <div class="reso">✅ Fixed 11 Ags: gcal_sync auto-discover HANYA budget_tambahan (Marketing/BLF); kalender=event TM SELAIN activity DSR/DMR. Commit 2a70724.</div>
+      </div>
+    </details></div><h2><span class="dot gap"></span>DITUTUP (7)</h2><div class="list"><details class="card gap">
       <summary><span class="tid">#T7</span><span class="kic">🔵</span><span class="jd">Pesan dari David: &quot;AI-nya mantap&quot; 👍
 
 (Feedback untuk Janus — David puas dengan p</span><span class="st gap">DITUTUP</span></summary>
@@ -308,11 +698,96 @@ Prioritas: normal</p>
         <div class="reso">✅ Pesan personal — diteruskan, bukan tiket kerja.</div>
       </div>
     </details><details class="card gap">
+      <summary><span class="tid">#T12</span><span class="kic">🔵</span><span class="jd">David tanya: berapa sisa LDD Mas Irham?
+
+Ini di luar scope CAC David — data keua</span><span class="st gap">DITUTUP</span></summary>
+      <div class="bd">
+        <div class="meta">🔵 Pertanyaan · david (CAC) · 2026-07-15T21:30 · 👤 Abang</div>
+        <p class="isi">David tanya: berapa sisa LDD Mas Irham?
+
+Ini di luar scope CAC David — data keuangan/operasional. Mohon arahan atau bisa langsung dijawab ke David.</p>
+        <div class="resp"><b>irham:</b> Ranah CAC (budget marketing). Data belum ada di sistem — belum pernah diinput/dibahas. Dibahas menyusul.</div><div class="reso">✅ Ditutup Abang (29 Jul): ini TEST SISTEM (Janus jujur &#x27;data belum ada&#x27;, tak ngarang = benar). Jawaban akan tersedia otomatis begitu kontribusi semua user lengkap (LDD → input CAC/David; daftar TM Jateng → data multi-TM terisi, cf onboarding TM baru [[tm-onboarding-data-standard]] &amp; #201 silo).</div>
+      </div>
+    </details><details class="card gap">
+      <summary><span class="tid">#T14</span><span class="kic">🔵</span><span class="jd">David (CAC CJ) menanyakan nama-nama TM di seluruh area Jawa Tengah. Di knowledge</span><span class="st gap">DITUTUP</span></summary>
+      <div class="bd">
+        <div class="meta">🔵 Pertanyaan · david (CAC) · 2026-07-16T08:36 · 👤 Abang</div>
+        <p class="isi">David (CAC CJ) menanyakan nama-nama TM di seluruh area Jawa Tengah. Di knowledge base saat ini hanya tercatat Bang Irham sebagai TM (cover Grobogan/Demak/Kudus/Kab. Semarang). David butuh daftar lengkap TM Jateng — termasuk area lain seperti Solo, Pekalongan, Banyumas, dll. Mohon diinfokan atau diarahkan ya Mas.</p>
+        <div class="resp"><b>irham:</b> Perlu — nunggu data daftar TM Jateng dari Mas Irham/David.</div><div class="reso">✅ Ditutup Abang (29 Jul): ini TEST SISTEM (Janus jujur &#x27;data belum ada&#x27;, tak ngarang = benar). Jawaban akan tersedia otomatis begitu kontribusi semua user lengkap (LDD → input CAC/David; daftar TM Jateng → data multi-TM terisi, cf onboarding TM baru [[tm-onboarding-data-standard]] &amp; #201 silo).</div>
+      </div>
+    </details><details class="card gap">
+      <summary><span class="tid">#T17</span><span class="kic">🔵</span><span class="jd">PESAN DARI WIDYA ke Mas Irham:
+
+aku sudah selesai analisa positioning Vayego vs </span><span class="st gap">DITUTUP</span></summary>
+      <div class="bd">
+        <div class="meta">🔵 Pertanyaan · widya (MD) · 2026-07-16T13:13 · 🔧 Claude</div>
+        <p class="isi">PESAN DARI WIDYA ke Mas Irham:
+
+aku sudah selesai analisa positioning Vayego vs Fenite. Vayego tetraniliprol 200 g/L, Fenite emamektin 60 + lufenuron 90. Keunggulan Vayego: stop feeding 1-2 jam, translaminar aman bunga.
+
+🔴 PROTOKOL DEMOPLOT KC Hijau (PAKAI INI, JANGAN nebak/pakai offset chart):
+• DOSIS per titik (0,1ha=1.000m², sprayer 14L): Oberon 80ml · Vayego 40ml · Ambition 200ml
+• TIMING Oberon+Ambition: Spray1 = H+15 (vegetatif awal), Spray2 = H+22
+• TIMING Vayego+Ambition: Spray1 = H~20-25, Spray2 = H~30-35 (bunga), Spray3 = H~40-45 (polong)
+• Kacang hijau panen ≈ H+60. HST = hari setelah TANAM (bukan dari tanggal lain).
+⚠️ JADWAL SPRAY per demoplot → PANGGIL: python3 ~/janus/scripts/demoplot_spray.py --dr &lt;DR&gt; (output tanggal EKSAK). JANGAN hitung HST-&gt;tanggal manual — DeepSeek sering salah. Detail: rag_lookup &quot;protokol demoplot&quot;.
+
+📘 SKILL LAPOR-KEGIATAN (section C) — framework, angka tetap dari tool:
+&gt; Update: 2026-07-12 · Skill Lapor-Kegiatan (section C) — playbook intake laporan lapangan, BUKAN data. Pasangan: terima-planning-kegiatan.
+
+## Cakupan
+DR/Abang lapor kegiatan SELESAI (&quot;sudah selesai FED di Desa X, hadir 25 petani, ini fotonya&quot;) → tersimpan di liquidation (SoT laporan+tanggal). Rencana baru = skill terima-planning-kegiatan.
+
+## Alur (deterministik, ≤4 langkah)
+1. **Anti-dobel DULU**: `liquidation.py --recall --dr &lt;DR&gt; [--jenis &lt;J&gt;] [--bulan YYYY-MM]` — laporan yang sama sudah ada → JANGAN `--add` baru; info susulan masuk `--update &lt;LIQ_ID&gt;` / `--attach-foto &lt;LIQ_ID&gt; --foto &lt;url&gt;`.
+2. **Simpan baru**: `echo &#x27;&lt;json&gt;&#x27; | liquidation.py --add` — field dari pesan user apa adanya (jenis, dr, desa/kec, tanggal, peserta, produk, foto). Field yang user tak sebut → biarkan kosong, JANGAN isi karangan.
+3. **Baca scorecard hasil add**: blok `❓ KOSONG` = field itu BELUM tersimpan → minta ke user (foto? jumlah peserta?) → lengkapi via `--update`/`--attach-foto`. JANGAN lapor &quot;sudah tercatat lengkap&quot; selagi masih ada ❓.
+4. **Verify ke user**: tampilkan ringkas hasil recall/scorecard DARI TOOL (bukan dari ingatan) + apa yang masih kurang.
+
+## ⚠️ Pitfall
+1. Tanggal report di liquidation = SoT tanggal tampil (report &gt; selesai &gt; plan). Tanggal salah → betulkan DI SINI, jangan tambal di dashboard/kalender.
+2. Auto-rekonsiliasi ke plan jalan sendiri; report kelihatan &quot;orphan&quot; → `--reconcile-all`, bukan bikin plan baru.
+3. Laporan dari DR langsung (bukan Abang): tetap boleh dicatat sebagai laporan, tapi perubahan plan/settle tetap human-gate Abang.
+4. Susulan (foto nyusul, koreksi peserta) = `--update`/`--attach-foto`, BUKAN `--add` kedua.
+
+## Penalaran (probabilistik)
+- Nilai kegiatan (&quot;worth it gak?&quot;) BUKAN di sini → arahkan ke skill dampak-kegiatan (eval_kegiatan).
+- Ragu ini laporan baru atau susulan dari recall → tanya user 1×, jangan tebak.
+
+
+⛔ ANTI-NGARANG (SEMUA topik, WAJIB): jawaban DATA/ANGKA/STATUS/ANALISA/MATCHING = HANYA dari TOOL (cek TOOLS.md — ada ~100 tool siap pakai). DILARANG KERAS nulis logika bisnis / algoritma / rekonsiliasi / pencocokan / script analisa SENDIRI di chat, dan DILARANG hitung dari ingatan. Kalau kamu merasa perlu &#x27;benerin/bikin/hitung&#x27; logika sendiri → itu SINYAL tool-nya kurang/ada bug → (1) JALANKAN tool yang ada dulu, relay hasilnya apa adanya; (2) kalau hasil tool masih salah → `python3 ~/janus/scripts/janus_issue.py` biar Claude betulin di BACKEND. JANGAN PERNAH tambal/ngarang jawaban atau &#x27;bikin fix&#x27; di chat — itu bikin angka beda dari papan &amp; nyesatin.</p>
+        <div class="reso">✅ Pesan/analisa Widya (positioning Vayego vs Fenite) sudah tersampaikan ke Abang. Bukan bug/task backend — relay selesai, ditutup 25 Jul.</div>
+      </div>
+    </details><details class="card gap">
       <summary><span class="tid">#T18</span><span class="kic">🔵</span><span class="jd">[KONSULTASI → Widya Nugraha] Halo Pak Widya, David (CAC) di sini. Lagi nyusun ca</span><span class="st gap">DITUTUP</span></summary>
       <div class="bd">
         <div class="meta">🔵 Pertanyaan · david (CAC) · 2026-07-16T14:01 · 👤 Abang</div>
         <p class="isi">[KONSULTASI → Widya Nugraha] Halo Pak Widya, David (CAC) di sini. Lagi nyusun campaign Camalus untuk kacang hijau nih. Mohon masukan teknisnya: hama dominan apa yang paling relevan diangkat sebagai highlight campaign Camalus di kacang hijau? Butuh data agronomi-nya supaya klaim marketing saya nggak ngawang. Terima kasih sebelumnya!</p>
         <div class="reso">✅ Diarahkan langsung David↔Widya via fitur konsultasi — tak perlu lewat Mas Irham.</div>
+      </div>
+    </details><details class="card gap">
+      <summary><span class="tid">#T25</span><span class="kic">🔴</span><span class="jd">Heppy FED Undaan Kidul 22 Jun — settle_recon bilang belum settle vs SoT 4/4 done</span><span class="st gap">DITUTUP</span></summary>
+      <div class="bd">
+        <div class="meta">🔴 Masalah · irham (super-admin) · 2026-07-23T09:31 · 🔧 Claude</div>
+        <p class="isi">Setelah fetch &amp; kroscek CA Juli 2026 Periode I (folder: 1MCemEgxIJ8VlohP6rgwgl6ilK_rqT-bk), settle_recon.py --dr Heppy --bulan 2026-06 menampilkan:
+
+▷ BELUM SETTLE: FED Undaan/Undaan Kidul 2026-06-22
+
+Sementara SoT (demand_projects.json): Heppy FED Juni = 4/4 done.
+Hanya 3 yang match CA. CA Juni P-II ada settle 23 Jun untuk Undaan Kidul, tapi sudah di-override ke Ngemplak 30 Jun — bukan untuk kegiatan 22 Jun.
+
+Perlu dicek: apakah memang belum settle atau matching yang salah?</p>
+        <div class="resp"><b>Claude Code (dev):</b> Hasil kroscek CA (backend): BUKAN bug matching — genuinely belum-settle, dan itu SENGAJA sesuai klarifikasi DR sendiri.
+
+Di data/config/settle_overrides.json ada 2 override Heppy yang saling terkait:
+• Ngemplak 30 Jun → status &#x27;settled&#x27; (pakai CA Undaan Kidul 23 Jun, di-shift)
+• Undaan Kidul 22 Jun → status &#x27;belum&#x27; (note: CA Undaan Kidul dipakai utk Ngemplak → kegiatan ini perlu settlement terpisah)
+
+Artinya settle_recon melapor PERSIS sesuai keputusan DR. &#x27;4/4 done&#x27; di SoT = 4 kegiatan DIEKSEKUSI; settlement itu axis terpisah → 3/4 sudah match CA, 1 (Undaan Kidul 22 Jun) masih nunggu CA-nya sendiri.
+
+Tindak lanjut operasional (bukan bug): FED Undaan Kidul 22 Jun perlu CA/liquidation sendiri, ATAU DR konfirmasi kalau memang tak akan diliquidasi. Tak ada yang perlu dibetulin di kode.
+
+Catatan: issue #211 (Janus salah bikin di GitHub) sudah kututup — ke depan Janus tak bisa bikin GitHub issue lagi, semua ke tiket ini.</div><div class="reso">✅ Kroscek CA selesai: BUKAN bug matching — Heppy Undaan Kidul genuinely belum-settle &amp; itu SENGAJA sesuai klarifikasi DR (override settle_overrides.json). Tak ada perbaikan backend. Resolved via diskusi Abang&lt;-&gt;Janus, ditutup 25 Jul.</div>
       </div>
     </details></div><h2><span class="dot red"></span>DITOLAK (4)</h2><div class="list"><details class="card red">
       <summary><span class="tid">#T8</span><span class="kic">🔵</span><span class="jd">David tanya: Janus bisa cari tempat karaoke di Semarang?
