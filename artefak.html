@@ -49,36 +49,36 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <div class="sub">Semua artefak yang pernah di-generate &amp; dipublish — <b>link</b>, <b>tgl dibuat</b>, <b>tujuan</b>, <b>status</b>. Satu tempat buat tahu apa yang ada.</div>
 
 <div class="skor">
-  <span class="pil"><span class="dot gap"></span>terakhir dibuat 2026-07-31</span>
-  <span class="pil"><b>9</b> artefak</span>
-  
-  <span class="pil"><span class="dot ok"></span><b>9</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span><b>0</b> draft</span>
+  <span class="pil new"><b>🆕 1</b> baru (14 hari)</span>
+  <span class="pil"><b>14</b> artefak</span>
+  <span class="pil"><span class="dot gap"></span><b>＋16</b> internal (tak dipublish)</span>
+  <span class="pil"><span class="dot ok"></span><b>13</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span><b>1</b> draft</span>
   <span class="pil"><span class="dot gap"></span><b>0</b> arsip</span>
 </div>
 
-<main class="grid"><article class="card ok">
-      <header><span class="ic">📊</span><h3>Kesiapan TM (onboarding)</h3><span class="st ok">aktif</span></header>
-      <dl>
-        <dt>tipe</dt><dd>laporan</dd>
-        <dt>dibuat</dt><dd>2026-07-31</dd>
-        <dt>tujuan</dt><dd class="tuj">Status kesiapan data fondasi tiap TM/area baru (7 kategori) — apa yang sudah lengkap, apa yang kurang buat onboard.</dd>
-      </dl>
-      <a class="open" href="/janus-infra-map/kesiapan.html" target="_blank" rel="noopener">Buka →</a>
-    </article><article class="card ok">
-      <header><span class="ic">📄</span><h3>Helpdesk / Tiket DR</h3><span class="st ok">aktif</span></header>
+<main class="grid"><article class="card warn">
+      <header><span class="ic">📄</span><h3>Mockup Desain (demoplot A/B, kesiapan data)</h3><span class="baru">BARU</span><span class="st warn">draft</span></header>
       <dl>
         <dt>tipe</dt><dd>halaman</dd>
-        <dt>dibuat</dt><dd>2026-07-19</dd>
-        <dt>tujuan</dt><dd class="tuj">Daftar tiket masalah/permintaan dari user (T1..) + statusnya (baru/selesai/ditutup/ditolak). Satu tempat pantau apa yang lagi dikerjakan.</dd>
+        <dt>dibuat</dt><dd>2026-08-12</dd>
+        <dt>tujuan</dt><dd class="tuj">Prototipe desain UI (referensi UAT), bukan deliverable final.</dd>
       </dl>
-      <a class="open" href="/janus-infra-map/helpdesk.html" target="_blank" rel="noopener">Buka →</a>
+      <div class="loc">📍 <code>infra/dr-dashboard/mockup_demoplot_ab.html, mockup_kesiapan_data.html</code></div>
+    </article><article class="card ok">
+      <header><span class="ic">📕</span><h3>Laporan FGD Janus</h3><span class="st ok">aktif</span></header>
+      <dl>
+        <dt>tipe</dt><dd>pdf</dd>
+        <dt>dibuat</dt><dd>2026-07-20</dd>
+        <dt>tujuan</dt><dd class="tuj">Ringkasan temuan discovery FGD (non-angka).</dd>
+      </dl>
+      <div class="loc">📍 <code>develop/2026-07_fgd-janus/FGD_Janus_Report.pdf (+ FGD_Mindmap.html)</code></div>
     </article><article class="card ok">
       <header><span class="ic">📋</span><h3>Kuis FGD Discovery Multi-User</h3><span class="st ok">aktif</span></header>
       <dl>
         <dt>tipe</dt><dd>kuis</dd>
         <dt>dibuat</dt><dd>2026-07-18</dd>
-        <dt>tujuan</dt><dd class="tuj">Gali kebutuhan tiap role (TM/CAC/CIDT/Captain) buat prioritas fitur Janus. Anonim, submit langsung ke backend + notif tiap jawaban.</dd>
+        <dt>tujuan</dt><dd class="tuj">Gali kebutuhan tiap role (TM/CAC/CIDT/Captain) buat prioritas fitur. Anonim, submit langsung.</dd>
       </dl>
       <a class="open" href="/janus-infra-map/fgd/" target="_blank" rel="noopener">Buka →</a>
     </article><article class="card ok">
@@ -86,9 +86,17 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
       <dl>
         <dt>tipe</dt><dd>diagram</dd>
         <dt>dibuat</dt><dd>2026-07-18</dd>
-        <dt>tujuan</dt><dd class="tuj">Peta sistem Janus buat awam &amp; kontributor: 3 aktor, alur per-section (storing→processing→recalling), AI-biasa vs Janus, read-model.</dd>
+        <dt>tujuan</dt><dd class="tuj">Peta sistem Janus buat awam &amp; kontributor: 3 aktor, alur per-section, AI-biasa vs Janus, read-model.</dd>
       </dl>
       <a class="open" href="/janus-infra-map/arsitektur/" target="_blank" rel="noopener">Buka →</a>
+    </article><article class="card ok">
+      <header><span class="ic">🗺️</span><h3>Arsitektur — sub-halaman (read-model, user-loop, section A–E)</h3><span class="st ok">aktif</span></header>
+      <dl>
+        <dt>tipe</dt><dd>diagram</dd>
+        <dt>dibuat</dt><dd>2026-07-18</dd>
+        <dt>tujuan</dt><dd class="tuj">Detail alur per-section (storing→processing→recalling) &amp; read-model, versi on-brand.</dd>
+      </dl>
+      <a class="open" href="/janus-infra-map/arsitektur/ (read-model, user-loop, ai-vs-janus, section-A..E .onbrand)" target="_blank" rel="noopener">Buka →</a>
     </article><article class="card ok">
       <header><span class="ic">🗺️</span><h3>Matriks Governance (role x section)</h3><span class="st ok">aktif</span></header>
       <dl>
@@ -98,11 +106,19 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
       </dl>
       <a class="open" href="/janus-infra-map/arsitektur/governance-matrix.html" target="_blank" rel="noopener">Buka →</a>
     </article><article class="card ok">
+      <header><span class="ic">🖼️</span><h3>Deck &amp; Matriks Produk (Vayego dll)</h3><span class="st ok">aktif</span></header>
+      <dl>
+        <dt>tipe</dt><dd>deck</dd>
+        <dt>dibuat</dt><dd>2026-07-17</dd>
+        <dt>tujuan</dt><dd class="tuj">Product knowledge &amp; matriks kompetitor (protokol Vayego, Vayego vs kompetitor, Oberon).</dd>
+      </dl>
+      <div class="loc">📍 <code>data/output/deck/protokol_vayego_padi.html, vayego_vs_kompetitor_kacang_hijau.pdf, matrix_kompetitor_vayego.pdf, prd/matrix_vayego_kc_hijau.png, showcase/oberon_kc_hijau.png</code></div>
+    </article><article class="card ok">
       <header><span class="ic">📄</span><h3>Peta Interaksi Antar-User</h3><span class="st ok">aktif</span></header>
       <dl>
         <dt>tipe</dt><dd>halaman</dd>
         <dt>dibuat</dt><dd>2026-07-15</dd>
-        <dt>tujuan</dt><dd class="tuj">Jalur eskalasi/relay/review/kontribusi antar-user: mana yang sudah jalan, mana yang belum (+ nomor issue).</dd>
+        <dt>tujuan</dt><dd class="tuj">Jalur eskalasi/relay/review/kontribusi antar-user: mana yang jalan, mana belum.</dd>
       </dl>
       <a class="open" href="/janus-infra-map/interaksi.html" target="_blank" rel="noopener">Buka →</a>
     </article><article class="card ok">
@@ -114,11 +130,19 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
       </dl>
       <a class="open" href="/janus-infra-map/panduan_infra.pdf" target="_blank" rel="noopener">Buka →</a>
     </article><article class="card ok">
+      <header><span class="ic">📄</span><h3>Template Design-Engine (deck/poster/sertifikat/undangan)</h3><span class="st ok">aktif</span></header>
+      <dl>
+        <dt>tipe</dt><dd>halaman</dd>
+        <dt>dibuat</dt><dd>2026-07-11</dd>
+        <dt>tujuan</dt><dd class="tuj">Template Tier-1 on-brand yang me-render deck/poster/sertifikat/undangan (engine, bukan data).</dd>
+      </dl>
+      <div class="loc">📍 <code>design/templates/ (deck-kpi, deck-pitch-kios, deck-pitch-produk, laporan-kegiatan-kios, poster-kegiatan, sertifikat, und-fed)</code></div>
+    </article><article class="card ok">
       <header><span class="ic">📄</span><h3>Katalog Product Knowledge</h3><span class="st ok">aktif</span></header>
       <dl>
         <dt>tipe</dt><dd>halaman</dd>
         <dt>dibuat</dt><dd>2026-07-06</dd>
-        <dt>tujuan</dt><dd class="tuj">Katalog pengetahuan produk (dosis, cara pakai, gejala) yang bisa dibuka DR/retailer di HP.</dd>
+        <dt>tujuan</dt><dd class="tuj">Katalog pengetahuan produk (dosis, cara pakai, gejala) buat DR/retailer di HP.</dd>
       </dl>
       <a class="open" href="/janus-infra-map/pk/" target="_blank" rel="noopener">Buka →</a>
     </article><article class="card ok">
@@ -126,11 +150,27 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
       <dl>
         <dt>tipe</dt><dd>halaman</dd>
         <dt>dibuat</dt><dd>2026-06-22</dd>
-        <dt>tujuan</dt><dd class="tuj">Graf hidup semua script Janus + ketergantungannya per domain, status test/orphan. Read-only, buat debug &amp; analisa dampak.</dd>
+        <dt>tujuan</dt><dd class="tuj">Graf hidup semua script Janus + ketergantungannya per domain, status test/orphan. Read-only.</dd>
       </dl>
       <a class="open" href="/janus-infra-map/tools.html" target="_blank" rel="noopener">Buka →</a>
+    </article><article class="card ok">
+      <header><span class="ic">📕</span><h3>Explainer Janus (Apa Itu / Overview / Use-Case)</h3><span class="st ok">aktif</span></header>
+      <dl>
+        <dt>tipe</dt><dd>pdf</dd>
+        <dt>dibuat</dt><dd>2026-06-19</dd>
+        <dt>tujuan</dt><dd class="tuj">Set penjelasan sistem Janus untuk audiens umum (non-teknis).</dd>
+      </dl>
+      <div class="loc">📍 <code>data/output/Apa_Itu_Janus.pdf, Janus_Infrastructure_Overview.pdf, Janus_UseCase_Pipeline.pdf, Janus_Diagram_Arsitektur.png</code></div>
+    </article><article class="card ok">
+      <header><span class="ic">🖼️</span><h3>Poster Tania</h3><span class="st ok">aktif</span></header>
+      <dl>
+        <dt>tipe</dt><dd>deck</dd>
+        <dt>dibuat</dt><dd>2026-06-15</dd>
+        <dt>tujuan</dt><dd class="tuj">Poster marketing produk Tania.</dd>
+      </dl>
+      <div class="loc">📍 <code>data/C-running/intel/marketing/Poster_Tania_20260615.pdf</code></div>
     </article></main>
 
 <footer>Digenerate <code>infra_artefak.py</code> dari <code>data/config/artefak.json</code> (sumber tunggal — nol hardcode).
-Tambah artefak → edit JSON itu lalu regenerate. Update: 2026-08-18 · render: 2026-08-19</footer>
+Tambah artefak → edit JSON itu lalu regenerate. Update: 2026-08-19 · render: 2026-08-19</footer>
 </div></body></html>
