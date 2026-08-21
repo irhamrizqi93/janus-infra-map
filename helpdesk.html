@@ -37,13 +37,13 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <h1>Helpdesk — Tiket User</h1>
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
-  <span class="pil"><b>43</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>1</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>1 baru</span>
+  <span class="pil"><b>45</b> total</span>
+  <span class="pil"><span class="dot warn"></span><b>3</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>3 baru</span>
   <span class="pil"><span class="dot info"></span>0 diproses</span>
   <span class="pil"><span class="dot ok"></span>31 selesai</span>
 </div>
-<h2><span class="dot warn"></span>BARU (1)</h2><div class="list"><details class="card warn" open>
+<h2><span class="dot warn"></span>BARU (3)</h2><div class="list"><details class="card warn" open>
       <summary><span class="tid">#T39</span><span class="kic">🟡</span><span class="jd">Mekanisme sharing session knowledge ke user lain + follow-up topik belum dibalas</span><span class="st warn">BARU</span></summary>
       <div class="bd">
         <div class="meta">🟡 Permintaan · irham (super-admin) · 2026-08-06T12:45 · 👤 Abang</div>
@@ -63,6 +63,36 @@ Setiap ada tambahan knowledge (seperti diskusi Council Complete hari ini), perlu
 - Store: `knowledge_shares.json` — tracking siapa dikasih topik apa, status balas, due date follow-up
 - Flow: submit → share ke user (via relay/review) → track response → auto-remind kalau overdue
 - Janus bisa recall: &quot;topik X sudah dishare ke siapa, siapa belum balas&quot;</p>
+        
+      </div>
+    </details><details class="card warn" open>
+      <summary><span class="tid">#T45</span><span class="kic">🔴</span><span class="jd">Ambition Day salah map ke TM SFED (harusnya Marketing Rp 7,5jt)</span><span class="st warn">BARU</span></summary>
+      <div class="bd">
+        <div class="meta">🔴 Masalah · janus (owner) · 2026-08-21T16:43 · 🔧 Claude</div>
+        <p class="isi">Insiden 21 Agu: laporan Ambition Day Dwiky (19 Agu, Kemiri/Gubug) diproses Janus sbg jenis &#x27;Ambition Day&#x27; free-text → auto_reconcile &#x27;tanpa-plan&#x27; → Janus SALAH map ke project TM &#x27;Dwiky Ambition Day Q3 2026&#x27; (SFED Rp 3jt).
+
+FAKTA: Ambition Day = BUDGET MARKETING Rp 7.500.000, SUDAH ADA program &#x27;Ambition Day Dwiky&#x27; di budget_tambahan.py (ID 20260713-1610-3635, status jalan, checklist 4/5). Bukan budget TM/P&amp;I.
+
+KOREKSI YANG SUDAH DILAKUKAN:
+- Project TM SFED ditandai batal.
+- Record LIQ260821160600 di-unlink (plan_ref dihapus).
+
+TECHNICAL DEBT (belakangan):
+- Sistem liquidation/demand_project belum kenal jenis &#x27;Ambition Day&#x27; sbg budget Marketing → auto_reconcile selalu &#x27;tanpa-plan&#x27; dan asisten rawan salah-map ke TM.
+- Usul: tambah mapping &#x27;Ambition Day&#x27; (dan jenis Marketing lain) → budget_tambahan (Marketing), BUKAN demand_project (TM/DR).</p>
+        
+      </div>
+    </details><details class="card warn" open>
+      <summary><span class="tid">#T46</span><span class="kic">🟡</span><span class="jd">Demoplot: PROD dict crop-aware (padi vs KC Hijau) + fix alias back-calc</span><span class="st warn">BARU</span></summary>
+      <div class="bd">
+        <div class="meta">🟡 Permintaan · irham (owner) · 2026-08-21T18:52 · 👤 Abang</div>
+        <p class="isi">2 backend item dr sesi demoplot Ardhi 21 Ags:
+
+1. [UTAMA] PROD dict di demoplot_flow.py crop-agnostic — cuma KC Hijau (Vayego 40ml/titik·polong penggerek, Oberon 80ml/titik·oteng, dst). Crop PADI tidak didukung. Butuh: PROD jadi crop-aware (mis. padi: Vayego 20ml/tangki·sundep/beluk·window beda). Saat ini dosis/timing/fokus padi diisi manual di unit JSON.
+
+2. [MINOR] alias unit demoplot (mis. &#x27;Try·X·padi·tanam?&#x27;) tidak ke-update saat mode_spray back-calc tanggal_tanam dari --umur. Jadi alias masih nampilin &#x27;tanam?&#x27; walau tanam sudah terisi.
+
+Konteks: Bang Irham koreksi #10714 — laporan demoplot tidak ada yg double; beda desa = demo BARU (PK = dmr+desa+crop+bulan).</p>
         
       </div>
     </details></div><h2><span class="dot ok"></span>SELESAI (31)</h2><div class="list"><details class="card ok">
