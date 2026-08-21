@@ -37,13 +37,20 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid va
 <h1>Helpdesk — Tiket User</h1>
 <div class="sub">Semua tiket dari user (Widya/David/TM/Captain) — masalah, permintaan, pertanyaan. Berstatus & terlacak.</div>
 <div class="skor">
-  <span class="pil"><b>45</b> total</span>
-  <span class="pil"><span class="dot warn"></span><b>3</b> aktif</span>
-  <span class="pil"><span class="dot warn"></span>3 baru</span>
+  <span class="pil"><b>46</b> total</span>
+  <span class="pil"><span class="dot warn"></span><b>4</b> aktif</span>
+  <span class="pil"><span class="dot warn"></span>4 baru</span>
   <span class="pil"><span class="dot info"></span>0 diproses</span>
   <span class="pil"><span class="dot ok"></span>31 selesai</span>
 </div>
-<h2><span class="dot warn"></span>BARU (3)</h2><div class="list"><details class="card warn" open>
+<h2><span class="dot warn"></span>BARU (4)</h2><div class="list"><details class="card warn" open>
+      <summary><span class="pr">🔺</span><span class="tid">#T47</span><span class="kic">🟡</span><span class="jd">Backlink liq_id 2-arah (liquidation ↔ demand_projects)</span><span class="st warn">BARU</span></summary>
+      <div class="bd">
+        <div class="meta">🟡 Permintaan · irham (TM) · 2026-08-21T20:50 · 👤 Abang</div>
+        <p class="isi">Link laporan↔plan saat ini SATU ARAH: record liquidation.json nyimpen plan_ref (slug#idx), tapi activity di demand_projects.json TIDAK nyimpen balik liq_id → janus_doctor flag &#x27;Link laporan↔plan (N tak 2-arah, plan tak nyimpan balik liq_id)&#x27;. Akar: waktu laporan ke-link (auto-close / manual done), cuma sisi liquidation yang di-update. Minta: sisi plan activity ikut nyimpen field liq_id (id liquidation) biar link 2-arah &amp; bisa recall dua arah. Kasus contoh: 5 SM Darmanto (LIQ260815195234–3 → sm-darmanto-q3-2026#0–4) + Heppy SM + Fani FED semua kena. Prioritas normal (keterbatasan umum, bukan data rusak).</p>
+        
+      </div>
+    </details><details class="card warn" open>
       <summary><span class="tid">#T39</span><span class="kic">🟡</span><span class="jd">Mekanisme sharing session knowledge ke user lain + follow-up topik belum dibalas</span><span class="st warn">BARU</span></summary>
       <div class="bd">
         <div class="meta">🟡 Permintaan · irham (super-admin) · 2026-08-06T12:45 · 👤 Abang</div>
